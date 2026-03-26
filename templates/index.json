@@ -69,10 +69,11 @@
       "type": "featured-collection",
       "settings": {
         "heading": "BESTSELLERS",
-        "collection": "all",
+        "subheading": "",
+        "collection": "body-candles",
         "products_to_show": 4,
         "show_navigation": true,
-        "card_layout": "stacked",
+        "card_layout": "shop",
         "show_secondary_image": true,
         "show_swatches": false,
         "show_quick_add": false,
@@ -171,6 +172,7 @@
       "type": "split-view",
       "settings": {
         "color_scheme": "scheme-1",
+        "full_width": false,
         "eyebrow": "OUR STORY",
         "heading": "GROUNDED IN RITUAL. EMBODIED IN CONFIDENCE.",
         "body": "<p>Scents By Sara is a female-founded fragrance house rooted in embodied confidence and modern ritual. What began as a personal exploration of scent and form has grown into a brand shaped by lived experience, community, and the power of recognising ourselves as we are.</p>",
