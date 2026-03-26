@@ -75,6 +75,17 @@
   align-self: flex-start;
 }
 
+/* Full-width variant — grid bleeds to page edges up to 1920px */
+.split-view--full-width > div {
+  max-width: var(--page-width, 1920px);
+  margin-inline: auto;
+}
+
+.split-view--full-width .split-view__image,
+.split-view--full-width .split-view__placeholder {
+  min-height: clamp(28rem, 55vw, 56rem);
+}
+
 @media screen and (max-width: 989px) {
   .split-view .split-view__grid,
   .split-view .split-view__grid--reverse {

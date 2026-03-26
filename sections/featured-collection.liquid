@@ -14,6 +14,10 @@
         <h2 class="section-title featured-collection__title">{{ section.settings.heading | escape }}</h2>
       {%- endif -%}
 
+      {%- if section.settings.subheading != blank -%}
+        <p class="featured-collection__subheading text-body text-muted">{{ section.settings.subheading | escape }}</p>
+      {%- endif -%}
+
       {%- if section.settings.show_navigation -%}
       <div class="section-nav featured-collection__nav" aria-label="Collection navigation">
         <button type="button" class="section-nav-link featured-collection__nav-button" data-carousel-prev aria-label="Previous products">
@@ -375,6 +379,11 @@
       "id": "heading",
       "label": "Heading",
       "default": "BESTSELLERS"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading"
     },
     {
       "type": "collection",

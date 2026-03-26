@@ -1,0 +1,163 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "heading": "SCENTED BODY CANDLES",
+        "subheading": "Our hand-poured body candles celebrate the female form as it is, not as it should be. Thoughtfully crafted in three tones — Ivory, Caramel, and Mocha — each form honours individuality, lived experience, and quiet confidence."
+      }
+    },
+    "she_is_strength": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "SHE IS STRENGTH",
+        "subheading": "She Is Strength is a sculptural body candle engraved with a mastectomy scar, honouring bodies shaped by breast cancer as a testament to endurance, courage, and lived experience.",
+        "products_to_show": 4,
+        "show_navigation": false,
+        "card_layout": "stacked",
+        "show_secondary_image": true,
+        "show_swatches": false,
+        "show_quick_add": true,
+        "show_view_all": false,
+        "color_scheme": "scheme-1"
+      }
+    },
+    "she_is_you": {
+      "type": "split-view",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "eyebrow": "CUSTOM CANDLES",
+        "heading": "SHE IS YOU",
+        "body": "<p>A <strong>fully customisable body candle</strong> created from your own description, transforming personal stories and lived experience into form — celebrating you, exactly as you are.</p>",
+        "image_position": "left",
+        "content_background": "secondary",
+        "cta_text": "CUSTOMISE YOUR OWN",
+        "cta_link": "/products/she-is-you",
+        "button_style": "btn-solid"
+      }
+    },
+    "she_is_lust": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "SHE IS LUST",
+        "subheading": "A sculptural body candle honouring stretch marks as quiet marks of growth, transformation, and presence. She Is Lust invites self-compassion and acceptance.",
+        "products_to_show": 4,
+        "show_navigation": false,
+        "card_layout": "stacked",
+        "show_secondary_image": true,
+        "show_swatches": false,
+        "show_quick_add": true,
+        "show_view_all": false,
+        "color_scheme": "scheme-1"
+      }
+    },
+    "celebrate": {
+      "type": "split-view",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "eyebrow": "OUR PHILOSOPHY",
+        "heading": "EMBODIED CONFIDENCE",
+        "body": "<p>Our hand-poured body candles celebrate the female form as it is — <strong>not as it should be.</strong></p><p>Each form reflects <strong>real, lived bodies</strong> — across shapes, sizes, skin tones, scars and stories. Rather than idealising femininity, our forms honour difference and acknowledge change, treating individuality as something to be respected, not perfected.</p><p>This is <strong>embodied confidence</strong>, without the performance.</p>",
+        "image_position": "right",
+        "content_background": "secondary",
+        "cta_text": "READ OUR STORY",
+        "cta_link": "/pages/our-story",
+        "button_style": "btn-outline"
+      }
+    },
+    "she_is_timeless": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "SHE IS TIMELESS",
+        "subheading": "She Is Timeless is a minimal body candle that honours the female form through shape, presence and quiet simplicity — created for moments of pause and reflection.",
+        "products_to_show": 4,
+        "show_navigation": false,
+        "card_layout": "stacked",
+        "show_secondary_image": true,
+        "show_swatches": false,
+        "show_quick_add": true,
+        "show_view_all": false,
+        "color_scheme": "scheme-1"
+      }
+    },
+    "she_is_beauty": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "SHE IS BEAUTY",
+        "subheading": "Adorned in 23-karat gold leaf, She Is Beauty celebrates the inherent beauty and worth the female form holds.",
+        "products_to_show": 4,
+        "show_navigation": false,
+        "card_layout": "stacked",
+        "show_secondary_image": true,
+        "show_swatches": false,
+        "show_quick_add": true,
+        "show_view_all": false,
+        "color_scheme": "scheme-1"
+      }
+    },
+    "scar_collection": {
+      "type": "split-view",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "eyebrow": "EXPLORE MORE",
+        "heading": "SCAR COLLECTION",
+        "body": "<p>The Scar Collection celebrates the body as a holder of memory, healing, and confidence. Gold leaf is applied by hand to mark scars — not as decoration but as recognition.</p>",
+        "image_position": "left",
+        "content_background": "secondary",
+        "cta_text": "DISCOVER COLLECTION",
+        "cta_link": "/collections/scar-collection",
+        "button_style": "btn-solid"
+      },
+      "blocks": {
+        "note_1": {
+          "type": "note",
+          "settings": {
+            "title": "She Is Lust — Stretch Marks",
+            "text": "Celebrating growth & transformation"
+          }
+        },
+        "note_2": {
+          "type": "note",
+          "settings": {
+            "title": "She Is Strength — Mastectomy Scars",
+            "text": "Acknowledging resilience & courage"
+          }
+        },
+        "note_3": {
+          "type": "note",
+          "settings": {
+            "title": "She Is Power — C-section",
+            "text": "Honouring motherhood & creation"
+          }
+        },
+        "note_4": {
+          "type": "note",
+          "settings": {
+            "title": "She Is You — Custom Scars",
+            "text": "Created in collaboration with you."
+          }
+        }
+      },
+      "block_order": [
+        "note_1",
+        "note_2",
+        "note_3",
+        "note_4"
+      ]
+    }
+  },
+  "order": [
+    "hero",
+    "she_is_strength",
+    "she_is_you",
+    "she_is_lust",
+    "celebrate",
+    "she_is_timeless",
+    "she_is_beauty",
+    "scar_collection"
+  ]
+}

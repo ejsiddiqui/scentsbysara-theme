@@ -11,11 +11,11 @@
 
 <section
   id="SplitView-{{ section.id }}"
-  class="split-view section-block color-{{ section.settings.color_scheme }}"
+  class="split-view section-block color-{{ section.settings.color_scheme }}{% if section.settings.full_width %} split-view--full-width{% endif %}"
 >
   {{ 'section-split-view.css' | asset_url | stylesheet_tag }}
 
-  <div class="container">
+  <div class="{% unless section.settings.full_width %}container{% endunless %}">
     <div class="split-view__grid{% if section.settings.image_position == 'right' %} split-view__grid--reverse{% endif %}">
       <div class="split-view__media">
         {%- if section.settings.image != blank -%}
@@ -72,6 +72,13 @@
       "id": "color_scheme",
       "label": "Colour scheme",
       "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "info": "Removes the container — image and content stretch to page edge (max 1920px)",
+      "default": false
     },
     {
       "type": "text",
