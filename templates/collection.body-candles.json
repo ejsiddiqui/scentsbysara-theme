@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
@@ -13,6 +22,7 @@
       "settings": {
         "heading": "SHE IS STRENGTH",
         "subheading": "She Is Strength is a sculptural body candle engraved with a mastectomy scar, honouring bodies shaped by breast cancer as a testament to endurance, courage, and lived experience.",
+        "collection": "",
         "products_to_show": 4,
         "show_navigation": false,
         "card_layout": "stacked",
@@ -20,6 +30,7 @@
         "show_swatches": false,
         "show_quick_add": true,
         "show_view_all": false,
+        "view_all_label": "SHOP THE COLLECTION",
         "color_scheme": "scheme-1"
       }
     },
@@ -31,6 +42,8 @@
         "eyebrow": "CUSTOM CANDLES",
         "heading": "SHE IS YOU",
         "body": "<p>A <strong>fully customisable body candle</strong> created from your own description, transforming personal stories and lived experience into form — celebrating you, exactly as you are.</p>",
+        "image": "shopify://shop_images/she-is-you-half-left.png",
+        "image_alt": "She is you",
         "image_position": "left",
         "content_background": "secondary",
         "cta_text": "CUSTOMISE YOUR OWN",
@@ -43,6 +56,7 @@
       "settings": {
         "heading": "SHE IS LUST",
         "subheading": "A sculptural body candle honouring stretch marks as quiet marks of growth, transformation, and presence. She Is Lust invites self-compassion and acceptance.",
+        "collection": "",
         "products_to_show": 4,
         "show_navigation": false,
         "card_layout": "stacked",
@@ -50,6 +64,7 @@
         "show_swatches": false,
         "show_quick_add": true,
         "show_view_all": false,
+        "view_all_label": "SHOP THE COLLECTION",
         "color_scheme": "scheme-1"
       }
     },
@@ -58,9 +73,11 @@
       "settings": {
         "color_scheme": "scheme-1",
         "full_width": true,
-        "eyebrow": "OUR PHILOSOPHY",
-        "heading": "EMBODIED CONFIDENCE",
+        "eyebrow": "",
+        "heading": "",
         "body": "<p>Our hand-poured body candles celebrate the female form as it is — <strong>not as it should be.</strong></p><p>Each form reflects <strong>real, lived bodies</strong> — across shapes, sizes, skin tones, scars and stories. Rather than idealising femininity, our forms honour difference and acknowledge change, treating individuality as something to be respected, not perfected.</p><p>This is <strong>embodied confidence</strong>, without the performance.</p>",
+        "image": "shopify://shop_images/celebrate.png",
+        "image_alt": "Celebrating Female Form",
         "image_position": "right",
         "content_background": "secondary",
         "cta_text": "READ OUR STORY",
@@ -73,6 +90,7 @@
       "settings": {
         "heading": "SHE IS TIMELESS",
         "subheading": "She Is Timeless is a minimal body candle that honours the female form through shape, presence and quiet simplicity — created for moments of pause and reflection.",
+        "collection": "",
         "products_to_show": 4,
         "show_navigation": false,
         "card_layout": "stacked",
@@ -80,6 +98,7 @@
         "show_swatches": false,
         "show_quick_add": true,
         "show_view_all": false,
+        "view_all_label": "SHOP THE COLLECTION",
         "color_scheme": "scheme-1"
       }
     },
@@ -88,6 +107,7 @@
       "settings": {
         "heading": "SHE IS BEAUTY",
         "subheading": "Adorned in 23-karat gold leaf, She Is Beauty celebrates the inherent beauty and worth the female form holds.",
+        "collection": "",
         "products_to_show": 4,
         "show_navigation": false,
         "card_layout": "stacked",
@@ -95,23 +115,12 @@
         "show_swatches": false,
         "show_quick_add": true,
         "show_view_all": false,
+        "view_all_label": "SHOP THE COLLECTION",
         "color_scheme": "scheme-1"
       }
     },
     "scar_collection": {
       "type": "split-view",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "full_width": true,
-        "eyebrow": "EXPLORE MORE",
-        "heading": "SCAR COLLECTION",
-        "body": "<p>The Scar Collection celebrates the body as a holder of memory, healing, and confidence. Gold leaf is applied by hand to mark scars — not as decoration but as recognition.</p>",
-        "image_position": "left",
-        "content_background": "secondary",
-        "cta_text": "DISCOVER COLLECTION",
-        "cta_link": "/collections/scar-collection",
-        "button_style": "btn-solid"
-      },
       "blocks": {
         "note_1": {
           "type": "note",
@@ -147,7 +156,20 @@
         "note_2",
         "note_3",
         "note_4"
-      ]
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "eyebrow": "EXPLORE MORE",
+        "heading": "SCAR COLLECTION",
+        "body": "<p>The Scar Collection celebrates the body as a holder of memory, healing, and confidence. Gold leaf is applied by hand to mark scars — not as decoration but as recognition.</p>",
+        "image_alt": "Founder of Scents by Sara",
+        "image_position": "left",
+        "content_background": "secondary",
+        "cta_text": "DISCOVER COLLECTION",
+        "cta_link": "/collections/scar-collection",
+        "button_style": "btn-solid"
+      }
     }
   },
   "order": [
