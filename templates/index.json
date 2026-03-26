@@ -74,9 +74,9 @@
         "show_navigation": true,
         "card_layout": "stacked",
         "show_secondary_image": true,
-        "show_swatches": true,
-        "show_quick_add": true,
-        "show_view_all": true,
+        "show_swatches": false,
+        "show_quick_add": false,
+        "show_view_all": false,
         "view_all_label": "SHOP THE COLLECTION",
         "color_scheme": "scheme-1"
       }
