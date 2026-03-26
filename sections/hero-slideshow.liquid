@@ -1,0 +1,268 @@
+{%- liquid
+  assign autoplay = section.settings.autoplay
+  assign interval = section.settings.interval | default: 5
+-%}
+
+{{ 'section-hero.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'slideshow.js' | asset_url }}" type="module"></script>
+
+<slideshow-component
+  class="home-hero color-{{ section.settings.color_scheme | default: 'scheme-1' }}"
+  data-autoplay="{{ autoplay }}"
+  data-interval="{{ interval }}"
+  aria-label="{{ section.settings.accessibility_label | default: 'Hero slideshow' | escape }}"
+>
+  {%- if section.blocks.size > 0 -%}
+    <div class="hero-slider">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign slide_loading = 'lazy'
+          assign slide_fetchpriority = nil
+          if forloop.first
+            assign slide_loading = 'eager'
+            assign slide_fetchpriority = 'high'
+          endif
+
+          assign hero_image = block.settings.image_desktop
+          assign fallback_desktop_asset = ''
+          assign fallback_mobile_asset = ''
+
+          case forloop.index
+            when 1
+              assign fallback_desktop_asset = 'desktop-hero-1.png'
+              assign fallback_mobile_asset = 'mobile-hero-1.png'
+            when 2
+              assign fallback_desktop_asset = 'desktop-hero-2.png'
+              assign fallback_mobile_asset = 'mobile-hero-2.png'
+            when 3
+              assign fallback_desktop_asset = 'desktop-hero-3.png'
+              assign fallback_mobile_asset = 'mobile-hero-3.png'
+          endcase
+
+          if hero_image == blank
+            assign hero_image = block.settings.image_mobile
+          endif
+        -%}
+
+        <div
+          id="{{ section.id }}-slide-{{ forloop.index0 }}"
+          class="hero-slide{% if forloop.first %} is-active{% endif %}"
+          data-slide
+          role="group"
+          aria-roledescription="slide"
+          aria-label="{{ forloop.index }} of {{ section.blocks.size }}"
+          aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}"
+          tabindex="{% if forloop.first %}0{% else %}-1{% endif %}"
+          {{ block.shopify_attributes }}
+        >
+          <div class="hero-image">
+            {%- if hero_image != blank -%}
+              {% render
+                'image',
+                image: hero_image,
+                mobile_image: block.settings.image_mobile,
+                alt: block.settings.heading,
+                sizes: '100vw',
+                loading: slide_loading,
+                fetchpriority: slide_fetchpriority
+              %}
+            {%- elsif fallback_desktop_asset != blank -%}
+              <picture>
+                {%- if fallback_mobile_asset != blank -%}
+                  <source media="(max-width: 749px)" srcset="{{ fallback_mobile_asset | asset_url }}">
+                {%- endif -%}
+                <img
+                  src="{{ fallback_desktop_asset | asset_url }}"
+                  alt="{{ block.settings.heading | escape }}"
+                  loading="{{ slide_loading }}"
+                  width="1600"
+                  height="1800"
+                  {% if slide_fetchpriority != blank %}fetchpriority="{{ slide_fetchpriority }}"{% endif %}
+                >
+              </picture>
+            {%- else -%}
+              <div class="hero-placeholder" aria-hidden="true"></div>
+            {%- endif -%}
+          </div>
+
+          <div class="hero-content container" style="text-align: {{ block.settings.text_alignment }};">
+            <div>
+              {%- if block.settings.kicker != blank -%}
+                <span class="eyebrow">{{ block.settings.kicker }}</span>
+              {%- endif -%}
+              {%- if block.settings.heading != blank -%}
+                <h1 class="font-serif text-hero hero-heading">{{ block.settings.heading }}</h1>
+              {%- endif -%}
+            </div>
+
+            {%- if block.settings.subheading != blank -%}
+              <p class="hero-subtext text-body">{{ block.settings.subheading }}</p>
+            {%- endif -%}
+
+            {%- if block.settings.cta_text != blank -%}
+              <div class="hero-actions">
+                <a
+                  {% if block.settings.cta_link != blank %}
+                    href="{{ block.settings.cta_link }}"
+                  {% else %}
+                    href="{{ routes.all_products_collection_url }}"
+                  {% endif %}
+                  class="btn-solid"
+                >
+                  {{ block.settings.cta_text }}
+                </a>
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {% render
+      'slideshow-controls',
+      total: section.blocks.size,
+      id: section.id,
+      label: section.settings.accessibility_label,
+      show_arrows: section.settings.show_arrows
+    %}
+  {%- else -%}
+    <div class="hero-slider">
+      <div class="hero-slide is-active">
+        <div class="hero-placeholder">
+          <div class="hero-placeholder-content">
+            <span class="eyebrow">Hero slideshow</span>
+            <h1 class="font-serif text-hero hero-heading">Add slides in the theme editor</h1>
+            <p class="hero-subtext text-body">
+              Create one or more slides to match the homepage mockup and configure the content from the customizer.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+</slideshow-component>
+
+{% schema %}
+{
+  "name": "Hero slideshow",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay slides",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "interval",
+      "label": "Slide interval",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 5
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "Show arrows",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "accessibility_label",
+      "label": "Accessibility label",
+      "default": "Hero slideshow"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "text",
+          "id": "kicker",
+          "label": "Kicker",
+          "default": "Scents by Sara"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "THE FEMALE FORM, AS IT IS"
+        },
+        {
+          "type": "textarea",
+          "id": "subheading",
+          "label": "Subheading",
+          "default": "Hand-poured body candles celebrating real bodies and lived experience."
+        },
+        {
+          "type": "text",
+          "id": "cta_text",
+          "label": "CTA text",
+          "default": "SHOP NOW"
+        },
+        {
+          "type": "url",
+          "id": "cta_link",
+          "label": "CTA link"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_desktop",
+          "label": "Desktop image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Mobile image"
+        },
+        {
+          "type": "select",
+          "id": "text_alignment",
+          "label": "Text alignment",
+          "default": "left",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero slideshow",
+      "blocks": [
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

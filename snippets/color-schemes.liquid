@@ -1,0 +1,31 @@
+{% comment %}
+  Generates per-scheme CSS custom properties.
+{% endcomment %}
+
+{% style %}
+{%- for scheme in settings.color_schemes -%}
+.color-{{ scheme.id }} {
+  --color-background: {{ scheme.settings.background }};
+  --color-foreground: {{ scheme.settings.text }};
+  --color-muted: {{ scheme.settings.muted }};
+  --color-border: {{ scheme.settings.border }};
+  --color-secondary-bg: {{ scheme.settings.secondary_bg }};
+  --color-accent: {{ scheme.settings.accent }};
+  --status-success: {{ scheme.settings.success }};
+  --status-error: {{ scheme.settings.error }};
+  --color-success: var(--status-success);
+  --color-error: var(--status-error);
+  --bg-primary: var(--color-background);
+  --bg-primary-dark: var(--color-foreground);
+  --bg-secondary: var(--color-secondary-bg);
+  --bg-tertiary: var(--color-border);
+  --text-primary: var(--color-foreground);
+  --text-primary-dark: var(--color-background);
+  --text-muted: var(--color-muted);
+  --text-on-dark: var(--color-background);
+  --border-light: var(--color-border);
+  --border-heavy: var(--color-foreground);
+  --border-dark: var(--color-accent);
+}
+{%- endfor -%}
+{% endstyle %}

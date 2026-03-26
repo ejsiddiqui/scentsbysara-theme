@@ -1,0 +1,21 @@
+{
+  "type": "footer",
+  "name": "Footer Group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "newsletter_heading": "JOIN OUR NEWSLETTER",
+        "menu_1_heading": "SHOP ALL",
+        "menu_2_heading": "ABOUT US",
+        "menu_3_heading": "GIFTING",
+        "menu_4_heading": "CUSTOMER SERVICE",
+        "show_payment_icons": true
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

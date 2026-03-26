@@ -1,0 +1,33 @@
+{%- liquid
+  assign total = total | default: 0
+  assign id = id | default: 'slideshow'
+  assign show_arrows = show_arrows | default: false
+-%}
+
+<div class="slideshow-controls" data-slideshow-controls>
+  <div class="slideshow-dots" role="tablist" aria-label="{{ label | default: 'Slideshow navigation' | escape }}">
+    {%- for i in (1..total) -%}
+      <button
+        class="slideshow-dot{% if forloop.first %} is-active{% endif %}"
+        type="button"
+        role="tab"
+        aria-controls="{{ id }}-slide-{{ forloop.index0 }}"
+        aria-label="{{ 'Go to slide ' | append: i | escape }}"
+        aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+        tabindex="{% if forloop.first %}0{% else %}-1{% endif %}"
+        data-slide-index="{{ forloop.index0 }}"
+      ></button>
+    {%- endfor -%}
+  </div>
+
+  {%- if show_arrows -%}
+    <div class="slideshow-arrows" aria-label="{{ label | default: 'Slideshow controls' | escape }}">
+      <button type="button" class="slideshow-arrow slideshow-arrow--prev" aria-label="{{ 'Previous slide' | escape }}" data-slideshow-prev>
+        {% render 'icon', name: 'chevron-left' %}
+      </button>
+      <button type="button" class="slideshow-arrow slideshow-arrow--next" aria-label="{{ 'Next slide' | escape }}" data-slideshow-next>
+        {% render 'icon', name: 'chevron-right' %}
+      </button>
+    </div>
+  {%- endif -%}
+</div>

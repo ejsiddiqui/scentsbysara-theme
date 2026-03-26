@@ -1,0 +1,546 @@
+<footer class="footer-section{% if settings.logo_mobile != blank %} footer-section--has-mobile-logo{% endif %} color-{{ section.settings.color_scheme }}">
+  <div class="footer-section__inner container">
+    <div class="footer-section__grid">
+      <div class="footer-section__newsletter">
+        <p class="footer-section__eyebrow eyebrow">
+          {{ section.settings.newsletter_heading | escape }}
+        </p>
+
+        {%- if section.settings.newsletter_text != blank -%}
+          <div class="footer-section__newsletter-text text-body">
+            {{ section.settings.newsletter_text }}
+          </div>
+        {%- endif -%}
+
+        {%- form 'customer', id: 'FooterNewsletterForm', class: 'footer-section__newsletter-form' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+
+          {%- if form.posted_successfully? -%}
+            <p class="footer-section__message" role="status">
+              {{ 'newsletter.success' | t }}
+            </p>
+          {%- endif -%}
+
+          {{ form.errors | default_errors }}
+
+          <div class="footer-section__newsletter-fields">
+            <label class="footer-section__label" for="FooterNewsletterEmail">
+              {{ 'newsletter.email_label' | t }}
+            </label>
+            <input
+              id="FooterNewsletterEmail"
+              class="footer-section__input"
+              type="email"
+              name="contact[email]"
+              autocomplete="email"
+              placeholder="{{ 'newsletter.email_placeholder' | t }}"
+              required
+            >
+            <button type="submit" class="footer-section__button btn-solid">
+              {{ 'newsletter.subscribe' | t }}
+            </button>
+          </div>
+        {%- endform -%}
+
+        <div class="footer-section__socials" aria-label="{{ 'general.social_media_links' | t }}">
+          {%- if settings.social_instagram != blank -%}
+            <a href="{{ settings.social_instagram }}" class="footer-section__social" aria-label="{{ 'social.instagram' | t }}" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <rect x="5" y="5" width="14" height="14" rx="4" ry="4" fill="none" stroke="currentColor" stroke-width="1.4"></rect>
+                <circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" stroke-width="1.4"></circle>
+                <circle cx="16.4" cy="7.6" r="1" fill="currentColor"></circle>
+              </svg>
+            </a>
+          {%- endif -%}
+
+          {%- if settings.social_facebook != blank -%}
+            <a href="{{ settings.social_facebook }}" class="footer-section__social" aria-label="{{ 'social.facebook' | t }}" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M14.8 8.5h2V5.8h-2.2c-2.5 0-4 1.5-4 4v1.8H8.1v2.8h2.5V19h3v-4.6h2.3l.4-2.8h-2.7v-1.4c0-.9.3-1.7 1.2-1.7Z" fill="currentColor"></path>
+              </svg>
+            </a>
+          {%- endif -%}
+
+          {%- if settings.social_tiktok != blank -%}
+            <a href="{{ settings.social_tiktok }}" class="footer-section__social" aria-label="{{ 'social.tiktok' | t }}" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M14.1 5.2c.5 1.9 1.8 3 3.8 3.3v2.8c-1.3 0-2.6-.4-3.8-1.1v4.1c0 2.7-2.2 4.9-4.9 4.9S4.3 17 4.3 14.3s2.2-4.9 4.9-4.9c.3 0 .7 0 1 .1v2.9c-.3-.1-.6-.2-1-.2-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2V4.8h2.9c0 .2 0 .3 0 .4Z" fill="currentColor"></path>
+              </svg>
+            </a>
+          {%- endif -%}
+
+          {%- if settings.social_pinterest != blank -%}
+            <a href="{{ settings.social_pinterest }}" class="footer-section__social" aria-label="{{ 'social.pinterest' | t }}" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M12 4.2c-4.2 0-7.6 3.2-7.6 7.3 0 3.1 1.8 5 2.8 5 .4 0 .6-1 .6-1.5 0-.5-1-1.3-1-3 0-2.4 1.8-4.2 4.2-4.2 2 0 3.4 1.1 3.4 3.2 0 1.5-.6 4.5-2.6 4.5-.7 0-1.4-.5-1.2-1.3.2-.8.6-1.7.6-2.6 0-1.1-.6-1.8-1.6-1.8-1.2 0-2.2 1.2-2.2 2.8 0 .9.3 1.5.3 1.5l-1.2 4.8c-.4 1.5-.1 3.4-.1 3.4h2.2l.8-3c.2.4 1.1.8 2 .8 3.4 0 5.8-3 5.8-7 0-3.8-3-6.9-7.3-6.9Z" fill="currentColor"></path>
+              </svg>
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <details class="footer-section__menu" data-accordion data-accordion-group="footer">
+        <summary class="footer-section__menu-title" aria-label="{{ section.settings.menu_1_heading | escape }}">
+          <span>{{ section.settings.menu_1_heading }}</span>
+          <span class="footer-section__menu-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="footer-section__menu-panel">
+          <ul class="footer-section__menu-list" role="list">
+            {%- if section.settings.menu_1 != blank and section.settings.menu_1.links.size > 0 -%}
+              {%- for link in section.settings.menu_1.links -%}
+                <li class="footer-section__menu-item">
+                  <a href="{{ link.url }}">{{ link.title }}</a>
+                </li>
+              {%- endfor -%}
+            {%- else -%}
+              <li class="footer-section__menu-item footer-section__menu-item--empty">
+                <span>{{ 'general.menu_not_assigned' | t }}</span>
+              </li>
+            {%- endif -%}
+          </ul>
+        </div>
+      </details>
+
+      <details class="footer-section__menu" data-accordion data-accordion-group="footer">
+        <summary class="footer-section__menu-title" aria-label="{{ section.settings.menu_2_heading | escape }}">
+          <span>{{ section.settings.menu_2_heading }}</span>
+          <span class="footer-section__menu-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="footer-section__menu-panel">
+          <ul class="footer-section__menu-list" role="list">
+            {%- if section.settings.menu_2 != blank and section.settings.menu_2.links.size > 0 -%}
+              {%- for link in section.settings.menu_2.links -%}
+                <li class="footer-section__menu-item">
+                  <a href="{{ link.url }}">{{ link.title }}</a>
+                </li>
+              {%- endfor -%}
+            {%- else -%}
+              <li class="footer-section__menu-item footer-section__menu-item--empty">
+                <span>{{ 'general.menu_not_assigned' | t }}</span>
+              </li>
+            {%- endif -%}
+          </ul>
+        </div>
+      </details>
+
+      <details class="footer-section__menu" data-accordion data-accordion-group="footer">
+        <summary class="footer-section__menu-title" aria-label="{{ section.settings.menu_3_heading | escape }}">
+          <span>{{ section.settings.menu_3_heading }}</span>
+          <span class="footer-section__menu-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="footer-section__menu-panel">
+          <ul class="footer-section__menu-list" role="list">
+            {%- if section.settings.menu_3 != blank and section.settings.menu_3.links.size > 0 -%}
+              {%- for link in section.settings.menu_3.links -%}
+                <li class="footer-section__menu-item">
+                  <a href="{{ link.url }}">{{ link.title }}</a>
+                </li>
+              {%- endfor -%}
+            {%- else -%}
+              <li class="footer-section__menu-item footer-section__menu-item--empty">
+                <span>{{ 'general.menu_not_assigned' | t }}</span>
+              </li>
+            {%- endif -%}
+          </ul>
+        </div>
+      </details>
+
+      <details class="footer-section__menu" data-accordion data-accordion-group="footer">
+        <summary class="footer-section__menu-title" aria-label="{{ section.settings.menu_4_heading | escape }}">
+          <span>{{ section.settings.menu_4_heading }}</span>
+          <span class="footer-section__menu-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="footer-section__menu-panel">
+          <ul class="footer-section__menu-list" role="list">
+            {%- if section.settings.menu_4 != blank and section.settings.menu_4.links.size > 0 -%}
+              {%- for link in section.settings.menu_4.links -%}
+                <li class="footer-section__menu-item">
+                  <a href="{{ link.url }}">{{ link.title }}</a>
+                </li>
+              {%- endfor -%}
+            {%- else -%}
+              <li class="footer-section__menu-item footer-section__menu-item--empty">
+                <span>{{ 'general.menu_not_assigned' | t }}</span>
+              </li>
+            {%- endif -%}
+          </ul>
+        </div>
+      </details>
+    </div>
+
+    <div class="footer-section__divider"></div>
+
+    <div class="footer-section__bottom">
+      <div class="footer-section__brand">
+        {%- if settings.logo != blank -%}
+          <a href="{{ routes.root_url }}" class="footer-section__brand-link footer-section__brand-link--desktop" aria-label="{{ shop.name }}">
+            <img
+              src="{{ settings.logo | image_url: width: 320 }}"
+              alt="{{ shop.name }}"
+              class="footer-section__brand-logo footer-section__brand-logo--desktop"
+              loading="lazy"
+              width="{{ settings.logo.width }}"
+              height="{{ settings.logo.height }}"
+            >
+          </a>
+        {%- endif -%}
+
+        {%- if settings.logo_mobile != blank -%}
+          <a href="{{ routes.root_url }}" class="footer-section__brand-link footer-section__brand-link--mobile" aria-label="{{ shop.name }}">
+            <img
+              src="{{ settings.logo_mobile | image_url: width: 160 }}"
+              alt="{{ shop.name }}"
+              class="footer-section__brand-logo footer-section__brand-logo--mobile"
+              loading="lazy"
+              width="{{ settings.logo_mobile.width }}"
+              height="{{ settings.logo_mobile.height }}"
+            >
+          </a>
+        {%- endif -%}
+
+        {%- if settings.logo == blank and settings.logo_mobile == blank -%}
+          <span class="footer-section__brand-name font-serif">{{ shop.name }}</span>
+        {%- endif -%}
+
+        <p class="footer-section__copyright">
+          &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ 'footer.rights_reserved' | t }}
+        </p>
+      </div>
+
+      {%- if section.settings.show_payment_icons and shop.enabled_payment_types.size > 0 -%}
+        <div class="footer-section__payments" aria-label="{{ 'general.payment_methods' | t }}">
+          {%- for type in shop.enabled_payment_types -%}
+            {{ type | payment_type_svg_tag }}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <script type="module" src="{{ 'accordion.js' | asset_url }}"></script>
+</footer>
+
+{% stylesheet %}
+  .footer-section {
+    padding-block: 48px 28px;
+  }
+
+  .footer-section__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) repeat(4, minmax(0, 0.8fr));
+    gap: 32px;
+    align-items: start;
+  }
+
+  .footer-section__newsletter {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .footer-section__newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .footer-section__newsletter-fields {
+    display: grid;
+    gap: 12px;
+  }
+
+  .footer-section__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .footer-section__input {
+    width: 100%;
+    min-height: 48px;
+    padding: 0 16px;
+    border: 1px solid var(--color-border);
+    background: var(--color-background);
+    color: var(--color-foreground);
+  }
+
+  .footer-section__button {
+    width: 100%;
+  }
+
+  .footer-section__socials {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .footer-section__social {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--color-border);
+    color: var(--color-foreground);
+  }
+
+  .footer-section__social svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .footer-section__menu {
+    border-top: 1px solid transparent;
+  }
+
+  .footer-section__menu-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    padding: 0 0 16px;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-foreground);
+  }
+
+  .footer-section__menu-title::-webkit-details-marker {
+    display: none;
+  }
+
+  .footer-section__menu-icon {
+    display: none;
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  .footer-section__menu-panel {
+    display: block;
+  }
+
+  .footer-section__menu-list {
+    display: grid;
+    gap: 10px;
+    list-style: none;
+  }
+
+  .footer-section__menu-item a,
+  .footer-section__menu-item span {
+    color: var(--color-foreground);
+  }
+
+  .footer-section__divider {
+    margin-block: 32px;
+    border-top: 1px solid var(--color-border);
+    opacity: 0.35;
+  }
+
+  .footer-section__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .footer-section__brand {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+
+  .footer-section__brand-link {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .footer-section__brand-name {
+    font-size: var(--text-h4);
+    color: var(--color-foreground);
+  }
+
+  .footer-section__brand-logo {
+    display: block;
+    width: auto;
+    max-height: 64px;
+  }
+
+  .footer-section__brand-logo--mobile,
+  .footer-section__brand-link--mobile {
+    display: none;
+  }
+
+  .footer-section__copyright {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  .footer-section__payments {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .footer-section__payments svg {
+    height: 24px;
+    width: auto;
+  }
+
+  @media (min-width: 990px) {
+    .footer-section__menu-panel {
+      display: block !important;
+    }
+
+    .footer-section__menu {
+      display: grid;
+      gap: 16px;
+    }
+
+    .footer-section__menu-title {
+      padding: 0;
+      pointer-events: none;
+    }
+  }
+
+  @media (max-width: 989px) {
+    .footer-section__grid {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .footer-section__menu {
+      border-top: 1px solid var(--color-border);
+    }
+
+    .footer-section__menu-title {
+      padding: 16px 0;
+    }
+
+    .footer-section__menu-icon {
+      display: inline-block;
+    }
+
+    .footer-section__menu-panel {
+      display: none;
+      padding-bottom: 16px;
+    }
+
+    .footer-section__menu[open] .footer-section__menu-panel {
+      display: block;
+    }
+
+    .footer-section__menu[open] .footer-section__menu-icon {
+      transform: rotate(45deg);
+    }
+  }
+
+  @media (max-width: 749px) {
+    .footer-section__bottom {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .footer-section--has-mobile-logo .footer-section__brand-logo--desktop,
+    .footer-section--has-mobile-logo .footer-section__brand-link--desktop {
+      display: none;
+    }
+
+    .footer-section--has-mobile-logo .footer-section__brand-logo--mobile,
+    .footer-section--has-mobile-logo .footer-section__brand-link--mobile {
+      display: inline-flex;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Newsletter heading",
+      "default": "JOIN OUR NEWSLETTER"
+    },
+    {
+      "type": "richtext",
+      "id": "newsletter_text",
+      "label": "Newsletter text"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_1",
+      "label": "Menu 1"
+    },
+    {
+      "type": "text",
+      "id": "menu_1_heading",
+      "label": "Menu 1 heading",
+      "default": "SHOP ALL"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_2",
+      "label": "Menu 2"
+    },
+    {
+      "type": "text",
+      "id": "menu_2_heading",
+      "label": "Menu 2 heading",
+      "default": "ABOUT US"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_3",
+      "label": "Menu 3"
+    },
+    {
+      "type": "text",
+      "id": "menu_3_heading",
+      "label": "Menu 3 heading",
+      "default": "GIFTING"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_4",
+      "label": "Menu 4"
+    },
+    {
+      "type": "text",
+      "id": "menu_4_heading",
+      "label": "Menu 4 heading",
+      "default": "CUSTOMER SERVICE"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show payment icons",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer"
+    }
+  ]
+}
+{% endschema %}

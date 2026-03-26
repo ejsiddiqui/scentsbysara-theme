@@ -1,0 +1,282 @@
+{%- liquid
+  assign section_eyebrow = section.settings.eyebrow | default: 'OUR COMMITMENT'
+  assign section_heading = section.settings.heading | default: 'INTENTIONAL DESIGN IN SCENT AND FORM.'
+  assign image_alt = section.settings.image_alt | default: section_heading
+-%}
+
+<section
+  id="Commitment-{{ section.id }}"
+  class="commitment-section section-block color-{{ section.settings.color_scheme }}"
+>
+  <div class="container">
+    <div class="commitment-section__layout{% if section.settings.image_position == 'right' %} commitment-section__layout--reverse{% endif %}">
+      <div class="commitment-section__media">
+        {%- if section.settings.image != blank -%}
+          {% render 'image',
+            class: 'commitment-section__image',
+            image: section.settings.image,
+            alt: image_alt,
+            loading: 'lazy'
+          %}
+        {%- else -%}
+          <img class="commitment-section__image" src="{{ 'our-commitment-left.png' | asset_url }}" alt="{{ image_alt | escape }}" width="1200" height="1200">
+        {%- endif -%}
+      </div>
+
+      <div class="commitment-section__content">
+        <span class="eyebrow">{{ section_eyebrow | escape }}</span>
+        <h2 class="font-serif commitment-section__heading">{{ section_heading | escape }}</h2>
+
+        <div class="commitment-section__items" role="list">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'value' -%}
+              <article class="commitment-section__item" role="listitem" {{ block.shopify_attributes }}>
+                {%- if block.settings.icon != blank -%}
+                  {% render 'image',
+                    class: 'commitment-section__item-icon',
+                    image: block.settings.icon,
+                    alt: block.settings.title,
+                    widths: '48,72,96',
+                    sizes: '48px',
+                    loading: 'lazy'
+                  %}
+                {%- endif -%}
+                <h3 class="font-serif commitment-section__item-heading">{{ block.settings.title | escape }}</h3>
+                <p class="commitment-section__item-text">{{ block.settings.description | escape | newline_to_br }}</p>
+              </article>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+        {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+          <a href="{{ section.settings.button_link }}" class="commitment-section__button btn-outline">
+            {{ section.settings.button_label | escape }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% style %}
+  #Commitment-{{ section.id }} {
+    overflow: clip;
+  }
+
+  #Commitment-{{ section.id }} .commitment-section__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    gap: clamp(1.75rem, 4vw, 5rem);
+    align-items: center;
+  }
+
+  #Commitment-{{ section.id }} .commitment-section__layout--reverse .commitment-section__media {
+    order: 2;
+  }
+
+  #Commitment-{{ section.id }} .commitment-section__layout--reverse .commitment-section__content {
+    order: 1;
+  }
+
+  #Commitment-{{ section.id }} .commitment-section__media {
+    min-width: 0;
+  }
+
+  #Commitment-{{ section.id }} .commitment-section__image,
+  #Commitment-{{ section.id }} .commitment-section__placeholder {
+    width: 100%;
+    aspect-ratio: 0.96;
+    object-fit: cover;
+  }
+
+  #Commitment-{{ section.id }} .commitment-section__placeholder {
+    display: grid;
+    place-items: center;
+    border: 1px dashed var(--color-border);
+    color: var(--color-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: var(--text-micro);
+  }
+
+  #Commitment-{{ section.id }} .commitment-section__content {
+    min-width: 0;
+  }
+
+  #Commitment-{{ section.id }} .commitment-section__heading {
+    max-width: 12ch;
+    margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+    text-transform: uppercase;
+  }
+
+  #Commitment-{{ section.id }} .commitment-section__items {
+    display: grid;
+    gap: clamp(1.25rem, 2vw, 2rem);
+  }
+
+  #Commitment-{{ section.id }} .commitment-section__item {
+    display: grid;
+    gap: 0.5rem;
+    max-width: 42rem;
+  }
+
+  #Commitment-{{ section.id }} .commitment-section__item-icon {
+    width: 3rem;
+    height: 3rem;
+    object-fit: contain;
+  }
+
+  #Commitment-{{ section.id }} .commitment-section__item-heading {
+    font-size: clamp(1.15rem, 1.1vw + 0.85rem, 1.5rem);
+  }
+
+  #Commitment-{{ section.id }} .commitment-section__item-text {
+    max-width: 36rem;
+  }
+
+  #Commitment-{{ section.id }} .commitment-section__button {
+    margin-top: clamp(1.75rem, 3vw, 3rem);
+  }
+
+  @media screen and (max-width: 989px) {
+    #Commitment-{{ section.id }} .commitment-section__layout,
+    #Commitment-{{ section.id }} .commitment-section__layout--reverse {
+      grid-template-columns: 1fr;
+    }
+
+    #Commitment-{{ section.id }} .commitment-section__layout--reverse .commitment-section__media,
+    #Commitment-{{ section.id }} .commitment-section__layout--reverse .commitment-section__content {
+      order: initial;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #Commitment-{{ section.id }} .commitment-section__heading {
+      max-width: none;
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Commitment",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "OUR COMMITMENT"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "INTENTIONAL DESIGN IN SCENT AND FORM."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image alt text",
+      "default": "Matches and candle"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "READ OUR STORY"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "value",
+      "name": "Value",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Embodied Confidence"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Confidence that is felt rather than performed - creating space to recognise ourselves, our experiences, and how we feel within them."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Commitment",
+      "blocks": [
+        {
+          "type": "value",
+          "settings": {
+            "title": "Embodied Confidence",
+            "description": "Confidence that is felt rather than performed - creating space to recognise ourselves, our experiences, and how we feel within them."
+          }
+        },
+        {
+          "type": "value",
+          "settings": {
+            "title": "Rooted in Real Stories",
+            "description": "Built with its community, not just for it - shaped by lived experience, resilience, and the individuality that defines each person."
+          }
+        },
+        {
+          "type": "value",
+          "settings": {
+            "title": "Meaningful Gifting",
+            "description": "Custom pieces gifted as recognition for self or others - chosen to honour who someone is and the moments that shape them."
+          }
+        },
+        {
+          "type": "value",
+          "settings": {
+            "title": "Sustainable Craftsmanship",
+            "description": "Luxury defined through consideration - for materials, craft, and the environments in which our pieces exist."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

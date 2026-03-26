@@ -1,0 +1,68 @@
+<script type="application/json" data-product-variants>
+  [
+    {%- for variant in product.variants -%}
+      {
+        "id": {{ variant.id | json }},
+        "available": {{ variant.available | json }},
+        "price": {{ variant.price | json }},
+        "price_money": {{ variant.price | money | json }},
+        "compare_at_price": {{ variant.compare_at_price | default: 0 | json }},
+        "compare_at_price_money": {{ variant.compare_at_price | money | json }},
+        "featured_media_id": {{ variant.featured_media.id | default: 0 | json }},
+        "url": {{ product.url | append: '?variant=' | append: variant.id | json }},
+        "options": {{ variant.options | json }}
+      }{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ]
+</script>
+
+{%- for option in product.options_with_values -%}
+  {%- liquid
+    assign option_name_downcase = option.name | downcase
+    assign option_type = 'pill'
+
+    if option_name_downcase contains 'colour' or option_name_downcase contains 'color'
+      assign option_type = 'swatch'
+    endif
+  -%}
+  <fieldset class="variant-option" data-option-position="{{ option.position }}">
+    <legend class="selector-label text-sm">
+      {{ option.name | upcase }} :
+      <span data-selected-value>{{ option.selected_value }}</span>
+    </legend>
+    <div class="variant-option-values{% if option_type == 'swatch' %} swatch-group{% else %} pill-group{% endif %}">
+      {%- for value in option.values -%}
+        {%- liquid
+          assign input_id = 'VariantOption-' | append: section.id | append: '-' | append: option.position | append: '-' | append: forloop.index0
+          assign option_value_downcase = value | downcase
+          assign swatch_color = 'var(--color-accent)'
+
+          if option_value_downcase contains 'ivory' or option_value_downcase contains 'cream' or option_value_downcase contains 'white'
+            assign swatch_color = '#EAE5DE'
+          elsif option_value_downcase contains 'caramel' or option_value_downcase contains 'tan' or option_value_downcase contains 'beige'
+            assign swatch_color = '#C99B6A'
+          elsif option_value_downcase contains 'mocha' or option_value_downcase contains 'brown' or option_value_downcase contains 'chocolate'
+            assign swatch_color = '#6A4232'
+          endif
+        -%}
+        <label class="{% if option_type == 'swatch' %}swatch-label{% else %}pill-label{% endif %}">
+          <input
+            id="{{ input_id }}"
+            type="radio"
+            name="options[{{ option.name }}]"
+            value="{{ value | escape }}"
+            {% if value == option.selected_value %}checked{% endif %}
+            data-option-position="{{ option.position }}"
+            data-option-value="{{ value | escape }}"
+            aria-label="{{ option.name }}: {{ value | escape }}"
+          >
+          {%- if option_type == 'swatch' -%}
+            <span class="swatch swatch-large" style="--swatch-color: {{ swatch_color }};" aria-label="{{ value | escape }}"></span>
+          {%- else -%}
+            <span class="pill">{{ value }}</span>
+          {%- endif -%}
+        </label>
+      {%- endfor -%}
+    </div>
+  </fieldset>
+{%- endfor -%}

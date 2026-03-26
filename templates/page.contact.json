@@ -1,0 +1,54 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "heading": "CONTACT US",
+        "subheading": "We are here to help with product questions, custom requests, and order support."
+      }
+    },
+    "main": {
+      "type": "contact-form",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "info_eyebrow": "GET IN TOUCH",
+        "form_eyebrow": "SEND A MESSAGE",
+        "heading": "LET US SUPPORT YOUR RITUAL",
+        "description": "<p>We are here to help with product questions, custom requests, and order support.</p>"
+      },
+      "blocks": {
+        "email": {
+          "type": "info_block",
+          "settings": {
+            "title": "Email",
+            "content": "<p><a href=\"mailto:hello@scentsbysara.com\">hello@scentsbysara.com</a></p>"
+          }
+        },
+        "whatsapp": {
+          "type": "info_block",
+          "settings": {
+            "title": "WhatsApp",
+            "content": "<p><a href=\"tel:+442012345678\">+44 20 1234 5678</a></p>"
+          }
+        },
+        "hours": {
+          "type": "info_block",
+          "settings": {
+            "title": "Studio hours",
+            "content": "<p>Monday to Friday, 9:00 to 18:00 GMT</p>"
+          }
+        }
+      },
+      "block_order": [
+        "email",
+        "whatsapp",
+        "hours"
+      ]
+    }
+  },
+  "order": [
+    "hero",
+    "main"
+  ]
+}

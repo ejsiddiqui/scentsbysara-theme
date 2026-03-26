@@ -1,0 +1,97 @@
+{% comment %}
+  Generates CSS custom properties from theme settings.
+  Used by the theme layout head when the layout wiring is added.
+{% endcomment %}
+
+{% assign default_scheme = settings.color_schemes | first %}
+
+{% style %}
+:root {
+  --color-sand: #F9F6F2;
+  --color-stone: #E7E3DC;
+  --color-clay: #CEC5B8;
+  --color-taupe: #A39382;
+  --color-mocha: #3F3229;
+  --color-slate: #2D2B27;
+  --gradient-brown: linear-gradient(90deg, rgba(109, 58, 15, 1) 0%, rgba(241, 189, 139, 0.85) 100%);
+  --gradient-tan: linear-gradient(90deg, rgba(213, 149, 84, 1) 0%, rgba(239, 180, 124, 0.85) 100%);
+  --gradient-white: linear-gradient(90deg, rgba(202, 172, 148, 0.67) 0%, rgba(249, 246, 242, 0.67) 100%);
+
+  --color-background: {{ default_scheme.settings.background | default: '#F9F6F2' }};
+  --color-foreground: {{ default_scheme.settings.text | default: '#3F3229' }};
+  --color-muted: {{ default_scheme.settings.muted | default: '#A39382' }};
+  --color-border: {{ default_scheme.settings.border | default: '#CEC5B8' }};
+  --color-secondary-bg: {{ default_scheme.settings.secondary_bg | default: '#E7E3DC' }};
+  --color-accent: {{ default_scheme.settings.accent | default: '#3F3229' }};
+  --status-success: {{ default_scheme.settings.success | default: '#2d6a4f' }};
+  --status-error: {{ default_scheme.settings.error | default: '#8b2e2e' }};
+  --color-success: var(--status-success);
+  --color-error: var(--status-error);
+
+  --bg-primary: var(--color-background);
+  --bg-primary-dark: var(--color-foreground);
+  --bg-secondary: var(--color-secondary-bg);
+  --bg-tertiary: var(--color-border);
+  --text-primary: var(--color-foreground);
+  --text-primary-dark: var(--color-background);
+  --text-muted: var(--color-muted);
+  --text-on-dark: var(--color-background);
+  --border-light: var(--color-border);
+  --border-heavy: var(--color-foreground);
+  --border-dark: var(--color-accent);
+
+  --swatch-ivory: #EAE5DE;
+  --swatch-caramel: #C99B6A;
+  --swatch-mocha: #6A4232;
+
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 64px;
+  --space-xxl: {{ settings.section_spacing | default: 80 }}px;
+  --space-2xl: 96px;
+  --space-3xl: 128px;
+  --space-4xl: 80px;
+  --space-section: {{ settings.section_spacing | default: 80 }}px;
+
+  --header-height: 132px;
+  --announcement-height: 38px;
+  --section-max: 1920px;
+  --container-max: {{ settings.page_width | default: '1920' }}px;
+  --container-editorial: 800px;
+  --gutter: {{ settings.container_gutter | default: 60 }}px;
+  --inner-gutter: 80px;
+  --radius-max: {{ settings.button_border_radius | default: 0 }}px;
+  --border-newsletter: 1px solid var(--color-mocha);
+  --border-footer-divider: 1px solid rgba(63, 50, 41, 0.15);
+
+  --font-serif: "rl-limo", {{ settings.type_heading_font.family | default: 'Libre Baskerville' | json }}, {{ settings.type_heading_font.fallback_families | default: 'serif' }};
+  --font-sans: "Suisse Int'l", {{ settings.type_body_font.family | default: 'Work Sans' | json }}, {{ settings.type_body_font.fallback_families | default: 'sans-serif' }};
+  --text-hero: {{ settings.heading_size_h1 | default: 47 | plus: 2 }}px;
+  --text-h1: {{ settings.heading_size_h1 | default: 47 }}px;
+  --text-h2: {{ settings.heading_size_h2 | default: 39 }}px;
+  --text-h3: {{ settings.heading_size_h3 | default: 30 }}px;
+  --text-h4: {{ settings.heading_size_h4 | default: 25 }}px;
+  --text-h5: {{ settings.heading_size_h5 | default: 21 }}px;
+  --text-h6: {{ settings.heading_size_h6 | default: 18 }}px;
+  --text-heading-extra: 36px;
+  --text-body-large: 18px;
+  --text-body: {{ settings.body_font_size | default: 16 }}px;
+  --text-small: 13px;
+  --text-xsmall: 11px;
+  --text-micro: 11px;
+
+  --button-border-width: {{ settings.button_border_width | default: 1 }}px;
+  --logo-height: {{ settings.logo_height | default: 40 }}px;
+  --card-image-ratio: {{ settings.card_image_ratio | default: 'portrait' }};
+  --card-show-secondary-image: {{ settings.card_show_secondary_image | default: true }};
+  --card-show-swatches: {{ settings.card_show_swatches | default: true }};
+  --card-show-quick-add: {{ settings.card_show_quick_add | default: true }};
+  --swatch-shape: {{ settings.swatch_shape | default: 'circle' }};
+  --swatch-size: {{ settings.swatch_size | default: 32 }}px;
+  --cart-type: {{ settings.cart_type | default: 'page' }};
+  --cart-note-enabled: {{ settings.cart_note_enabled | default: false }};
+  --cart-auto-open: {{ settings.cart_auto_open | default: true }};
+}
+{% endstyle %}

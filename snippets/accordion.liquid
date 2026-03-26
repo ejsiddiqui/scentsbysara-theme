@@ -1,0 +1,11 @@
+<details class="accordion"{% if open %} open{% endif %} data-accordion{% if group != blank %} data-accordion-group="{{ group }}"{% endif %}>
+  <summary class="accordion-header">
+    <span>{{ title }}</span>
+    {% render 'icon', name: 'plus', size: 18 %}
+  </summary>
+  <div class="accordion-body">
+    <div class="accordion-body__inner">
+      {{ content }}
+    </div>
+  </div>
+</details>

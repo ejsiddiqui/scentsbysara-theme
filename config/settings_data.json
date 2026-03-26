@@ -1,0 +1,83 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "sections": {},
+    "content_for_index": [],
+    "color_schemes": {
+      "scheme-1": {
+        "settings": {
+          "background": "#F9F6F2",
+          "background_gradient": "",
+          "text": "#3F3229",
+          "muted": "#A39382",
+          "border": "#CEC5B8",
+          "secondary_bg": "#E7E3DC",
+          "accent": "#3F3229",
+          "button": "#3F3229",
+          "button_label": "#F9F6F2",
+          "secondary_button_label": "#3F3229",
+          "shadow": "#3F3229",
+          "success": "#2d6a4f",
+          "error": "#8b2e2e"
+        }
+      },
+      "scheme-2": {
+        "settings": {
+          "background": "#3F3229",
+          "background_gradient": "",
+          "text": "#F9F6F2",
+          "muted": "#CEC5B8",
+          "border": "#A39382",
+          "secondary_bg": "#2D2B27",
+          "accent": "#F9F6F2",
+          "button": "#F9F6F2",
+          "button_label": "#3F3229",
+          "secondary_button_label": "#F9F6F2",
+          "shadow": "#F9F6F2",
+          "success": "#2d6a4f",
+          "error": "#8b2e2e"
+        }
+      }
+    },
+    "logo": "",
+    "logo_inverse": "",
+    "logo_mobile": "",
+    "logo_height": 40,
+    "favicon": "",
+    "type_heading_font": "libre_baskerville_n4",
+    "type_body_font": "work_sans_n4",
+    "heading_size_h1": 47,
+    "heading_size_h2": 39,
+    "heading_size_h3": 30,
+    "heading_size_h4": 25,
+    "heading_size_h5": 21,
+    "heading_size_h6": 18,
+    "body_font_size": 16,
+    "page_width": "1920",
+    "section_spacing": 80,
+    "container_gutter": 60,
+    "button_border_radius": 0,
+    "button_border_width": 1,
+    "cart_type": "drawer",
+    "cart_note_enabled": false,
+    "cart_auto_open": true,
+    "card_image_ratio": "portrait",
+    "card_show_secondary_image": true,
+    "card_show_swatches": true,
+    "card_show_quick_add": true,
+    "swatch_shape": "circle",
+    "swatch_size": 32,
+    "social_instagram": "",
+    "social_facebook": "",
+    "social_tiktok": "",
+    "social_pinterest": ""
+  }
+}

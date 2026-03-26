@@ -1,0 +1,223 @@
+{
+  "general": {
+    "404": "404",
+    "article": "Article",
+    "block": "Block",
+    "blog": "Blog",
+    "cart": "Cart",
+    "collection": "Collection",
+    "collections_grid": "Collections grid",
+    "column": "Column",
+    "content": "Content",
+    "custom_section": "Custom section",
+    "footer": "Footer",
+    "fonts": "Fonts",
+    "group": "Group",
+    "header": "Header",
+    "layout": "Layout",
+    "main": "Main",
+    "page": "Page",
+    "password": "Password",
+    "primary": "Primary",
+    "product": "Product",
+    "row": "Row",
+    "search": "Search",
+    "secondary": "Secondary",
+    "section": "Section",
+    "settings": "Settings",
+    "sidebar": "Sidebar",
+    "text": "Text",
+    "theme": "Theme",
+    "typography": "Typography"
+  },
+  "settings_schema": {
+    "brand": {
+      "name": "Brand & identity",
+      "settings": {
+        "logo": {
+          "label": "Logo"
+        },
+        "logo_inverse": {
+          "label": "Inverse logo"
+        },
+        "logo_mobile": {
+          "label": "Mobile logo"
+        },
+        "logo_height": {
+          "label": "Logo height"
+        },
+        "favicon": {
+          "label": "Favicon"
+        }
+      }
+    },
+    "colour_schemes": {
+      "name": "Colour schemes",
+      "settings": {
+        "background": {
+          "label": "Background"
+        },
+        "background_gradient": {
+          "label": "Background gradient",
+          "info": "Optional linear gradient overlay for the scheme background."
+        },
+        "text": {
+          "label": "Text"
+        },
+        "muted": {
+          "label": "Muted text"
+        },
+        "border": {
+          "label": "Border"
+        },
+        "secondary_bg": {
+          "label": "Secondary background"
+        },
+        "accent": {
+          "label": "Accent"
+        },
+        "button": {
+          "label": "Button background"
+        },
+        "button_label": {
+          "label": "Button text"
+        },
+        "secondary_button_label": {
+          "label": "Secondary button text"
+        },
+        "shadow": {
+          "label": "Shadow"
+        },
+        "success": {
+          "label": "Success"
+        },
+        "error": {
+          "label": "Error"
+        }
+      }
+    },
+    "typography": {
+      "name": "Typography",
+      "settings": {
+        "type_heading_font": {
+          "label": "Heading font",
+          "info": "RL Limo is loaded from Adobe Fonts. This picker controls the fallback stack."
+        },
+        "type_body_font": {
+          "label": "Body font",
+          "info": "Suisse Int'l is loaded from the theme assets. This picker controls the fallback stack."
+        },
+        "heading_size_h1": {
+          "label": "Heading size H1"
+        },
+        "heading_size_h2": {
+          "label": "Heading size H2"
+        },
+        "heading_size_h3": {
+          "label": "Heading size H3"
+        },
+        "heading_size_h4": {
+          "label": "Heading size H4"
+        },
+        "heading_size_h5": {
+          "label": "Heading size H5"
+        },
+        "heading_size_h6": {
+          "label": "Heading size H6"
+        },
+        "body_font_size": {
+          "label": "Body size"
+        }
+      }
+    },
+    "layout": {
+      "name": "Layout",
+      "settings": {
+        "page_width": {
+          "label": "Page width"
+        },
+        "section_spacing": {
+          "label": "Section spacing"
+        },
+        "container_gutter": {
+          "label": "Container gutter"
+        }
+      }
+    },
+    "buttons": {
+      "name": "Buttons",
+      "settings": {
+        "button_border_radius": {
+          "label": "Button border radius"
+        },
+        "button_border_width": {
+          "label": "Button border width"
+        }
+      }
+    },
+    "cart": {
+      "name": "Cart",
+      "settings": {
+        "cart_type": {
+          "label": "Cart type"
+        },
+        "cart_note_enabled": {
+          "label": "Enable order notes"
+        },
+        "cart_auto_open": {
+          "label": "Auto-open cart drawer"
+        }
+      }
+    },
+    "product_cards": {
+      "name": "Product cards",
+      "settings": {
+        "card_image_ratio": {
+          "label": "Image ratio"
+        },
+        "card_show_secondary_image": {
+          "label": "Show secondary image"
+        },
+        "card_show_swatches": {
+          "label": "Show swatches"
+        },
+        "card_show_quick_add": {
+          "label": "Show quick add"
+        }
+      }
+    },
+    "swatches": {
+      "name": "Swatches",
+      "settings": {
+        "swatch_shape": {
+          "label": "Shape"
+        },
+        "swatch_size": {
+          "label": "Size"
+        }
+      }
+    },
+    "social": {
+      "name": "Social media",
+      "settings": {
+        "social_instagram": {
+          "label": "Instagram"
+        },
+        "social_facebook": {
+          "label": "Facebook"
+        },
+        "social_tiktok": {
+          "label": "TikTok"
+        },
+        "social_pinterest": {
+          "label": "Pinterest"
+        }
+      }
+    }
+  },
+  "labels": {
+    "menu": "Menu",
+    "customer_account_menu": "Customer account menu",
+    "show_payment_icons": "Show payment icons"
+  }
+}

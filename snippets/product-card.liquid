@@ -1,0 +1,143 @@
+{%- liquid
+  assign card_product = product | default: card_product
+  assign image_ratio = image_ratio | default: settings.card_image_ratio
+  assign card_layout = card_layout | default: 'stacked'
+  assign show_secondary_image = show_secondary_image
+  assign show_swatches = show_swatches
+  assign show_quick_add = show_quick_add
+  assign current_variant = blank
+  assign primary_image = blank
+  assign secondary_image = blank
+  assign subtitle = subtitle
+
+  if show_secondary_image == blank and show_secondary_image != false
+    assign show_secondary_image = settings.card_show_secondary_image
+  endif
+
+  if show_swatches == blank and show_swatches != false
+    assign show_swatches = settings.card_show_swatches
+  endif
+
+  if show_quick_add == blank and show_quick_add != false
+    assign show_quick_add = settings.card_show_quick_add
+  endif
+
+  if show_secondary_image and secondary_image != blank and secondary_image != primary_image
+    assign has_secondary_image = true
+  endif
+
+  if card_product != blank
+    assign current_variant = variant | default: card_product.selected_or_first_available_variant
+    assign primary_image = card_product.featured_image | default: card_product.images.first
+    assign secondary_image = card_product.images[1]
+    assign has_secondary_image = false
+
+    if show_secondary_image and secondary_image != blank and secondary_image != primary_image
+      assign has_secondary_image = true
+    endif
+
+    assign subtitle = subtitle | default: card_product.type
+    if subtitle == blank
+      assign subtitle = card_product.vendor
+    endif
+  endif
+-%}
+
+{%- if card_product != blank -%}
+  <product-card
+    class="product-card product-card--{{ card_layout }}{% if card_product.available == false %} is-sold-out{% endif %}"
+    data-product-card
+    data-product-card-id="{{ card_product.id }}"
+    data-product-url="{{ card_product.url }}"
+    data-card-layout="{{ card_layout }}"
+    data-card-image-ratio="{{ image_ratio }}"
+  >
+    <div class="product-card-media product-card__media-shell">
+      <a
+        class="product-image-wrap product-card__media"
+        href="{{ card_product.url }}"
+        aria-label="{{ card_product.title | escape }}"
+      >
+        {%- if primary_image != blank -%}
+          {% render 'image',
+            class: 'product-card__image product-card__image--primary',
+            image: primary_image,
+            widths: '320,480,640,800',
+            sizes: '(min-width: 1200px) 25vw, (min-width: 750px) 40vw, 78vw'
+          %}
+        {%- else -%}
+          <div class="image product-card__image product-card__image--placeholder" aria-hidden="true"></div>
+        {%- endif -%}
+
+        {%- if has_secondary_image -%}
+          {% render 'image',
+            class: 'product-card__image product-card__image--secondary',
+            image: secondary_image,
+            widths: '320,480,640,800',
+            sizes: '(min-width: 1200px) 25vw, (min-width: 750px) 40vw, 78vw'
+          %}
+        {%- endif -%}
+      </a>
+
+      {%- if show_quick_add and card_product.available -%}
+        <button
+          class="product-btn-add product-card__quick-add"
+          type="button"
+          data-product-card-quick-add
+          data-product-card-quick-add-url="{% if current_variant != blank %}{{ card_product.url }}?variant={{ current_variant.id }}{% else %}{{ card_product.url }}{% endif %}"
+          aria-label="Quick add {{ card_product.title | escape }}"
+        >
+          +
+        </button>
+      {%- endif -%}
+
+      {%- unless card_product.available -%}
+        <span class="product-card__badge" aria-label="Sold out">Sold out</span>
+      {%- endunless -%}
+    </div>
+
+    {%- if card_layout == 'shop' -%}
+      {%- if show_swatches -%}
+        <div class="product-options product-card__options">
+          {% render 'variant-swatches', product: card_product, variant: current_variant %}
+        </div>
+      {%- endif -%}
+
+      <div class="product-info-shop product-card__body">
+        <div class="product-card__copy">
+          <span class="product-name product-card__title">
+            <a href="{{ card_product.url }}">{{ card_product.title | escape }}</a>
+          </span>
+
+          {%- if subtitle != blank -%}
+            <span class="product-desc product-card__subtitle">{{ subtitle | escape }}</span>
+          {%- endif -%}
+        </div>
+
+        {% render 'price', product: card_product, variant: current_variant %}
+      </div>
+    {%- else -%}
+      <div class="product-info-stacked product-card__body">
+        <div class="product-card__copy">
+          <span class="product-name product-card__title">
+            <a href="{{ card_product.url }}">{{ card_product.title | escape }}</a>
+          </span>
+
+          {%- if subtitle != blank -%}
+            <span class="product-desc product-card__subtitle">{{ subtitle | escape }}</span>
+          {%- endif -%}
+        </div>
+
+        {% render 'price', product: card_product, variant: current_variant %}
+      </div>
+
+      {%- if show_swatches -%}
+        <div class="product-options product-card__options">
+          {% render 'variant-swatches', product: card_product, variant: current_variant %}
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+
+    <a href="{{ card_product.url }}" class="product-btn product-card__button">SHOP NOW</a>
+  </product-card>
+{%- endif -%}

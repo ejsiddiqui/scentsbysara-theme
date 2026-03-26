@@ -1,0 +1,130 @@
+{%- liquid
+  assign products_to_show = section.settings.products_to_show | default: 4
+  assign recommendations_url = routes.product_recommendations_url | append: '?product_id=' | append: product.id | append: '&limit=' | append: products_to_show | append: '&section_id=' | append: section.id
+-%}
+
+<section
+  id="ProductRecommendations-{{ section.id }}"
+  class="section-block product-recommendations"
+  data-product-recommendations
+  data-url="{{ recommendations_url }}"
+>
+  <div class="container product-recommendations__container">
+    {%- if section.settings.heading != blank -%}
+      <header class="product-recommendations__header">
+        <h2 class="section-title font-serif text-h3">{{ section.settings.heading | escape }}</h2>
+      </header>
+    {%- endif -%}
+
+    {%- if recommendations.performed? and recommendations.products_count > 0 -%}
+      <div class="product-grid grid-cols-4 product-recommendations__grid" data-product-recommendations-content>
+        {%- for product in recommendations.products limit: products_to_show -%}
+          {% render 'product-card',
+            product: product,
+            card_layout: 'stacked',
+            show_secondary_image: true,
+            show_swatches: true,
+            show_quick_add: false
+          %}
+        {%- endfor -%}
+      </div>
+    {%- elsif recommendations.performed? -%}
+      <div class="product-recommendations__empty" role="status">
+        No related products are available right now.
+      </div>
+    {%- else -%}
+      <div class="product-recommendations__loading" data-product-recommendations-status aria-live="polite">
+        Finding related products...
+      </div>
+      <div class="product-grid grid-cols-4 product-recommendations__grid" data-product-recommendations-content hidden></div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .product-recommendations__header {
+    margin-bottom: var(--space-lg);
+    text-align: center;
+  }
+
+  .product-recommendations__grid {
+    margin-top: var(--space-lg);
+  }
+
+  .product-recommendations__loading,
+  .product-recommendations__empty {
+    padding-block: var(--space-lg);
+    color: var(--color-muted);
+    text-align: center;
+  }
+{% endstylesheet %}
+
+<script type="module">
+  const section = document.getElementById('ProductRecommendations-{{ section.id }}');
+
+  if (section && section.dataset.productRecommendationsLoaded !== 'true') {
+    section.dataset.productRecommendationsLoaded = 'true';
+
+    const loadRecommendations = async () => {
+      const url = section.dataset.url;
+
+      if (!url) {
+        return;
+      }
+
+      try {
+        const response = await fetch(url, { headers: { Accept: 'text/html' } });
+
+        if (!response.ok) {
+          throw new Error(`Recommendations request failed: ${response.status}`);
+        }
+
+        const html = await response.text();
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        const nextSection = doc.querySelector('[data-product-recommendations]');
+
+        if (!nextSection) {
+          return;
+        }
+
+        section.replaceWith(nextSection);
+      } catch (error) {
+        const status = section.querySelector('[data-product-recommendations-status]');
+
+        if (status) {
+          status.textContent = 'Related products are unavailable right now.';
+        }
+      }
+    };
+
+    queueMicrotask(loadRecommendations);
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Product recommendations",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "YOU MAY ALSO LIKE"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product recommendations"
+    }
+  ]
+}
+{% endschema %}

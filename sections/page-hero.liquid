@@ -1,0 +1,113 @@
+{%- assign has_image = false -%}
+{%- if section.settings.image != blank -%}
+  {%- assign has_image = true -%}
+{%- endif -%}
+
+<section
+  class="page-hero{% if has_image %} page-hero--has-image{% endif %} color-{{ section.settings.color_scheme }}"
+  {% if has_image %}
+    style="--page-hero-bg: url('{{ section.settings.image | image_url: width: 2400 }}')"
+  {% endif %}
+>
+  {%- if has_image -%}
+    <div class="page-hero__overlay"></div>
+  {%- endif -%}
+
+  <div class="page-hero__content">
+    {%- if section.settings.heading != blank -%}
+      <h1 class="font-serif page-hero__heading">{{ section.settings.heading | upcase | escape }}</h1>
+    {%- endif -%}
+    {%- if section.settings.subheading != blank -%}
+      <p class="page-hero__subheading">{{ section.settings.subheading | escape }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .page-hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: clamp(220px, 30vw, 380px);
+    overflow: hidden;
+    background-color: var(--color-secondary-bg);
+  }
+
+  .page-hero--has-image {
+    background-image: var(--page-hero-bg);
+    background-size: cover;
+    background-position: center;
+  }
+
+  .page-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.45);
+  }
+
+  .page-hero__content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: var(--space-xl) var(--gutter);
+    display: grid;
+    gap: 1rem;
+  }
+
+  .page-hero__heading {
+    font-size: clamp(2rem, 4vw + 1rem, var(--font-size-h1));
+    letter-spacing: 0.12em;
+    line-height: 1;
+    color: var(--color-text);
+  }
+
+  .page-hero--has-image .page-hero__heading,
+  .page-hero--has-image .page-hero__subheading {
+    color: #F9F6F2;
+  }
+
+  .page-hero__subheading {
+    color: var(--color-muted);
+    max-width: 42rem;
+    margin: 0 auto;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Page hero",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "PAGE TITLE"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Page hero",
+      "settings": {
+        "heading": "PAGE TITLE"
+      }
+    }
+  ]
+}
+{% endschema %}

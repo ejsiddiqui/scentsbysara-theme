@@ -1,0 +1,114 @@
+{
+  "accessibility": {
+    "skip_to_content": "Skip to content",
+    "close": "Close",
+    "open_menu": "Open menu",
+    "back": "Back",
+    "previous_slide": "Previous slide",
+    "next_slide": "Next slide"
+  },
+  "404": {
+    "title": "404",
+    "not_found": "Page not found.",
+    "back_to_shopping": "Back to shopping"
+  },
+  "blog": {
+    "article_comments": "Comments",
+    "article_metadata_html": "{{ date }} by {{ author }}",
+    "comment_form_body": "Comment",
+    "comment_form_email": "Email",
+    "comment_form_name": "Name",
+    "comment_form_submit": "Post comment",
+    "comment_form_title": "Add a comment"
+  },
+  "cart": {
+    "checkout": "Checkout",
+    "title": "Your bag",
+    "empty": "Your bag is empty",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "tax": "Tax (VAT)",
+    "total": "Total",
+    "update": "Update",
+    "remove": "Remove",
+    "view_bag": "View bag"
+  },
+  "collections": {
+    "title": "Collections",
+    "filter": "Filter",
+    "sort": "Sort by",
+    "items_count": "{{ count }} items"
+  },
+  "contact": {
+    "success": "Thank you for your message. We'll get back to you soon."
+  },
+  "customers": {
+    "login": {
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign in",
+      "title": "Login"
+    }
+  },
+  "general": {
+    "continue_shopping": "Continue shopping",
+    "search": "Search",
+    "cart": "Cart",
+    "account": "Account",
+    "wishlist": "Wishlist",
+    "menu_not_assigned": "Menu not assigned",
+    "primary_navigation": "Primary navigation",
+    "mobile_navigation": "Mobile navigation",
+    "mobile_menu": "Mobile menu",
+    "social_media_links": "Social media links",
+    "payment_methods": "Payment methods"
+  },
+  "footer": {
+    "rights_reserved": "All rights reserved."
+  },
+  "localization": {
+    "select_market": "Select your market",
+    "current_market": "Current market"
+  },
+  "gift_card": {
+    "add_to_apple_wallet": "Add to Apple Wallet",
+    "card": "Gift card",
+    "expired": "This gift card has expired",
+    "expires_on": "Expires on {{ expires_on }}",
+    "use_at_checkout": "Use this gift card at checkout"
+  },
+  "newsletter": {
+    "success": "Thank you for subscribing!",
+    "heading": "Join our newsletter",
+    "email_label": "Email address",
+    "email_placeholder": "Email address",
+    "subscribe": "Subscribe"
+  },
+  "social": {
+    "instagram": "Instagram",
+    "facebook": "Facebook",
+    "tiktok": "TikTok",
+    "pinterest": "Pinterest"
+  },
+  "password": {
+    "title": "This shop is private",
+    "password": "Password",
+    "enter": "Enter"
+  },
+  "products": {
+    "add_to_cart": "Add to bag",
+    "sold_out": "Sold out",
+    "quantity": "Quantity",
+    "shop_now": "Shop now"
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "Search articles, pages, or products",
+    "submit": "Search",
+    "no_results_html": "No results found for {{ terms }}",
+    "results_for_html": "{{ count }} results found for {{ terms }}",
+    "collections_heading": "Collections",
+    "pages_heading": "Pages",
+    "no_results_text": "No results found for"
+  }
+}

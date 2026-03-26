@@ -1,0 +1,8 @@
+<nav class="breadcrumbs text-micro text-muted" aria-label="Breadcrumb">
+  <a href="{{ routes.all_products_collection_url }}" class="text-muted">SHOP</a>
+  {%- if product.collections.size > 0 -%}
+    {%- assign breadcrumb_collection = product.collections.first -%}
+    / <a href="{{ breadcrumb_collection.url }}" class="text-muted">{{ breadcrumb_collection.title | upcase }}</a>
+  {%- endif -%}
+  / <span class="breadcrumb-current">{{ product.title | upcase }}</span>
+</nav>

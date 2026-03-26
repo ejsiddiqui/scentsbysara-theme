@@ -1,0 +1,109 @@
+{%- liquid
+  assign card_product = product | default: card_product
+  assign current_variant = blank
+  assign requested_option_name = option_name | default: 'Colour'
+  assign requested_option_name_downcase = requested_option_name | downcase
+  assign swatch_option = blank
+  assign swatch_option_index = blank
+
+  if card_product != blank
+    assign current_variant = variant | default: card_product.selected_or_first_available_variant
+
+    for option in card_product.options_with_values
+      assign option_name_downcase = option.name | downcase
+
+      if option_name_downcase == requested_option_name_downcase or option_name_downcase == 'color'
+        assign swatch_option = option
+        assign swatch_option_index = forloop.index0
+        break
+      endif
+    endfor
+
+    if swatch_option == blank and card_product.options_with_values.size > 0
+      assign swatch_option = card_product.options_with_values.first
+      assign swatch_option_index = 0
+    endif
+  endif
+-%}
+
+{%- if card_product != blank and swatch_option != blank and swatch_option.values.size > 0 -%}
+  <div
+    class="color-swatches variant-swatches"
+    data-swatch-shape="{{ settings.swatch_shape }}"
+    style="--swatch-size: {{ settings.swatch_size }}px;"
+  >
+    {%- for value in swatch_option.values -%}
+      {%- liquid
+        assign value_downcase = value | downcase
+        assign swatch_color = 'var(--color-accent)'
+
+        if value_downcase contains 'ivory' or value_downcase contains 'cream' or value_downcase contains 'white'
+          assign swatch_color = 'var(--color-background)'
+        elsif value_downcase contains 'caramel' or value_downcase contains 'tan' or value_downcase contains 'beige'
+          assign swatch_color = 'var(--color-secondary-bg)'
+        elsif value_downcase contains 'mocha' or value_downcase contains 'brown' or value_downcase contains 'chocolate'
+          assign swatch_color = 'var(--color-foreground)'
+        endif
+
+        assign swatch_variant = blank
+        assign variant_image_srcset = blank
+
+        for candidate in card_product.variants
+          if candidate.options[swatch_option_index] == value
+            assign swatch_variant = candidate
+            break
+          endif
+        endfor
+
+        if swatch_variant.featured_image != blank
+          capture variant_image_srcset
+            for image_width in (1..4)
+              assign width_value = '320'
+              case image_width
+                when 2
+                  assign width_value = '480'
+                when 3
+                  assign width_value = '640'
+                when 4
+                  assign width_value = '800'
+              endcase
+              echo swatch_variant.featured_image | image_url: width: width_value
+              echo ' '
+              echo width_value
+              echo 'w'
+              unless forloop.last
+                echo ', '
+              endunless
+            endfor
+          endcapture
+        endif
+
+        assign is_active = false
+
+        if current_variant and current_variant.options[swatch_option_index] == value
+          assign is_active = true
+        endif
+      -%}
+      <button
+        type="button"
+        class="variant-swatches__swatch swatch{% if is_active %} is-active{% endif %}"
+        data-product-card-swatch
+        data-swatch-value="{{ value | escape }}"
+        data-swatch-color="{{ swatch_color }}"
+        {% if swatch_variant != blank %}
+          data-variant-id="{{ swatch_variant.id }}"
+          data-variant-url="{{ card_product.url }}?variant={{ swatch_variant.id }}"
+          data-variant-price="{{ swatch_variant.price | money | escape }}"
+          data-variant-compare="{% if swatch_variant.compare_at_price > swatch_variant.price %}{{ swatch_variant.compare_at_price | money | escape }}{% endif %}"
+          {% if swatch_variant.featured_image != blank %}
+            data-variant-image="{{ swatch_variant.featured_image | image_url: width: 800 }}"
+            data-variant-image-srcset="{{ variant_image_srcset | strip }}"
+          {% endif %}
+        {% endif %}
+        aria-label="{{ swatch_option.name }}: {{ value | escape }}"
+        aria-pressed="{% if is_active %}true{% else %}false{% endif %}"
+        style="--swatch-color: {{ swatch_color }};"
+      ></button>
+    {%- endfor -%}
+  </div>
+{%- endif -%}

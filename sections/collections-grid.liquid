@@ -1,0 +1,251 @@
+{%- liquid
+  assign section_heading = section.settings.heading | default: ''
+-%}
+
+<section
+  id="CollectionsGrid-{{ section.id }}"
+  class="collections-grid section-block color-{{ section.settings.color_scheme }}"
+>
+  <div class="container">
+    {%- if section_heading != blank -%}
+      <header class="collections-grid__header">
+        <span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>
+        <h2 class="font-serif collections-grid__heading">{{ section_heading | escape }}</h2>
+      </header>
+    {%- endif -%}
+
+    <div
+      class="collections-grid__grid"
+      style="--collections-grid-columns: {{ section.settings.columns | default: 2 }};"
+    >
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'collection_card' -%}
+          {%- liquid
+            assign linked_collection = block.settings.collection
+            assign card_image = block.settings.image_override | default: linked_collection.featured_image
+            assign card_title = block.settings.heading_override | default: linked_collection.title | default: block.settings.heading_override
+            assign card_text = linked_collection.description | strip_html | default: block.settings.body_text
+            assign card_link = linked_collection.url | default: block.settings.link_override
+            if card_link == blank
+              assign card_link = routes.all_products_collection_url
+            endif
+          -%}
+          <article class="collection-card collections-grid__card" {{ block.shopify_attributes }}>
+            <div class="collection-image-wrap collections-grid__image-wrap">
+              {%- if card_link != blank -%}
+                <a href="{{ card_link }}" class="collections-grid__image-link">
+              {%- endif -%}
+
+              {%- if card_image != blank -%}
+                {% render 'image',
+                  class: 'collections-grid__image',
+                  image: card_image,
+                  alt: block.settings.image_alt | default: card_title,
+                  loading: 'lazy'
+                %}
+              {%- else -%}
+                {%- liquid
+                  assign fallback_asset = 'scar-collection.png'
+                  if forloop.index == 2
+                    assign fallback_asset = 'sculpted-collection.png'
+                  endif
+                -%}
+                <img class="collections-grid__image" src="{{ fallback_asset | asset_url }}" alt="{{ card_title | escape }}" width="1200" height="1320">
+              {%- endif -%}
+
+              {%- if card_link != blank -%}
+                </a>
+              {%- endif -%}
+            </div>
+
+            <div class="collection-content collections-grid__content">
+              <h3 class="font-serif collections-grid__title">{{ card_title | escape }}</h3>
+              {%- if card_text != blank -%}
+                <p class="collections-grid__text">{{ card_text | strip_html | truncatewords: 28 }}</p>
+              {%- endif -%}
+
+              {%- if block.settings.cta_text != blank and card_link != blank -%}
+                <a href="{{ card_link }}" class="btn-outline collections-grid__button">
+                  {{ block.settings.cta_text | escape }}
+                </a>
+              {%- endif -%}
+            </div>
+          </article>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% style %}
+  #CollectionsGrid-{{ section.id }} {
+    overflow: clip;
+  }
+
+  #CollectionsGrid-{{ section.id }} .collections-grid__header {
+    margin-bottom: clamp(1.5rem, 3vw, 3rem);
+    text-align: center;
+  }
+
+  #CollectionsGrid-{{ section.id }} .collections-grid__heading {
+    text-transform: uppercase;
+  }
+
+  #CollectionsGrid-{{ section.id }} .collections-grid__grid {
+    display: grid;
+    grid-template-columns: repeat(var(--collections-grid-columns, 2), minmax(0, 1fr));
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  #CollectionsGrid-{{ section.id }} .collections-grid__card {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1rem, 2vw, 1.5rem);
+  }
+
+  #CollectionsGrid-{{ section.id }} .collections-grid__image-wrap {
+    overflow: hidden;
+  }
+
+  #CollectionsGrid-{{ section.id }} .collections-grid__image-link {
+    display: block;
+  }
+
+  #CollectionsGrid-{{ section.id }} .collections-grid__image,
+  #CollectionsGrid-{{ section.id }} .collections-grid__placeholder {
+    width: 100%;
+    aspect-ratio: 0.92;
+    object-fit: cover;
+  }
+
+  #CollectionsGrid-{{ section.id }} .collections-grid__placeholder {
+    display: grid;
+    place-items: center;
+    border: 1px dashed var(--color-border);
+    color: var(--color-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: var(--text-micro);
+  }
+
+  #CollectionsGrid-{{ section.id }} .collections-grid__content {
+    display: grid;
+    gap: 1rem;
+  }
+
+  #CollectionsGrid-{{ section.id }} .collections-grid__title {
+    text-transform: uppercase;
+    font-size: clamp(1.2rem, 1.2vw + 0.9rem, 1.75rem);
+  }
+
+  #CollectionsGrid-{{ section.id }} .collections-grid__text {
+    max-width: 34rem;
+  }
+
+  #CollectionsGrid-{{ section.id }} .collections-grid__button {
+    justify-self: start;
+  }
+
+  @media screen and (max-width: 989px) {
+    #CollectionsGrid-{{ section.id }} .collections-grid__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Collections grid",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Columns",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"},
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"}
+  ],
+  "blocks": [
+    {
+      "type": "collection_card",
+      "name": "Collection card",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_override",
+          "label": "Image override"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image alt text"},
+        {
+          "type": "text",
+          "id": "heading_override",
+          "label": "Heading override"},
+        {
+          "type": "textarea",
+          "id": "body_text",
+          "label": "Fallback text"
+        },
+        {
+          "type": "url",
+          "id": "link_override",
+          "label": "Link override"
+        },
+        {
+          "type": "text",
+          "id": "cta_text",
+          "label": "CTA text",
+          "default": "DISCOVER NOW"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collections grid",
+      "blocks": [
+        {
+          "type": "collection_card",
+          "settings": {
+            "heading_override": "SCAR COLLECTION",
+            "body_text": "Designed to celebrate the body as a holder of memory, healing, and confidence. Gold leaf is applied by hand to mark scars - not as decoration but as recognition.",
+            "cta_text": "DISCOVER NOW"
+          }
+        },
+        {
+          "type": "collection_card",
+          "settings": {
+            "heading_override": "SCULPTED COLLECTION",
+            "body_text": "Designed around fluid silhouettes and intentional scent layering, this line celebrates the female body through elevated shape, texture, and ritual.",
+            "cta_text": "DISCOVER NOW"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

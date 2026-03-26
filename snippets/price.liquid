@@ -1,0 +1,32 @@
+{%- liquid
+  assign card_product = product | default: card_product
+  assign current_variant = blank
+  assign price_value = blank
+  assign compare_at_value = blank
+  assign on_sale = false
+
+  if card_product != blank
+    assign current_variant = variant | default: card_product.selected_or_first_available_variant
+    assign price_value = current_variant.price | default: card_product.price
+    assign compare_at_value = current_variant.compare_at_price | default: card_product.compare_at_price
+
+    if compare_at_value and compare_at_value > price_value
+      assign on_sale = true
+    endif
+  endif
+-%}
+
+{%- if card_product != blank and price_value != blank -%}
+  <div class="product-price price{% if on_sale %} price--sale{% endif %}" data-price>
+    {%- if on_sale -%}
+      <s class="price-strikethrough price__compare">{{ compare_at_value | money }}</s>
+    {%- endif -%}
+    <span class="price-current price__current">
+      {%- if card_product.price_varies and variant == blank -%}
+        From {{ price_value | money }}
+      {%- else -%}
+        {{ price_value | money }}
+      {%- endif -%}
+    </span>
+  </div>
+{%- endif -%}

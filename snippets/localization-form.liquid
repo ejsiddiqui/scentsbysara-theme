@@ -1,0 +1,70 @@
+{%- liquid
+  assign form_id = 'Localisation-' | append: section.id
+  assign select_id = form_id | append: '-select'
+  assign available_countries = localization.available_countries
+  assign current_country = localization.country
+-%}
+
+{%- if available_countries.size > 1 -%}
+  {%- form 'localization', id: form_id, class: 'localization-form' -%}
+    <label class="localization-form__label" for="{{ select_id }}">{{ 'localization.select_market' | t }}</label>
+    <select
+      id="{{ select_id }}"
+      name="country_code"
+      aria-label="{{ 'localization.select_market' | t }}"
+      onchange="this.form.submit()"
+    >
+      {%- for country in available_countries -%}
+        <option
+          value="{{ country.iso_code }}"
+          {% if country.iso_code == current_country.iso_code %}selected{% endif %}
+        >
+          {{ country.currency.iso_code }} {{ country.currency.symbol }}
+        </option>
+      {%- endfor -%}
+    </select>
+  {%- endform -%}
+{%- else -%}
+  <div class="localization-form localization-form--static" aria-label="{{ 'localization.current_market' | t }}">
+    <span>{{ current_country.currency.iso_code }} {{ current_country.currency.symbol }}</span>
+  </div>
+{%- endif -%}
+
+{% style %}
+  .localization-form {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    color: inherit;
+  }
+
+  .localization-form__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .localization-form select,
+  .localization-form--static {
+    font: inherit;
+    font-size: var(--text-xsmall, 11px);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: inherit;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    margin: 0;
+  }
+
+  .localization-form select {
+    appearance: none;
+    cursor: pointer;
+  }
+{% endstyle %}

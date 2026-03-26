@@ -1,0 +1,144 @@
+{%- liquid
+  assign og_title = page_title | default: shop.name
+  assign og_url = canonical_url | default: request.origin
+  assign og_type = 'website'
+  assign og_description = page_description | default: shop.description | default: shop.name
+  assign seo_description = og_description | strip_html | truncate: 160
+  assign seo_image = page_image
+  assign organization_logo = settings.logo_desktop | default: settings.logo_mobile
+
+  if request.page_type == 'product'
+    assign og_type = 'product'
+    assign og_description = product.description | default: og_description
+    assign seo_description = og_description | strip_html | truncate: 160
+    assign seo_image = product.featured_image | default: page_image
+  elsif request.page_type == 'collection'
+    assign og_description = collection.description | default: og_description
+    assign seo_description = og_description | strip_html | truncate: 160
+    assign seo_image = collection.image | default: page_image
+  elsif request.page_type == 'page'
+    assign og_description = page.content | default: og_description
+    assign seo_description = og_description | strip_html | truncate: 160
+  elsif request.page_type == 'article'
+    assign og_type = 'article'
+    assign og_description = article.excerpt_or_content | default: og_description
+    assign seo_description = og_description | strip_html | truncate: 160
+    assign seo_image = article.image | default: page_image
+  elsif request.page_type == 'password'
+    assign og_url = request.origin
+  endif
+%}
+
+<meta
+  property="og:site_name"
+  content="{{ shop.name }}"
+>
+<meta
+  property="og:url"
+  content="{{ og_url }}"
+>
+<meta
+  property="og:title"
+  content="{{ og_title | escape }}"
+>
+<meta
+  property="og:type"
+  content="{{ og_type }}"
+>
+<meta
+  property="og:description"
+  content="{{ seo_description | escape }}"
+>
+
+{%- if seo_image -%}
+  <meta
+    property="og:image"
+    content="http:{{ seo_image | image_url }}"
+  >
+  <meta
+    property="og:image:secure_url"
+    content="https:{{ seo_image | image_url }}"
+  >
+  <meta
+    property="og:image:width"
+    content="{{ seo_image.width }}"
+  >
+  <meta
+    property="og:image:height"
+    content="{{ seo_image.height }}"
+  >
+{%- endif -%}
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    "url": {{ request.origin | json }}{% if organization_logo != blank %},
+    "logo": {{ organization_logo | image_url: width: 600 | prepend: 'https:' | json }}{% endif %}
+  }
+</script>
+
+{%- if request.page_type == 'product' -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": {{ product.title | json }},
+      "image": [{% if product.featured_image != blank %}{{ product.featured_image | image_url: width: 1200 | prepend: 'https:' | json }}{% endif %}],
+      "description": {{ product.description | strip_html | truncate: 200 | json }},
+      "brand": {
+        "@type": "Brand",
+        "name": {{ shop.name | json }}
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": {{ product.selected_or_first_available_variant.price | money_without_currency | json }},
+        "priceCurrency": {{ cart.currency.iso_code | json }},
+        "availability": "{% if product.selected_or_first_available_variant.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
+        "url": {{ canonical_url | json }}
+      }
+    }
+  </script>
+
+  <meta
+    property="og:price:amount"
+    content="{{ product.price | money_without_currency | strip_html }}"
+  >
+  <meta
+    property="og:price:currency"
+    content="{{ cart.currency.iso_code }}"
+  >
+{%- endif -%}
+
+<meta
+  name="twitter:card"
+  content="summary_large_image"
+>
+<meta
+  name="twitter:title"
+  content="{{ og_title | escape }}"
+>
+<meta
+  name="twitter:description"
+  content="{{ seo_description | escape }}"
+>
+
+{%- if seo_image -%}
+  <meta
+    name="twitter:image"
+    content="https:{{ seo_image | image_url }}"
+  >
+{%- endif -%}
+
+<link
+  rel="canonical"
+  href="{{ canonical_url }}"
+>
+
+{% if seo_description != blank %}
+  <meta
+    name="description"
+    content="{{ seo_description | escape }}"
+  >
+{% endif %}

@@ -1,0 +1,50 @@
+<div class="mega-menu" data-mega-menu>
+  <div class="mega-menu-inner container">
+    <div class="mega-menu-columns">
+      {%- for child_link in link.links -%}
+        <div class="mega-menu-col">
+          <span class="mega-menu-col-title eyebrow text-micro">{{ child_link.title }}</span>
+          <ul class="mega-menu-links" role="list">
+            {%- if child_link.links.size > 0 -%}
+              {%- for grandchild in child_link.links -%}
+                <li><a href="{{ grandchild.url }}">{{ grandchild.title }}</a></li>
+              {%- endfor -%}
+            {%- else -%}
+              <li><a href="{{ child_link.url }}">{{ child_link.title }}</a></li>
+            {%- endif -%}
+          </ul>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- if featured_image != blank -%}
+      <div class="mega-menu-featured">
+        {%- if featured_link != blank -%}
+          <a href="{{ featured_link }}" class="mega-menu-featured-link">
+            {{
+              featured_image
+              | image_url: width: 480
+              | image_tag:
+                class: 'mega-menu-featured-image',
+                widths: '320,400,480',
+                sizes: '320px',
+                loading: 'lazy',
+                alt: shop.name
+            }}
+          </a>
+        {%- else -%}
+          {{
+            featured_image
+            | image_url: width: 480
+            | image_tag:
+              class: 'mega-menu-featured-image',
+              widths: '320,400,480',
+              sizes: '320px',
+              loading: 'lazy',
+              alt: shop.name
+          }}
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>

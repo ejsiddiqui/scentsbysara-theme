@@ -1,0 +1,203 @@
+.home-hero {
+  position: relative;
+  display: block;
+  background: var(--color-background);
+  color: var(--color-background);
+}
+
+.home-hero .hero-slider {
+  position: relative;
+  min-height: clamp(34rem, 92vh, 60rem);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.home-hero .hero-slide {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-items: end;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  transform: translateY(0.5rem);
+}
+
+.home-hero .hero-slide.is-active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  z-index: 1;
+}
+
+.home-hero .hero-image,
+.home-hero .hero-image picture,
+.home-hero .hero-image img,
+.home-hero .hero-image .image {
+  width: 100%;
+  height: 100%;
+}
+
+.home-hero .hero-image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.home-hero .hero-image img,
+.home-hero .hero-image picture img,
+.home-hero .hero-image .image > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.home-hero .hero-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(45, 43, 39, 0.08) 0%, rgba(45, 43, 39, 0.24) 100%),
+    linear-gradient(90deg, rgba(249, 246, 242, 0.06) 0%, rgba(249, 246, 242, 0) 42%);
+  pointer-events: none;
+}
+
+.home-hero .hero-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding-top: clamp(8rem, 22vh, 16rem);
+  padding-bottom: clamp(2rem, 8vh, 5rem);
+  display: grid;
+  gap: var(--space-lg);
+  color: var(--color-background);
+  text-shadow: 0 1px 1px rgba(45, 43, 39, 0.16);
+}
+
+.home-hero .hero-heading {
+  max-width: 14ch;
+}
+
+.home-hero .hero-subtext {
+  max-width: 30rem;
+  color: rgba(249, 246, 242, 0.95);
+}
+
+.home-hero .hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.home-hero .slideshow-controls {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(1rem, 4vw, 2rem);
+  z-index: 2;
+  width: min(100%, var(--container-max));
+  padding-inline: var(--gutter);
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.home-hero .slideshow-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: rgba(45, 43, 39, 0.18);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(249, 246, 242, 0.2);
+  border-radius: 999px;
+  pointer-events: auto;
+}
+
+.home-hero .slideshow-dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  padding: 0;
+  border-radius: 999px;
+  border: 1px solid rgba(249, 246, 242, 0.8);
+  background: transparent;
+  opacity: 0.6;
+  transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
+}
+
+.home-hero .slideshow-dot.is-active {
+  background: var(--color-background);
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+.home-hero .slideshow-arrows {
+  display: none;
+}
+
+.home-hero .hero-placeholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--color-secondary-bg), var(--color-background));
+  color: var(--color-foreground);
+}
+
+.home-hero .hero-placeholder-content {
+  max-width: 32rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+@media (max-width: 989px) {
+  .home-hero .hero-slider {
+    min-height: clamp(28rem, 76vh, 46rem);
+  }
+
+  .home-hero .hero-content {
+    padding-top: clamp(7rem, 18vh, 12rem);
+  }
+}
+
+@media (max-width: 749px) {
+  .home-hero .hero-slider {
+    min-height: clamp(32rem, 84vh, 42rem);
+  }
+
+  .home-hero .hero-content {
+    gap: var(--space-md);
+    padding-top: clamp(5.5rem, 20vh, 9rem);
+    padding-bottom: 4rem;
+  }
+
+  .home-hero .hero-heading {
+    max-width: 12ch;
+  }
+
+  .home-hero .hero-subtext {
+    max-width: 22rem;
+  }
+
+  .home-hero .slideshow-controls {
+    bottom: 1rem;
+  }
+
+  .home-hero .slideshow-dots {
+    gap: 0.5rem;
+    padding: 0.65rem 0.85rem;
+  }
+
+  .home-hero .slideshow-dot {
+    width: 0.65rem;
+    height: 0.65rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-hero .hero-slide,
+  .home-hero .slideshow-dot {
+    transition: none;
+  }
+}

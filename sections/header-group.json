@@ -1,0 +1,31 @@
+{
+  "type": "header",
+  "name": "Header Group",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "text_style": "static"
+      },
+      "blocks": {
+        "announcement_1": {
+          "type": "announcement",
+          "settings": {
+            "text": "Launching March 2026 — join the waiting list for early access"
+          }
+        }
+      },
+      "block_order": [
+        "announcement_1"
+      ]
+    },
+    "header": {
+      "type": "header"
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "header"
+  ]
+}

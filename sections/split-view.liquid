@@ -1,0 +1,200 @@
+{%- liquid
+  assign section_eyebrow = section.settings.eyebrow | default: 'OUR STORY'
+  assign section_heading = section.settings.heading | default: 'GROUNDED IN RITUAL. EMBODIED IN CONFIDENCE.'
+  assign image_alt = section.settings.image_alt | default: section_heading
+  assign content_background_class = 'bg-secondary'
+
+  if section.settings.content_background == 'primary'
+    assign content_background_class = 'bg-primary'
+  endif
+-%}
+
+<section
+  id="SplitView-{{ section.id }}"
+  class="split-view section-block color-{{ section.settings.color_scheme }}"
+>
+  {{ 'section-split-view.css' | asset_url | stylesheet_tag }}
+
+  <div class="container">
+    <div class="split-view__grid{% if section.settings.image_position == 'right' %} split-view__grid--reverse{% endif %}">
+      <div class="split-view__media">
+        {%- if section.settings.image != blank -%}
+          {% render 'image',
+            class: 'split-view__image',
+            image: section.settings.image,
+            alt: image_alt,
+            loading: 'lazy'
+          %}
+        {%- else -%}
+          <img class="split-view__image" src="{{ 'sara.png' | asset_url }}" alt="{{ image_alt | escape }}" width="1200" height="1600">
+        {%- endif -%}
+      </div>
+
+      <div class="split-view__content {{ content_background_class }}">
+        <span class="eyebrow">{{ section_eyebrow | escape }}</span>
+        <h2 class="font-serif split-view__heading">{{ section_heading | escape }}</h2>
+
+        {%- if section.settings.body != blank -%}
+          <div class="container-editorial split-view__body">
+            {{ section.settings.body }}
+          </div>
+        {%- endif -%}
+
+        {%- if section.blocks.size > 0 -%}
+          <div class="split-view__notes">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'note' -%}
+                <article class="split-view__note" {{ block.shopify_attributes }}>
+                  <h3 class="font-serif split-view__note-heading">{{ block.settings.title | escape }}</h3>
+                  <p class="split-view__note-text">{{ block.settings.text | escape | newline_to_br }}</p>
+                </article>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.cta_text != blank -%}
+          <a href="{{ section.settings.cta_link | default: routes.root_url }}" class="{{ section.settings.button_style }} split-view__button">
+            {{ section.settings.cta_text | escape }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Split view",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "OUR STORY"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "GROUNDED IN RITUAL. EMBODIED IN CONFIDENCE."
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>Scents By Sara is a female-founded fragrance house rooted in embodied confidence and modern ritual. What began as a personal exploration of scent and form has grown into a brand shaped by lived experience, community, and the power of recognising ourselves as we are.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image alt text",
+      "default": "Founder of Scents by Sara"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "content_background",
+      "label": "Content background",
+      "options": [
+        {
+          "value": "secondary",
+          "label": "Secondary"
+        },
+        {
+          "value": "primary",
+          "label": "Primary"
+        }
+      ],
+      "default": "secondary"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text",
+      "default": "READ MORE"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        {
+          "value": "btn-solid",
+          "label": "Solid"
+        },
+        {
+          "value": "btn-outline",
+          "label": "Outline"
+        }
+      ],
+      "default": "btn-solid"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "note",
+      "name": "Note",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Intentional craft"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Every piece is designed to feel considered, personal, and quietly luxurious."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Split view",
+      "blocks": [
+        {
+          "type": "note",
+          "settings": {
+            "title": "Intentional craft",
+            "text": "Every piece is designed to feel considered, personal, and quietly luxurious."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

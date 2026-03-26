@@ -1,0 +1,38 @@
+<predictive-search
+  id="SearchModal-{{ section_id }}"
+  class="search-modal"
+  data-search-modal
+  role="search"
+  data-collections-heading="{{ 'search.collections_heading' | t }}"
+  data-pages-heading="{{ 'search.pages_heading' | t }}"
+  data-no-results="{{ 'search.no_results_text' | t }}"
+>
+  <dialog ref="dialog" class="search-dialog" aria-modal="true" aria-label="{{ 'general.search' | t }}">
+    <div class="search-inner container">
+      <form action="{{ routes.search_url }}" method="get" role="search" class="search-form">
+        <input type="hidden" name="type" value="product,page,collection">
+        <label class="visually-hidden" for="PredictiveSearchInput-{{ section_id }}">{{ 'general.search' | t }}</label>
+        <input
+          id="PredictiveSearchInput-{{ section_id }}"
+          ref="input"
+          class="search-input"
+          type="search"
+          name="q"
+          value=""
+          placeholder="{{ 'search.placeholder' | t }}"
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="false"
+        >
+        <button type="submit" class="icon-btn" aria-label="{{ 'search.submit' | t }}">
+          {% render 'icon', name: 'search' %}
+        </button>
+        <button type="button" ref="close" class="icon-btn" aria-label="{{ 'accessibility.close' | t }}" data-dialog-close>
+          {% render 'icon', name: 'close' %}
+        </button>
+      </form>
+      <div ref="results" class="search-results" aria-live="polite" aria-atomic="true" hidden></div>
+    </div>
+  </dialog>
+</predictive-search>

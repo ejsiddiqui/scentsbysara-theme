@@ -1,0 +1,37 @@
+{
+  "sections": {
+    "intro": {
+      "type": "quote-highlight",
+      "settings": {
+        "quote": "Scents by Sara was built on the stories of real women. We invite you to be part of the narrative.",
+        "attribution": "YOUR STORY",
+        "color_scheme": "scheme-1",
+        "text_alignment": "center"
+      }
+    },
+    "form": {
+      "type": "story-form",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "eyebrow": "SHARE WITH US",
+        "heading": "SUBMIT YOUR STORY",
+        "description": "Tell us about your moment. We may feature your story as part of our community pages or in upcoming editorials.",
+        "disclaimer": "By submitting, you agree that Scents by Sara may publish your story, edited for brevity, across our digital channels."
+      }
+    },
+    "grid": {
+      "type": "story-grid",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "heading": "YOUR STORIES",
+        "eyebrow": "AS TOLD BY OUR COMMUNITY",
+        "description": "Every candle tells a story. These are yours: shared moments of transformation, memory, and quiet power."
+      }
+    }
+  },
+  "order": [
+    "intro",
+    "form",
+    "grid"
+  ]
+}

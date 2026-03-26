@@ -1,0 +1,449 @@
+{{ 'section-product.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign active_media = current_variant.featured_media | default: product.featured_media
+  assign active_media_id = active_media.id
+  assign has_gallery_media = false
+  assign media_count = 0
+
+  for media in product.media
+    if media.preview_image != blank
+      assign media_count = media_count | plus: 1
+      assign has_gallery_media = true
+    endif
+  endfor
+
+  assign subtitle_text = product.metafields.custom.subtitle | default: product.metafields.custom.subheading | default: product.type | default: section.settings.fallback_subtitle
+  assign summary_text = product.description | strip_html | truncate: 220
+-%}
+
+<section
+  class="product-page-section"
+  id="ProductSection-{{ section.id }}"
+  data-product-section
+>
+  <div class="container product-page-main">
+    {% render 'breadcrumbs', product: product %}
+
+    <div class="product-mobile-header">
+      <div class="product-mobile-header__copy">
+        <h1 class="font-serif product-details__title">{{ product.title }}</h1>
+        <p class="product-details__subtitle text-micro">{{ subtitle_text }}</p>
+      </div>
+      <div class="product-mobile-header__price">
+        {% render 'price', card_product: product, variant: current_variant %}
+      </div>
+    </div>
+
+    <div class="product-page-grid">
+      <div class="product-gallery" data-product-gallery data-product-gallery-count="{{ media_count }}">
+        <div class="product-gallery__stage">
+          {%- if has_gallery_media -%}
+            <div class="product-gallery__viewport" aria-label="{{ product.title | escape }} media gallery">
+              <ul class="product-gallery__track" role="list">
+                {%- for media in product.media -%}
+                  {%- if media.preview_image != blank -%}
+                    {%- liquid
+                      assign is_active = false
+
+                      if active_media_id == blank and forloop.first
+                        assign is_active = true
+                      elsif media.id == active_media_id
+                        assign is_active = true
+                      endif
+                    -%}
+                    <li
+                      id="ProductGallerySlide-{{ section.id }}-{{ forloop.index0 }}"
+                      class="product-gallery__slide{% if is_active %} is-active{% endif %}"
+                      data-product-gallery-slide
+                      data-slide-index="{{ forloop.index0 }}"
+                      data-media-id="{{ media.id }}"
+                      role="tabpanel"
+                      aria-labelledby="ProductGalleryThumb-{{ section.id }}-{{ forloop.index0 }}"
+                      {% unless is_active %}hidden{% endunless %}
+                    >
+                      {%- if is_active -%}
+                        {% render 'image',
+                          image: media.preview_image,
+                          alt: media.alt | default: product.title,
+                          sizes: '(min-width: 1200px) 52vw, 100vw',
+                          widths: '375,540,720,960,1200,1500',
+                          loading: 'eager',
+                          fetchpriority: 'high',
+                          class: 'product-gallery__image'
+                        %}
+                      {%- else -%}
+                        {% render 'image',
+                          image: media.preview_image,
+                          alt: media.alt | default: product.title,
+                          sizes: '(min-width: 1200px) 52vw, 100vw',
+                          widths: '375,540,720,960,1200,1500',
+                          loading: 'lazy',
+                          class: 'product-gallery__image'
+                        %}
+                      {%- endif -%}
+                    </li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+            </div>
+
+            {%- if media_count > 1 -%}
+              <button
+                class="product-gallery__arrow product-gallery__arrow--prev"
+                type="button"
+                data-product-gallery-prev
+                aria-label="Show previous product image"
+              >
+                {% render 'icon', name: 'chevron-left', size: 18 %}
+              </button>
+              <button
+                class="product-gallery__arrow product-gallery__arrow--next"
+                type="button"
+                data-product-gallery-next
+                aria-label="Show next product image"
+              >
+                {% render 'icon', name: 'chevron-right', size: 18 %}
+              </button>
+            {%- endif -%}
+
+            <button
+              class="product-gallery__wishlist icon-btn"
+              type="button"
+              aria-label="Add {{ product.title | escape }} to wishlist"
+              aria-pressed="false"
+            >
+              {% render 'icon', name: 'wishlist', size: 20 %}
+            </button>
+          {%- else -%}
+            <div class="product-gallery__placeholder">
+              {{ 'product-apparel-1' | placeholder_svg_tag: 'product-gallery__placeholder-svg' }}
+            </div>
+          {%- endif -%}
+        </div>
+
+        {%- if media_count > 1 -%}
+          <div class="product-gallery__thumbnails" role="tablist" aria-label="Product image thumbnails">
+            {%- for media in product.media -%}
+              {%- if media.preview_image != blank -%}
+                {%- liquid
+                  assign is_active = false
+
+                  if active_media_id == blank and forloop.first
+                    assign is_active = true
+                  elsif media.id == active_media_id
+                    assign is_active = true
+                  endif
+                -%}
+                <button
+                  class="product-gallery__thumb{% if is_active %} is-active{% endif %}"
+                  id="ProductGalleryThumb-{{ section.id }}-{{ forloop.index0 }}"
+                  type="button"
+                  role="tab"
+                  data-product-gallery-thumb
+                  data-slide-index="{{ forloop.index0 }}"
+                  data-media-id="{{ media.id }}"
+                  data-product-gallery-thumb-id="ProductGallerySlide-{{ section.id }}-{{ forloop.index0 }}"
+                  aria-label="Show image {{ forloop.index }} for {{ product.title | escape }}"
+                  aria-controls="ProductGallerySlide-{{ section.id }}-{{ forloop.index0 }}"
+                  aria-selected="{% if is_active %}true{% else %}false{% endif %}"
+                >
+                  {% render 'image',
+                    image: media.preview_image,
+                    alt: media.alt | default: product.title,
+                    sizes: '96px',
+                    widths: '96,160,220',
+                    loading: 'lazy',
+                    class: 'product-gallery__thumb-image'
+                  %}
+                </button>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="product-details">
+        <header class="product-details__header">
+          {%- if section.settings.show_vendor and product.vendor != blank -%}
+            <p class="product-details__eyebrow text-micro text-muted">{{ product.vendor }}</p>
+          {%- endif -%}
+
+          <h1 class="product-details__title font-serif text-h1">{{ product.title }}</h1>
+
+          <div class="product-details__meta flex-between items-center" aria-live="polite" aria-atomic="true">
+            <p class="product-details__subtitle text-micro">{{ subtitle_text }}</p>
+            {% render 'price', card_product: product, variant: current_variant %}
+          </div>
+
+          {%- if section.settings.show_description and summary_text != blank -%}
+            <div class="product-details__summary text-body">
+              {{ summary_text }}
+            </div>
+          {%- endif -%}
+        </header>
+
+        <div class="product-details__controls" aria-label="Product purchase structure">
+          {%- form 'product', product, id: 'ProductForm-' | append: section.id, class: 'product-form', data-product-form: '' -%}
+            <input type="hidden" name="id" value="{{ current_variant.id }}" data-variant-id-input>
+
+            <variant-picker
+              class="product-details__slot"
+              data-section="{{ section.id }}"
+              data-product-url="{{ product.url }}"
+              aria-label="Variant picker"
+            >
+              {% render 'variant-picker', product: product, section: section %}
+            </variant-picker>
+
+            <quantity-selector class="quantity-selector">
+              <button type="button" class="qty-btn" data-action="decrease" aria-label="Decrease quantity">-</button>
+              <input type="number" name="quantity" value="1" min="1" aria-label="Quantity">
+              <button type="button" class="qty-btn" data-action="increase" aria-label="Increase quantity">+</button>
+            </quantity-selector>
+
+            <button
+              type="submit"
+              class="btn-solid add-to-cart"
+              data-add-to-cart
+              {% unless current_variant.available %}disabled{% endunless %}
+            >
+              {%- if current_variant.available -%}
+                ADD TO BAG - {{ current_variant.price | money }}
+              {%- else -%}
+                SOLD OUT
+              {%- endif -%}
+            </button>
+          {%- endform -%}
+
+          {%- if section.blocks.size > 0 -%}
+            <div class="product-accordions">
+              {%- for block in section.blocks -%}
+                {%- liquid
+                  assign accordion_handle = block.settings.title | handleize
+                  capture accordion_content
+                    if accordion_handle == 'description'
+                      echo product.description
+                    elsif accordion_handle == 'craft-intention' and product.metafields.custom.craft_intention != blank
+                      echo product.metafields.custom.craft_intention
+                    elsif accordion_handle == 'how-to-use' and product.metafields.custom.how_to_use != blank
+                      echo product.metafields.custom.how_to_use
+                    elsif accordion_handle == 'dimensions-ingredients' and product.metafields.custom.dimensions_ingredients != blank
+                      echo product.metafields.custom.dimensions_ingredients
+                    else
+                      echo block.settings.content
+                    endif
+                  endcapture
+                -%}
+                {% render
+                  'accordion',
+                  title: block.settings.title,
+                  content: accordion_content,
+                  open: block.settings.open_by_default,
+                  group: section.id
+                %}
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script type="module">
+  const root = document.getElementById('ProductSection-{{ section.id }}');
+
+  if (root && !root.productGalleryController) {
+    root.productGalleryController = (() => {
+      let activeIndex = 0;
+      let pointerStartX = 0;
+      let pointerStartY = 0;
+      let pointerTracking = false;
+
+      const getGalleryParts = () => {
+        const gallery = root.querySelector('[data-product-gallery]');
+        return {
+          gallery,
+          slides: gallery ? Array.from(gallery.querySelectorAll('[data-product-gallery-slide]')) : [],
+          thumbs: gallery ? Array.from(gallery.querySelectorAll('[data-product-gallery-thumb]')) : [],
+        };
+      };
+
+      const syncActiveIndex = () => {
+        const { slides } = getGalleryParts();
+        const visibleIndex = slides.findIndex((slide) => !slide.hidden);
+
+        activeIndex = visibleIndex >= 0 ? visibleIndex : 0;
+        return slides;
+      };
+
+      const updateActiveSlide = (nextIndex) => {
+        const { slides, thumbs } = getGalleryParts();
+
+        if (slides.length === 0) {
+          return;
+        }
+
+        const boundedIndex = (nextIndex + slides.length) % slides.length;
+
+        slides.forEach((slide, index) => {
+          const isActive = index === boundedIndex;
+          slide.hidden = !isActive;
+          slide.classList.toggle('is-active', isActive);
+        });
+
+        thumbs.forEach((thumb, index) => {
+          const isActive = index === boundedIndex;
+          thumb.classList.toggle('is-active', isActive);
+          thumb.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+
+        activeIndex = boundedIndex;
+      };
+
+      const activateByMediaId = (mediaId) => {
+        const { slides } = getGalleryParts();
+        const nextIndex = slides.findIndex((slide) => slide.dataset.mediaId === String(mediaId));
+
+        if (nextIndex >= 0) {
+          updateActiveSlide(nextIndex);
+        }
+      };
+
+      root.addEventListener('click', (event) => {
+        if (event.target.closest('[data-product-gallery-prev]')) {
+          updateActiveSlide(activeIndex - 1);
+          return;
+        }
+
+        if (event.target.closest('[data-product-gallery-next]')) {
+          updateActiveSlide(activeIndex + 1);
+          return;
+        }
+
+        const thumb = event.target.closest('[data-product-gallery-thumb]');
+        if (thumb) {
+          const nextIndex = Number(thumb.dataset.slideIndex || 0);
+          updateActiveSlide(nextIndex);
+        }
+      });
+
+      root.addEventListener('pointerdown', (event) => {
+        if (!event.target.closest('[data-product-gallery]')) {
+          return;
+        }
+
+        if (event.pointerType && event.pointerType !== 'touch') {
+          return;
+        }
+
+        pointerTracking = true;
+        pointerStartX = event.clientX;
+        pointerStartY = event.clientY;
+      });
+
+      root.addEventListener('pointerup', (event) => {
+        if (!event.target.closest('[data-product-gallery]')) {
+          return;
+        }
+
+        if (!pointerTracking) {
+          return;
+        }
+
+        pointerTracking = false;
+        const deltaX = event.clientX - pointerStartX;
+        const deltaY = event.clientY - pointerStartY;
+
+        if (Math.abs(deltaX) < 45 || Math.abs(deltaX) < Math.abs(deltaY)) {
+          return;
+        }
+
+        updateActiveSlide(deltaX < 0 ? activeIndex + 1 : activeIndex - 1);
+      });
+
+      root.addEventListener('pointercancel', () => {
+        pointerTracking = false;
+      });
+
+      root.addEventListener('theme:gallery:activate', (event) => {
+        const mediaId = event.detail?.mediaId;
+        const nextIndex = Number(event.detail?.index);
+
+        if (mediaId) {
+          activateByMediaId(mediaId);
+        } else if (Number.isFinite(nextIndex)) {
+          updateActiveSlide(nextIndex);
+        }
+      });
+
+      syncActiveIndex();
+
+      return {
+        refresh() {
+          syncActiveIndex();
+        },
+      };
+    })();
+  } else {
+    root?.productGalleryController?.refresh();
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Main product",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show vendor",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "Show description summary",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "fallback_subtitle",
+      "label": "Fallback subtitle",
+      "default": "STRETCH MARK BODY CANDLE"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Main product"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "accordion",
+      "name": "Accordion",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Description"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Fallback content"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_by_default",
+          "label": "Open by default",
+          "default": false
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

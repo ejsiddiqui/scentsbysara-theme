@@ -1,0 +1,103 @@
+.split-view {
+  overflow: clip;
+}
+
+.split-view .split-view__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: stretch;
+}
+
+.split-view .split-view__grid--reverse .split-view__media {
+  order: 2;
+}
+
+.split-view .split-view__grid--reverse .split-view__content {
+  order: 1;
+}
+
+.split-view .split-view__media {
+  min-width: 0;
+}
+
+.split-view .split-view__image,
+.split-view .split-view__placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: clamp(22rem, 48vw, 46rem);
+  object-fit: cover;
+}
+
+.split-view .split-view__placeholder {
+  display: grid;
+  place-items: center;
+  border: 1px dashed var(--color-border);
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: var(--text-micro);
+}
+
+.split-view .split-view__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  padding: clamp(1.75rem, 4vw, 4rem);
+}
+
+.split-view .split-view__heading {
+  max-width: 12ch;
+  margin-bottom: clamp(1rem, 2vw, 1.75rem);
+  text-transform: uppercase;
+}
+
+.split-view .split-view__body {
+  margin-bottom: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.split-view .split-view__notes {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.split-view .split-view__note {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.split-view .split-view__note-heading {
+  font-size: clamp(1.05rem, 0.9vw + 0.85rem, 1.35rem);
+}
+
+.split-view .split-view__button {
+  align-self: flex-start;
+}
+
+@media screen and (max-width: 989px) {
+  .split-view .split-view__grid,
+  .split-view .split-view__grid--reverse {
+    grid-template-columns: 1fr;
+  }
+
+  .split-view .split-view__grid--reverse .split-view__media,
+  .split-view .split-view__grid--reverse .split-view__content {
+    order: initial;
+  }
+
+  .split-view .split-view__content {
+    min-height: 0;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .split-view .split-view__content {
+    padding-inline: 1.25rem;
+    padding-block: 1.5rem;
+  }
+
+  .split-view .split-view__heading {
+    max-width: none;
+  }
+}

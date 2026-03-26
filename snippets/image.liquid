@@ -1,0 +1,70 @@
+{%- comment -%}
+  Renders an optimised responsive image.
+  Usage:
+    {% render 'image', image: section.settings.image, alt: 'Hero image', sizes: '100vw', loading: 'lazy', class: 'hero-img' %}
+    {% render 'image', image: product.featured_image, widths: '200,400,600,800', sizes: '(min-width: 1024px) 25vw, 50vw' %}
+
+  Params:
+    image         - Shopify image object (required)
+    alt           - Alt text (falls back to image.alt)
+    sizes         - sizes attribute (default: '100vw')
+    widths        - Comma-separated widths for srcset (default: '375,750,1100,1500,1920')
+    loading       - 'lazy' (default) or 'eager'
+    fetchpriority - 'high' for LCP images, omitted otherwise
+    class         - CSS class name(s)
+    mobile_image  - Optional separate mobile image (renders <picture> with <source>)
+{%- endcomment -%}
+{%- liquid
+  assign alt_text = alt | default: image.alt | default: shop.name | escape
+  assign sizes_attr = sizes | default: '100vw'
+  assign widths_csv = widths | default: '375,750,1100,1500,1920'
+  assign widths_list = widths_csv | split: ','
+  assign loading_attr = loading | default: 'lazy'
+  assign class_attr = class | strip
+  assign fallback_width = widths_list | last | strip | default: '1500'
+-%}
+
+{%- capture desktop_srcset -%}
+  {%- for width in widths_list -%}
+    {%- assign width_value = width | strip -%}
+    {{ image | image_url: width: width_value }} {{ width_value }}w{%- unless forloop.last -%}, {% endunless %}
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- if image != blank -%}
+  {%- if mobile_image != blank -%}
+    {%- capture mobile_srcset -%}
+      {%- for width in widths_list -%}
+        {%- assign width_value = width | strip -%}
+        {{ mobile_image | image_url: width: width_value }} {{ width_value }}w{%- unless forloop.last -%}, {% endunless %}
+      {%- endfor -%}
+    {%- endcapture -%}
+    <picture>
+      <source media="(max-width: 749px)" srcset="{{ mobile_srcset | strip }}" sizes="{{ sizes_attr }}">
+      <source media="(min-width: 750px)" srcset="{{ desktop_srcset | strip }}" sizes="{{ sizes_attr }}">
+      <img
+        src="{{ image | image_url: width: fallback_width }}"
+        srcset="{{ desktop_srcset | strip }}"
+        sizes="{{ sizes_attr }}"
+        alt="{{ alt_text }}"
+        loading="{{ loading_attr }}"
+        {% if fetchpriority != blank %}fetchpriority="{{ fetchpriority }}"{% endif %}
+        {% if class_attr != blank %}class="{{ class_attr }}"{% endif %}
+        width="{{ image.width }}"
+        height="{{ image.height }}"
+      >
+    </picture>
+  {%- else -%}
+    <img
+      src="{{ image | image_url: width: fallback_width }}"
+      srcset="{{ desktop_srcset | strip }}"
+      sizes="{{ sizes_attr }}"
+      alt="{{ alt_text }}"
+      loading="{{ loading_attr }}"
+      {% if fetchpriority != blank %}fetchpriority="{{ fetchpriority }}"{% endif %}
+      {% if class_attr != blank %}class="{{ class_attr }}"{% endif %}
+      width="{{ image.width }}"
+      height="{{ image.height }}"
+    >
+  {%- endif -%}
+{%- endif -%}

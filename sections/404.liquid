@@ -1,0 +1,24 @@
+<section class="error-404 section-block color-scheme-1">
+  <div class="container error-404__inner text-center">
+    <span class="eyebrow">PAGE NOT FOUND</span>
+    <h1 class="font-serif text-h1">{{ '404.title' | t }}</h1>
+    <p class="text-body text-muted">{{ '404.not_found' | t }}</p>
+    <a href="{{ routes.all_products_collection_url }}" class="btn-solid">{{ '404.back_to_shopping' | t }}</a>
+  </div>
+</section>
+
+{% stylesheet %}
+  .error-404__inner {
+    display: grid;
+    gap: 1rem;
+    justify-items: center;
+    padding-block: clamp(4rem, 12vw, 8rem);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "404",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,187 @@
+{{ 'section-cart.css' | asset_url | stylesheet_tag }}
+
+<cart-items
+  class="cart-page-section"
+  data-cart-page
+  data-section="{{ section.id }}"
+>
+  <div class="container">
+    <div class="checkout-breadcrumbs">
+      <span class="active">BAG</span> /
+      <span>INFORMATION</span> /
+      <span>SHIPPING</span> /
+      <span>PAYMENT</span>
+    </div>
+
+    <div class="cart-header flex-between items-end">
+      <h1 class="font-serif text-h2">YOUR BAG</h1>
+      <a href="{{ routes.collections_url }}" class="text-micro text-muted underline">CONTINUE SHOPPING</a>
+    </div>
+
+    <form action="{{ routes.cart_url }}" method="post" id="MainCartForm-{{ section.id }}">
+      <div class="cart-layout">
+        <section class="cart-content">
+          {%- if cart.item_count == 0 -%}
+            <div class="cart-empty">
+              <p>Your bag is currently empty.</p>
+              <a href="{{ routes.collections_url }}" class="btn-outline">SHOP CANDLES</a>
+            </div>
+          {%- else -%}
+            <div class="cart-table-wrap">
+              <table class="cart-table" aria-label="Shopping cart">
+                <thead>
+                  <tr>
+                    <th>PRODUCT</th>
+                    <th>PRICE</th>
+                    <th>QUANTITY</th>
+                    <th>TOTAL</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {%- for item in cart.items -%}
+                    <tr data-line="{{ forloop.index }}">
+                      <td>
+                        <div class="cart-line-item">
+                          <a href="{{ item.url }}" class="cart-line-item__media">
+                            {%- if item.image != blank -%}
+                              {% render 'image',
+                                image: item.image,
+                                alt: item.product.title,
+                                sizes: '120px',
+                                widths: '120,180,240',
+                                loading: 'lazy',
+                                class: 'cart-line-item__image'
+                              %}
+                            {%- endif -%}
+                          </a>
+                          <div class="cart-line-item__content">
+                            <div>
+                              <a href="{{ item.url }}" class="cart-item-title">{{ item.product.title }}</a>
+                              {%- if item.variant.title != blank and item.variant.title != 'Default Title' -%}
+                                <p class="text-micro text-muted">{{ item.variant.title }}</p>
+                              {%- endif -%}
+                            </div>
+                            <div class="cart-line-item__actions">
+                              <button type="button" class="cart-line-remove" data-cart-remove data-line="{{ forloop.index }}">
+                                Remove
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        {%- if item.original_price > item.final_price -%}
+                          <s class="price-strikethrough">{{ item.original_price | money }}</s>
+                        {%- endif -%}
+                        <span class="price-current">{{ item.final_price | money }}</span>
+                      </td>
+                      <td>
+                        <quantity-selector class="quantity-selector cart-quantity" data-line="{{ forloop.index }}">
+                          <button type="button" class="qty-btn" data-action="decrease" aria-label="Decrease quantity">-</button>
+                          <input type="number" value="{{ item.quantity }}" min="1" aria-label="Quantity for {{ item.product.title | escape }}">
+                          <button type="button" class="qty-btn" data-action="increase" aria-label="Increase quantity">+</button>
+                        </quantity-selector>
+                      </td>
+                      <td class="cart-line-item__totals">
+                        {%- if item.original_line_price > item.final_line_price -%}
+                          <s class="price-strikethrough">{{ item.original_line_price | money }}</s>
+                        {%- endif -%}
+                        <span class="price-current">{{ item.final_line_price | money }}</span>
+                      </td>
+                    </tr>
+                  {%- endfor -%}
+                </tbody>
+              </table>
+            </div>
+
+            <div class="cart-mobile-list">
+              {%- for item in cart.items -%}
+                <article class="cart-mobile-item" data-line="{{ forloop.index }}">
+                  <a href="{{ item.url }}" class="cart-line-item__media">
+                    {%- if item.image != blank -%}
+                      {% render 'image',
+                        image: item.image,
+                        alt: item.product.title,
+                        sizes: '120px',
+                        widths: '120,180,240',
+                        loading: 'lazy',
+                        class: 'cart-line-item__image'
+                      %}
+                    {%- endif -%}
+                  </a>
+
+                  <div class="cart-line-item__content">
+                    <div>
+                      <a href="{{ item.url }}" class="cart-item-title">{{ item.product.title }}</a>
+                      {%- if item.variant.title != blank and item.variant.title != 'Default Title' -%}
+                        <p class="text-micro text-muted">{{ item.variant.title }}</p>
+                      {%- endif -%}
+                    </div>
+
+                    <div class="cart-line-item__price">
+                      {%- if item.original_line_price > item.final_line_price -%}
+                        <s class="price-strikethrough">{{ item.original_line_price | money }}</s>
+                      {%- endif -%}
+                      <span class="price-current">{{ item.final_line_price | money }}</span>
+                    </div>
+
+                    <div class="cart-line-item__actions">
+                      <quantity-selector class="quantity-selector cart-quantity" data-line="{{ forloop.index }}">
+                        <button type="button" class="qty-btn" data-action="decrease" aria-label="Decrease quantity">-</button>
+                        <input type="number" value="{{ item.quantity }}" min="1" aria-label="Quantity for {{ item.product.title | escape }}">
+                        <button type="button" class="qty-btn" data-action="increase" aria-label="Increase quantity">+</button>
+                      </quantity-selector>
+
+                      <button type="button" class="cart-line-remove" data-cart-remove data-line="{{ forloop.index }}">
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+                </article>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        </section>
+
+        <aside class="cart-summary-box" aria-live="polite">
+          <h2>ORDER SUMMARY</h2>
+          <div class="flex-between">
+            <span class="font-sans">SUBTOTAL</span>
+            <span class="font-sans cart-total-subtotal">{{ cart.total_price | money }}</span>
+          </div>
+          <div class="flex-between">
+            <span class="text-sm text-muted">Shipping</span>
+            <span class="font-sans">Calculated at checkout</span>
+          </div>
+          <div class="flex-between">
+            <span class="text-sm text-muted">Tax</span>
+            <span class="font-sans">Calculated at checkout</span>
+          </div>
+          <div class="flex-between">
+            <span class="font-sans">TOTAL</span>
+            <span class="font-sans cart-total-grand">{{ cart.total_price | money }}</span>
+          </div>
+
+          <div class="main-cart__summary-actions">
+            {%- if cart.item_count > 0 -%}
+              <button type="submit" class="btn-solid w-full block text-center" name="checkout">
+                CHECKOUT
+              </button>
+            {%- else -%}
+              <a href="{{ routes.collections_url }}" class="btn-solid w-full block text-center">
+                SHOP CANDLES
+              </a>
+            {%- endif -%}
+          </div>
+        </aside>
+      </div>
+    </form>
+  </div>
+</cart-items>
+
+{% schema %}
+{
+  "name": "Main cart",
+  "settings": []
+}
+{% endschema %}

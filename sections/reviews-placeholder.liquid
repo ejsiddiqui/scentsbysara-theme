@@ -1,0 +1,69 @@
+{%- liquid
+  assign section_heading = section.settings.heading | default: 'WHAT OUR CUSTOMERS ARE SAYING'
+-%}
+
+<section
+  id="ReviewsPlaceholder-{{ section.id }}"
+  class="section-block reviews-placeholder"
+  role="region"
+  aria-labelledby="ReviewsPlaceholderHeading-{{ section.id }}"
+>
+  <div class="container reviews-placeholder__container">
+    <header class="reviews-placeholder__header">
+      <h2 id="ReviewsPlaceholderHeading-{{ section.id }}" class="section-title font-serif text-h3">
+        {{ section_heading | escape }}
+      </h2>
+    </header>
+
+    <div id="judgeme-reviews" class="jdgm-widget jdgm-review-widget reviews-placeholder__widget" data-judgeme-reviews>
+      {% content_for 'blocks' %}
+      <p class="reviews-placeholder__message">
+        Reviews will appear here once the Judge.me app is installed and connected.
+      </p>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .reviews-placeholder__header {
+    margin-bottom: var(--space-lg);
+    text-align: center;
+  }
+
+  .reviews-placeholder__widget {
+    min-height: 120px;
+    padding: var(--space-lg);
+    border: 1px solid var(--color-border);
+    background: var(--color-secondary-bg);
+  }
+
+  .reviews-placeholder__message {
+    margin: 0;
+    color: var(--color-muted);
+    text-align: center;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Reviews placeholder",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "WHAT OUR CUSTOMERS ARE SAYING"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reviews placeholder"
+    }
+  ]
+}
+{% endschema %}
