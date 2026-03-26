@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
@@ -15,7 +24,9 @@
         "eyebrow": "CUSTOM CANDLES",
         "heading": "SHE IS YOU",
         "body": "<p>A <strong>fully customisable body candle</strong> created from your own description, transforming personal stories and lived experience into form — celebrating you, exactly as you are.</p>",
-        "image_position": "right",
+        "image": "shopify://shop_images/she-is-you-half-left.png",
+        "image_alt": "Founder of Scents by Sara",
+        "image_position": "left",
         "content_background": "secondary",
         "cta_text": "CUSTOMISE YOUR OWN",
         "cta_link": "/products/she-is-you",
@@ -24,17 +35,6 @@
     },
     "scar_collection": {
       "type": "split-view",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "eyebrow": "GIFT A STORY",
-        "heading": "SCAR COLLECTION",
-        "body": "<p>The Scar Collection celebrates the body as a holder of memory, healing, and confidence. Gold leaf is applied by hand to mark scars — not as decoration but as recognition.</p>",
-        "image_position": "left",
-        "content_background": "secondary",
-        "cta_text": "DISCOVER COLLECTION",
-        "cta_link": "/collections/scar-collection",
-        "button_style": "btn-solid"
-      },
       "blocks": {
         "note_1": {
           "type": "note",
@@ -70,21 +70,22 @@
         "note_2",
         "note_3",
         "note_4"
-      ]
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "eyebrow": "GIFT A STORY",
+        "heading": "SCAR COLLECTION",
+        "body": "<p>The Scar Collection celebrates the body as a holder of memory, healing, and confidence. Gold leaf is applied by hand to mark scars — not as decoration but as recognition.</p>",
+        "image_alt": "Founder of Scents by Sara",
+        "image_position": "left",
+        "content_background": "secondary",
+        "cta_text": "DISCOVER COLLECTION",
+        "cta_link": "/collections/scar-collection",
+        "button_style": "btn-solid"
+      }
     },
     "sculpted_collection": {
       "type": "split-view",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "eyebrow": "GIFT BEAUTY",
-        "heading": "SCULPTED COLLECTION",
-        "body": "<p>The Sculpted Collection celebrates the female form through simplicity and presence alone. Minimal, considered and free from custom marks, these pieces invite stillness, reflection, and honour what already exists — inherent beauty, balance, and worth.</p>",
-        "image_position": "right",
-        "content_background": "secondary",
-        "cta_text": "DISCOVER COLLECTION",
-        "cta_link": "/collections/sculpted-collection",
-        "button_style": "btn-solid"
-      },
       "blocks": {
         "note_1": {
           "type": "note",
@@ -104,7 +105,19 @@
       "block_order": [
         "note_1",
         "note_2"
-      ]
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "eyebrow": "GIFT BEAUTY",
+        "heading": "SCULPTED COLLECTION",
+        "body": "<p>The Sculpted Collection celebrates the female form through simplicity and presence alone. Minimal, considered and free from custom marks, these pieces invite stillness, reflection, and honour what already exists — inherent beauty, balance, and worth.</p>",
+        "image_alt": "Founder of Scents by Sara",
+        "image_position": "right",
+        "content_background": "secondary",
+        "cta_text": "DISCOVER COLLECTION",
+        "cta_link": "/collections/sculpted-collection",
+        "button_style": "btn-solid"
+      }
     },
     "featured": {
       "type": "featured-collection",
@@ -124,13 +137,6 @@
     },
     "testimonials": {
       "type": "testimonials",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "heading": "CUSTOMER TESTIMONIALS",
-        "aria_label": "Customer testimonials",
-        "show_stars": true,
-        "star_count": 5
-      },
       "blocks": {
         "testimonial_1": {
           "type": "testimonial",
@@ -161,7 +167,14 @@
         "testimonial_1",
         "testimonial_2",
         "testimonial_3"
-      ]
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "heading": "CUSTOMER TESTIMONIALS",
+        "aria_label": "Customer testimonials",
+        "show_stars": true,
+        "star_count": 5
+      }
     }
   },
   "order": [
