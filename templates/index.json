@@ -11,41 +11,43 @@
   "sections": {
     "hero": {
       "type": "hero-slideshow",
-      "settings": {
-        "autoplay": true,
-        "interval": 5,
-        "show_arrows": false,
-        "accessibility_label": "Homepage hero slideshow",
-        "color_scheme": "scheme-1"
-      },
       "blocks": {
         "hero_slide_1": {
           "type": "slide",
           "settings": {
-            "kicker": "Scents by Sara",
+            "kicker": "",
             "heading": "THE FEMALE FORM, AS IT IS",
             "subheading": "Hand-poured body candles celebrating real bodies and lived experience.",
             "cta_text": "SHOP NOW",
+            "cta_link": "",
+            "image_desktop": "shopify://shop_images/desktop-hero-1.png",
+            "image_mobile": "shopify://shop_images/mobile-hero-1.png",
             "text_alignment": "left"
           }
         },
         "hero_slide_2": {
           "type": "slide",
           "settings": {
-            "kicker": "Meaningful gifts",
+            "kicker": "",
             "heading": "MEANINGFUL GIFTS",
             "subheading": "A gesture of recognition for who someone is and the experiences they carry.",
             "cta_text": "EXPLORE GIFTS",
+            "cta_link": "",
+            "image_desktop": "shopify://shop_images/desktop-hero-2.png",
+            "image_mobile": "shopify://shop_images/mobile-hero-2.png",
             "text_alignment": "left"
           }
         },
         "hero_slide_3": {
           "type": "slide",
           "settings": {
-            "kicker": "Custom candles",
+            "kicker": "",
             "heading": "SHE IS YOU",
             "subheading": "A fully customisable body candle created from your own description.",
             "cta_text": "CUSTOMISE YOUR OWN",
+            "cta_link": "",
+            "image_desktop": "shopify://shop_images/desktop-hero-3.png",
+            "image_mobile": "shopify://shop_images/mobile-hero-3.png",
             "text_alignment": "left"
           }
         }
@@ -54,7 +56,14 @@
         "hero_slide_1",
         "hero_slide_2",
         "hero_slide_3"
-      ]
+      ],
+      "settings": {
+        "autoplay": false,
+        "interval": 5,
+        "show_arrows": false,
+        "accessibility_label": "Homepage hero slideshow",
+        "color_scheme": "scheme-1"
+      }
     },
     "bestsellers": {
       "type": "featured-collection",
@@ -74,14 +83,6 @@
     },
     "commitment": {
       "type": "commitment",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "eyebrow": "OUR COMMITMENT",
-        "heading": "INTENTIONAL DESIGN IN SCENT AND FORM.",
-        "image_position": "left",
-        "button_label": "READ OUR STORY",
-        "button_link": "/pages/our-story"
-      },
       "blocks": {
         "value_1": {
           "type": "value",
@@ -117,20 +118,25 @@
         "value_2",
         "value_3",
         "value_4"
-      ]
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "eyebrow": "OUR COMMITMENT",
+        "heading": "INTENTIONAL DESIGN IN SCENT AND FORM.",
+        "image_alt": "Matches and candle",
+        "image_position": "left",
+        "button_label": "READ OUR STORY",
+        "button_link": "/pages/our-story"
+      }
     },
     "collections": {
       "type": "collections-grid",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "eyebrow": "",
-        "heading": "",
-        "columns": 2
-      },
       "blocks": {
         "collection_1": {
           "type": "collection_card",
           "settings": {
+            "collection": "",
+            "image_alt": "",
             "heading_override": "SCAR COLLECTION",
             "body_text": "Designed to celebrate the body as a holder of memory, healing, and confidence. Gold leaf is applied by hand to mark scars - not as decoration but as recognition.",
             "link_override": "/collections/scar-collection",
@@ -140,6 +146,8 @@
         "collection_2": {
           "type": "collection_card",
           "settings": {
+            "collection": "",
+            "image_alt": "",
             "heading_override": "SCULPTED COLLECTION",
             "body_text": "Designed around fluid silhouettes and intentional scent layering, this line celebrates the female body through elevated shape, texture, and ritual.",
             "link_override": "/collections/sculpted-collection",
@@ -150,7 +158,13 @@
       "block_order": [
         "collection_1",
         "collection_2"
-      ]
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "columns": 2,
+        "eyebrow": "",
+        "heading": ""
+      }
     },
     "our_story": {
       "type": "split-view",
@@ -159,6 +173,7 @@
         "eyebrow": "OUR STORY",
         "heading": "GROUNDED IN RITUAL. EMBODIED IN CONFIDENCE.",
         "body": "<p>Scents By Sara is a female-founded fragrance house rooted in embodied confidence and modern ritual. What began as a personal exploration of scent and form has grown into a brand shaped by lived experience, community, and the power of recognising ourselves as we are.</p>",
+        "image_alt": "Founder of Scents by Sara",
         "image_position": "left",
         "content_background": "secondary",
         "cta_text": "READ MORE",
@@ -168,13 +183,6 @@
     },
     "testimonials": {
       "type": "testimonials",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "heading": "CUSTOMER TESTIMONIALS",
-        "aria_label": "Customer testimonials",
-        "show_stars": true,
-        "star_count": 5
-      },
       "blocks": {
         "testimonial_1": {
           "type": "testimonial",
@@ -205,7 +213,14 @@
         "testimonial_1",
         "testimonial_2",
         "testimonial_3"
-      ]
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "heading": "CUSTOMER TESTIMONIALS",
+        "aria_label": "Customer testimonials",
+        "show_stars": true,
+        "star_count": 5
+      }
     }
   },
   "order": [
