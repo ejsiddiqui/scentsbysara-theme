@@ -32,6 +32,9 @@
     },
     "header": {
       "type": "header",
+      "custom_css": [
+        ".header-logo-image {max-width: 100%;}"
+      ],
       "settings": {
         "logo": "shopify://shop_images/logo-long.svg",
         "logo_mobile": "shopify://shop_images/logo-symbol.svg",
