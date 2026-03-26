@@ -525,6 +525,23 @@ main > .container {
   color: var(--color-background);
 }
 
+.btn-underline {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-sans);
+  font-size: var(--text-small);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-foreground);
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+  transition: opacity 0.3s ease;
+}
+
+.btn-underline:hover {
+  opacity: 0.6;
+}
+
 .btn-hero {
   padding: 20px 64px;
   font-size: var(--text-micro);

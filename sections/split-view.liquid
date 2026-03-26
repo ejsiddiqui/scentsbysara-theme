@@ -1,6 +1,6 @@
 {%- liquid
-  assign section_eyebrow = section.settings.eyebrow | default: 'OUR STORY'
-  assign section_heading = section.settings.heading | default: 'GROUNDED IN RITUAL. EMBODIED IN CONFIDENCE.'
+  assign section_eyebrow = section.settings.eyebrow
+  assign section_heading = section.settings.heading
   assign image_alt = section.settings.image_alt | default: section_heading
   assign content_background_class = 'bg-secondary'
 
@@ -31,8 +31,12 @@
       </div>
 
       <div class="split-view__content {{ content_background_class }}">
-        <span class="eyebrow">{{ section_eyebrow | escape }}</span>
-        <h2 class="font-serif split-view__heading">{{ section_heading | escape }}</h2>
+        {%- if section_eyebrow != blank -%}
+          <span class="eyebrow">{{ section_eyebrow | escape }}</span>
+        {%- endif -%}
+        {%- if section_heading != blank -%}
+          <h2 class="font-serif split-view__heading">{{ section_heading | escape }}</h2>
+        {%- endif -%}
 
         {%- if section.settings.body != blank -%}
           <div class="container-editorial split-view__body">
@@ -164,6 +168,10 @@
         {
           "value": "btn-outline",
           "label": "Outline"
+        },
+        {
+          "value": "btn-underline",
+          "label": "Underline"
         }
       ],
       "default": "btn-solid"

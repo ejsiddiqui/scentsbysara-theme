@@ -185,7 +185,8 @@
         </header>
 
         <div class="product-details__controls" aria-label="Product purchase structure">
-          {%- form 'product', product, id: 'ProductForm-' | append: section.id, class: 'product-form', data-product-form: '' -%}
+          {%- assign product_form_id = 'ProductForm-' | append: section.id -%}
+          {%- form 'product', product, id: product_form_id, class: 'product-form', data-product-form: '' -%}
             <input type="hidden" name="id" value="{{ current_variant.id }}" data-variant-id-input>
 
             <variant-picker
