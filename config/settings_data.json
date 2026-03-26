@@ -9,11 +9,11 @@
  */
 {
   "current": {
-    "logo": "",
+    "logo": "shopify://shop_images/logo-long.svg",
     "logo_inverse": "",
-    "logo_mobile": "",
-    "logo_height": 40,
-    "favicon": "",
+    "logo_mobile": "shopify://shop_images/logo-symbol.svg",
+    "logo_height": 30,
+    "favicon": "shopify://shop_images/logo-symbol.svg",
     "type_heading_font": "libre_baskerville_n4",
     "type_body_font": "work_sans_n4",
     "heading_size_h1": 47,
