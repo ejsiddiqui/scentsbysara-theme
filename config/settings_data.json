@@ -9,44 +9,6 @@
  */
 {
   "current": {
-    "sections": {},
-    "content_for_index": [],
-    "color_schemes": {
-      "scheme-1": {
-        "settings": {
-          "background": "#F9F6F2",
-          "background_gradient": "",
-          "text": "#3F3229",
-          "muted": "#A39382",
-          "border": "#CEC5B8",
-          "secondary_bg": "#E7E3DC",
-          "accent": "#3F3229",
-          "button": "#3F3229",
-          "button_label": "#F9F6F2",
-          "secondary_button_label": "#3F3229",
-          "shadow": "#3F3229",
-          "success": "#2d6a4f",
-          "error": "#8b2e2e"
-        }
-      },
-      "scheme-2": {
-        "settings": {
-          "background": "#3F3229",
-          "background_gradient": "",
-          "text": "#F9F6F2",
-          "muted": "#CEC5B8",
-          "border": "#A39382",
-          "secondary_bg": "#2D2B27",
-          "accent": "#F9F6F2",
-          "button": "#F9F6F2",
-          "button_label": "#3F3229",
-          "secondary_button_label": "#F9F6F2",
-          "shadow": "#F9F6F2",
-          "success": "#2d6a4f",
-          "error": "#8b2e2e"
-        }
-      }
-    },
     "logo": "",
     "logo_inverse": "",
     "logo_mobile": "",
@@ -78,6 +40,43 @@
     "social_instagram": "",
     "social_facebook": "",
     "social_tiktok": "",
-    "social_pinterest": ""
+    "social_pinterest": "",
+    "content_for_index": [],
+    "color_schemes": {
+      "scheme-1": {
+        "settings": {
+          "background": "#f9f6f2",
+          "background_gradient": "",
+          "text": "#3f3229",
+          "muted": "#a39382",
+          "border": "#cec5b8",
+          "secondary_bg": "#e7e3dc",
+          "accent": "#3f3229",
+          "button": "#3f3229",
+          "button_label": "#f9f6f2",
+          "secondary_button_label": "#3f3229",
+          "shadow": "#3f3229",
+          "success": "#2d6a4f",
+          "error": "#8b2e2e"
+        }
+      },
+      "scheme-2": {
+        "settings": {
+          "background": "#3f3229",
+          "background_gradient": "",
+          "text": "#f9f6f2",
+          "muted": "#cec5b8",
+          "border": "#a39382",
+          "secondary_bg": "#2d2b27",
+          "accent": "#f9f6f2",
+          "button": "#f9f6f2",
+          "button_label": "#3f3229",
+          "secondary_button_label": "#f9f6f2",
+          "shadow": "#f9f6f2",
+          "success": "#2d6a4f",
+          "error": "#8b2e2e"
+        }
+      }
+    }
   }
 }
