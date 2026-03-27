@@ -1,0 +1,160 @@
+{%- liquid
+  assign featured_product = section.settings.product
+  assign products_to_show = section.settings.products_to_show | default: 3
+  assign columns = section.settings.columns_desktop | default: 3
+-%}
+
+<section
+  id="ProductVariantsGrid-{{ section.id }}"
+  class="section-block featured-collection color-{{ section.settings.color_scheme }}"
+>
+  <div class="container">
+    <div class="section-header featured-collection__header">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="section-title featured-collection__title">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.subheading != blank -%}
+        <p class="featured-collection__subheading text-body text-muted">{{ section.settings.subheading | escape }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="featured-collection__viewport">
+      <div class="featured-collection__track" style="--fc-columns: {{ columns }}">
+        {%- if featured_product != blank -%}
+
+          {%- liquid
+            assign subtitle = featured_product.metafields.custom.short_description | default: featured_product.type
+            if subtitle == blank
+              assign subtitle = featured_product.vendor
+            endif
+          -%}
+
+          {%- for variant in featured_product.variants limit: products_to_show -%}
+            {%- liquid
+              assign variant_url = featured_product.url | append: '?variant=' | append: variant.id
+              assign variant_image = variant.image | default: featured_product.featured_image
+              if variant.title == 'Default Title'
+                assign card_title = featured_product.title | upcase
+              else
+                assign card_title = featured_product.title | upcase | append: ' – ' | append: variant.title | upcase
+              endif
+            -%}
+
+            <article class="product-card product-card--shop{% if variant.available == false %} is-sold-out{% endif %}">
+              <div class="product-card-media product-card__media-shell">
+                <a
+                  class="product-image-wrap product-card__media"
+                  href="{{ variant_url }}"
+                  aria-label="{{ card_title | escape }}"
+                >
+                  {%- if variant_image != blank -%}
+                    {% render 'image',
+                      class: 'product-card__image product-card__image--primary',
+                      image: variant_image,
+                      widths: '320,480,640,800',
+                      sizes: '(min-width: 1200px) 33vw, (min-width: 750px) 50vw, 100vw'
+                    %}
+                  {%- else -%}
+                    <div class="image product-card__image product-card__image--placeholder" aria-hidden="true"></div>
+                  {%- endif -%}
+                </a>
+
+                {%- unless variant.available -%}
+                  <span class="product-card__badge" aria-label="Sold out">Sold out</span>
+                {%- endunless -%}
+              </div>
+
+              <div class="product-info-shop product-card__body">
+                <div class="product-card__copy">
+                  <span class="product-name product-card__title">
+                    <a href="{{ variant_url }}">{{ card_title }}</a>
+                  </span>
+                  {%- if subtitle != blank -%}
+                    <span class="product-desc product-card__subtitle">{{ subtitle | escape }}</span>
+                  {%- endif -%}
+                </div>
+                {% render 'price', product: featured_product, variant: variant %}
+              </div>
+
+              <a href="{{ variant_url }}" class="product-btn product-card__button">SHOP NOW</a>
+            </article>
+          {%- endfor -%}
+
+        {%- else -%}
+
+          {%- for i in (1..columns) -%}
+            <article class="product-card product-card--shop">
+              <div class="product-card-media product-card__media-shell">
+                <a class="product-image-wrap product-card__media" href="{{ routes.all_products_collection_url }}">
+                  <div class="image product-card__image product-card__image--placeholder" aria-hidden="true"></div>
+                </a>
+              </div>
+              <div class="product-info-shop product-card__body">
+                <div class="product-card__copy">
+                  <span class="product-name product-card__title">
+                    <a href="{{ routes.all_products_collection_url }}">Select a product in the editor</a>
+                  </span>
+                </div>
+              </div>
+              <a href="{{ routes.all_products_collection_url }}" class="product-btn product-card__button">SHOP NOW</a>
+            </article>
+          {%- endfor -%}
+
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product variants grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Variants to show",
+      "min": 1,
+      "max": 12,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columns on desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product variants grid"
+    }
+  ]
+}
+{% endschema %}

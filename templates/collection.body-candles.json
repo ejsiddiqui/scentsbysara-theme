@@ -18,20 +18,13 @@
       }
     },
     "she_is_strength": {
-      "type": "featured-collection",
+      "type": "product-variants-grid",
       "settings": {
         "heading": "SHE IS STRENGTH",
         "subheading": "She Is Strength is a sculptural body candle engraved with a mastectomy scar, honouring bodies shaped by breast cancer as a testament to endurance, courage, and lived experience.",
-        "collection": "she-is-strength",
-        "products_to_show": 4,
+        "product": "she-is-strength",
+        "products_to_show": 3,
         "columns_desktop": 3,
-        "show_navigation": false,
-        "card_layout": "shop",
-        "show_secondary_image": true,
-        "show_swatches": false,
-        "show_quick_add": false,
-        "show_view_all": false,
-        "view_all_label": "SHOP THE COLLECTION",
         "color_scheme": "scheme-1"
       }
     },
@@ -53,20 +46,13 @@
       }
     },
     "she_is_lust": {
-      "type": "featured-collection",
+      "type": "product-variants-grid",
       "settings": {
         "heading": "SHE IS LUST",
         "subheading": "A sculptural body candle honouring stretch marks as quiet marks of growth, transformation, and presence. She Is Lust invites self-compassion and acceptance.",
-        "collection": "she-is-lust",
-        "products_to_show": 4,
+        "product": "she-is-lust",
+        "products_to_show": 3,
         "columns_desktop": 3,
-        "show_navigation": false,
-        "card_layout": "shop",
-        "show_secondary_image": true,
-        "show_swatches": false,
-        "show_quick_add": false,
-        "show_view_all": false,
-        "view_all_label": "SHOP THE COLLECTION",
         "color_scheme": "scheme-1"
       }
     },
@@ -88,38 +74,24 @@
       }
     },
     "she_is_timeless": {
-      "type": "featured-collection",
+      "type": "product-variants-grid",
       "settings": {
         "heading": "SHE IS TIMELESS",
         "subheading": "She Is Timeless is a minimal body candle that honours the female form through shape, presence and quiet simplicity — created for moments of pause and reflection.",
-        "collection": "she-is-timeless",
-        "products_to_show": 4,
+        "product": "she-is-timeless",
+        "products_to_show": 3,
         "columns_desktop": 3,
-        "show_navigation": false,
-        "card_layout": "shop",
-        "show_secondary_image": true,
-        "show_swatches": false,
-        "show_quick_add": false,
-        "show_view_all": false,
-        "view_all_label": "SHOP THE COLLECTION",
         "color_scheme": "scheme-1"
       }
     },
     "she_is_beauty": {
-      "type": "featured-collection",
+      "type": "product-variants-grid",
       "settings": {
         "heading": "SHE IS BEAUTY",
         "subheading": "Adorned in 23-karat gold leaf, She Is Beauty celebrates the inherent beauty and worth the female form holds.",
-        "collection": "she-is-beauty",
-        "products_to_show": 4,
+        "product": "she-is-beauty",
+        "products_to_show": 3,
         "columns_desktop": 3,
-        "show_navigation": false,
-        "card_layout": "shop",
-        "show_secondary_image": true,
-        "show_swatches": false,
-        "show_quick_add": false,
-        "show_view_all": false,
-        "view_all_label": "SHOP THE COLLECTION",
         "color_scheme": "scheme-1"
       }
     },
