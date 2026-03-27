@@ -1,7 +1,12 @@
-<details class="accordion"{% if open %} open{% endif %} data-accordion{% if group != blank %} data-accordion-group="{{ group }}"{% endif %}>
+<details class="accordion{% if open %} static-block is-default-open{% endif %}"{% if open %} open{% endif %} data-accordion{% if group != blank %} data-accordion-group="{{ group }}"{% endif %}>
   <summary class="accordion-header">
-    <span>{{ title }}</span>
-    {% render 'icon', name: 'plus', size: 18 %}
+    <span class="accordion-header__label">{{ title }}</span>
+    {%- unless hide_indicator -%}
+      <span class="accordion-header__indicator" aria-hidden="true">
+        <span class="accordion-header__indicator-plus">+</span>
+        <span class="accordion-header__indicator-minus">-</span>
+      </span>
+    {%- endunless -%}
   </summary>
   <div class="accordion-body">
     <div class="accordion-body__inner">

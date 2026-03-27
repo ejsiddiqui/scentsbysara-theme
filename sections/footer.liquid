@@ -218,11 +218,32 @@
   </div>
 
   <script type="module" src="{{ 'accordion.js' | asset_url }}"></script>
+
+  <script>
+    (function () {
+      var menus = document.querySelectorAll('.footer-section__menu[data-accordion]');
+      var mq = window.matchMedia('(min-width: 990px)');
+
+      function syncOpen(isDesktop) {
+        menus.forEach(function (el) {
+          if (isDesktop) {
+            el.setAttribute('open', '');
+          } else if (!el.hasAttribute('data-accordion-open')) {
+            el.removeAttribute('open');
+          }
+        });
+      }
+
+      syncOpen(mq.matches);
+      mq.addEventListener('change', function (e) { syncOpen(e.matches); });
+    })();
+  </script>
 </footer>
 
 {% stylesheet %}
   .footer-section {
     padding-block: 48px 28px;
+    background-color: var(--color-secondary-bg);
     color: var(--color-foreground);
   }
 
@@ -264,11 +285,14 @@
 
   .footer-section__input {
     width: 100%;
-    min-height: 48px;
+    min-height: 44px;
     padding: 0 16px;
     border: 1px solid var(--color-border);
     background: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-size: var(--text-body-small);
+    letter-spacing: 0.06em;
   }
 
   .footer-section__button {
@@ -285,9 +309,10 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
+    width: 36px;
+    height: 36px;
     border: 1px solid var(--color-border);
+    border-radius: 50%;
     color: var(--color-foreground);
   }
 
@@ -336,7 +361,9 @@
 
   .footer-section__menu-item a,
   .footer-section__menu-item span {
-    color: var(--color-foreground);
+    font-size: var(--text-body-small);
+    font-weight: 300;
+    color: var(--color-muted);
   }
 
   .footer-section__divider {
@@ -354,9 +381,9 @@
 
   .footer-section__brand {
     display: flex;
-    align-items: center;
-    gap: 18px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
   }
 
   .footer-section__brand-link {

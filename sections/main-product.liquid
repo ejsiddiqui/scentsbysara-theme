@@ -15,7 +15,6 @@
   endfor
 
   assign subtitle_text = product.metafields.custom.subtitle | default: product.metafields.custom.subheading | default: product.type | default: section.settings.fallback_subtitle
-  assign summary_text = product.description | strip_html | truncate: 220
 -%}
 
 <section
@@ -27,21 +26,21 @@
     {% render 'breadcrumbs', product: product %}
 
     <div class="product-mobile-header">
-      <div class="product-mobile-header__copy">
-        <h1 class="font-serif product-details__title">{{ product.title }}</h1>
-        <p class="product-details__subtitle text-micro">{{ subtitle_text }}</p>
+      <div class="product-mobile-header__copy product-mobile-header-copy">
+        <h1 class="font-serif product-details__title product-title">{{ product.title | upcase }}</h1>
+        <p class="product-details__subtitle subtitle text-micro">{{ subtitle_text | upcase }}</p>
       </div>
       <div class="product-mobile-header__price">
         {% render 'price', card_product: product, variant: current_variant %}
       </div>
     </div>
 
-    <div class="product-page-grid">
+    <div class="product-main product-page-grid">
       <div class="product-gallery" data-product-gallery data-product-gallery-count="{{ media_count }}">
-        <div class="product-gallery__stage">
+        <div class="main-image-wrap product-gallery__stage">
           {%- if has_gallery_media -%}
-            <div class="product-gallery__viewport" aria-label="{{ product.title | escape }} media gallery">
-              <ul class="product-gallery__track" role="list">
+            <div class="product-gallery__viewport product-gallery-viewport" aria-label="{{ product.title | escape }} media gallery">
+              <ul class="product-gallery__track product-gallery-track" role="list">
                 {%- for media in product.media -%}
                   {%- if media.preview_image != blank -%}
                     {%- liquid
@@ -55,7 +54,7 @@
                     -%}
                     <li
                       id="ProductGallerySlide-{{ section.id }}-{{ forloop.index0 }}"
-                      class="product-gallery__slide{% if is_active %} is-active{% endif %}"
+                      class="product-gallery__slide product-gallery-slide{% if is_active %} is-active{% endif %}"
                       data-product-gallery-slide
                       data-slide-index="{{ forloop.index0 }}"
                       data-media-id="{{ media.id }}"
@@ -91,7 +90,7 @@
 
             {%- if media_count > 1 -%}
               <button
-                class="product-gallery__arrow product-gallery__arrow--prev"
+                class="product-gallery__arrow product-gallery-arrow product-gallery__arrow--prev"
                 type="button"
                 data-product-gallery-prev
                 aria-label="Show previous product image"
@@ -99,7 +98,7 @@
                 {% render 'icon', name: 'chevron-left', size: 18 %}
               </button>
               <button
-                class="product-gallery__arrow product-gallery__arrow--next"
+                class="product-gallery__arrow product-gallery-arrow product-gallery__arrow--next"
                 type="button"
                 data-product-gallery-next
                 aria-label="Show next product image"
@@ -109,7 +108,7 @@
             {%- endif -%}
 
             <button
-              class="product-gallery__wishlist icon-btn"
+              class="product-gallery__wishlist wishlist-btn icon-btn"
               type="button"
               aria-label="Add {{ product.title | escape }} to wishlist"
               aria-pressed="false"
@@ -124,7 +123,7 @@
         </div>
 
         {%- if media_count > 1 -%}
-          <div class="product-gallery__thumbnails" role="tablist" aria-label="Product image thumbnails">
+          <div class="thumbnails product-gallery__thumbnails" role="tablist" aria-label="Product image thumbnails">
             {%- for media in product.media -%}
               {%- if media.preview_image != blank -%}
                 {%- liquid
@@ -137,7 +136,7 @@
                   endif
                 -%}
                 <button
-                  class="product-gallery__thumb{% if is_active %} is-active{% endif %}"
+                  class="thumb-wrap product-gallery__thumb{% if is_active %} is-active active{% endif %}"
                   id="ProductGalleryThumb-{{ section.id }}-{{ forloop.index0 }}"
                   type="button"
                   role="tab"
@@ -165,23 +164,13 @@
       </div>
 
       <div class="product-details">
-        <header class="product-details__header">
-          {%- if section.settings.show_vendor and product.vendor != blank -%}
-            <p class="product-details__eyebrow text-micro text-muted">{{ product.vendor }}</p>
-          {%- endif -%}
-
-          <h1 class="product-details__title font-serif text-h1">{{ product.title }}</h1>
+        <header class="product-header-block product-details__header">
+          <h1 class="product-details__title product-title font-serif text-h1">{{ product.title | upcase }}</h1>
 
           <div class="product-details__meta flex-between items-center" aria-live="polite" aria-atomic="true">
-            <p class="product-details__subtitle text-micro">{{ subtitle_text }}</p>
+            <p class="product-details__subtitle subtitle text-micro">{{ subtitle_text | upcase }}</p>
             {% render 'price', card_product: product, variant: current_variant %}
           </div>
-
-          {%- if section.settings.show_description and summary_text != blank -%}
-            <div class="product-details__summary text-body">
-              {{ summary_text }}
-            </div>
-          {%- endif -%}
         </header>
 
         <div class="product-details__controls" aria-label="Product purchase structure">
@@ -198,28 +187,33 @@
               {% render 'variant-picker', product: product, section: section %}
             </variant-picker>
 
-            <quantity-selector class="quantity-selector">
-              <button type="button" class="qty-btn" data-action="decrease" aria-label="Decrease quantity">-</button>
-              <input type="number" name="quantity" value="1" min="1" aria-label="Quantity">
-              <button type="button" class="qty-btn" data-action="increase" aria-label="Increase quantity">+</button>
-            </quantity-selector>
+            <div class="selector-group selector-group--quantity">
+              <div class="selector-label text-sm">QUANTITY</div>
+              <div class="add-to-cart-row">
+                <quantity-selector class="qty-selector quantity-selector">
+                  <button type="button" class="qty-btn" data-action="decrease" aria-label="Decrease quantity">-</button>
+                  <input type="number" name="quantity" value="1" min="1" aria-label="Quantity" class="qty-input">
+                  <button type="button" class="qty-btn" data-action="increase" aria-label="Increase quantity">+</button>
+                </quantity-selector>
 
-            <button
-              type="submit"
-              class="btn-solid add-to-cart"
-              data-add-to-cart
-              {% unless current_variant.available %}disabled{% endunless %}
-            >
-              {%- if current_variant.available -%}
-                ADD TO BAG - {{ current_variant.price | money }}
-              {%- else -%}
-                SOLD OUT
-              {%- endif -%}
-            </button>
+                <button
+                  type="submit"
+                  class="btn-solid btn-add-bag add-to-cart"
+                  data-add-to-cart
+                  {% unless current_variant.available %}disabled{% endunless %}
+                >
+                  {%- if current_variant.available -%}
+                    ADD TO BAG - {{ current_variant.price | money }}
+                  {%- else -%}
+                    SOLD OUT
+                  {%- endif -%}
+                </button>
+              </div>
+            </div>
           {%- endform -%}
 
           {%- if section.blocks.size > 0 -%}
-            <div class="product-accordions">
+            <div class="accordion-wrapper product-accordions">
               {%- for block in section.blocks -%}
                 {%- liquid
                   assign accordion_handle = block.settings.title | handleize
@@ -242,7 +236,8 @@
                   title: block.settings.title,
                   content: accordion_content,
                   open: block.settings.open_by_default,
-                  group: section.id
+                  group: section.id,
+                  hide_indicator: forloop.first
                 %}
               {%- endfor -%}
             </div>

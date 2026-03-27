@@ -5,6 +5,7 @@
   assign show_secondary_image = show_secondary_image
   assign show_swatches = show_swatches
   assign show_quick_add = show_quick_add
+  assign show_wishlist = show_wishlist | default: false
   assign current_variant = blank
   assign primary_image = blank
   assign secondary_image = blank
@@ -89,6 +90,17 @@
         {%- endif -%}
       </a>
 
+      {%- if show_wishlist -%}
+        <button
+          class="product-card__wishlist icon-btn"
+          type="button"
+          aria-label="Add {{ card_product.title | escape }} to wishlist"
+          aria-pressed="false"
+        >
+          {% render 'icon', name: 'wishlist', size: 20 %}
+        </button>
+      {%- endif -%}
+
       {%- if show_quick_add and card_product.available -%}
         <button
           class="product-btn-add product-card__quick-add"
@@ -165,6 +177,12 @@
       </div>
 
     {%- else -%}
+      {%- if show_swatches -%}
+        <div class="product-options product-card__options">
+          {% render 'variant-swatches', product: card_product, variant: current_variant %}
+        </div>
+      {%- endif -%}
+
       <div class="product-info-stacked product-card__body">
         <div class="product-card__copy">
           <span class="product-name product-card__title">
@@ -178,14 +196,10 @@
 
         {% render 'price', product: card_product, variant: current_variant %}
       </div>
-
-      {%- if show_swatches -%}
-        <div class="product-options product-card__options">
-          {% render 'variant-swatches', product: card_product, variant: current_variant %}
-        </div>
-      {%- endif -%}
     {%- endif -%}
 
-    <a href="{{ card_product.url }}" class="product-btn product-card__button">SHOP NOW</a>
+    {%- if card_layout == 'stacked' -%}
+      <a href="{{ card_product.url }}" class="product-btn product-card__button">SHOP NOW</a>
+    {%- endif -%}
   </product-card>
 {%- endif -%}

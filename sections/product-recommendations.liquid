@@ -1,11 +1,12 @@
 {%- liquid
   assign products_to_show = section.settings.products_to_show | default: 4
   assign recommendations_url = routes.product_recommendations_url | append: '?product_id=' | append: product.id | append: '&limit=' | append: products_to_show | append: '&section_id=' | append: section.id
+  assign card_layout = section.settings.card_layout | default: 'compact'
 -%}
 
 <section
   id="ProductRecommendations-{{ section.id }}"
-  class="section-block product-recommendations"
+  class="section-block best-sellers product-recommendations"
   data-product-recommendations
   data-url="{{ recommendations_url }}"
 >
@@ -18,15 +19,44 @@
 
     {%- if recommendations.performed? and recommendations.products_count > 0 -%}
       <div class="product-grid grid-cols-4 product-recommendations__grid" data-product-recommendations-content>
+        {%- liquid
+          assign shown_count = 0
+          assign rendered_product_ids = '|' | append: product.id | append: '|'
+        -%}
         {%- for product in recommendations.products limit: products_to_show -%}
+          {%- assign rendered_product_ids = rendered_product_ids | append: product.id | append: '|' -%}
+          {%- assign shown_count = shown_count | plus: 1 -%}
           {% render 'product-card',
             product: product,
-            card_layout: section.settings.card_layout,
+            card_layout: card_layout,
             show_secondary_image: true,
-            show_swatches: true,
-            show_quick_add: false
+            show_swatches: false,
+            show_quick_add: false,
+            show_wishlist: true
           %}
         {%- endfor -%}
+
+        {%- if shown_count < products_to_show -%}
+          {%- for fallback_product in collections.all.products limit: 12 -%}
+            {%- if shown_count >= products_to_show -%}
+              {%- break -%}
+            {%- endif -%}
+
+            {%- capture fallback_marker -%}|{{ fallback_product.id }}|{%- endcapture -%}
+            {%- unless rendered_product_ids contains fallback_marker -%}
+              {%- assign rendered_product_ids = rendered_product_ids | append: fallback_product.id | append: '|' -%}
+              {%- assign shown_count = shown_count | plus: 1 -%}
+              {% render 'product-card',
+                product: fallback_product,
+                card_layout: card_layout,
+                show_secondary_image: true,
+                show_swatches: false,
+                show_quick_add: false,
+                show_wishlist: true
+              %}
+            {%- endunless -%}
+          {%- endfor -%}
+        {%- endif -%}
       </div>
     {%- elsif recommendations.performed? -%}
       <div class="product-recommendations__empty" role="status">
@@ -42,13 +72,94 @@
 </section>
 
 {% stylesheet %}
+  .product-recommendations {
+    padding-top: var(--space-section);
+  }
+
   .product-recommendations__header {
-    margin-bottom: var(--space-lg);
+    margin-bottom: clamp(2rem, 3vw, 2.75rem);
+    text-align: center;
+  }
+
+  .product-recommendations__container {
     text-align: center;
   }
 
   .product-recommendations__grid {
-    margin-top: var(--space-lg);
+    margin-top: 0;
+    gap: 32px;
+  }
+
+  .product-recommendations__grid.product-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .product-recommendations .product-card {
+    min-width: auto;
+    text-align: center;
+  }
+
+  .product-recommendations .product-card__media-shell {
+    margin-bottom: 1rem;
+  }
+
+  .product-recommendations .product-card__body {
+    display: flex;
+    row-gap: 0.25rem;
+    text-align: center;
+  }
+
+  .product-recommendations .product-card__copy {
+    gap: 0.2rem;
+    align-items: center;
+  }
+
+  .product-recommendations .product-card__title,
+  .product-recommendations .product-card__title a,
+  .product-recommendations .product-card__subtitle {
+    text-align: center;
+  }
+
+  .product-recommendations .product-card .product-price {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    text-align: center;
+  }
+
+  .product-recommendations .product-card__button {
+    margin-top: 1rem;
+  }
+
+  .product-recommendations .product-card__wishlist {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 1;
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .product-recommendations .product-card__wishlist svg {
+    color: var(--color-muted);
+  }
+
+  @media (min-width: 1440px) {
+    .product-recommendations__grid.product-grid {
+      gap: 32px;
+    }
+  }
+
+  @media (max-width: 989px) {
+    .product-recommendations__grid.product-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
   }
 
   .product-recommendations__loading,
@@ -124,7 +235,7 @@
       "type": "select",
       "id": "card_layout",
       "label": "Card layout",
-      "default": "stacked",
+      "default": "compact",
       "options": [
         {
           "value": "stacked",

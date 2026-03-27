@@ -25,12 +25,12 @@
       assign option_type = 'swatch'
     endif
   -%}
-  <fieldset class="variant-option" data-option-position="{{ option.position }}">
+  <fieldset class="selector-group variant-option" data-option-position="{{ option.position }}">
     <legend class="selector-label text-sm">
       {{ option.name | upcase }} :
-      <span data-selected-value>{{ option.selected_value }}</span>
+      <span data-selected-value>{{ option.selected_value | upcase }}</span>
     </legend>
-    <div class="variant-option-values{% if option_type == 'swatch' %} swatch-group{% else %} pill-group{% endif %}">
+    <div class="variant-option-values{% if option_type == 'swatch' %} swatch-group color-swatches-lg{% else %} pill-group{% endif %}">
       {%- for value in option.values -%}
         {%- liquid
           assign input_id = 'VariantOption-' | append: section.id | append: '-' | append: option.position | append: '-' | append: forloop.index0
@@ -57,9 +57,9 @@
             aria-label="{{ option.name }}: {{ value | escape }}"
           >
           {%- if option_type == 'swatch' -%}
-            <span class="swatch swatch-large" style="--swatch-color: {{ swatch_color }};" aria-label="{{ value | escape }}"></span>
+            <span class="swatch swatch-large swatch-lg" style="--swatch-color: {{ swatch_color }};" aria-label="{{ value | escape }}"></span>
           {%- else -%}
-            <span class="pill">{{ value }}</span>
+            <span class="pill pill-btn">{{ value | upcase }}</span>
           {%- endif -%}
         </label>
       {%- endfor -%}
