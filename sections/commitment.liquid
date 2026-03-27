@@ -2,59 +2,107 @@
   assign section_eyebrow = section.settings.eyebrow | default: 'OUR COMMITMENT'
   assign section_heading = section.settings.heading | default: 'INTENTIONAL DESIGN IN SCENT AND FORM.'
   assign image_alt = section.settings.image_alt | default: section_heading
+  assign is_product_template = false
+  assign lead_text = section.settings.description
+
+  if request.page_type == 'product'
+    assign is_product_template = true
+  endif
+
+  for block in section.blocks
+    if block.type == 'value' and lead_text == blank and block.settings.description != blank
+      assign lead_text = block.settings.description
+    endif
+  endfor
 -%}
 
 <section
   id="Commitment-{{ section.id }}"
-  class="commitment-section section-block color-{{ section.settings.color_scheme }}"
+  class="commitment-section section-block color-{{ section.settings.color_scheme }}{% if is_product_template %} commitment-section--product{% endif %}"
 >
   <div class="container">
-    <div class="commitment-section__layout{% if section.settings.image_position == 'right' %} commitment-section__layout--reverse{% endif %}">
-      <div class="commitment-section__media">
-        {%- if section.settings.image != blank -%}
-          {% render 'image',
-            class: 'commitment-section__image',
-            image: section.settings.image,
-            alt: image_alt,
-            loading: 'lazy'
-          %}
-        {%- else -%}
-          <img class="commitment-section__image" src="{{ 'our-commitment-left.png' | asset_url }}" alt="{{ image_alt | escape }}" width="1200" height="1200">
-        {%- endif -%}
-      </div>
-
-      <div class="commitment-section__content">
-        <span class="eyebrow">{{ section_eyebrow | escape }}</span>
-        <h2 class="font-serif commitment-section__heading">{{ section_heading | escape }}</h2>
-
-        <div class="commitment-section__items" role="list">
-          {%- for block in section.blocks -%}
-            {%- if block.type == 'value' -%}
-              <article class="commitment-section__item" role="listitem" {{ block.shopify_attributes }}>
-                {%- if block.settings.icon != blank -%}
-                  {% render 'image',
-                    class: 'commitment-section__item-icon',
-                    image: block.settings.icon,
-                    alt: block.settings.title,
-                    widths: '48,72,96',
-                    sizes: '48px',
-                    loading: 'lazy'
-                  %}
-                {%- endif -%}
-                <h3 class="font-serif commitment-section__item-heading">{{ block.settings.title | escape }}</h3>
-                <p class="commitment-section__item-text">{{ block.settings.description | escape | newline_to_br }}</p>
-              </article>
-            {%- endif -%}
-          {%- endfor -%}
+    {%- if is_product_template -%}
+      <div class="product-commitment-grid">
+        <div class="commitment-img-col commitment-section__media">
+          {%- if section.settings.image != blank -%}
+            {% render 'image',
+              class: 'commitment-section__image',
+              image: section.settings.image,
+              alt: image_alt,
+              loading: 'lazy'
+            %}
+          {%- else -%}
+            <img class="commitment-section__image" src="{{ 'our-commitment-left.png' | asset_url }}" alt="{{ image_alt | escape }}" width="1200" height="1200">
+          {%- endif -%}
         </div>
 
-        {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
-          <a href="{{ section.settings.button_link }}" class="commitment-section__button btn-outline">
-            {{ section.settings.button_label | escape }}
-          </a>
-        {%- endif -%}
+        <div class="commitment-content-col commitment-section__content">
+          <span class="eyebrow">{{ section_eyebrow | escape }}</span>
+          <h2 class="font-serif commitment-section__heading">{{ section_heading | escape }}</h2>
+
+          {%- if lead_text != blank -%}
+            <p class="desc">{{ lead_text | escape }}</p>
+          {%- endif -%}
+
+          <div class="commitment-list" role="list">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'value' and block.settings.title != blank -%}
+                <span class="commitment-list-item" role="listitem" {{ block.shopify_attributes }}>
+                  {{ block.settings.title | escape }}
+                </span>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
       </div>
-    </div>
+    {%- else -%}
+      <div class="commitment-section__layout{% if section.settings.image_position == 'right' %} commitment-section__layout--reverse{% endif %}">
+        <div class="commitment-section__media">
+          {%- if section.settings.image != blank -%}
+            {% render 'image',
+              class: 'commitment-section__image',
+              image: section.settings.image,
+              alt: image_alt,
+              loading: 'lazy'
+            %}
+          {%- else -%}
+            <img class="commitment-section__image" src="{{ 'our-commitment-left.png' | asset_url }}" alt="{{ image_alt | escape }}" width="1200" height="1200">
+          {%- endif -%}
+        </div>
+
+        <div class="commitment-section__content">
+          <span class="eyebrow">{{ section_eyebrow | escape }}</span>
+          <h2 class="font-serif commitment-section__heading">{{ section_heading | escape }}</h2>
+
+          <div class="commitment-section__items" role="list">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'value' -%}
+                <article class="commitment-section__item" role="listitem" {{ block.shopify_attributes }}>
+                  {%- if block.settings.icon != blank -%}
+                    {% render 'image',
+                      class: 'commitment-section__item-icon',
+                      image: block.settings.icon,
+                      alt: block.settings.title,
+                      widths: '48,72,96',
+                      sizes: '48px',
+                      loading: 'lazy'
+                    %}
+                  {%- endif -%}
+                  <h3 class="font-serif commitment-section__item-heading">{{ block.settings.title | escape }}</h3>
+                  <p class="commitment-section__item-text">{{ block.settings.description | escape | newline_to_br }}</p>
+                </article>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+
+          {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+            <a href="{{ section.settings.button_link }}" class="commitment-section__button btn-outline">
+              {{ section.settings.button_label | escape }}
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
   </div>
 </section>
 
@@ -138,6 +186,57 @@
     margin-top: clamp(1.75rem, 3vw, 3rem);
   }
 
+  #Commitment-{{ section.id }}.commitment-section--product {
+    padding-block: 0;
+  }
+
+  #Commitment-{{ section.id }}.commitment-section--product .product-commitment-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: stretch;
+    min-height: 960px;
+    width: 100vw;
+    margin: var(--space-xl) calc(50% - 50vw) 0;
+  }
+
+  #Commitment-{{ section.id }}.commitment-section--product .commitment-section__image {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #Commitment-{{ section.id }}.commitment-section--product .commitment-content-col {
+    background: var(--color-secondary-bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 98px 80px;
+  }
+
+  #Commitment-{{ section.id }}.commitment-section--product .commitment-section__heading {
+    max-width: none;
+    margin-bottom: 36px;
+    color: var(--color-muted);
+    line-height: 1.08;
+  }
+
+  #Commitment-{{ section.id }}.commitment-section--product .desc {
+    margin: 0 0 44px;
+    max-width: 36rem;
+    line-height: 1.35;
+  }
+
+  #Commitment-{{ section.id }}.commitment-section--product .commitment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  #Commitment-{{ section.id }}.commitment-section--product .commitment-list-item {
+    color: var(--color-muted);
+    font-size: var(--text-h4);
+    font-weight: 400;
+  }
+
   @media screen and (max-width: 989px) {
     #Commitment-{{ section.id }} .commitment-section__layout,
     #Commitment-{{ section.id }} .commitment-section__layout--reverse {
@@ -148,9 +247,22 @@
     #Commitment-{{ section.id }} .commitment-section__layout--reverse .commitment-section__content {
       order: initial;
     }
+
+    #Commitment-{{ section.id }}.commitment-section--product .product-commitment-grid {
+      grid-template-columns: 1fr;
+      min-height: 0;
+    }
+
+    #Commitment-{{ section.id }}.commitment-section--product .commitment-content-col {
+      padding: 62px 40px;
+    }
   }
 
   @media screen and (max-width: 749px) {
+    #Commitment-{{ section.id }}.commitment-section--product .commitment-content-col {
+      padding: 48px 20px;
+    }
+
     #Commitment-{{ section.id }} .commitment-section__heading {
       max-width: none;
     }
@@ -178,6 +290,12 @@
       "id": "heading",
       "label": "Heading",
       "default": "INTENTIONAL DESIGN IN SCENT AND FORM."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Every material used by Scents by Sara is chosen for performance, longevity, and environmental consideration."
     },
     {
       "type": "image_picker",

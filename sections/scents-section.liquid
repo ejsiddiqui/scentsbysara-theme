@@ -1,8 +1,13 @@
 {%- liquid
   assign section_heading = section.settings.heading | default: 'SCENTS'
+  assign is_product_template = false
+
+  if request.page_type == 'product'
+    assign is_product_template = true
+  endif
 -%}
 
-<section class="scents-section" aria-labelledby="scents-section-title-{{ section.id }}">
+<section class="scents-section{% if is_product_template %} scents-section--product{% endif %}" aria-labelledby="scents-section-title-{{ section.id }}">
   <style>
     #shopify-section-{{ section.id }} {
       --scents-section-bg: var(--color-background, #f9f6f2);
@@ -97,9 +102,93 @@
       background: rgba(255, 255, 255, 0.35);
     }
 
+    #shopify-section-{{ section.id }} .scents-section--product {
+      background: var(--scents-section-bg);
+      width: 100vw;
+      margin-inline: calc(50% - 50vw);
+      padding: 0;
+    }
+
+    #shopify-section-{{ section.id }} .scents-section--product .scents-section__inner {
+      max-width: none;
+      padding: clamp(3rem, 5vw, 4rem) 0 0;
+    }
+
+    #shopify-section-{{ section.id }} .scents-section--product .scents-section__heading-wrap {
+      margin: 0 auto;
+      max-width: var(--page-width, 1800px);
+      padding: 0 clamp(1rem, 3vw, 3rem) clamp(2rem, 3vw, 2.75rem);
+    }
+
+    #shopify-section-{{ section.id }} .scents-section--product .scents-section__grid {
+      gap: 0;
+      margin-top: 0;
+    }
+
+    #shopify-section-{{ section.id }} .scents-section--product .scents-section__card {
+      position: relative;
+      min-height: clamp(30rem, 49vw, 61.5rem);
+      background: transparent;
+      border: 0;
+    }
+
+    #shopify-section-{{ section.id }} .scents-section--product .scents-section__media {
+      aspect-ratio: auto;
+      min-height: clamp(30rem, 49vw, 61.5rem);
+      background: transparent;
+    }
+
+    #shopify-section-{{ section.id }} .scents-section--product .scents-section__media::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(63, 50, 41, 0.12), rgba(63, 50, 41, 0.26));
+      pointer-events: none;
+    }
+
+    #shopify-section-{{ section.id }} .scents-section--product .scents-section__body {
+      position: absolute;
+      z-index: 1;
+      display: grid;
+      gap: 1.5rem;
+      inset: auto auto 3rem 3.25rem;
+      max-width: 34rem;
+      padding: 0;
+      color: var(--color-background);
+    }
+
+    #shopify-section-{{ section.id }} .scents-section--product .scents-section__card:nth-child(even) .scents-section__body {
+      inset: 3rem 3.25rem auto auto;
+      text-align: right;
+    }
+
+    #shopify-section-{{ section.id }} .scents-section--product .scents-section__name {
+      font-size: clamp(2.5rem, 3vw, 3.25rem);
+      line-height: 1;
+      color: var(--color-background);
+    }
+
+    #shopify-section-{{ section.id }} .scents-section--product .scents-section__description {
+      color: rgba(249, 246, 242, 0.92);
+      font-size: clamp(1.25rem, 0.6vw + 1rem, 1.6rem);
+      line-height: 1.45;
+    }
+
     @media (max-width: 749px) {
       #shopify-section-{{ section.id }} {
         --scents-section-columns: 1;
+      }
+
+      #shopify-section-{{ section.id }} .scents-section--product .scents-section__card,
+      #shopify-section-{{ section.id }} .scents-section--product .scents-section__media {
+        min-height: 28rem;
+      }
+
+      #shopify-section-{{ section.id }} .scents-section--product .scents-section__body,
+      #shopify-section-{{ section.id }} .scents-section--product .scents-section__card:nth-child(even) .scents-section__body {
+        inset: auto 1.5rem 1.5rem 1.5rem;
+        max-width: none;
+        text-align: left;
       }
     }
 
@@ -111,15 +200,17 @@
   </style>
 
   <div class="scents-section__inner">
-    <h2 class="scents-section__heading" id="scents-section-title-{{ section.id }}">
-      {{ section_heading | escape }}
-    </h2>
+    <div class="scents-section__heading-wrap">
+      <h2 class="scents-section__heading" id="scents-section-title-{{ section.id }}">
+        {{ section_heading | escape }}
+      </h2>
 
-    {%- if section.settings.intro != blank -%}
-      <div class="scents-section__intro rte">
-        {{ section.settings.intro }}
-      </div>
-    {%- endif -%}
+      {%- if section.settings.intro != blank and is_product_template == false -%}
+        <div class="scents-section__intro rte">
+          {{ section.settings.intro }}
+        </div>
+      {%- endif -%}
+    </div>
 
     {%- if section.blocks.size > 0 -%}
       <div class="scents-section__grid" role="list">
@@ -127,8 +218,18 @@
           {%- liquid
             assign scent_name = block.settings.name | default: 'Scent'
             assign scent_description = block.settings.description
+
+            if scent_description == blank and is_product_template
+              assign scent_name_downcase = scent_name | downcase
+
+              if scent_name_downcase contains 'vanilla'
+                assign scent_description = '<p>Warm and softly sweet, Vanilla fills a space with a gentle, enveloping richness.</p><p>Creamy and smooth, it creates an atmosphere that feels intimate, calm, and quietly indulgent.</p>'
+              elsif scent_name_downcase contains 'lavender'
+                assign scent_description = '<p>Clean and herbaceous, Lavender brings a sense of clarity to a space.</p><p>Fresh green notes soften into gentle florals, creating an atmosphere that feels calm, light, and composed.</p>'
+              endif
+            endif
           -%}
-          <article class="scents-section__card" role="listitem" {{ block.shopify_attributes }}>
+          <article class="scents-section__card" role="listitem" aria-label="{{ scent_name | escape }}" {{ block.shopify_attributes }}>
             <div class="scents-section__media">
               {%- if block.settings.image != blank -%}
                 {{
@@ -145,14 +246,16 @@
               {%- endif -%}
             </div>
 
-            <div class="scents-section__body">
-              <h3 class="scents-section__name">{{ scent_name | escape }}</h3>
-              {%- if scent_description != blank -%}
-                <div class="scents-section__description rte">
-                  {{ scent_description }}
-                </div>
-              {%- endif -%}
-            </div>
+            {%- unless is_product_template -%}
+              <div class="scents-section__body">
+                <h3 class="scents-section__name">{{ scent_name | escape }}</h3>
+                {%- if scent_description != blank -%}
+                  <div class="scents-section__description rte">
+                    {{ scent_description }}
+                  </div>
+                {%- endif -%}
+              </div>
+            {%- endunless -%}
           </article>
         {%- endfor -%}
       </div>

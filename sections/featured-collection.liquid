@@ -34,7 +34,7 @@
 
     {%- if featured_collection != blank and featured_collection.products_count > 0 -%}
       <div class="featured-collection__viewport">
-        <div class="featured-collection__track">
+        <div class="featured-collection__track" style="--fc-columns: {{ section.settings.columns_desktop | default: 4 }}">
           {%- for product in featured_collection.products limit: products_to_show -%}
             {% render 'product-card',
               product: product,
@@ -55,7 +55,7 @@
       {%- endif -%}
     {%- else -%}
       <div class="featured-collection__viewport">
-        <div class="featured-collection__track">
+        <div class="featured-collection__track" style="--fc-columns: {{ section.settings.columns_desktop | default: 4 }}">
           {%- for placeholder_index in (1..4) -%}
             {%- liquid
               assign placeholder_asset = 'she-is-grace-thumb.png'
@@ -134,7 +134,7 @@
   .featured-collection__track {
     display: grid;
     grid-auto-flow: column;
-    grid-auto-columns: minmax(0, calc((100% - (clamp(var(--space-md), 2vw, var(--space-xl)) * 3)) / 4));
+    grid-auto-columns: minmax(0, calc((100% - (clamp(var(--space-md), 2vw, var(--space-xl)) * (var(--fc-columns, 4) - 1))) / var(--fc-columns, 4)));
     gap: clamp(var(--space-md), 2vw, var(--space-xl));
     transition: transform 0.35s ease;
   }
@@ -476,6 +476,15 @@
       "label": "Products to show",
       "min": 4,
       "max": 12,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columns on desktop",
+      "min": 2,
+      "max": 4,
       "step": 1,
       "default": 4
     },
