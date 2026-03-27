@@ -21,6 +21,7 @@
       "type": "split-view",
       "settings": {
         "color_scheme": "scheme-1",
+        "full_width": false,
         "eyebrow": "CUSTOM CANDLES",
         "heading": "SHE IS YOU",
         "body": "<p>A <strong>fully customisable body candle</strong> created from your own description, transforming personal stories and lived experience into form — celebrating you, exactly as you are.</p>",
@@ -73,6 +74,7 @@
       ],
       "settings": {
         "color_scheme": "scheme-1",
+        "full_width": false,
         "eyebrow": "GIFT A STORY",
         "heading": "SCAR COLLECTION",
         "body": "<p>The Scar Collection celebrates the body as a holder of memory, healing, and confidence. Gold leaf is applied by hand to mark scars — not as decoration but as recognition.</p>",
@@ -109,6 +111,7 @@
       ],
       "settings": {
         "color_scheme": "scheme-1",
+        "full_width": false,
         "eyebrow": "GIFT BEAUTY",
         "heading": "SCULPTED COLLECTION",
         "body": "<p>The Sculpted Collection celebrates the female form through simplicity and presence alone. Minimal, considered and free from custom marks, these pieces invite stillness, reflection, and honour what already exists — inherent beauty, balance, and worth.</p>",
@@ -125,10 +128,11 @@
       "type": "featured-collection",
       "settings": {
         "heading": "YOU MAY ALSO LIKE",
+        "subheading": "",
         "collection": "all",
         "products_to_show": 4,
         "show_navigation": false,
-        "card_layout": "stacked",
+        "card_layout": "shop",
         "show_secondary_image": true,
         "show_swatches": false,
         "show_quick_add": false,
