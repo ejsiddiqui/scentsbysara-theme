@@ -21,7 +21,7 @@
         {%- for product in recommendations.products limit: products_to_show -%}
           {% render 'product-card',
             product: product,
-            card_layout: 'stacked',
+            card_layout: section.settings.card_layout,
             show_secondary_image: true,
             show_swatches: true,
             show_quick_add: false
@@ -119,6 +119,26 @@
       "max": 8,
       "step": 1,
       "default": 4
+    },
+    {
+      "type": "select",
+      "id": "card_layout",
+      "label": "Card layout",
+      "default": "stacked",
+      "options": [
+        {
+          "value": "stacked",
+          "label": "Full / Stacked"
+        },
+        {
+          "value": "shop",
+          "label": "Shop / Collection"
+        },
+        {
+          "value": "compact",
+          "label": "Compact / Carousel"
+        }
+      ]
     }
   ],
   "presets": [

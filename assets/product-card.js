@@ -52,6 +52,37 @@ class ProductCard extends Component {
     this.addEventListener('focusin', this.handleFocusIn);
     this.addEventListener('focusout', this.handleFocusOut);
     this.addEventListener('click', this.handleClick);
+
+    // Shape / option select handler (shop layout only)
+    this.variants = [];
+    try {
+      this.variants = JSON.parse(this.dataset.variants || '[]');
+    } catch (_) {
+      this.variants = [];
+    }
+
+    this.handleOptionChange = (event) => {
+      const select = event.target.closest('[data-product-card-option]');
+      if (!select || !this.contains(select)) return;
+
+      const selectedValue = select.value.toLowerCase();
+      const activeSwatchValue = this.querySelector('.variant-swatches__swatch.is-active')
+        ?.dataset.swatchValue?.toLowerCase();
+
+      // Prefer variant matching both shape and current colour; fall back to first with matching shape
+      const match =
+        this.variants.find((v) => {
+          const opts = v.options.map((o) => o.toLowerCase());
+          return opts.includes(selectedValue) && (activeSwatchValue ? opts.includes(activeSwatchValue) : true);
+        }) ||
+        this.variants.find((v) =>
+          v.options.map((o) => o.toLowerCase()).includes(selectedValue)
+        );
+
+      if (match?.url) window.location.assign(match.url);
+    };
+
+    this.addEventListener('change', this.handleOptionChange);
   }
 
   onDisconnect() {
@@ -60,6 +91,7 @@ class ProductCard extends Component {
     this.removeEventListener('focusin', this.handleFocusIn);
     this.removeEventListener('focusout', this.handleFocusOut);
     this.removeEventListener('click', this.handleClick);
+    this.removeEventListener('change', this.handleOptionChange);
   }
 
   setActiveSwatch(activeSwatch) {

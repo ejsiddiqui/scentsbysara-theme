@@ -36,12 +36,21 @@
       assign has_secondary_image = true
     endif
 
-    assign subtitle = subtitle | default: card_product.type
+    assign subtitle = subtitle | default: card_product.metafields.custom.short_description | default: card_product.type
     if subtitle == blank
       assign subtitle = card_product.vendor
     endif
   endif
 -%}
+
+{%- if card_layout == 'shop' and card_product != blank -%}
+  {%- capture card_variants_json -%}
+    [{%- for v in card_product.variants -%}
+      {"id":{{ v.id }},"url":"{{ card_product.url }}?variant={{ v.id }}","options":{{ v.options | json }}}
+      {%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}]
+  {%- endcapture -%}
+{%- endif -%}
 
 {%- if card_product != blank -%}
   <product-card
@@ -51,6 +60,7 @@
     data-product-url="{{ card_product.url }}"
     data-card-layout="{{ card_layout }}"
     data-card-image-ratio="{{ image_ratio }}"
+    {%- if card_layout == 'shop' %}data-variants='{{ card_variants_json | strip }}'{% endif -%}
   >
     <div class="product-card-media product-card__media-shell">
       <a
@@ -97,6 +107,43 @@
     </div>
 
     {%- if card_layout == 'shop' -%}
+      <div class="product-options product-card__options">
+        {%- for option in card_product.options_with_values -%}
+          {%- assign opt_down = option.name | downcase -%}
+          {%- unless opt_down contains 'colour' or opt_down contains 'color' -%}
+            <select
+              class="product-card__option-select"
+              data-product-card-option="{{ option.name | downcase }}"
+            >
+              {%- for value in option.values -%}
+                <option
+                  value="{{ value | escape }}"
+                  {%- if current_variant.options[forloop.parentloop.index0] == value %} selected{%- endif -%}
+                >{{ option.name | upcase }}: {{ value | upcase }}</option>
+              {%- endfor -%}
+            </select>
+          {%- endunless -%}
+        {%- endfor -%}
+        {%- if show_swatches -%}
+          {% render 'variant-swatches', product: card_product, variant: current_variant %}
+        {%- endif -%}
+      </div>
+
+      <div class="product-info-shop product-card__body">
+        <div class="product-card__copy">
+          <span class="product-name product-card__title">
+            <a href="{{ card_product.url }}">{{ card_product.title | escape }}</a>
+          </span>
+
+          {%- if subtitle != blank -%}
+            <span class="product-desc product-card__subtitle">{{ subtitle | escape }}</span>
+          {%- endif -%}
+        </div>
+
+        {% render 'price', product: card_product, variant: current_variant %}
+      </div>
+
+    {%- elsif card_layout == 'compact' -%}
       {%- if show_swatches -%}
         <div class="product-options product-card__options">
           {% render 'variant-swatches', product: card_product, variant: current_variant %}
@@ -116,6 +163,7 @@
 
         {% render 'price', product: card_product, variant: current_variant %}
       </div>
+
     {%- else -%}
       <div class="product-info-stacked product-card__body">
         <div class="product-card__copy">

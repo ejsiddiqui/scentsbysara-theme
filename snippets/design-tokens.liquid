@@ -67,7 +67,7 @@
   --border-footer-divider: 1px solid rgba(63, 50, 41, 0.15);
 
   --font-serif: "rl-limo", {{ settings.type_heading_font.family | default: 'Libre Baskerville' | json }}, {{ settings.type_heading_font.fallback_families | default: 'serif' }};
-  --font-sans: "Suisse Int'l", {{ settings.type_body_font.family | default: 'Work Sans' | json }}, {{ settings.type_body_font.fallback_families | default: 'sans-serif' }};
+  --font-sans: "Suisse Int'l", sans-serif;
   --text-hero: {{ settings.heading_size_h1 | default: 47 | plus: 2 }}px;
   --text-h1: {{ settings.heading_size_h1 | default: 47 }}px;
   --text-h2: {{ settings.heading_size_h2 | default: 39 }}px;
@@ -78,6 +78,7 @@
   --text-heading-extra: 36px;
   --text-body-large: 18px;
   --text-body: {{ settings.body_font_size | default: 16 }}px;
+  --text-body-small: 14px;
   --text-small: 13px;
   --text-xsmall: 11px;
   --text-micro: 11px;
