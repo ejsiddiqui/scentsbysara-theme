@@ -1,6 +1,6 @@
 <section class="contact-section section-block color-{{ section.settings.color_scheme }}">
-  <div class="container contact-section__grid grid-cols-2">
-    <aside class="contact-section__info">
+  <div class="container contact-section__grid contact-grid grid-cols-2">
+    <aside class="contact-section__info contact-info-panel">
       <span class="eyebrow">{{ section.settings.info_eyebrow | escape }}</span>
       <h1 class="font-serif text-h2">{{ section.settings.heading | escape }}</h1>
 
@@ -9,20 +9,9 @@
       {%- endif -%}
 
       {%- if section.blocks.size > 0 -%}
-        <ul class="contact-section__info-list" role="list">
+        <ul class="contact-section__info-list contact-info-list" role="list">
           {%- for block in section.blocks -%}
             <li class="contact-section__info-item" {{ block.shopify_attributes }}>
-              {%- if block.settings.icon != blank -%}
-                {% render 'image',
-                  image: block.settings.icon,
-                  alt: block.settings.title,
-                  sizes: '40px',
-                  widths: '40,80',
-                  loading: 'lazy',
-                  class: 'contact-section__info-icon'
-                %}
-              {%- endif -%}
-
               <div>
                 <h3>{{ block.settings.title | escape }}</h3>
                 <div class="text-small text-muted">{{ block.settings.content }}</div>
@@ -33,7 +22,7 @@
       {%- endif -%}
     </aside>
 
-    <div class="contact-section__form-shell">
+    <div class="contact-section__form-shell contact-form-panel">
       <span class="eyebrow">{{ section.settings.form_eyebrow | escape }}</span>
 
       {%- form 'contact', id: 'contact-form', class: 'contact-form' -%}
@@ -47,80 +36,228 @@
           </div>
         {%- endif -%}
 
-        <div class="grid-cols-2 contact-form__grid">
-          <div class="form-group">
-            <label for="ContactName-{{ section.id }}" class="form-label">NAME</label>
-            <input id="ContactName-{{ section.id }}" type="text" name="contact[name]" class="form-input" required autocomplete="name">
-          </div>
-
-          <div class="form-group">
-            <label for="ContactEmail-{{ section.id }}" class="form-label">EMAIL</label>
-            <input id="ContactEmail-{{ section.id }}" type="email" name="contact[email]" class="form-input" required autocomplete="email">
-          </div>
+        <div class="form-group">
+          <label for="ContactName-{{ section.id }}" class="form-label">FULL NAME</label>
+          <input
+            id="ContactName-{{ section.id }}"
+            type="text"
+            name="contact[name]"
+            class="form-input"
+            required
+            minlength="2"
+            maxlength="80"
+            autocomplete="name"
+          >
+          <p class="field-error" data-for="name" aria-live="polite"></p>
         </div>
 
         <div class="form-group">
-          <label for="ContactSubject-{{ section.id }}" class="form-label">SUBJECT</label>
-          <input id="ContactSubject-{{ section.id }}" type="text" name="contact[subject]" class="form-input">
+          <label for="ContactEmail-{{ section.id }}" class="form-label">EMAIL ADDRESS</label>
+          <input
+            id="ContactEmail-{{ section.id }}"
+            type="email"
+            name="contact[email]"
+            class="form-input"
+            required
+            maxlength="120"
+            autocomplete="email"
+          >
+          <p class="field-error" data-for="email" aria-live="polite"></p>
+        </div>
+
+        <div class="form-group">
+          <label for="ContactTopic-{{ section.id }}" class="form-label">TOPIC</label>
+          <select id="ContactTopic-{{ section.id }}" name="contact[Topic]" class="form-input" required>
+            <option value="">Select a topic</option>
+            <option value="Order support">Order support</option>
+            <option value="Product question">Product question</option>
+            <option value="Custom candle enquiry">Custom candle enquiry</option>
+            <option value="Press / collaboration">Press / collaboration</option>
+          </select>
+          <p class="field-error" data-for="topic" aria-live="polite"></p>
         </div>
 
         <div class="form-group">
           <label for="ContactMessage-{{ section.id }}" class="form-label">MESSAGE</label>
-          <textarea id="ContactMessage-{{ section.id }}" name="contact[body]" class="form-input contact-form__textarea" rows="7" required></textarea>
+          <textarea
+            id="ContactMessage-{{ section.id }}"
+            name="contact[body]"
+            class="form-input contact-form__textarea"
+            rows="9"
+            required
+            minlength="20"
+            maxlength="1200"
+          ></textarea>
+          <div class="form-meta">
+            <span class="char-count">0 / 1200</span>
+          </div>
+          <p class="field-error" data-for="message" aria-live="polite"></p>
         </div>
 
-        <button type="submit" class="btn-solid">SEND MESSAGE</button>
+        <button type="submit" class="btn-solid">SUBMIT</button>
+        <p class="form-status" aria-live="polite"></p>
       {%- endform -%}
     </div>
   </div>
 </section>
 
 {% stylesheet %}
-  .contact-section__grid {
-    gap: var(--space-xl);
+  .contact-section {
+    max-width: 1920px;
+    margin-inline: auto;
+    padding: 96px var(--gutter);
   }
 
-  .contact-section__info,
-  .contact-section__form-shell {
+  .contact-section__grid {
+    align-items: start;
+    gap: 64px;
+    min-height: 804px;
+    padding-inline: 0;
+  }
+
+  .contact-section__info {
     display: grid;
-    gap: 1rem;
+    gap: 16px;
+  }
+
+  .contact-info-panel {
+    padding: 48px;
+    border: 1px solid var(--border-light);
+    background: var(--bg-secondary);
+  }
+
+  .contact-section__info > .text-body {
+    line-height: 1.7;
+    margin-bottom: 36px;
   }
 
   .contact-section__info-list {
     display: grid;
-    gap: 1rem;
+    gap: 24px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
 
   .contact-section__info-item {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 1rem;
-    align-items: start;
+    display: block;
+    padding-top: 18px;
+    border-top: 1px solid var(--border-light);
   }
 
-  .contact-section__info-icon {
-    width: 2.5rem;
-    height: 2.5rem;
-    object-fit: contain;
+  .contact-section__info-item h3 {
+    margin: 0 0 8px;
+  }
+
+  .contact-form-panel {
+    align-self: stretch;
+    display: block;
+    padding: 8px 0;
   }
 
   .contact-form {
     display: grid;
-    gap: 1rem;
+    gap: 14px;
   }
 
-  .contact-form__grid {
-    gap: 1rem;
+  .contact-form .form-group {
+    display: block;
+    gap: normal;
+    height: 106px;
+    min-height: auto;
+    flex-direction: row;
   }
 
   .contact-form__textarea {
-    min-height: 12rem;
+    min-height: 190px;
+    resize: vertical;
   }
 
-  @media (max-width: 749px) {
-    .contact-form__grid,
+  .form-label {
+    display: inline-block;
+    margin-bottom: 8px;
+    font-size: var(--text-micro);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  .form-meta {
+    display: block;
+    margin-top: 6px;
+    text-align: right;
+  }
+
+  .char-count {
+    color: var(--color-muted);
+    font-size: var(--text-small);
+  }
+
+  .field-error {
+    min-height: 16px;
+    margin: 6px 0 0;
+    font-size: var(--text-micro);
+    color: var(--status-error);
+  }
+
+  .form-status {
+    min-height: 18px;
+    font-size: var(--text-small);
+  }
+
+  .contact-section .btn-solid {
+    justify-self: start;
+  }
+
+  @media (max-width: 1024px) {
     .contact-section__grid {
-      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .contact-info-panel {
+      padding: 40px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .contact-section {
+      padding-top: 72px;
+      padding-bottom: 72px;
+    }
+
+    .contact-section__grid {
+      min-height: 790px;
+    }
+
+    .contact-info-panel {
+      padding: 30px;
+    }
+  }
+
+  @media (min-width: 1600px) {
+    .contact-section__grid {
+      min-height: 809px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .contact-section {
+      padding-top: 72px;
+      padding-bottom: 72px;
+    }
+
+    .contact-section__grid {
+      grid-template-columns: minmax(0, 1.389fr) minmax(0, 1fr);
+      gap: 24px;
+      min-height: 772.5px;
+    }
+  }
+
+  @media (max-width: 390px) {
+    .contact-section__grid {
+      gap: 15px;
+      grid-template-columns: minmax(0, 2.43fr) minmax(0, 1fr);
+      min-height: 787px;
     }
   }
 {% endstylesheet %}

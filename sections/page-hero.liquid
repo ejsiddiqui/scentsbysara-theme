@@ -4,16 +4,14 @@
 {%- endif -%}
 
 <section
-  class="page-hero{% if has_image %} page-hero--has-image{% endif %} color-{{ section.settings.color_scheme }}"
+  class="page-hero small-hero story-hero{% if has_image %} page-hero--has-image{% endif %} color-{{ section.settings.color_scheme }}"
   {% if has_image %}
     style="--page-hero-bg: url('{{ section.settings.image | image_url: width: 2400 }}')"
   {% endif %}
 >
-  {%- if has_image -%}
-    <div class="page-hero__overlay"></div>
-  {%- endif -%}
+  <div class="page-hero__overlay story-hero-overlay"></div>
 
-  <div class="page-hero__content">
+  <div class="page-hero__content small-hero-content story-hero-content">
     {%- if section.settings.heading != blank -%}
       <h1 class="font-serif page-hero__heading">{{ section.settings.heading | upcase | escape }}</h1>
     {%- endif -%}
@@ -28,10 +26,12 @@
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: center;
-    min-height: clamp(220px, 30vw, 380px);
+    min-height: 383px;
+    max-width: 1920px;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
     overflow: hidden;
-    background-color: var(--color-secondary-bg);
+    background-color: transparent;
   }
 
   .page-hero--has-image {
@@ -43,23 +43,24 @@
   .page-hero__overlay {
     position: absolute;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.45);
+    background-color: rgba(45, 43, 39, 0.5);
   }
 
   .page-hero__content {
     position: relative;
     z-index: 1;
-    text-align: center;
-    padding: var(--space-xl) var(--gutter);
-    display: grid;
-    gap: 1rem;
+    display: block;
+    width: min(100%, 909.125px);
+    text-align: start;
+    padding: 0;
   }
 
   .page-hero__heading {
-    font-size: clamp(2rem, 4vw + 1rem, var(--font-size-h1));
+    margin: 0 0 var(--space-md);
+    font-size: 47px;
     letter-spacing: 0.12em;
-    line-height: 1;
-    color: var(--color-text);
+    line-height: 49.35px;
+    color: var(--color-sand);
   }
 
   .page-hero--has-image .page-hero__heading,
@@ -68,9 +69,71 @@
   }
 
   .page-hero__subheading {
-    color: var(--color-muted);
-    max-width: 42rem;
-    margin: 0 auto;
+    max-width: 1040px;
+    margin: 0;
+    color: var(--color-sand);
+    font-size: 25px;
+    line-height: 33.75px;
+    font-weight: 300;
+  }
+
+  @media (max-width: 1440px) {
+    .page-hero__heading {
+      font-size: 42px;
+      line-height: 44.1px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .page-hero {
+      min-height: 460px;
+    }
+
+    .page-hero__subheading {
+      font-size: 20px;
+      line-height: 27px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .page-hero {
+      display: block;
+      min-height: 460px;
+      padding-inline: var(--gutter);
+      overflow: visible;
+    }
+
+    .page-hero__content {
+      position: static;
+      width: 100%;
+      padding: 36px 14px;
+    }
+
+    .page-hero__heading {
+      margin-bottom: 10px;
+      font-size: 36px;
+      color: var(--color-mocha);
+      letter-spacing: 0;
+      line-height: 43.2px;
+    }
+
+    .page-hero__subheading {
+      max-width: none;
+      color: var(--color-slate);
+      font-size: 11px;
+      line-height: 16.5px;
+    }
+  }
+
+  @media (max-width: 390px) {
+    .page-hero__content {
+      padding-inline: 12px;
+    }
+
+    .page-hero__heading {
+      font-size: 30px;
+      line-height: 36px;
+    }
   }
 {% endstylesheet %}
 

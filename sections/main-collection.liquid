@@ -2,6 +2,10 @@
 
 {%- liquid
   assign current_sort = collection.sort_by | default: collection.default_sort_by
+  assign collection_heading = collection.title | upcase
+  if collection.handle == 'all'
+    assign collection_heading = section.settings.hero_title | default: 'SHOP ALL'
+  endif
 -%}
 
 {%- paginate collection.products by section.settings.products_per_page -%}
@@ -12,9 +16,9 @@
     data-collection-url="{{ collection.url }}"
   >
     {%- if collection.image or section.settings.hero_image != blank -%}
-      {%- liquid
-        assign hero_img = section.settings.hero_image | default: collection.image
-      -%}
+          {%- liquid
+            assign hero_img = section.settings.hero_image | default: collection.image
+          -%}
       <div class="collection-fullbleed-hero">
         {% render 'image',
           image: hero_img,
@@ -38,12 +42,16 @@
       <div class="container shop-page-shell">
         {%- unless collection.image or section.settings.hero_image != blank -%}
           <header class="collection-hero shop-hero">
-            <h1 class="font-serif text-h1">{{ collection.title | upcase }}</h1>
+            <h1 class="font-serif text-h1">{{ collection_heading }}</h1>
 
             {%- if collection.description != blank -%}
               <div class="collection-hero__description text-body rte">
                 {{ collection.description }}
               </div>
+            {%- elsif section.settings.hero_description != blank -%}
+              <p class="collection-hero__description collection-hero__description--plain text-body">
+                {{ section.settings.hero_description }}
+              </p>
             {%- endif -%}
           </header>
         {%- endunless -%}
@@ -187,7 +195,7 @@
             {%- for product in collection.products -%}
               {% render 'product-card',
                 product: product,
-                card_layout: 'shop',
+                card_layout: section.settings.card_layout,
                 show_secondary_image: true,
                 show_swatches: true,
                 show_quick_add: false
@@ -275,6 +283,26 @@
       "default": 4
     },
     {
+      "type": "select",
+      "id": "card_layout",
+      "label": "Card layout",
+      "default": "shop",
+      "options": [
+        {
+          "value": "stacked",
+          "label": "Full / Stacked"
+        },
+        {
+          "value": "shop",
+          "label": "Shop / Collection"
+        },
+        {
+          "value": "compact",
+          "label": "Compact / Carousel"
+        }
+      ]
+    },
+    {
       "type": "checkbox",
       "id": "enable_filtering",
       "label": "Enable filtering",
@@ -296,6 +324,18 @@
       "type": "image_picker",
       "id": "hero_image",
       "label": "Hero image override"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Fallback hero title for all products collection",
+      "default": "SHOP ALL"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_description",
+      "label": "Fallback hero description",
+      "default": "Discover the full Scents By Sara collection. Thoughtfully designed to reflect real bodies, each combines sculptural form with meaning detail and intentional craftsmanship."
     }
   ]
 }

@@ -6,10 +6,7 @@
   <div class="container">
     <div class="story-grid-section__header flex-between items-end">
       <div>
-        <h2 class="font-serif text-h2">{{ section.settings.heading | escape }}</h2>
-        {%- if section.settings.description != blank -%}
-          <p class="text-body text-muted">{{ section.settings.description | escape }}</p>
-        {%- endif -%}
+        <h2 class="font-sans text-md font-weight-normal">{{ section.settings.heading | escape }}</h2>
       </div>
       {%- if section.settings.eyebrow != blank -%}
         <span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>
@@ -90,8 +87,66 @@
         </dialog-component>
       {%- endfor -%}
     {%- else -%}
-      <div class="story-grid__empty">
-        Add approved customer stories from the `customer_story` metaobject to populate this section.
+      <div class="masonry-grid grid-cols-2">
+        <div class="masonry-col">
+          <article class="ys-card">
+            <div class="ys-img-wrap">
+              <span class="ys-badge">SHE IS GRACE</span>
+              <img src="{{ 'product-2.png' | asset_url }}" alt="A Moment of Grace" width="429" height="537" loading="lazy">
+            </div>
+            <div class="ys-content">
+              <h3 class="font-sans text-md font-weight-normal mb-4">A Moment of Grace</h3>
+              <p class="text-sm text-muted mb-8">
+                The first time I lit She Is Grace, I felt something shift. The scent carried me back to my grandmother's garden in Lagos, warm jasmine and soft earth. I cried, then smiled. It was a memory I didn't know I'd been carrying.
+              </p>
+              <span class="ys-author text-micro text-muted uppercase tracking-widest">AMARA OSEI</span>
+            </div>
+          </article>
+
+          <article class="ys-card">
+            <div class="ys-img-wrap">
+              <span class="ys-badge">SHE IS POWER</span>
+              <img src="{{ 'product-4.png' | asset_url }}" alt="The Gift That Said Everything" width="429" height="537" loading="lazy">
+            </div>
+            <div class="ys-content">
+              <h3 class="font-sans text-md font-weight-normal mb-4">The Gift That Said Everything</h3>
+              <p class="text-sm text-muted mb-8">
+                I gifted She Is Power to my sister on the day she was promoted. She messaged me an hour later, weeping. She said it smelled like the version of herself she had always been trying to become.
+              </p>
+              <span class="ys-author text-micro text-muted uppercase tracking-widest">NADIA IBRAHIM</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="masonry-col">
+          <article class="ys-card">
+            <div class="ys-img-wrap">
+              <span class="ys-badge">THE LIVED-IN BODY</span>
+              <img src="{{ 'product-1.png' | asset_url }}" alt="Reclaiming My Body" width="429" height="537" loading="lazy">
+            </div>
+            <div class="ys-content">
+              <h3 class="font-sans text-md font-weight-normal mb-4">Reclaiming My Body</h3>
+              <p class="text-sm text-muted mb-8">
+                After years of feeling disconnected from myself, the Lived-In Body Collection became part of my morning ritual. Seeing the gold leaf celebrate the curves I once hid changed how I saw my own reflection.
+              </p>
+              <span class="ys-author text-micro text-muted uppercase tracking-widest">CLAIRE DEVEREUX</span>
+            </div>
+          </article>
+
+          <article class="ys-card">
+            <div class="ys-img-wrap">
+              <span class="ys-badge">SHE IS STRENGTH</span>
+              <img src="{{ 'product-3.png' | asset_url }}" alt="Strength in Stillness" width="429" height="537" loading="lazy">
+            </div>
+            <div class="ys-content">
+              <h3 class="font-sans text-md font-weight-normal mb-4">Strength in Stillness</h3>
+              <p class="text-sm text-muted mb-8">
+                In the quiet after my surgery, She Is Strength sat on my bedside table. I couldn't explain why it helped, but it did. It reminded me that beauty and healing could exist in the same moment.
+              </p>
+              <span class="ys-author text-micro text-muted uppercase tracking-widest">PRIYA MEHTA</span>
+            </div>
+          </article>
+        </div>
       </div>
     {%- endif -%}
   </div>
@@ -116,9 +171,35 @@
 </script>
 
 {% stylesheet %}
+  .story-grid-section {
+    max-width: 1920px;
+    margin-inline: auto;
+    padding-top: 0;
+    padding-right: var(--gutter);
+    padding-bottom: 64px;
+    padding-left: var(--gutter);
+  }
+
+  .story-grid-section > .container {
+    width: 100%;
+    max-width: none;
+    padding-inline: 0;
+  }
+
   .story-grid-section__header {
     margin-bottom: var(--space-lg);
     gap: 1rem;
+  }
+
+  .story-grid-section__header h2 {
+    margin: 0;
+  }
+
+  .story-grid-section__header .eyebrow {
+    font-size: var(--text-micro);
+    line-height: 1;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
   }
 
   .story-grid {
@@ -164,6 +245,70 @@
     color: var(--color-muted);
   }
 
+  .masonry-grid {
+    gap: 32px;
+  }
+
+  .masonry-col {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .ys-card {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 32px;
+  }
+
+  .ys-img-wrap {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-secondary-bg);
+  }
+
+  .ys-img-wrap img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .ys-badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 8px;
+    background: var(--text-primary);
+    color: var(--text-on-dark);
+    font-size: var(--text-micro);
+    letter-spacing: 0.1em;
+  }
+
+  .ys-content {
+    display: flex;
+    flex-direction: column;
+    min-height: 239px;
+    padding: 40px;
+  }
+
+  .masonry-col:first-child .ys-content {
+    background: var(--bg-secondary);
+  }
+
+  .masonry-col:last-child .ys-content {
+    background: var(--bg-primary);
+  }
+
+  .ys-author {
+    display: block;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-light);
+    font-size: var(--text-micro);
+  }
+
   .story-modal {
     width: min(48rem, calc(100vw - 2rem));
     border: 0;
@@ -189,13 +334,67 @@
   }
 
   @media (max-width: 749px) {
-    .story-grid-section__header {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
     .story-grid {
       grid-template-columns: 1fr;
+    }
+
+    .masonry-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (min-width: 769px) {
+    .story-grid-section__header {
+      padding-bottom: 4px;
+    }
+  }
+
+  @media (max-width: 1440px) {
+    .ys-content {
+      min-height: 254px;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .ys-content {
+      min-height: 276px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .story-grid-section {
+      padding-right: var(--gutter);
+      padding-left: var(--gutter);
+    }
+
+    .ys-content {
+      min-height: 290px;
+      padding: 28px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .story-grid-section {
+      padding-top: 0;
+      padding-bottom: 64px;
+    }
+
+    .story-grid-section__header {
+      padding-bottom: 3px;
+    }
+
+    .ys-card {
+      margin-bottom: 24px;
+    }
+
+    .ys-content {
+      min-height: 239px;
+    }
+  }
+
+  @media (max-width: 390px) {
+    .ys-card {
+      margin-bottom: 32px;
     }
   }
 {% endstylesheet %}
