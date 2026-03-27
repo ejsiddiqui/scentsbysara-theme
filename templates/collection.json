@@ -14,13 +14,9 @@
       "settings": {
         "products_per_page": 16,
         "columns_desktop": 4,
-        "card_layout": "shop",
         "enable_filtering": true,
         "enable_sorting": true,
-        "color_scheme": "scheme-1",
-        "hero_image": "shopify://shop_images/scar-collection-hero-bg.png",
-        "hero_title": "SHOP ALL",
-        "hero_description": "Discover the full Scents By Sara collection. Thoughtfully designed to reflect real bodies, each combines sculptural form with meaning detail and intentional craftsmanship."
+        "color_scheme": "scheme-1"
       }
     }
   },

@@ -28,6 +28,15 @@
             if subtitle == blank
               assign subtitle = featured_product.vendor
             endif
+
+            assign shape_option_index = nil
+            for option_name in featured_product.options
+              assign opt_lower = option_name | downcase
+              if opt_lower contains 'body' or opt_lower contains 'shape'
+                assign shape_option_index = forloop.index0
+                break
+              endif
+            endfor
           -%}
 
           {%- for variant in featured_product.variants limit: products_to_show -%}
@@ -36,6 +45,9 @@
               assign variant_image = variant.image | default: featured_product.featured_image
               if variant.title == 'Default Title'
                 assign card_title = featured_product.title | upcase
+              elsif shape_option_index != nil
+                assign shape_value = variant.options[shape_option_index]
+                assign card_title = featured_product.title | upcase | append: ' – ' | append: shape_value | upcase
               else
                 assign card_title = featured_product.title | upcase | append: ' – ' | append: variant.title | upcase
               endif

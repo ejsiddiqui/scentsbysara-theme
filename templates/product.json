@@ -11,12 +11,12 @@
   "sections": {
     "main": {
       "type": "main-product",
+      "settings": {},
       "blocks": {
         "description": {
           "type": "accordion",
           "settings": {
             "title": "Description",
-            "content": "",
             "open_by_default": true
           }
         },
@@ -24,7 +24,6 @@
           "type": "accordion",
           "settings": {
             "title": "Craft & Intention",
-            "content": "<p>{{ product.metafields.custom.craft_intention | metafield_tag }}</p>",
             "open_by_default": false
           }
         },
@@ -32,7 +31,6 @@
           "type": "accordion",
           "settings": {
             "title": "How to Use",
-            "content": "<p>{{ product.metafields.custom.how_to_use | metafield_tag }}</p>",
             "open_by_default": false
           }
         },
@@ -40,7 +38,6 @@
           "type": "accordion",
           "settings": {
             "title": "Dimensions & Ingredients",
-            "content": "<p>{{ product.metafields.custom.dimensions_ingredients | metafield_tag }}</p>",
             "open_by_default": false
           }
         }
@@ -50,45 +47,43 @@
         "craft",
         "how_to_use",
         "dimensions"
-      ],
-      "settings": {
-        "show_vendor": true,
-        "show_description": true,
-        "fallback_subtitle": "STRETCH MARK BODY CANDLE"
-      }
+      ]
     },
     "scents": {
       "type": "scents-section",
+      "settings": {
+        "heading": "SCENTS",
+        "columns_desktop": 2
+      },
       "blocks": {
         "vanilla": {
           "type": "scent",
           "settings": {
-            "image": "shopify://shop_images/scents-vanilla.png",
-            "name": "Vanilla",
-            "description": ""
+            "name": "Vanilla"
           }
         },
         "lavender": {
           "type": "scent",
           "settings": {
-            "image": "shopify://shop_images/scents-lavender.png",
-            "name": "Lavender",
-            "description": ""
+            "name": "Lavender"
           }
         }
       },
       "block_order": [
         "vanilla",
         "lavender"
-      ],
-      "settings": {
-        "heading": "SCENTS",
-        "intro": "",
-        "columns_desktop": 2
-      }
+      ]
     },
     "commitment": {
       "type": "commitment",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "eyebrow": "OUR COMMITMENT",
+        "heading": "INTENTIONAL DESIGN IN SCENT AND DESIGN.",
+        "image_position": "left",
+        "button_label": "READ OUR STORY",
+        "button_link": "/pages/our-story"
+      },
       "blocks": {
         "value_1": {
           "type": "value",
@@ -124,25 +119,13 @@
         "value_2",
         "value_3",
         "value_4"
-      ],
-      "settings": {
-        "color_scheme": "scheme-1",
-        "eyebrow": "OUR COMMITMENT",
-        "heading": "INTENTIONAL DESIGN IN SCENT AND DESIGN.",
-        "description": "Every material used by Scents by Sara is chosen for performance, longevity, and environmental consideration.",
-        "image": "shopify://shop_images/our-commitment.png",
-        "image_alt": "Matches and candle",
-        "image_position": "left",
-        "button_label": "READ OUR STORY",
-        "button_link": "/pages/our-story"
-      }
+      ]
     },
     "recommendations": {
       "type": "product-recommendations",
       "settings": {
         "heading": "YOU MAY ALSO LIKE",
-        "products_to_show": 4,
-        "card_layout": "compact"
+        "products_to_show": 4
       }
     },
     "reviews": {
