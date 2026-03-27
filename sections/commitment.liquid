@@ -29,6 +29,8 @@
               class: 'commitment-section__image',
               image: section.settings.image,
               alt: image_alt,
+              widths: '600,900,1200,1500',
+              sizes: '50vw',
               loading: 'lazy'
             %}
           {%- else -%}
@@ -63,6 +65,8 @@
               class: 'commitment-section__image',
               image: section.settings.image,
               alt: image_alt,
+              widths: '600,900,1200,1500',
+              sizes: '(max-width: 989px) 100vw, 50vw',
               loading: 'lazy'
             %}
           {%- else -%}
@@ -180,6 +184,10 @@
 
   #Commitment-{{ section.id }} .commitment-section__item-text {
     max-width: 36rem;
+    font-size: var(--text-body-large);
+    color: var(--color-slate);
+    font-weight: 300;
+    line-height: 1.6;
   }
 
   #Commitment-{{ section.id }} .commitment-section__button {
