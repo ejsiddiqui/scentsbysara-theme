@@ -24,7 +24,7 @@
           "type": "accordion",
           "settings": {
             "title": "Craft & Intention",
-            "content": "",
+            "content": "<p>{{ product.metafields.custom.craft_intention | metafield_tag }}</p>",
             "open_by_default": false
           }
         },
@@ -32,7 +32,7 @@
           "type": "accordion",
           "settings": {
             "title": "How to Use",
-            "content": "",
+            "content": "<p>{{ product.metafields.custom.how_to_use | metafield_tag }}</p>",
             "open_by_default": false
           }
         },
@@ -40,7 +40,7 @@
           "type": "accordion",
           "settings": {
             "title": "Dimensions & Ingredients",
-            "content": "",
+            "content": "<p>{{ product.metafields.custom.dimensions_ingredients | metafield_tag }}</p>",
             "open_by_default": false
           }
         }
