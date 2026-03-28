@@ -28,7 +28,7 @@
     <div class="product-mobile-header">
       <div class="product-mobile-header__copy product-mobile-header-copy">
         <h1 class="font-serif product-details__title product-title">{{ product.title | upcase }}</h1>
-        <p class="product-details__subtitle subtitle text-micro">{{ subtitle_text | upcase }}</p>
+        <p class="product-details__subtitle subtitle">{{ subtitle_text }}</p>
       </div>
       <div class="product-mobile-header__price">
         {% render 'price', card_product: product, variant: current_variant %}
@@ -123,42 +123,74 @@
         </div>
 
         {%- if media_count > 1 -%}
-          <div class="thumbnails product-gallery__thumbnails" role="tablist" aria-label="Product image thumbnails">
-            {%- for media in product.media -%}
-              {%- if media.preview_image != blank -%}
-                {%- liquid
-                  assign is_active = false
+          <div
+            class="thumbnails product-gallery__thumbnails{% if media_count > 3 %} product-gallery__thumbnails--slider{% endif %}"
+            role="tablist"
+            aria-label="Product image thumbnails"
+            {% if media_count > 3 %}data-thumb-slider{% endif %}
+          >
+            {%- if media_count > 3 -%}
+              <button
+                class="product-gallery__thumb-arrow product-gallery__thumb-arrow--prev"
+                type="button"
+                data-thumb-prev
+                aria-label="Show previous thumbnails"
+                disabled
+              >
+                {% render 'icon', name: 'chevron-left', size: 16 %}
+              </button>
+            {%- endif -%}
 
-                  if active_media_id == blank and forloop.first
-                    assign is_active = true
-                  elsif media.id == active_media_id
-                    assign is_active = true
-                  endif
-                -%}
-                <button
-                  class="thumb-wrap product-gallery__thumb{% if is_active %} is-active active{% endif %}"
-                  id="ProductGalleryThumb-{{ section.id }}-{{ forloop.index0 }}"
-                  type="button"
-                  role="tab"
-                  data-product-gallery-thumb
-                  data-slide-index="{{ forloop.index0 }}"
-                  data-media-id="{{ media.id }}"
-                  data-product-gallery-thumb-id="ProductGallerySlide-{{ section.id }}-{{ forloop.index0 }}"
-                  aria-label="Show image {{ forloop.index }} for {{ product.title | escape }}"
-                  aria-controls="ProductGallerySlide-{{ section.id }}-{{ forloop.index0 }}"
-                  aria-selected="{% if is_active %}true{% else %}false{% endif %}"
-                >
-                  {% render 'image',
-                    image: media.preview_image,
-                    alt: media.alt | default: product.title,
-                    sizes: '96px',
-                    widths: '96,160,220',
-                    loading: 'lazy',
-                    class: 'product-gallery__thumb-image'
-                  %}
-                </button>
-              {%- endif -%}
-            {%- endfor -%}
+            <div class="product-gallery__thumb-viewport">
+              <div class="product-gallery__thumb-track" data-thumb-track>
+                {%- for media in product.media -%}
+                  {%- if media.preview_image != blank -%}
+                    {%- liquid
+                      assign is_active = false
+
+                      if active_media_id == blank and forloop.first
+                        assign is_active = true
+                      elsif media.id == active_media_id
+                        assign is_active = true
+                      endif
+                    -%}
+                    <button
+                      class="thumb-wrap product-gallery__thumb{% if is_active %} is-active active{% endif %}"
+                      id="ProductGalleryThumb-{{ section.id }}-{{ forloop.index0 }}"
+                      type="button"
+                      role="tab"
+                      data-product-gallery-thumb
+                      data-slide-index="{{ forloop.index0 }}"
+                      data-media-id="{{ media.id }}"
+                      data-product-gallery-thumb-id="ProductGallerySlide-{{ section.id }}-{{ forloop.index0 }}"
+                      aria-label="Show image {{ forloop.index }} for {{ product.title | escape }}"
+                      aria-controls="ProductGallerySlide-{{ section.id }}-{{ forloop.index0 }}"
+                      aria-selected="{% if is_active %}true{% else %}false{% endif %}"
+                    >
+                      {% render 'image',
+                        image: media.preview_image,
+                        alt: media.alt | default: product.title,
+                        sizes: '96px',
+                        widths: '96,160,220',
+                        loading: 'lazy',
+                        class: 'product-gallery__thumb-image'
+                      %}
+                    </button>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            </div>
+
+            {%- if media_count > 3 -%}
+              <button
+                class="product-gallery__thumb-arrow product-gallery__thumb-arrow--next"
+                type="button"
+                data-thumb-next
+                aria-label="Show next thumbnails"
+              >
+                {% render 'icon', name: 'chevron-right', size: 16 %}
+              </button>
+            {%- endif -%}
           </div>
         {%- endif -%}
       </div>
@@ -168,7 +200,7 @@
           <h1 class="product-details__title product-title font-serif text-h1">{{ product.title | upcase }}</h1>
 
           <div class="product-details__meta flex-between items-center" aria-live="polite" aria-atomic="true">
-            <p class="product-details__subtitle subtitle text-micro">{{ subtitle_text | upcase }}</p>
+            <p class="product-details__subtitle subtitle">{{ subtitle_text }}</p>
             {% render 'price', card_product: product, variant: current_variant %}
           </div>
         </header>
@@ -386,6 +418,63 @@
   } else {
     root?.productGalleryController?.refresh();
   }
+
+  // Thumbnail slider (only when > 3 thumbnails)
+  (() => {
+    const slider = root?.querySelector('[data-thumb-slider]');
+    if (!slider) return;
+
+    const track = slider.querySelector('[data-thumb-track]');
+    const prevBtn = slider.querySelector('[data-thumb-prev]');
+    const nextBtn = slider.querySelector('[data-thumb-next]');
+    if (!track || !prevBtn || !nextBtn) return;
+
+    const VISIBLE = 3;
+    const thumbs = Array.from(track.querySelectorAll('[data-product-gallery-thumb]'));
+    const total = thumbs.length;
+    let offset = 0; // index of leftmost visible thumb
+
+    const updateSlider = () => {
+      // Use the first thumb's actual rendered width + gap for the step
+      const firstThumb = thumbs[0];
+      const gap = 12;
+      const step = firstThumb ? firstThumb.offsetWidth + gap : 0;
+      track.style.transform = `translateX(-${offset * step}px)`;
+
+      prevBtn.disabled = offset <= 0;
+      nextBtn.disabled = offset + VISIBLE >= total;
+    };
+
+    prevBtn.addEventListener('click', () => {
+      if (offset > 0) {
+        offset = Math.max(0, offset - 1);
+        updateSlider();
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (offset + VISIBLE < total) {
+        offset = Math.min(total - VISIBLE, offset + 1);
+        updateSlider();
+      }
+    });
+
+    // When a thumb is activated, scroll slider to keep it visible
+    root.addEventListener('click', (event) => {
+      const thumb = event.target.closest('[data-product-gallery-thumb]');
+      if (!thumb || !slider.contains(thumb)) return;
+      const idx = Number(thumb.dataset.slideIndex || 0);
+      if (idx < offset) {
+        offset = idx;
+        updateSlider();
+      } else if (idx >= offset + VISIBLE) {
+        offset = idx - VISIBLE + 1;
+        updateSlider();
+      }
+    });
+
+    updateSlider();
+  })();
 </script>
 
 {% schema %}

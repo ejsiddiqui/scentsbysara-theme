@@ -27,7 +27,7 @@
 .product-main,
 .product-page-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
   gap: 56px;
   align-items: start;
   min-width: 0;
@@ -64,8 +64,8 @@
 .main-image-wrap,
 .product-gallery__stage {
   position: relative;
-  height: clamp(620px, 44vw, 810px);
-  min-height: clamp(620px, 44vw, 810px);
+  height: clamp(620px, 46vw, 900px);
+  min-height: clamp(620px, 46vw, 900px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -167,6 +167,52 @@
   gap: 12px;
 }
 
+/* Thumbnail slider (> 3 images) */
+.product-gallery__thumbnails--slider {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.product-gallery__thumb-viewport {
+  flex: 1;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.product-gallery__thumb-track {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 12px;
+  transition: transform 0.3s ease;
+  will-change: transform;
+}
+
+/* Each thumb in slider: sized to exactly 1/3 of viewport (accounting for 2 gaps) */
+.product-gallery__thumbnails--slider .product-gallery__thumb {
+  flex: 0 0 calc((100% - 24px) / 3);
+  min-width: 0;
+}
+
+.product-gallery__thumb-arrow {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-muted);
+  box-shadow: none;
+}
+
+.product-gallery__thumb-arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
 .product-gallery__thumb,
 .thumb-wrap {
   position: relative;
@@ -242,11 +288,11 @@
 
 .product-details__subtitle {
   color: var(--color-muted);
-  font-size: var(--text-body-large);
-  letter-spacing: 0.18em;
+  font-size: var(--text-small);
+  letter-spacing: 0.03em;
   margin-bottom: 0;
-  text-transform: uppercase;
-  font-weight: 400;
+  text-transform: none;
+  font-weight: 300;
 }
 
 .product-details__summary {
@@ -282,14 +328,14 @@
   gap: 0;
   border: 0;
   padding: 0;
-  margin: 0 0 var(--space-md);
+  margin: 0 0 24px;
 }
 
 .selector-label {
   margin-bottom: var(--space-sm);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  font-size: var(--text-small);
+  font-size: var(--text-micro);
 }
 
 .variant-option-values {
@@ -325,21 +371,36 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 44px;
-  padding: 13px 0 10px;
-  border: 1px solid var(--color-border);
+  padding: 8px 20px 8px;
+  box-shadow: inset 0 0 0 0.4px var(--color-taupe);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-size: var(--text-small);
+  letter-spacing: 0.12em;
+  font-size: var(--text-micro);
   flex: 1;
+  width: 100%;
 }
 
+.label.pill-label {
+  flex:1;
+}
+
+/* Swatches: double-ring on selected/hover */
 .swatch-label input:checked + .swatch-large,
-.swatch-label:hover .swatch-large,
-.pill-label input:checked + .pill,
+.swatch-label:hover .swatch-large {
+  border-color: var(--color-foreground);
+  box-shadow: inset 0 0 0 2px var(--color-background), 0 0 0 1px var(--color-foreground);
+}
+
+/* Pills: stone fill + dark border on selected, simple border on hover */
+.pill-label input:checked + .pill {
+  background-color: var(--color-secondary-bg);
+  border-color: var(--color-foreground);
+  box-shadow: none;
+}
+
 .pill-label:hover .pill {
   border-color: var(--color-foreground);
-  box-shadow: inset 0 0 0 1px var(--color-background), 0 0 0 1px var(--color-foreground);
+  box-shadow: none;
 }
 
 .add-to-cart-row {
@@ -384,12 +445,19 @@
 .accordion-wrapper,
 .product-accordions {
   display: grid;
-  gap: 12px;
+  gap: 8px;
 }
 
 .accordion {
   border: 0;
   background: var(--color-secondary-bg);
+}
+
+/* Description is always open — prevent toggling */
+.accordion.static-block > summary {
+  pointer-events: none;
+  cursor: default;
+  user-select: none;
 }
 
 .accordion-header {
@@ -398,9 +466,9 @@
   justify-content: space-between;
   gap: 1rem;
   width: 100%;
-  padding: 24px;
+  padding: 20px 24px;
   list-style: none;
-  font-size: var(--text-body);
+  font-size: var(--text-micro);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-foreground);
@@ -444,7 +512,7 @@
 .accordion[open] .accordion-body {
   max-height: 40rem;
   opacity: 1;
-  padding-bottom: 24px;
+  padding-bottom: 20px;
 }
 
 .accordion-body__inner {
@@ -479,7 +547,7 @@
     display: none;
   }
 
-  .product-gallery__thumbnails {
+  .product-gallery__thumbnails:not(.product-gallery__thumbnails--slider) {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }

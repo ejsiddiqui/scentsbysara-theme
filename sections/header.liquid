@@ -82,13 +82,26 @@
       </div>
 
       <div class="header-right nav-icons">
-        <a href="{{ account_url }}" class="icon-btn header-action desktop-only-inline" aria-label="{{ 'general.account' | t }}">
+        <a
+          href="{{ account_url }}"
+          class="icon-btn header-action desktop-only-inline"
+          aria-label="{{ 'general.account' | t }}"
+        >
           {% render 'icon', name: 'account' %}
         </a>
-        <a href="{{ routes.all_products_collection_url }}" class="icon-btn header-action desktop-only-inline" aria-label="{{ 'general.wishlist' | t }}">
+        <a
+          href="{{ routes.all_products_collection_url }}"
+          class="icon-btn header-action desktop-only-inline"
+          aria-label="{{ 'general.wishlist' | t }}"
+        >
           {% render 'icon', name: 'wishlist' %}
         </a>
-        <a href="{{ routes.cart_url }}" class="icon-btn header-action desktop-only-inline" aria-label="{{ 'general.cart' | t }}" data-open-cart>
+        <a
+          href="{{ routes.cart_url }}"
+          class="icon-btn header-action desktop-only-inline"
+          aria-label="{{ 'general.cart' | t }}"
+          data-open-cart
+        >
           {% render 'icon', name: 'cart' %}
           <span class="header-cart-badge{% if cart.item_count == 0 %} is-hidden{% endif %}">
             {{ cart.item_count }}
@@ -111,13 +124,17 @@
       <nav class="header-nav container" aria-label="{{ 'general.primary_navigation' | t }}">
         <ul class="header-nav-list" role="list">
           {%- for link in linklists[main_menu].links -%}
-            <li class="header-nav-item{% if link.links.size > 0 %} has-mega-menu{% endif %}"{% if link.links.size > 0 %} data-nav-item-has-children{% endif %}>
+            <li
+              class="header-nav-item{% if link.links.size > 0 %} has-mega-menu{% endif %}"
+              {% if link.links.size > 0 %}
+                data-nav-item-has-children
+              {% endif %}
+            >
               <a href="{{ link.url }}" class="header-nav-link">
                 {{ link.title }}
               </a>
               {%- if link.links.size > 0 -%}
-                {% render
-                  'mega-menu',
+                {% render 'mega-menu',
                   link: link,
                   featured_image: section.settings.mega_menu_featured_image,
                   featured_link: section.settings.mega_menu_featured_link
@@ -183,25 +200,57 @@
                     <a href="{{ link.url }}" class="mobile-nav-link">{{ link.title }}</a>
                   {%- endif -%}
                 {%- endfor -%}
-                <a href="{{ routes.all_products_collection_url }}" class="mobile-nav-link">{{ 'general.wishlist' | t }}</a>
+                <a href="{{ routes.all_products_collection_url }}" class="mobile-nav-link">
+                  {{- 'general.wishlist' | t -}}
+                </a>
               </nav>
 
               <div class="mobile-menu-footer">
                 <a href="{{ account_url }}" class="btn-outline full-width-btn">{{ 'customers.login.title' | t }}</a>
-                <a href="#FooterNewsletterForm" class="btn-outline full-width-btn" data-dialog-close>{{ 'newsletter.heading' | t }}</a>
+                <a href="#FooterNewsletterForm" class="btn-outline full-width-btn" data-dialog-close>
+                  {{- 'newsletter.heading' | t -}}
+                </a>
                 <div class="mobile-menu-meta">
                   <div class="mobile-menu-social">
                     {%- if settings.social_instagram != blank -%}
-                      <a href="{{ settings.social_instagram }}" aria-label="{{ 'social.instagram' | t }}" target="_blank" rel="noopener noreferrer">{% render 'icon', name: 'instagram' %}</a>
+                      <a
+                        href="{{ settings.social_instagram }}"
+                        aria-label="{{ 'social.instagram' | t }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {%- render 'icon', name: 'instagram' -%}
+                      </a>
                     {%- endif -%}
                     {%- if settings.social_facebook != blank -%}
-                      <a href="{{ settings.social_facebook }}" aria-label="{{ 'social.facebook' | t }}" target="_blank" rel="noopener noreferrer">{% render 'icon', name: 'facebook' %}</a>
+                      <a
+                        href="{{ settings.social_facebook }}"
+                        aria-label="{{ 'social.facebook' | t }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {%- render 'icon', name: 'facebook' -%}
+                      </a>
                     {%- endif -%}
                     {%- if settings.social_tiktok != blank -%}
-                      <a href="{{ settings.social_tiktok }}" aria-label="{{ 'social.tiktok' | t }}" target="_blank" rel="noopener noreferrer">{% render 'icon', name: 'tiktok' %}</a>
+                      <a
+                        href="{{ settings.social_tiktok }}"
+                        aria-label="{{ 'social.tiktok' | t }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {%- render 'icon', name: 'tiktok' -%}
+                      </a>
                     {%- endif -%}
                     {%- if settings.social_pinterest != blank -%}
-                      <a href="{{ settings.social_pinterest }}" aria-label="{{ 'social.pinterest' | t }}" target="_blank" rel="noopener noreferrer">{% render 'icon', name: 'pinterest' %}</a>
+                      <a
+                        href="{{ settings.social_pinterest }}"
+                        aria-label="{{ 'social.pinterest' | t }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {%- render 'icon', name: 'pinterest' -%}
+                      </a>
                     {%- endif -%}
                   </div>
                   <div class="mobile-menu-currency">
@@ -224,7 +273,12 @@
                       {% render 'icon', name: 'chevron-left' %}
                     </button>
                     <span class="sub-nav-label">{{ link.title }}</span>
-                    <button type="button" class="icon-btn" aria-label="{{ 'accessibility.close' | t }}" data-dialog-close>
+                    <button
+                      type="button"
+                      class="icon-btn"
+                      aria-label="{{ 'accessibility.close' | t }}"
+                      data-dialog-close
+                    >
                       {% render 'icon', name: 'close' %}
                     </button>
                   </div>
@@ -278,7 +332,7 @@
   }
 
   .header-top {
-    min-height: 5.875rem;
+    padding: 28px var(--gutter) 3px;
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
