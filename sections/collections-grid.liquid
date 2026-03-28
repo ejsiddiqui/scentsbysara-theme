@@ -152,6 +152,56 @@
       grid-template-columns: 1fr;
     }
   }
+
+  @media screen and (max-width: 480px) {
+    #CollectionsGrid-{{ section.id }} {
+      overflow: visible;
+    }
+
+    #CollectionsGrid-{{ section.id }} .container {
+      overflow: visible;
+      padding-inline: 0;
+    }
+
+    #CollectionsGrid-{{ section.id }} .collections-grid__grid {
+      grid-template-columns: none;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(calc(100% - 44px), calc(100% - 44px));
+      gap: var(--space-md);
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-behavior: smooth;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding-inline: var(--gutter);
+      padding-bottom: 4px;
+    }
+
+    #CollectionsGrid-{{ section.id }} .collections-grid__grid::-webkit-scrollbar {
+      display: none;
+    }
+
+    #CollectionsGrid-{{ section.id }} .collections-grid__card {
+      min-width: 0;
+      scroll-snap-align: start;
+    }
+
+    #CollectionsGrid-{{ section.id }} .collections-grid__button {
+      display: none;
+    }
+
+    #CollectionsGrid-{{ section.id }} .collections-grid__title {
+      font-family: var(--font-sans);
+      font-size: var(--text-body);
+      letter-spacing: 0.1em;
+    }
+
+    #CollectionsGrid-{{ section.id }} .collections-grid__text {
+      font-size: var(--text-xsmall);
+      font-weight: 300;
+    }
+  }
 {% endstyle %}
 
 {% schema %}

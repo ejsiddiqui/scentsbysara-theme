@@ -308,6 +308,13 @@
       max-width: none;
     }
   }
+
+  @media screen and (max-width: 480px) {
+    #Commitment-{{ section.id }}.section-block {
+      padding-block: 0;
+      background-color: var(--color-stone);
+    }
+  }
 {% endstyle %}
 
 {% schema %}
