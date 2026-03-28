@@ -24,6 +24,7 @@
             assign story_product = story.product.value
             assign story_anonymous = story.anonymous.value
           -%}
+          <!-- DBG:{% for field in story.values %}[{{field.key}}={{field.value|truncate:12}}]{% endfor %} -->
           <button
             class="story-card"
             type="button"
