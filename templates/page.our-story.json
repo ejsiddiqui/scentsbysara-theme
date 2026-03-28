@@ -1,17 +1,31 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "split-view",
       "settings": {
         "color_scheme": "scheme-1",
-        "eyebrow": "OUR STORY",
-        "heading": "A BRAND BUILT FROM LIVED EXPERIENCE",
-        "body": "<p>Scents by Sara was founded to honour real bodies, meaningful ritual, and scent as emotional architecture.</p><p>I created Scents by Sara to reframe the way women see themselves. Every sculpted candle is designed to celebrate the body as it is: changing, strong, and worthy of softness.</p>",
+        "full_width": true,
+        "eyebrow": "OUR PHILOSOPHY",
+        "heading": "A STORY OF FORM, FRAGRANCE, AND EMBODIED CONFIDENCE ",
+        "body": "<p>Scents by Sara is a female-founded luxury fragrance house rooted in embodied confidence and modern ritual.  <br/><br/>It exists in the quiet moments – where scent shapes experience, form invites reflection, and confidence is felt rather than declared. Guided by lived experience and community, the brand creates scented pieces designed to support how we feel within ourselves and the spaces we inhabit.  <br/><br/>At its core, Scents By Sara is about self-recognition in a culture of external validation. Each piece is created as a ritual object, returned to over time, reinforcing recognition of self, space, and experience. <br/><br/></p>",
+        "image": "shopify://shop_images/our-story-founder-9.png",
+        "asset_image": "",
+        "image_alt": "Founder of Scents by Sara",
         "image_position": "left",
         "content_background": "secondary",
-        "cta_text": "SHOP ALL",
+        "cta_text": "",
         "cta_link": "shopify://collections/all",
-        "button_style": "btn-solid"
+        "button_style": "btn-solid",
+        "collection_filter": ""
       }
     },
     "quote": {
@@ -27,13 +41,18 @@
       "type": "split-view",
       "settings": {
         "color_scheme": "scheme-1",
+        "full_width": false,
         "eyebrow": "WHAT WE STAND FOR",
         "heading": "THE VALUES THAT SHAPE EVERY COLLECTION",
         "body": "<p>From hand-pouring to scent curation, each piece is crafted as a quiet ritual object, something that can hold memory, mood, and intention inside everyday spaces.</p><p>Born in London and raised in Dubai, the brand brings together embodied confidence, intentional scent, and personal ritual, shaped by community and real stories.</p>",
+        "asset_image": "",
+        "image_alt": "Founder of Scents by Sara",
         "image_position": "right",
         "content_background": "primary",
         "cta_text": "",
-        "button_style": "btn-outline"
+        "cta_link": "",
+        "button_style": "btn-outline",
+        "collection_filter": ""
       }
     }
   },
