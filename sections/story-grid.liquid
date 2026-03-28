@@ -385,8 +385,9 @@
   .story-modal__grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    min-height: min(36rem, 80svh);
+    grid-template-rows: min(38rem, 80svh);
     max-height: calc(100svh - 2rem);
+    overflow: hidden;
   }
 
   .story-modal__media {
