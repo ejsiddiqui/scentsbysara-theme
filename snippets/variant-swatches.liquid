@@ -88,6 +88,7 @@
         type="button"
         class="variant-swatches__swatch swatch{% if is_active %} is-active{% endif %}"
         data-product-card-swatch
+        data-swatch-option-name="{{ swatch_option.name | downcase | escape }}"
         data-swatch-value="{{ value | escape }}"
         data-swatch-color="{{ swatch_color }}"
         {% if swatch_variant != blank %}
