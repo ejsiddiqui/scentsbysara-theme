@@ -18,9 +18,45 @@
         "enable_sorting": true,
         "color_scheme": "scheme-1"
       }
+    },
+    "sustainable": {
+      "type": "split-view",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "eyebrow": "OUR SUSTAINABLE PRACTICE",
+        "heading": "CRAFTED WITH CONSIDERATION.",
+        "body": "<p>Every material used by Scents by Sara is chosen for performance, longevity, and environmental consideration. Plant-based wax, IFRA-certified fragrances, and FSC-certified recyclable packaging — because what goes into the candle matters as much as what comes out.</p>",
+        "image_position": "right",
+        "content_background": "secondary",
+        "cta_text": "READ MORE",
+        "cta_link": "/pages/our-sustainability",
+        "button_style": "btn-outline",
+        "collection_filter": "scar-collection"
+      }
+    },
+    "scar_crosssell": {
+      "type": "split-view",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "full_width": true,
+        "eyebrow": "ALSO FROM SCENTS BY SARA",
+        "heading": "SCAR COLLECTION",
+        "body": "<p>The Scar Collection celebrates the body as a holder of memory, healing, and confidence. Gold leaf is applied by hand to mark scars — not as decoration but as recognition.</p>",
+        "image": "shopify://shop_images/scar-collection-half-left.png",
+        "image_alt": "SCAR Collection",
+        "image_position": "left",
+        "content_background": "secondary",
+        "cta_text": "DISCOVER SCAR COLLECTION",
+        "cta_link": "/collections/scar-collection",
+        "button_style": "btn-solid",
+        "collection_filter": "sculpted-collection"
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "sustainable",
+    "scar_crosssell"
   ]
 }

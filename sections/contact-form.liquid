@@ -20,6 +20,21 @@
           {%- endfor -%}
         </ul>
       {%- endif -%}
+
+      <div class="contact-section__socials" aria-label="Social media">
+        {%- if settings.social_instagram != blank -%}
+          <a href="{{ settings.social_instagram }}" class="contact-section__social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer">{% render 'icon', name: 'instagram', size: 20 %}</a>
+        {%- endif -%}
+        {%- if settings.social_facebook != blank -%}
+          <a href="{{ settings.social_facebook }}" class="contact-section__social-link" aria-label="Facebook" target="_blank" rel="noopener noreferrer">{% render 'icon', name: 'facebook', size: 20 %}</a>
+        {%- endif -%}
+        {%- if settings.social_tiktok != blank -%}
+          <a href="{{ settings.social_tiktok }}" class="contact-section__social-link" aria-label="TikTok" target="_blank" rel="noopener noreferrer">{% render 'icon', name: 'tiktok', size: 20 %}</a>
+        {%- endif -%}
+        {%- if settings.social_pinterest != blank -%}
+          <a href="{{ settings.social_pinterest }}" class="contact-section__social-link" aria-label="Pinterest" target="_blank" rel="noopener noreferrer">{% render 'icon', name: 'pinterest', size: 20 %}</a>
+        {%- endif -%}
+      </div>
     </aside>
 
     <div class="contact-section__form-shell contact-form-panel">
@@ -234,6 +249,24 @@
 
   .contact-section .btn-solid {
     justify-self: start;
+  }
+
+  .contact-section__socials {
+    display: flex;
+    gap: 1rem;
+    margin-top: var(--space-lg);
+  }
+
+  .contact-section__social-link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-foreground);
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+  }
+
+  .contact-section__social-link:hover {
+    opacity: 1;
   }
 
   @media (max-width: 1024px) {

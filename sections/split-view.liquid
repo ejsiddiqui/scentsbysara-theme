@@ -7,7 +7,14 @@
   if section.settings.content_background == 'primary'
     assign content_background_class = 'bg-primary'
   endif
+
+  assign collection_filter = section.settings.collection_filter | strip
+  assign skip_section = false
+  if collection_filter != blank and collection.handle != collection_filter
+    assign skip_section = true
+  endif
 -%}
+{%- unless skip_section -%}
 
 <section
   id="SplitView-{{ section.id }}"
@@ -66,6 +73,7 @@
     </div>
   </div>
 </section>
+{%- endunless -%}
 
 {% schema %}
 {
@@ -175,6 +183,12 @@
         }
       ],
       "default": "btn-solid"
+    },
+    {
+      "type": "text",
+      "id": "collection_filter",
+      "label": "Show only on collection (handle)",
+      "info": "Leave blank to show everywhere. Enter a collection handle (e.g. scar-collection) to restrict to that collection only."
     }
   ],
   "blocks": [
