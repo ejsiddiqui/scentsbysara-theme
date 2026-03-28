@@ -14,7 +14,7 @@
     </div>
 
     {%- if stories != blank and stories.count > 0 -%}
-      <div class="story-grid grid-cols-2">
+      <div class="story-grid grid-cols-3">
         {%- for story in stories -%}
           {%- liquid
             assign story_name = story.name.value | default: story.system.title
@@ -87,7 +87,7 @@
         </dialog-component>
       {%- endfor -%}
     {%- else -%}
-      <div class="masonry-grid grid-cols-2">
+      <div class="masonry-grid grid-cols-3">
         <div class="masonry-col">
           <article class="ys-card">
             <div class="ys-img-wrap">
@@ -334,6 +334,16 @@
   }
 
   @media (max-width: 749px) {
+    .story-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .masonry-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
     .story-grid {
       grid-template-columns: 1fr;
     }
