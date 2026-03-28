@@ -41,11 +41,27 @@
         "eyebrow": "AS TOLD BY OUR COMMUNITY",
         "description": "Every candle tells a story. These are yours: shared moments of transformation, memory, and quiet power."
       }
+    },
+    "editorial": {
+      "type": "split-view",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "eyebrow": "OUR STORY",
+        "heading": "GROUNDED IN RITUAL. EMBODIED IN CONFIDENCE.",
+        "body": "<p>Scents By Sara is a female-founded fragrance house rooted in embodied confidence and modern ritual. What began as a personal exploration of scent and form has grown into a brand shaped by lived experience, community, and the power of recognising ourselves as we are.</p>",
+        "image_position": "left",
+        "content_background": "secondary",
+        "cta_text": "READ OUR STORY",
+        "cta_link": "/pages/our-story",
+        "button_style": "btn-solid"
+      }
     }
   },
   "order": [
     "hero",
     "form",
-    "grid"
+    "grid",
+    "editorial"
   ]
 }
