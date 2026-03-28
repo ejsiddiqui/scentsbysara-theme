@@ -1,5 +1,5 @@
 {%- liquid
-  assign stories = section.settings.stories.value
+  assign stories = section.settings.stories
 -%}
 
 <section class="story-grid-section section-block color-{{ section.settings.color_scheme }}" id="StoryGrid-{{ section.id }}">
@@ -13,7 +13,7 @@
       {%- endif -%}
     </div>
 
-    {%- if stories != blank and stories.count > 0 -%}
+    {%- if stories != blank and stories.size > 0 -%}
       <div class="story-grid grid-cols-3">
         {%- for story in stories -%}
           {%- liquid
