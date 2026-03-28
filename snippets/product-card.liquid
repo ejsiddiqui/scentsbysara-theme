@@ -198,8 +198,11 @@
       </div>
     {%- endif -%}
 
-    {%- if card_layout == 'stacked' -%}
-      <a href="{{ card_product.url }}" class="product-btn product-card__button">SHOP NOW</a>
-    {%- endif -%}
+    <a
+      href="{% if current_variant != blank %}{{ card_product.url }}?variant={{ current_variant.id }}{% else %}{{ card_product.url }}{% endif %}"
+      class="product-btn product-card__button"
+    >
+      SHOP NOW
+    </a>
   </product-card>
 {%- endif -%}
