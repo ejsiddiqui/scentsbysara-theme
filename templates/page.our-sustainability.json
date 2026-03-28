@@ -1,0 +1,62 @@
+{
+  "sections": {
+    "hero": {
+      "type": "split-view",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "eyebrow": "OUR SUSTAINABILITY",
+        "heading": "CRAFTED WITH CONSIDERATION.",
+        "body": "<p>At Scents by Sara, sustainability is not a feature — it is a foundation. Every material, process, and decision is made with environmental responsibility and long-term impact in mind.</p>",
+        "image_position": "left",
+        "content_background": "secondary",
+        "cta_text": "SHOP NOW",
+        "cta_link": "shopify://collections/all",
+        "button_style": "btn-solid"
+      }
+    },
+    "quote": {
+      "type": "quote-highlight",
+      "settings": {
+        "quote": "The story begins before the candle is lit.",
+        "attribution": "Sara",
+        "color_scheme": "scheme-1",
+        "text_alignment": "center"
+      }
+    },
+    "materials": {
+      "type": "split-view",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "full_width": false,
+        "eyebrow": "OUR MATERIALS",
+        "heading": "INTENTIONAL FROM THE INSIDE OUT.",
+        "body": "<p>Every candle is hand-poured using a plant-based wax blend, free from paraffin, parabens, and phthalates. Our wicks are cotton-core and lead-free. Fragrances are IFRA-certified and sourced from responsible suppliers.</p>",
+        "image_position": "right",
+        "content_background": "primary",
+        "cta_text": "",
+        "button_style": "btn-outline"
+      }
+    },
+    "packaging": {
+      "type": "split-view",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "full_width": false,
+        "eyebrow": "PACKAGING",
+        "heading": "DESIGNED TO BE KEPT, NOT DISCARDED.",
+        "body": "<p>Our packaging is printed on FSC-certified kraft card using water-based inks. Every element is recyclable. We use minimal void fill and never use plastic wrapping in our shipments.</p>",
+        "image_position": "left",
+        "content_background": "secondary",
+        "cta_text": "SHOP NOW",
+        "cta_link": "shopify://collections/all",
+        "button_style": "btn-outline"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "quote",
+    "materials",
+    "packaging"
+  ]
+}
