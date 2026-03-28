@@ -42,9 +42,9 @@
       "type": "story-form",
       "settings": {
         "color_scheme": "scheme-1",
-        "eyebrow": "SHARE WITH US",
+        "eyebrow": "BE A PART OF SCENTS BY SARA",
         "heading": "SUBMIT YOUR STORY",
-        "description": "Tell us about your moment. We may feature your story as part of our community pages or in upcoming editorials.",
+        "description": "",
         "disclaimer": "By submitting, you agree that Scents by Sara may publish your story, edited for brevity, across our digital channels."
       }
     },
