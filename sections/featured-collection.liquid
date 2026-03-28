@@ -198,7 +198,7 @@
   .product-card__title,
   .product-card__title a {
     font-size: var(--text-body);
-    font-weight: 400;
+    font-weight: 500;
     line-height: 1.15;
   }
 
@@ -247,6 +247,11 @@
   /* ── Shape select (Tier 2 shop layout) ───────────────── */
   .product-card--shop .product-card__options {
     margin: 16px 0 0;
+  }
+
+  /* ── Hide body-shape option selects (swatches only) ─── */
+  .product-card--shop .product-card__option-select {
+    display: none;
   }
 
   /* ── Mobile (≤480px) ─────────────────────────────────── */
