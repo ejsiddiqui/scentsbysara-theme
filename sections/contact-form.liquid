@@ -36,19 +36,35 @@
           </div>
         {%- endif -%}
 
-        <div class="form-group">
-          <label for="ContactName-{{ section.id }}" class="form-label">FULL NAME</label>
-          <input
-            id="ContactName-{{ section.id }}"
-            type="text"
-            name="contact[name]"
-            class="form-input"
-            required
-            minlength="2"
-            maxlength="80"
-            autocomplete="name"
-          >
-          <p class="field-error" data-for="name" aria-live="polite"></p>
+        <div class="contact-form__name-row">
+          <div class="form-group">
+            <label for="ContactFirstName-{{ section.id }}" class="form-label">FIRST NAME</label>
+            <input
+              id="ContactFirstName-{{ section.id }}"
+              type="text"
+              name="contact[first_name]"
+              class="form-input"
+              required
+              minlength="1"
+              maxlength="40"
+              autocomplete="given-name"
+            >
+            <p class="field-error" data-for="first_name" aria-live="polite"></p>
+          </div>
+          <div class="form-group">
+            <label for="ContactLastName-{{ section.id }}" class="form-label">LAST NAME</label>
+            <input
+              id="ContactLastName-{{ section.id }}"
+              type="text"
+              name="contact[last_name]"
+              class="form-input"
+              required
+              minlength="1"
+              maxlength="40"
+              autocomplete="family-name"
+            >
+            <p class="field-error" data-for="last_name" aria-live="polite"></p>
+          </div>
         </div>
 
         <div class="form-group">
@@ -67,13 +83,14 @@
 
         <div class="form-group">
           <label for="ContactTopic-{{ section.id }}" class="form-label">TOPIC</label>
-          <select id="ContactTopic-{{ section.id }}" name="contact[Topic]" class="form-input" required>
-            <option value="">Select a topic</option>
-            <option value="Order support">Order support</option>
-            <option value="Product question">Product question</option>
-            <option value="Custom candle enquiry">Custom candle enquiry</option>
-            <option value="Press / collaboration">Press / collaboration</option>
-          </select>
+          <input
+            id="ContactTopic-{{ section.id }}"
+            type="text"
+            name="contact[topic]"
+            class="form-input"
+            placeholder=""
+            maxlength="120"
+          >
           <p class="field-error" data-for="topic" aria-live="polite"></p>
         </div>
 
@@ -158,6 +175,18 @@
   .contact-form {
     display: grid;
     gap: 14px;
+  }
+
+  .contact-form__name-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  @media (max-width: 480px) {
+    .contact-form__name-row {
+      grid-template-columns: 1fr;
+    }
   }
 
   .contact-form .form-group {

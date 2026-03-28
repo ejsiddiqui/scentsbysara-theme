@@ -1,12 +1,17 @@
 {
   "sections": {
-    "intro": {
-      "type": "quote-highlight",
+    "hero": {
+      "type": "split-view",
       "settings": {
-        "quote": "Scents by Sara was built on the stories of real women. We invite you to be part of the narrative.",
-        "attribution": "YOUR STORY",
         "color_scheme": "scheme-1",
-        "text_alignment": "center"
+        "full_width": false,
+        "eyebrow": "YOUR STORY",
+        "heading": "THE PLEASURE OF A LIFETIME.",
+        "body": "<p>Scents by Sara was built on the stories of real women. Every candle holds a memory. We invite you to share yours.</p>",
+        "image_position": "left",
+        "content_background": "primary",
+        "cta_text": "",
+        "button_style": "btn-outline"
       }
     },
     "form": {
@@ -30,7 +35,7 @@
     }
   },
   "order": [
-    "intro",
+    "hero",
     "form",
     "grid"
   ]
