@@ -29,6 +29,8 @@
         "body": "<p>Every material used by Scents by Sara is chosen for performance, longevity, and environmental consideration. Plant-based wax, IFRA-certified fragrances, and FSC-certified recyclable packaging — because what goes into the candle matters as much as what comes out.</p>",
         "image_position": "right",
         "content_background": "secondary",
+        "asset_image": "our-commitment-left.png",
+        "image_alt": "Sustainable materials",
         "cta_text": "READ MORE",
         "cta_link": "/pages/our-sustainability",
         "button_style": "btn-outline",

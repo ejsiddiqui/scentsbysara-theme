@@ -32,6 +32,8 @@
             alt: image_alt,
             loading: 'lazy'
           %}
+        {%- elsif section.settings.asset_image != blank -%}
+          <img class="split-view__image" src="{{ section.settings.asset_image | asset_url }}" alt="{{ image_alt | escape }}" width="1200" height="1600" loading="lazy">
         {%- else -%}
           <img class="split-view__image" src="{{ 'sara.png' | asset_url }}" alt="{{ image_alt | escape }}" width="1200" height="1600">
         {%- endif -%}
@@ -114,6 +116,12 @@
       "type": "image_picker",
       "id": "image",
       "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "asset_image",
+      "label": "Theme asset image (filename)",
+      "info": "Use a theme asset filename (e.g. our-commitment-left.png) when no shop image is selected."
     },
     {
       "type": "text",
