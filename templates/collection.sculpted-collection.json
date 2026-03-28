@@ -1,0 +1,35 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-collection",
+      "settings": {
+        "products_per_page": 16,
+        "columns_desktop": 4,
+        "enable_filtering": true,
+        "enable_sorting": true,
+        "color_scheme": "scheme-1"
+      }
+    },
+    "scar_crosssell": {
+      "type": "split-view",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "full_width": true,
+        "eyebrow": "ALSO FROM SCENTS BY SARA",
+        "heading": "SCAR COLLECTION",
+        "body": "<p>The Scar Collection celebrates the body as a holder of memory, healing, and confidence. Gold leaf is applied by hand to mark scars — not as decoration but as recognition.</p>",
+        "image": "shopify://shop_images/scar-collection-half-left.png",
+        "image_alt": "SCAR Collection",
+        "image_position": "left",
+        "content_background": "secondary",
+        "cta_text": "DISCOVER SCAR COLLECTION",
+        "cta_link": "/collections/scar-collection",
+        "button_style": "btn-solid"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "scar_crosssell"
+  ]
+}
