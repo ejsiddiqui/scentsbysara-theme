@@ -77,6 +77,7 @@
         <div class="commitment-section__content">
           <span class="eyebrow">{{ section_eyebrow | escape }}</span>
           <h2 class="font-serif commitment-section__heading">{{ section_heading | escape }}</h2>
+          <hr class="commitment-section__divider">
 
           <div class="commitment-section__items" role="list">
             {%- for block in section.blocks -%}
@@ -155,10 +156,22 @@
     min-width: 0;
   }
 
+  #Commitment-{{ section.id }} .eyebrow {
+    color: var(--color-taupe);
+  }
+
   #Commitment-{{ section.id }} .commitment-section__heading {
-    max-width: 12ch;
-    margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+    max-width: none;
+    margin-bottom: clamp(1rem, 2vw, 1.5rem);
+    color: var(--color-muted);
     text-transform: uppercase;
+  }
+
+  #Commitment-{{ section.id }} .commitment-section__divider {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    width: 8rem;
+    margin: 0 0 clamp(1.25rem, 2vw, 2rem);
   }
 
   #Commitment-{{ section.id }} .commitment-section__items {
