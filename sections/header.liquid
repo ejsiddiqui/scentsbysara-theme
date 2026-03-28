@@ -427,6 +427,13 @@
 
   .header-nav-link {
     padding: 0.35rem 0;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+  }
+
+  .header-nav-link:hover,
+  .header-nav-link.is-active {
+    border-bottom-color: currentColor;
   }
 
   .has-mega-menu:hover .mega-menu,
@@ -654,7 +661,7 @@
   }
 
   .mobile-menu-currency {
-    min-width: 8rem;
+    display: none;
   }
 
   .mobile-shop-group {
