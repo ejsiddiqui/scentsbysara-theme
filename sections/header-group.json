@@ -39,7 +39,7 @@
         "logo": "shopify://shop_images/logo-long.svg",
         "logo_mobile": "shopify://shop_images/logo-symbol.svg",
         "menu": "main-menu",
-        "sticky_header": "always",
+        "sticky_header": "scroll-up",
         "enable_transparent": false,
         "color_scheme": "",
         "mega_menu_featured_image": "shopify://shop_images/mega-menu-image.png",
