@@ -11,10 +11,13 @@
   "sections": {
     "hero": {
       "type": "page-hero",
+      "custom_css": [
+        ".page-hero__overlay{background: none;}"
+      ],
       "settings": {
         "color_scheme": "scheme-2",
-        "heading": "CONTACT US",
-        "subheading": "We are here to help with product questions, custom requests, and order support.",
+        "heading": "",
+        "subheading": "",
         "image": "shopify://shop_images/hero-contact-us.png"
       }
     },
