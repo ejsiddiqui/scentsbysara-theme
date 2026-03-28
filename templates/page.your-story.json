@@ -48,11 +48,17 @@
         "disclaimer": "By submitting, you agree that Scents by Sara may publish your story, edited for brevity, across our digital channels."
       }
     },
-    "custom_section_mbNaW6": {
-      "type": "custom-section",
-      "name": "Your Stories BG",
+    "page_hero_iGRYBF": {
+      "type": "page-hero",
+      "custom_css": [
+        ".page-hero__overlay{background: none;}"
+      ],
+      "name": "Page hero",
       "settings": {
-        "background_image": "shopify://shop_images/our-story-bottom-2.png"
+        "color_scheme": "",
+        "heading": "",
+        "subheading": "",
+        "image": "shopify://shop_images/our-story-bottom-2.png"
       }
     },
     "grid": {
@@ -88,7 +94,7 @@
     "page_hero_ef9eP4",
     "hero",
     "form",
-    "custom_section_mbNaW6",
+    "page_hero_iGRYBF",
     "grid",
     "editorial"
   ]
