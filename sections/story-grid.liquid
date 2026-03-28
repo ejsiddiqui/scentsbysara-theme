@@ -17,14 +17,13 @@
       <div class="story-grid grid-cols-3">
         {%- for story in stories -%}
           {%- liquid
-            assign story_title = story.title.value | default: story.system.title
+            assign story_title = story.title.value | default: story.system.title | default: story.system.handle | replace: '-', ' '
             assign story_name = story.name.value
             assign story_body = story.story.value
             assign story_image = story.image.value
             assign story_product = story.product.value
             assign story_anonymous = story.anonymous.value
           -%}
-          <!-- DEBUG: type={{story.type}} handle={{story.handle}} sys_title={{story.system.title}} sys_handle={{story.system.handle}} product_title={{story.product.value.title}} title={{story.title.value}} story={{story.story.value}} name={{story.name.value}} anon={{story.anonymous.value}} -->
           <button
             class="story-card"
             type="button"
