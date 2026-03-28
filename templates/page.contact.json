@@ -14,18 +14,12 @@
       "settings": {
         "color_scheme": "scheme-2",
         "heading": "CONTACT US",
-        "subheading": "We are here to help with product questions, custom requests, and order support."
+        "subheading": "We are here to help with product questions, custom requests, and order support.",
+        "image": "shopify://shop_images/hero-contact-us.png"
       }
     },
     "main": {
       "type": "contact-form",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "info_eyebrow": "GET IN TOUCH",
-        "form_eyebrow": "SEND A MESSAGE",
-        "heading": "LET US SUPPORT YOUR RITUAL",
-        "description": "<p>We are here to help with product questions, custom requests, and order support.</p>"
-      },
       "blocks": {
         "email": {
           "type": "info_block",
@@ -33,11 +27,18 @@
             "title": "Email",
             "content": "<p><a href=\"mailto:hello@scentsbysara.com\">hello@scentsbysara.com</a></p>"
           }
-        },
+        }
       },
       "block_order": [
         "email"
-      ]
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "info_eyebrow": "GET IN TOUCH",
+        "form_eyebrow": "SEND A MESSAGE",
+        "heading": "LET US SUPPORT YOUR RITUAL",
+        "description": "<p>We are here to help with product questions, custom requests, and order support.</p>"
+      }
     }
   },
   "order": [
