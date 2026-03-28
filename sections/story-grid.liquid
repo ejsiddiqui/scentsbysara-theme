@@ -60,12 +60,12 @@
 
       {%- for story in stories -%}
         {%- liquid
-          assign story_title = story.title.value | default: story.system.title
-          assign story_name = story.name.value
-          assign story_body = story.story.value
+          assign story_title = story.heading
+          assign story_name = story.customer_name
+          assign story_body = story.details
           assign story_image = story.image.value
           assign story_product = story.product.value
-          assign story_anonymous = story.anonymous.value
+          assign story_anonymous = story.anonymous
         -%}
         <dialog-component id="StoryModal-{{ section.id }}-{{ forloop.index }}">
           <dialog class="story-modal">
