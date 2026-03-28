@@ -24,7 +24,7 @@
             assign story_product = story.product.value
             assign story_anonymous = story.anonymous.value
           -%}
-          <!-- DBG handle={{story.system.handle}} heading={{story.heading|truncate:15}} | customer_story={{story.customer_story|truncate:15}} | story_content={{story.story_content|truncate:15}} | full_story={{story.full_story|truncate:15}} | your_story={{story.your_story|truncate:15}} | written_story={{story.written_story|truncate:15}} | submission={{story.submission|truncate:15}} | story_submission={{story.story_submission|truncate:15}} | anon_key={{story.anonymous_submission}} -->
+          <!-- DBG_JSON:{{ story | json | truncate: 500 }} -->
           <button
             class="story-card"
             type="button"
