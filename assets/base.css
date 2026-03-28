@@ -56,6 +56,12 @@ body {
   overflow-x: clip;
 }
 
+/* Ensure text color cascades correctly inside color scheme sections */
+[class*="color-scheme-"] {
+  color: var(--color-foreground);
+  background-color: var(--color-background);
+}
+
 img,
 picture,
 video,
