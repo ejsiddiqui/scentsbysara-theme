@@ -51,7 +51,7 @@
     "page_hero_iGRYBF": {
       "type": "page-hero",
       "custom_css": [
-        ".page-hero__overlay{background: none;}"
+        ".page-hero__overlay {background: none;}"
       ],
       "name": "Page hero",
       "settings": {
@@ -68,7 +68,14 @@
         "heading": "YOUR STORIES",
         "eyebrow": "AS TOLD BY OUR COMMUNITY",
         "description": "Every candle tells a story. These are yours: shared moments of transformation, memory, and quiet power.",
-        "stories": []
+        "stories": [
+          "she-is-grace",
+          "she-is-strength",
+          "she-is-beauty",
+          "she-is-timeless",
+          "she-is-power",
+          "she-is-you"
+        ]
       }
     },
     "editorial": {
