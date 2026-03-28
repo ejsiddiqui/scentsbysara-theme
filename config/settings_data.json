@@ -10,8 +10,8 @@
 {
   "current": {
     "logo": "shopify://shop_images/logo.svg",
-    "logo_inverse": "",
-    "logo_mobile": "shopify://shop_images/logo-symbol.svg",
+    "logo_inverse": "shopify://shop_images/logo-symbol.svg",
+    "logo_mobile": "shopify://shop_images/logo-long.svg",
     "logo_height": 30,
     "favicon": "shopify://shop_images/logo-symbol.svg",
     "type_heading_font": "libre_baskerville_n4",
@@ -37,10 +37,10 @@
     "card_show_quick_add": true,
     "swatch_shape": "circle",
     "swatch_size": 30,
-    "social_instagram": "#",
-    "social_facebook": "#",
-    "social_tiktok": "#",
-    "social_pinterest": "#",
+    "social_instagram": "https://www.instagram.com/scentsbysara",
+    "social_facebook": "https://www.facebook.com/scentsbysara",
+    "social_tiktok": "https://www.toktok.com/scentsbysara",
+    "social_pinterest": "https://www.pinterest.com/scentsbysara",
     "content_for_index": [],
     "color_schemes": {
       "scheme-1": {
