@@ -1037,3 +1037,8 @@ select:focus {
     --gutter: 12px;
   }
 }
+
+/* Hide variant selectors on featured collection cards (homepage) */
+.featured-collection .product-card__options {
+  display: none;
+}
