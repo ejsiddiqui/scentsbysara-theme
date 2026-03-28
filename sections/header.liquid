@@ -603,13 +603,16 @@
     position: relative;
     flex: 1;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
 
   .mobile-panel {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    height: 100%;
+    flex: 1;
+    min-height: 0;
   }
 
   .mobile-panel.is-active {
@@ -623,14 +626,13 @@
   .mobile-nav-links,
   .mobile-shop-groups {
     display: grid;
-    gap: 1rem;
+    gap: var(--space-lg);
   }
 
   .mobile-nav-link,
   .mobile-nav-trigger {
     justify-content: space-between;
-    padding: 0.75rem 0;
-    border-bottom: 1px solid rgba(63, 50, 41, 0.08);
+    padding: 0;
   }
 
   .mobile-nav-trigger {
