@@ -9,6 +9,16 @@
  */
 {
   "sections": {
+    "page_hero_ef9eP4": {
+      "type": "page-hero",
+      "name": "Page hero",
+      "settings": {
+        "color_scheme": "",
+        "heading": "Your Story",
+        "subheading": "Stories that deserve to be seen",
+        "image": "shopify://shop_images/hero-your-story.png"
+      }
+    },
     "hero": {
       "type": "split-view",
       "settings": {
@@ -17,10 +27,14 @@
         "eyebrow": "YOUR STORY",
         "heading": "THE PLEASURE OF A LIFETIME.",
         "body": "<p>Scents by Sara was built on the stories of real women. Every candle holds a memory. We invite you to share yours.</p>",
+        "asset_image": "",
+        "image_alt": "Founder of Scents by Sara",
         "image_position": "left",
         "content_background": "primary",
         "cta_text": "",
-        "button_style": "btn-outline"
+        "cta_link": "",
+        "button_style": "btn-outline",
+        "collection_filter": ""
       }
     },
     "form": {
@@ -39,7 +53,8 @@
         "color_scheme": "scheme-1",
         "heading": "YOUR STORIES",
         "eyebrow": "AS TOLD BY OUR COMMUNITY",
-        "description": "Every candle tells a story. These are yours: shared moments of transformation, memory, and quiet power."
+        "description": "Every candle tells a story. These are yours: shared moments of transformation, memory, and quiet power.",
+        "stories": []
       }
     },
     "editorial": {
@@ -50,15 +65,19 @@
         "eyebrow": "OUR STORY",
         "heading": "GROUNDED IN RITUAL. EMBODIED IN CONFIDENCE.",
         "body": "<p>Scents By Sara is a female-founded fragrance house rooted in embodied confidence and modern ritual. What began as a personal exploration of scent and form has grown into a brand shaped by lived experience, community, and the power of recognising ourselves as we are.</p>",
+        "asset_image": "",
+        "image_alt": "Founder of Scents by Sara",
         "image_position": "left",
         "content_background": "secondary",
         "cta_text": "READ OUR STORY",
         "cta_link": "/pages/our-story",
-        "button_style": "btn-solid"
+        "button_style": "btn-solid",
+        "collection_filter": ""
       }
     }
   },
   "order": [
+    "page_hero_ef9eP4",
     "hero",
     "form",
     "grid",
