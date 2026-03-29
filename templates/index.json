@@ -83,55 +83,36 @@
         "color_scheme": "scheme-1"
       }
     },
-    "commitment": {
-      "type": "commitment",
+    "split_view_nGBMwq": {
+      "type": "split-view",
       "blocks": {
-        "value_1": {
-          "type": "value",
+        "note_HVyTw9": {
+          "type": "note",
           "settings": {
-            "title": "Embodied Confidence",
-            "description": "Confidence that is felt rather than performed - creating space to recognise ourselves, our experiences, and how we feel within them."
-          }
-        },
-        "value_2": {
-          "type": "value",
-          "settings": {
-            "title": "Rooted in Real Stories",
-            "description": "Built with its community, not just for it - shaped by lived experience, resilience, and the individuality that defines each person."
-          }
-        },
-        "value_3": {
-          "type": "value",
-          "settings": {
-            "title": "Meaningful Gifting",
-            "description": "Custom pieces gifted as recognition for self or others - chosen to honour who someone is and the moments that shape them."
-          }
-        },
-        "value_4": {
-          "type": "value",
-          "settings": {
-            "title": "Sustainable Craftsmanship",
-            "description": "Luxury defined through consideration - for materials, craft, and the environments in which our pieces exist."
+            "title": "Intentional craft",
+            "text": "Every piece is designed to feel considered, personal, and quietly luxurious."
           }
         }
       },
       "block_order": [
-        "value_1",
-        "value_2",
-        "value_3",
-        "value_4"
+        "note_HVyTw9"
       ],
+      "name": "Split view",
       "settings": {
+        "color_scheme": "",
         "full_width": true,
-        "color_scheme": "scheme-1",
-        "eyebrow": "OUR Philosophy",
+        "eyebrow": "OUR PHILOSOPHY",
         "heading": "INTENTIONAL DESIGN IN SCENT & FORM.",
-        "description": "Scents By Sara is rooted in self-recognition in a culture of external validation. \n\nFragrance is approached as emotional architecture, shaping the relationship between body, space, and emotion. \n\nEach piece is created as a ritual object, designed to be returned to — reinforcing recognition of self, space, and lived experience.\n\nHere, confidence is not performed.\nIt is embodied.",
+        "body": "<p>Scents By Sara is rooted in self-recognition in a culture of external validation. <br/><br/>Fragrance is approached as emotional architecture, shaping the relationship between body, space, and emotion. <br/><br/>Each piece is created as a ritual object, designed to be returned to — reinforcing recognition of self, space, and lived experience.<br/><br/>Here, confidence is not performed.<br/>It is embodied.</p>",
         "image": "shopify://shop_images/our-philosphy.png",
-        "image_alt": "Matches and candle",
+        "asset_image": "",
+        "image_alt": "Founder of Scents by Sara",
         "image_position": "left",
-        "button_label": "READ OUR STORY",
-        "button_link": "/pages/our-story"
+        "content_background": "secondary",
+        "cta_text": "",
+        "cta_link": "",
+        "button_style": "btn-solid",
+        "collection_filter": ""
       }
     },
     "collections": {
@@ -235,7 +216,7 @@
   "order": [
     "hero",
     "bestsellers",
-    "commitment",
+    "split_view_nGBMwq",
     "collections",
     "our_story",
     "testimonials"
