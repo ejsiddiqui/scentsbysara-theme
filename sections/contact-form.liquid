@@ -2,7 +2,7 @@
   <div class="container contact-section__grid contact-grid grid-cols-2">
     <aside class="contact-section__info contact-info-panel">
       <span class="eyebrow">{{ section.settings.info_eyebrow | escape }}</span>
-      <h1 class="font-serif text-h2">{{ section.settings.heading | escape }}</h1>
+      <h1 class="text-h2">{{ section.settings.heading | escape }}</h1>
 
       {%- if section.settings.description != blank -%}
         <div class="text-body text-muted">{{ section.settings.description }}</div>
@@ -189,7 +189,7 @@
 
   .contact-form {
     display: grid;
-    gap: 14px;
+    gap: 20px;
   }
 
   .contact-form__name-row {
@@ -223,7 +223,9 @@
   }
 
   .form-meta {
-    display: none;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 6px;
   }
 
   .char-count {
