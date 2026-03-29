@@ -12,7 +12,7 @@
     "hero": {
       "type": "page-hero",
       "custom_css": [
-        ".page-hero__overlay{background: none;}"
+        ".page-hero__overlay {background: none;}"
       ],
       "settings": {
         "color_scheme": "scheme-2",
@@ -39,8 +39,8 @@
         "color_scheme": "scheme-1",
         "info_eyebrow": "GET IN TOUCH",
         "form_eyebrow": "SEND A MESSAGE",
-        "heading": "LET US SUPPORT YOUR RITUAL",
-        "description": "<p>We are here to help with product questions, custom requests, and order support.</p>"
+        "heading": "",
+        "description": "<p>Our team replies within 1-2 business days. For order issues, include your order number for faster help.</p>"
       }
     }
   },
