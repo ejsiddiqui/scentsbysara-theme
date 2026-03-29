@@ -30,7 +30,7 @@
         %}
         <div class="collection-fullbleed-hero__overlay"></div>
         <div class="container collection-fullbleed-hero__content">
-          <h1 class="font-serif collection-fullbleed-hero__title">{{ collection.title | upcase }}</h1>
+          <h1 class="collection-fullbleed-hero__title">{{ collection.title | upcase }}</h1>
           {%- if collection.description != blank -%}
             <p class="collection-fullbleed-hero__desc">{{ collection.description | strip_html | truncatewords: 30 }}</p>
           {%- endif -%}

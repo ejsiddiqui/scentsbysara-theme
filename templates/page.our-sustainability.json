@@ -54,6 +54,54 @@
         "collection_filter": ""
       }
     },
+    "ingredients": {
+      "type": "split-view",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "eyebrow": "OUR INGREDIENTS",
+        "heading": "SCENT AS A CONSCIOUS CHOICE.",
+        "body": "<p>Every fragrance we use is IFRA-certified, phthalate-free, and responsibly sourced. We work with suppliers who share our commitment to transparency — from the origin of each note to its environmental impact.</p>",
+        "asset_image": "",
+        "image_alt": "Natural fragrance ingredients",
+        "image_position": "left",
+        "content_background": "secondary",
+        "cta_text": "",
+        "cta_link": "",
+        "button_style": "btn-outline",
+        "collection_filter": ""
+      }
+    },
+    "ingredients_carousel": {
+      "type": "scents-section",
+      "blocks": {
+        "scent_1": {
+          "type": "scent",
+          "settings": {
+            "name": "VANILLA & SANDALWOOD",
+            "description": "<p>Warm and enveloping, this grounding blend centres the senses and settles the mind.</p>"
+          }
+        },
+        "scent_2": {
+          "type": "scent",
+          "settings": {
+            "name": "JASMINE & NEROLI",
+            "description": "<p>A floral luminosity — uplifting, feminine, and quietly intoxicating.</p>"
+          }
+        },
+        "scent_3": {
+          "type": "scent",
+          "settings": {
+            "name": "CEDAR & AMBER",
+            "description": "<p>Deep, woody warmth with a dry-down that lingers like memory.</p>"
+          }
+        }
+      },
+      "settings": {
+        "heading": "OUR SIGNATURE SCENTS",
+        "columns_desktop": 3
+      }
+    },
     "packaging": {
       "type": "split-view",
       "settings": {
@@ -64,8 +112,8 @@
         "body": "<p>Our packaging is printed on FSC-certified kraft card using water-based inks. Every element is recyclable. We use minimal void fill and never use plastic wrapping in our shipments.</p>",
         "asset_image": "",
         "image_alt": "Founder of Scents by Sara",
-        "image_position": "left",
-        "content_background": "secondary",
+        "image_position": "right",
+        "content_background": "primary",
         "cta_text": "SHOP NOW",
         "cta_link": "shopify://collections/all",
         "button_style": "btn-outline",
@@ -77,6 +125,8 @@
     "hero",
     "quote",
     "materials",
+    "ingredients",
+    "ingredients_carousel",
     "packaging"
   ]
 }
