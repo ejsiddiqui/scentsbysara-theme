@@ -24,6 +24,7 @@
         "cta_text": "SHOP NOW",
         "cta_link": "shopify://collections/all",
         "button_style": "btn-solid",
+        "text_alignment": "left",
         "collection_filter": ""
       }
     },
@@ -51,6 +52,7 @@
         "cta_text": "",
         "cta_link": "",
         "button_style": "btn-outline",
+        "text_alignment": "left",
         "collection_filter": ""
       }
     },
@@ -69,6 +71,7 @@
         "cta_text": "",
         "cta_link": "",
         "button_style": "btn-outline",
+        "text_alignment": "left",
         "collection_filter": ""
       }
     },
@@ -76,32 +79,9 @@
       "type": "scents-section",
       "settings": {
         "heading": "OUR SIGNATURE SCENTS",
+        "intro": "",
         "columns_desktop": 3
-      },
-      "blocks": {
-        "scent_1": {
-          "type": "scent",
-          "settings": {
-            "name": "VANILLA & SANDALWOOD",
-            "description": "<p>Warm and enveloping, this grounding blend centres the senses and settles the mind.</p>"
-          }
-        },
-        "scent_2": {
-          "type": "scent",
-          "settings": {
-            "name": "JASMINE & NEROLI",
-            "description": "<p>A floral luminosity — uplifting, feminine, and quietly intoxicating.</p>"
-          }
-        },
-        "scent_3": {
-          "type": "scent",
-          "settings": {
-            "name": "CEDAR & AMBER",
-            "description": "<p>Deep, woody warmth with a dry-down that lingers like memory.</p>"
-          }
-        }
-      },
-      "blocks_order": ["scent_1", "scent_2", "scent_3"]
+      }
     },
     "packaging": {
       "type": "split-view",
@@ -118,6 +98,7 @@
         "cta_text": "SHOP NOW",
         "cta_link": "shopify://collections/all",
         "button_style": "btn-outline",
+        "text_alignment": "left",
         "collection_filter": ""
       }
     }

@@ -100,6 +100,7 @@
         "cta_text": "",
         "cta_link": "",
         "button_style": "btn-solid",
+        "text_alignment": "left",
         "collection_filter": ""
       }
     },
@@ -109,7 +110,8 @@
         "collection_1": {
           "type": "collection_card",
           "settings": {
-            "collection": "",
+            "collection": "scar-collection",
+            "image_override": "shopify://shop_images/scar-collection.png",
             "image_alt": "",
             "heading_override": "SCAR COLLECTION",
             "body_text": "Designed to celebrate the body as a holder of memory, healing, and confidence. Gold leaf is applied by hand to mark scars - not as decoration but as recognition.",
@@ -120,7 +122,8 @@
         "collection_2": {
           "type": "collection_card",
           "settings": {
-            "collection": "",
+            "collection": "sculpted-collection",
+            "image_override": "shopify://shop_images/sculpted-collection-mobile-hero.png",
             "image_alt": "",
             "heading_override": "SCULPTED COLLECTION",
             "body_text": "Designed around fluid silhouettes and intentional scent layering, this line celebrates the female body through elevated shape, texture, and ritual.",
@@ -156,6 +159,7 @@
         "cta_text": "READ MORE",
         "cta_link": "/pages/our-story",
         "button_style": "btn-solid",
+        "text_alignment": "center",
         "collection_filter": ""
       }
     },
