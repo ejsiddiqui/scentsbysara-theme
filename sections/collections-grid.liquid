@@ -59,7 +59,7 @@
             </div>
 
             <div class="collection-content collections-grid__content">
-              <h3 class="font-serif collections-grid__title">{{ card_title | escape }}</h3>
+              <h3 class="collections-grid__title">{{ card_title | escape }}</h3>
               {%- if card_text != blank -%}
                 <p class="collections-grid__text">{{ card_text | strip_html | truncatewords: 28 }}</p>
               {%- endif -%}
@@ -94,7 +94,7 @@
   #CollectionsGrid-{{ section.id }} .collections-grid__grid {
     display: grid;
     grid-template-columns: repeat(var(--collections-grid-columns, 2), minmax(0, 1fr));
-    gap: var(--space-xl);
+    gap: var(--space-md);
     align-items: start;
   }
 
@@ -132,11 +132,14 @@
   #CollectionsGrid-{{ section.id }} .collections-grid__content {
     display: grid;
     gap: 1rem;
+    text-align: center;
+    justify-items: center;
   }
 
   #CollectionsGrid-{{ section.id }} .collections-grid__title {
+    font-family: var(--font-sans);
+    font-size: var(--text-h3);
     text-transform: uppercase;
-    font-size: clamp(1.2rem, 1.2vw + 0.9rem, 1.75rem);
   }
 
   #CollectionsGrid-{{ section.id }} .collections-grid__text {
@@ -144,7 +147,9 @@
   }
 
   #CollectionsGrid-{{ section.id }} .collections-grid__button {
-    justify-self: start;
+    width: 100%;
+    justify-self: stretch;
+    text-align: center;
   }
 
   @media screen and (max-width: 989px) {
