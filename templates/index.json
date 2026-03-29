@@ -124,10 +124,10 @@
       "settings": {
         "full_width": true,
         "color_scheme": "scheme-1",
-        "eyebrow": "OUR COMMITMENT",
-        "heading": "INTENTIONAL DESIGN IN SCENT AND FORM.",
-        "description": "Every material used by Scents by Sara is chosen for performance, longevity, and environmental consideration.",
-        "image": "shopify://shop_images/our-commitment.png",
+        "eyebrow": "OUR Philosophy",
+        "heading": "INTENTIONAL DESIGN IN SCENT & FORM.",
+        "description": "Scents By Sara is rooted in self-recognition in a culture of external validation. \n\nFragrance is approached as emotional architecture, shaping the relationship between body, space, and emotion. \n\nEach piece is created as a ritual object, designed to be returned to — reinforcing recognition of self, space, and lived experience.\n\nHere, confidence is not performed.\nIt is embodied.",
+        "image": "shopify://shop_images/our-philosphy.png",
         "image_alt": "Matches and candle",
         "image_position": "left",
         "button_label": "READ OUR STORY",
@@ -180,12 +180,14 @@
         "heading": "GROUNDED IN RITUAL. EMBODIED IN CONFIDENCE.",
         "body": "<p>Scents By Sara is a female-founded fragrance house rooted in embodied confidence and modern ritual. What began as a personal exploration of scent and form has grown into a brand shaped by lived experience, community, and the power of recognising ourselves as we are.</p>",
         "image": "shopify://shop_images/our-story.png",
+        "asset_image": "",
         "image_alt": "Founder of Scents by Sara",
         "image_position": "left",
         "content_background": "secondary",
         "cta_text": "READ MORE",
         "cta_link": "/pages/our-story",
-        "button_style": "btn-solid"
+        "button_style": "btn-solid",
+        "collection_filter": ""
       }
     },
     "testimonials": {
