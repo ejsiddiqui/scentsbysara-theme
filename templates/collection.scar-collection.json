@@ -14,9 +14,12 @@
       "settings": {
         "products_per_page": 16,
         "columns_desktop": 4,
+        "card_layout": "shop",
         "enable_filtering": true,
         "enable_sorting": true,
-        "color_scheme": "scheme-1"
+        "color_scheme": "scheme-1",
+        "hero_title": "SHOP ALL",
+        "hero_description": "Discover the full Scents By Sara collection. Thoughtfully designed to reflect real bodies, each combines sculptural form with meaning detail and intentional craftsmanship."
       }
     },
     "sustainable": {
@@ -24,14 +27,18 @@
       "settings": {
         "color_scheme": "scheme-1",
         "full_width": true,
-        "eyebrow": "OUR SUSTAINABLE PRACTICE",
-        "heading": "CRAFTED WITH CONSIDERATION.",
-        "body": "<p>Every material used by Scents by Sara is chosen for performance, longevity, and environmental consideration. Plant-based wax, IFRA-certified fragrances, and FSC-certified recyclable packaging — because what goes into the candle matters as much as what comes out.</p>",
+        "eyebrow": "",
+        "heading": "OUR SUSTAINABLE PRACTICE",
+        "body": "<p>Luxury is not defined by excess or volume, but by consideration - for the materials we work with, the people involved in bringing each piece to life, and the environments in which our pieces exist.<br/><br/></p>",
+        "image": "shopify://shop_images/our-commitment.png",
+        "asset_image": "",
+        "image_alt": "Founder of Scents by Sara",
         "image_position": "right",
         "content_background": "secondary",
-        "cta_text": "READ MORE",
+        "cta_text": "Our Approach",
         "cta_link": "/pages/our-sustainability",
-        "button_style": "btn-outline"
+        "button_style": "btn-solid",
+        "collection_filter": ""
       }
     }
   },
