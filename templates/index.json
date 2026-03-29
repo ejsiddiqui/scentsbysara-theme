@@ -162,7 +162,8 @@
     "page_hero_aCnJqP": {
       "type": "page-hero",
       "custom_css": [
-        ".page-hero__overlay{background: none;}"
+        ".page-hero__overlay {background: none;}",
+        ".page-hero--has-image {margin: 0 var(--gutter);}"
       ],
       "name": "Page hero",
       "settings": {
