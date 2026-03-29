@@ -85,18 +85,6 @@
     },
     "split_view_nGBMwq": {
       "type": "split-view",
-      "blocks": {
-        "note_HVyTw9": {
-          "type": "note",
-          "settings": {
-            "title": "Intentional craft",
-            "text": "Every piece is designed to feel considered, personal, and quietly luxurious."
-          }
-        }
-      },
-      "block_order": [
-        "note_HVyTw9"
-      ],
       "name": "Split view",
       "settings": {
         "color_scheme": "",
@@ -163,12 +151,25 @@
         "image": "shopify://shop_images/our-story.png",
         "asset_image": "",
         "image_alt": "Founder of Scents by Sara",
-        "image_position": "left",
+        "image_position": "right",
         "content_background": "secondary",
         "cta_text": "READ MORE",
         "cta_link": "/pages/our-story",
         "button_style": "btn-solid",
         "collection_filter": ""
+      }
+    },
+    "page_hero_aCnJqP": {
+      "type": "page-hero",
+      "custom_css": [
+        ".page-hero__overlay{background: none;}"
+      ],
+      "name": "Page hero",
+      "settings": {
+        "color_scheme": "",
+        "heading": "",
+        "subheading": "",
+        "image": "shopify://shop_images/home-image-2.png"
       }
     },
     "testimonials": {
@@ -219,6 +220,7 @@
     "split_view_nGBMwq",
     "collections",
     "our_story",
+    "page_hero_aCnJqP",
     "testimonials"
   ]
 }
