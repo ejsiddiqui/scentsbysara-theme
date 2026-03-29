@@ -8,6 +8,12 @@
     assign content_background_class = 'bg-primary'
   endif
 
+  assign text_align = section.settings.text_alignment | default: 'left'
+  assign content_align_items = 'flex-start'
+  if text_align == 'center'
+    assign content_align_items = 'center'
+  endif
+
   assign collection_filter = section.settings.collection_filter | strip
   assign skip_section = false
   if collection_filter != blank and collection.handle != collection_filter
@@ -39,7 +45,7 @@
         {%- endif -%}
       </div>
 
-      <div class="split-view__content {{ content_background_class }}">
+      <div class="split-view__content {{ content_background_class }}"{% if text_align != 'left' %} style="text-align: {{ text_align }}; align-items: {{ content_align_items }};"{% endif %}>
         {%- if section_eyebrow != blank -%}
           <span class="eyebrow">{{ section_eyebrow | escape }}</span>
         {%- endif -%}
@@ -191,6 +197,16 @@
         }
       ],
       "default": "btn-solid"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ],
+      "default": "left"
     },
     {
       "type": "text",
