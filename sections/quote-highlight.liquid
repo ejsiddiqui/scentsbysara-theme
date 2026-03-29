@@ -1,6 +1,5 @@
 <section class="quote-highlight section-block color-{{ section.settings.color_scheme }}">
   <div class="container quote-highlight__inner quote-highlight__inner--{{ section.settings.text_alignment }}">
-    <span class="quote-highlight__mark" aria-hidden="true">"</span>
     <blockquote class="quote-highlight__quote font-serif">{{ section.settings.quote | escape }}</blockquote>
 
     {%- if section.settings.attribution != blank -%}
@@ -11,9 +10,7 @@
 
 {% stylesheet %}
   .quote-highlight__inner {
-    padding: clamp(2rem, 4vw, 4rem);
-    background: var(--color-secondary-bg);
-    border: 1px solid var(--color-border);
+    padding: clamp(3rem, 6vw, 6rem) clamp(2rem, 8vw, 10rem);
   }
 
   .quote-highlight__inner--center {
@@ -24,23 +21,17 @@
     text-align: left;
   }
 
-  .quote-highlight__mark {
-    display: inline-block;
-    margin-bottom: 1rem;
-    font-size: clamp(3rem, 6vw, 5rem);
-    line-height: 1;
-    color: var(--color-accent);
-  }
-
   .quote-highlight__quote {
     margin: 0;
-    font-size: clamp(1.5rem, 2.8vw, 2.5rem);
-    line-height: 1.2;
+    font-size: clamp(1.75rem, 3vw, 2.75rem);
+    line-height: 1.25;
+    font-style: italic;
+    letter-spacing: 0.01em;
   }
 
   .quote-highlight__attribution {
-    margin-top: 1rem;
-    letter-spacing: 0.08em;
+    margin-top: 1.5rem;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
   }
 {% endstylesheet %}

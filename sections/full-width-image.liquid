@@ -1,0 +1,94 @@
+{%- liquid
+  assign margin_px = section.settings.margin | default: 0
+-%}
+
+<section
+  id="FullWidthImage-{{ section.id }}"
+  class="full-width-image section-block color-{{ section.settings.color_scheme }}"
+>
+  {%- if section.settings.image != blank -%}
+    <div
+      class="full-width-image__wrap"
+      style="margin-inline: {{ margin_px }}px;"
+    >
+      {% render 'image',
+        image: section.settings.image,
+        alt: section.settings.alt_text | default: '',
+        class: 'full-width-image__img',
+        loading: 'lazy',
+        sizes: '100vw'
+      %}
+    </div>
+  {%- else -%}
+    <div class="full-width-image__placeholder" style="margin-inline: {{ margin_px }}px;">
+      <span>Select an image in the theme editor</span>
+    </div>
+  {%- endif -%}
+</section>
+
+{% stylesheet %}
+  .full-width-image {
+    overflow: clip;
+  }
+
+  .full-width-image__wrap {
+    line-height: 0;
+  }
+
+  .full-width-image__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .full-width-image__placeholder {
+    display: grid;
+    place-items: center;
+    min-height: 200px;
+    background: var(--color-secondary-bg);
+    border: 1px dashed var(--color-border);
+    color: var(--color-muted);
+    font-size: var(--text-small);
+    letter-spacing: 0.08em;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Full width image",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "alt_text",
+      "label": "Image alt text"
+    },
+    {
+      "type": "range",
+      "id": "margin",
+      "label": "Side margin (px)",
+      "info": "Horizontal margin applied to each side of the image.",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Full width image"
+    }
+  ]
+}
+{% endschema %}
