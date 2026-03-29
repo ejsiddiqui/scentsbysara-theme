@@ -46,6 +46,7 @@ class SlideshowComponent extends Component {
       this.touchTracking = true;
       this.touchStartX = event.clientX;
       this.touchStartY = event.clientY;
+      try { this.setPointerCapture(event.pointerId); } catch (_) {}
     };
 
     this.handlePointerUp = (event) => {
