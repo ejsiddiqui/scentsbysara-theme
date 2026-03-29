@@ -58,7 +58,7 @@
         "hero_slide_3"
       ],
       "settings": {
-        "autoplay": false,
+        "autoplay": true,
         "interval": 5,
         "show_arrows": false,
         "accessibility_label": "Homepage hero slideshow",
