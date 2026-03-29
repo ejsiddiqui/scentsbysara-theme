@@ -101,6 +101,8 @@
         "cta_link": "",
         "button_style": "btn-solid",
         "text_alignment": "left",
+        "button_alignment": "left",
+        "heading_max_width": "",
         "collection_filter": ""
       }
     },
@@ -160,6 +162,8 @@
         "cta_link": "/pages/our-story",
         "button_style": "btn-solid",
         "text_alignment": "center",
+        "button_alignment": "center",
+        "heading_max_width": "350px",
         "collection_filter": ""
       }
     },
