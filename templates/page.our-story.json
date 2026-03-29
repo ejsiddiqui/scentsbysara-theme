@@ -27,6 +27,14 @@
         "collection_filter": ""
       }
     },
+    "story_grid": {
+      "type": "story-grid",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "heading": "YOUR STORIES",
+        "eyebrow": "AS TOLD BY OUR COMMUNITY"
+      }
+    },
     "quote": {
       "type": "quote-highlight",
       "settings": {
@@ -53,11 +61,48 @@
         "button_style": "btn-outline",
         "collection_filter": ""
       }
+    },
+    "our_craft": {
+      "type": "split-view",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "eyebrow": "OUR CRAFT",
+        "heading": "MADE BY HAND. MADE WITH INTENTION.",
+        "body": "<p>Every piece in the Scents by Sara collection is hand-poured in small batches. We believe in slow making — taking time with each candle so that care is built into the object before it reaches you.</p>",
+        "asset_image": "",
+        "image_alt": "Hand-pouring candles",
+        "image_position": "left",
+        "content_background": "secondary",
+        "cta_text": "SHOP THE COLLECTION",
+        "cta_link": "shopify://collections/all",
+        "button_style": "btn-outline",
+        "collection_filter": ""
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "SHOP THE COLLECTION",
+        "color_scheme": "scheme-1",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "show_navigation": true,
+        "card_layout": "stacked",
+        "show_secondary_image": true,
+        "show_swatches": true,
+        "show_quick_add": true,
+        "show_view_all": true,
+        "view_all_label": "SHOP ALL"
+      }
     }
   },
   "order": [
     "hero",
+    "story_grid",
     "quote",
-    "story-2"
+    "story-2",
+    "our_craft",
+    "featured_collection"
   ]
 }
