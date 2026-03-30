@@ -178,7 +178,7 @@
             "text_color": "#3f3229",
             "card_color": "#f9f6f2",
             "stars_color": "#cec5b8",
-            "arrows_color": "#a39382",
+            "arrows_color": "#cec5b8",
             "transition_speed": 5,
             "header_text": "",
             "show_average_rating": true
