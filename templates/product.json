@@ -52,7 +52,7 @@
         "dimensions"
       ],
       "settings": {
-        "show_vendor": true,
+        "show_vendor": false,
         "show_description": true,
         "fallback_subtitle": "STRETCH MARK BODY CANDLE"
       }
