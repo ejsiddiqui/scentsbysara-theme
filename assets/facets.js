@@ -7,8 +7,13 @@ class FacetFilters extends Component {
     this.toggle = this.querySelector('[data-facets-toggle]');
     this.requestController = null;
 
+    if (this.panel) {
+      this.panel.removeAttribute('hidden');
+    }
+
     this.handleChange = (event) => {
-      if (event.target.matches('input[type="checkbox"], select[name="sort_by"]')) {
+      // Only sort_by triggers immediate re-render; checkboxes apply via the Apply button
+      if (event.target.matches('select[name="sort_by"]')) {
         this.renderSection(this.buildCollectionUrl());
       }
     };
@@ -43,7 +48,10 @@ class FacetFilters extends Component {
 
       if (clear) {
         event.preventDefault();
-        this.renderSection(clear.href);
+        if (this.panel) {
+          this.panel.querySelectorAll('input[type="checkbox"]').forEach((i) => { i.checked = false; });
+          this.panel.querySelectorAll('input[type="number"]').forEach((i) => { i.value = ''; });
+        }
         return;
       }
 
@@ -124,8 +132,8 @@ class FacetFilters extends Component {
       return;
     }
 
-    const nextOpen = typeof forceOpen === 'boolean' ? forceOpen : this.panel.hidden;
-    this.panel.hidden = !nextOpen;
+    const nextOpen = typeof forceOpen === 'boolean' ? forceOpen : !this.panel.classList.contains('is-open');
+    this.panel.classList.toggle('is-open', nextOpen);
 
     if (this.toggle) {
       this.toggle.setAttribute('aria-expanded', nextOpen ? 'true' : 'false');
