@@ -52,15 +52,21 @@
   max-width: 34rem;
   margin-inline: auto;
   font-size: var(--text-body-large);
+  line-height: 1.6;
   font-style: italic;
   font-weight: 300;
+  color: var(--color-taupe);
+  opacity: 0.8;
 }
 
 .testimonials-section .testimonial-author {
   font-family: var(--font-sans);
-  font-size: var(--text-body-small);
-  letter-spacing: 0.15em;
+  font-size: var(--text-body-large);
+  font-weight: 500;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
+  color: var(--color-taupe);
+  margin-top: var(--space-md);
 }
 
 .testimonials-section .testimonials-section__dots {

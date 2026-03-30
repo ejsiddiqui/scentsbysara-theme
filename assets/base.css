@@ -679,9 +679,10 @@ textarea,
 select {
   width: 100%;
   padding: 12px 14px;
-  border: 1px solid var(--color-border);
-  background-color: var(--color-background);
+  border: 1px solid var(--border-heavy);
+  background-color: transparent;
   color: var(--color-foreground);
+  font-family: inherit;
 }
 
 .form-input::placeholder,

@@ -110,68 +110,37 @@
     }
 
     #shopify-section-{{ section.id }} .scents-section--product .scents-section__inner {
-      max-width: none;
-      padding: clamp(3rem, 5vw, 4rem) 0 0;
-    }
-
-    #shopify-section-{{ section.id }} .scents-section--product .scents-section__heading-wrap {
+      max-width: var(--container-max, 1440px);
       margin: 0 auto;
-      max-width: var(--page-width, 1800px);
-      padding: 0 clamp(1rem, 3vw, 3rem) clamp(2rem, 3vw, 2.75rem);
+      padding: var(--space-xl) var(--gutter);
     }
 
     #shopify-section-{{ section.id }} .scents-section--product .scents-section__grid {
-      gap: 0;
-      margin-top: 0;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-md);
+      margin-top: var(--space-lg);
     }
 
     #shopify-section-{{ section.id }} .scents-section--product .scents-section__card {
       position: relative;
-      min-height: clamp(30rem, 49vw, 61.5rem);
+      min-height: 0;
       background: transparent;
       border: 0;
     }
 
     #shopify-section-{{ section.id }} .scents-section--product .scents-section__media {
-      aspect-ratio: auto;
-      min-height: clamp(30rem, 49vw, 61.5rem);
+      aspect-ratio: 1 / 1;
+      min-height: 0;
       background: transparent;
     }
 
     #shopify-section-{{ section.id }} .scents-section--product .scents-section__media::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(63, 50, 41, 0.12), rgba(63, 50, 41, 0.26));
-      pointer-events: none;
+      display: none;
     }
 
     #shopify-section-{{ section.id }} .scents-section--product .scents-section__body {
-      position: absolute;
-      z-index: 1;
-      display: grid;
-      gap: 1.5rem;
-      inset: auto auto 3rem 3.25rem;
-      max-width: 34rem;
-      padding: 0;
-      color: var(--color-background);
-    }
-
-    #shopify-section-{{ section.id }} .scents-section--product .scents-section__card:nth-child(even) .scents-section__body {
-      inset: 3rem 3.25rem auto auto;
-      text-align: right;
-    }
-
-    #shopify-section-{{ section.id }} .scents-section--product .scents-section__name {
-      font-size: clamp(2.5rem, 3vw, 3.25rem);
-      line-height: 1;
-      color: var(--color-background);
-    }
-
-    #shopify-section-{{ section.id }} .scents-section--product .scents-section__description {
-      color: rgba(249, 246, 242, 0.92);
-      font-size: clamp(1.25rem, 0.6vw + 1rem, 1.6rem);
-      line-height: 1.45;
+      display: none;
     }
 
     @media (max-width: 749px) {

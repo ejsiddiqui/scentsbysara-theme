@@ -330,13 +330,16 @@
 .collection-page .product-card--shop .product-card__title,
 .collection-page .product-card--shop .product-card__title a {
   font-size: var(--text-body);
+  font-weight: 400;
   line-height: 1.15;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 .collection-page .product-card--shop .product-card__subtitle {
-  font-size: var(--text-body-small);
+  font-size: var(--text-small);
   font-weight: 300;
+  color: var(--color-muted);
 }
 
 .collection-page .product-card--shop .product-price {

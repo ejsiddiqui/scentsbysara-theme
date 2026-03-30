@@ -16,8 +16,14 @@
       {%- if section.settings.show_stars -%}
         <div class="testimonials-section__stars" aria-hidden="true">
           {%- for i in (1..star_count) -%}
-            <span class="testimonials-section__star">★</span>
+            <img src="{{ 'star_filled.svg' | asset_url }}" alt="" width="24" height="24">
           {%- endfor -%}
+          {%- assign empty_stars = 5 | minus: star_count -%}
+          {%- if empty_stars > 0 -%}
+            {%- for i in (1..empty_stars) -%}
+              <img src="{{ 'star_empty.svg' | asset_url }}" alt="" width="24" height="24">
+            {%- endfor -%}
+          {%- endif -%}
         </div>
       {%- endif -%}
     </header>

@@ -60,7 +60,13 @@
           <span class="eyebrow">{{ section_eyebrow | escape }}</span>
         {%- endif -%}
         {%- if section_heading != blank -%}
-          <h2 class="font-serif split-view__heading"{% if heading_max_width != blank %} style="max-width: {{ heading_max_width }}"{% endif %}>{{ section_heading | escape }}</h2>
+          {%- assign h_max_width = heading_max_width -%}
+          {%- if h_max_width != blank -%}
+            {%- unless h_max_width contains 'px' or h_max_width contains '%' or h_max_width contains 'ch' or h_max_width contains 'rem' or h_max_width contains 'vw' -%}
+              {%- assign h_max_width = h_max_width | append: 'px' -%}
+            {%- endunless -%}
+          {%- endif -%}
+          <h2 class="font-serif split-view__heading"{% if h_max_width != blank %} style="max-width: {{ h_max_width }}"{% endif %}>{{ section_heading | escape }}</h2>
         {%- endif -%}
 
         {%- if section.settings.body != blank -%}

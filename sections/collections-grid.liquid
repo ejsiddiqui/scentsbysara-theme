@@ -65,7 +65,7 @@
               {%- endif -%}
 
               {%- if block.settings.cta_text != blank and card_link != blank -%}
-                <a href="{{ card_link }}" class="btn-outline collections-grid__button">
+                <a href="{{ card_link }}" class="btn-solid collections-grid__button">
                   {{ block.settings.cta_text | escape }}
                 </a>
               {%- endif -%}
@@ -137,13 +137,18 @@
   }
 
   #CollectionsGrid-{{ section.id }} .collections-grid__title {
-    font-family: var(--font-sans);
+    font-family: var(--font-serif);
     font-size: var(--text-h3);
     text-transform: uppercase;
+    margin: 0;
   }
 
   #CollectionsGrid-{{ section.id }} .collections-grid__text {
     max-width: 34rem;
+    font-size: var(--text-body);
+    line-height: 1.6;
+    font-weight: 300;
+    color: var(--color-muted);
   }
 
   #CollectionsGrid-{{ section.id }} .collections-grid__button {
