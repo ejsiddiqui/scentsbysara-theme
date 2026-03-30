@@ -10,26 +10,6 @@
 {
   "type": "footer",
   "name": "Footer Group",
-  "sections": {
-    "footer": {
-      "type": "footer",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "newsletter_heading": "JOIN OUR NEWSLETTER",
-        "newsletter_text": "",
-        "menu_1": "footer-shop-all",
-        "menu_1_heading": "SHOP ALL",
-        "menu_2": "footer-about-us",
-        "menu_2_heading": "ABOUT US",
-        "menu_3": "footer-gifting",
-        "menu_3_heading": "GIFTING",
-        "menu_4": "footer-customer-service",
-        "menu_4_heading": "CUSTOMER SERVICE",
-        "show_payment_icons": true
-      }
-    }
-  },
-  "order": [
-    "footer"
-  ]
+  "sections": {},
+  "order": []
 }

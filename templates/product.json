@@ -147,8 +147,49 @@
     },
     "reviews": {
       "type": "reviews-placeholder",
+      "blocks": {
+        "judge_me_reviews_cards_carousel_RxmD8a": {
+          "type": "shopify://apps/judge-me-reviews/blocks/cards_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "show_sample_reviews": true,
+            "reviews_selection": "featured_reviews",
+            "products": [
+              "she-is-beauty",
+              "she-is-power",
+              "she-is-strength",
+              "she-is-timeless"
+            ],
+            "star_rating": "4_to_5_star",
+            "show_review_media": false,
+            "display_order": "most_recent",
+            "no_image_fallback": "review_text_only",
+            "max_reviews": 4,
+            "review_length": "small",
+            "text_size": "small",
+            "image_ratio": "1",
+            "reviews_shown": 4,
+            "show_reviewer_name": true,
+            "show_product_name": true,
+            "hide_arrows_mobile": true,
+            "arrows_position": "sides",
+            "max_width": 1100,
+            "corner_styling": "square",
+            "header_text_color": "#2d2b27",
+            "text_color": "#3f3229",
+            "card_color": "#f9f6f2",
+            "stars_color": "#cec5b8",
+            "arrows_color": "#a39382",
+            "transition_speed": 5,
+            "header_text": "",
+            "show_average_rating": true
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_cards_carousel_RxmD8a"
+      ],
       "settings": {
-        "heading": "WHAT OUR CUSTOMERS ARE SAYING"
+        "heading": "Customer Testimonials"
       }
     }
   },
