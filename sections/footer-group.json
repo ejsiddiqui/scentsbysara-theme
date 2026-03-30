@@ -11,16 +11,17 @@
   "type": "footer",
   "name": "Footer Group",
   "sections": {
-    "footer": {
+    "footer_DHViX6": {
       "type": "footer",
+      "name": "Footer",
       "settings": {
         "color_scheme": "scheme-1",
         "newsletter_heading": "JOIN OUR NEWSLETTER",
         "newsletter_text": "",
         "menu_1": "footer-shop-all",
-        "menu_1_heading": "SHOP ALL",
+        "menu_1_heading": "SHOP",
         "menu_2": "footer-about-us",
-        "menu_2_heading": "ABOUT US",
+        "menu_2_heading": "ABOUT",
         "menu_3": "footer-gifting",
         "menu_3_heading": "GIFTING",
         "menu_4": "footer-customer-service",
@@ -30,6 +31,6 @@
     }
   },
   "order": [
-    "footer"
+    "footer_DHViX6"
   ]
 }
