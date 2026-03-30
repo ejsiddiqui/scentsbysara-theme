@@ -102,7 +102,7 @@
         "button_style": "btn-solid",
         "text_alignment": "left",
         "button_alignment": "left",
-        "heading_max_width": "300",
+        "heading_max_width": "600",
         "collection_filter": ""
       }
     },
@@ -163,7 +163,7 @@
         "button_style": "btn-solid",
         "text_alignment": "center",
         "button_alignment": "center",
-        "heading_max_width": "350px",
+        "heading_max_width": "550px",
         "collection_filter": ""
       }
     },
