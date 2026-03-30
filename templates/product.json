@@ -164,10 +164,10 @@
             "quote_marks_size": "hidden",
             "product_name_text_size": "hidden",
             "verified_badge_style": "icon",
-            "card_height": "medium",
+            "card_height": "compact",
             "text_size": "extra_small",
             "stars_size": "small",
-            "arrows_position": "bottom",
+            "arrows_position": "hidden",
             "max_width": 900,
             "corner_styling": "square",
             "quote_marks_style": "serif",
@@ -188,7 +188,7 @@
         "judge_me_reviews_testimonials_carousel_e3jRbd"
       ],
       "custom_css": [
-        ".reviews-placeholder__widget{background: none; border:none; }"
+        ".reviews-placeholder__widget {background: none; border: none;}"
       ],
       "settings": {
         "heading": "Customer Testimonials"
