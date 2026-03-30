@@ -19,24 +19,38 @@
       {%- endif -%}
 
       {%- if section.settings.show_navigation -%}
-      <div class="section-nav featured-collection__nav" aria-label="Collection navigation">
-        <button type="button" class="section-nav-link featured-collection__nav-button" data-carousel-prev aria-label="Previous products">
-          {% render 'icon', name: 'chevron-left', size: 18 %}
-          BACK
-        </button>
-        <button type="button" class="section-nav-link featured-collection__nav-button" data-carousel-next aria-label="Next products">
-          NEXT
-          {% render 'icon', name: 'chevron-right', size: 18 %}
-        </button>
-      </div>
+        <div class="section-nav featured-collection__nav" aria-label="Collection navigation">
+          <button
+            type="button"
+            class="section-nav-link featured-collection__nav-button"
+            data-carousel-prev
+            aria-label="Previous products"
+          >
+            {% render 'icon', name: 'chevron-left', size: 18 %}
+            BACK
+          </button>
+          <button
+            type="button"
+            class="section-nav-link featured-collection__nav-button"
+            data-carousel-next
+            aria-label="Next products"
+          >
+            NEXT
+            {% render 'icon', name: 'chevron-right', size: 18 %}
+          </button>
+        </div>
       {%- endif -%}
     </div>
 
     {%- if featured_collection != blank and featured_collection.products_count > 0 -%}
       <div class="featured-collection__viewport">
-        <div class="featured-collection__track" style="--fc-columns: {{ section.settings.columns_desktop | default: 4 }}">
+        <div
+          class="featured-collection__track"
+          style="--fc-columns: {{ section.settings.columns_desktop | default: 4 }}"
+        >
           {%- for product in featured_collection.products limit: products_to_show -%}
-            {% render 'product-card',
+            {%
+              render 'product-card',
               product: product,
               card_layout: section.settings.card_layout,
               show_secondary_image: section.settings.show_secondary_image,
@@ -55,7 +69,10 @@
       {%- endif -%}
     {%- else -%}
       <div class="featured-collection__viewport">
-        <div class="featured-collection__track" style="--fc-columns: {{ section.settings.columns_desktop | default: 4 }}">
+        <div
+          class="featured-collection__track"
+          style="--fc-columns: {{ section.settings.columns_desktop | default: 4 }}"
+        >
           {%- for placeholder_index in (1..4) -%}
             {%- liquid
               assign placeholder_asset = 'she-is-grace-thumb.png'
@@ -107,12 +124,12 @@
 
   .featured-collection__header {
     align-items: flex-end;
-    margin-bottom: 80px;
+    margin-bottom: var(--space-lg);
     gap: var(--space-md);
   }
 
   .featured-collection__title {
-    font-size: var(--text-h1);
+    font-size: var(--text-h3);
     font-family: var(--font-sans);
     letter-spacing: 0.08em;
   }
@@ -140,7 +157,10 @@
   .featured-collection__track {
     display: grid;
     grid-auto-flow: column;
-    grid-auto-columns: minmax(0, calc((100% - (clamp(var(--space-md), 2vw, var(--space-xl)) * (var(--fc-columns, 4) - 1))) / var(--fc-columns, 4)));
+    grid-auto-columns: minmax(
+      0,
+      calc((100% - (clamp(var(--space-md), 2vw, var(--space-xl)) * (var(--fc-columns, 4) - 1))) / var(--fc-columns, 4))
+    );
     gap: var(--space-md);
     transition: transform 0.35s ease;
   }
@@ -217,8 +237,8 @@
   }
 
   .product-card .price__current {
-    font-size: var(--text-body);
-    font-weight: 300;
+    font-size: var(--text-h5);
+    color: var(--color-slate);
   }
 
   .product-card__button {

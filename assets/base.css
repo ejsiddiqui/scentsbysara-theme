@@ -801,7 +801,6 @@ select:focus {
   align-items: start;
   column-gap: 1rem;
   row-gap: 0.25rem;
-  margin-bottom: 12px;
 }
 
 .product-card__copy {
@@ -813,7 +812,8 @@ select:focus {
 .product-card__title,
 .product-card__title a,
 .product-card .product-name {
-  font-size: var(--text-body);
+  font-size: var(--text-h5);
+  color: var(--color-slate);
   font-weight: 400;
   line-height: 1.15;
   letter-spacing: 0.02em;
@@ -823,7 +823,7 @@ select:focus {
 .product-card__subtitle,
 .product-card .product-desc,
 .product-card .product-scent {
-  font-size: var(--text-body-small);
+  font-size: var(--text-body);
   font-weight: 300;
   color: var(--color-muted);
 }
@@ -849,8 +849,8 @@ select:focus {
 .product-card .price__compare,
 .product-card .price-current,
 .product-card .price-strikethrough {
-  font-size: var(--text-body);
-  font-weight: 300;
+  font-size: var(--text-h5);
+  color: var(--color-slate);
 }
 
 .product-card .price__compare,
