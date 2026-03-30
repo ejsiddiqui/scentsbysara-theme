@@ -40,12 +40,12 @@ class SlideshowComponent extends Component {
     };
 
     this.handlePointerDown = (event) => {
-      if (event.pointerType && event.pointerType !== 'touch') return;
       if (this.slides.length < 2) return;
 
       this.touchTracking = true;
       this.touchStartX = event.clientX;
       this.touchStartY = event.clientY;
+      this.classList.add('is-dragging');
       try { this.setPointerCapture(event.pointerId); } catch (_) {}
     };
 
@@ -55,6 +55,7 @@ class SlideshowComponent extends Component {
       const deltaX = event.clientX - this.touchStartX;
       const deltaY = event.clientY - this.touchStartY;
       this.touchTracking = false;
+      this.classList.remove('is-dragging');
 
       if (Math.abs(deltaX) < 45 || Math.abs(deltaX) < Math.abs(deltaY)) {
         return;
@@ -69,6 +70,7 @@ class SlideshowComponent extends Component {
 
     this.handlePointerCancel = () => {
       this.touchTracking = false;
+      this.classList.remove('is-dragging');
     };
 
     this.handlePause = () => this.pause();
