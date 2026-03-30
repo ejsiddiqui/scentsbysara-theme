@@ -151,13 +151,17 @@
         "judge_me_reviews_testimonials_carousel_e3jRbd": {
           "type": "shopify://apps/judge-me-reviews/blocks/testimonials_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {
-            "show_sample_reviews": true,
+            "show_sample_reviews": false,
             "reviews_selection": "product_reviews",
             "products": [
               "she-is-beauty",
               "she-is-power",
               "she-is-strength",
-              "she-is-timeless"
+              "she-is-timeless",
+              "she-is-real",
+              "she-is-strength-1",
+              "she-is-you",
+              "she-is-lust"
             ],
             "star_rating": "4_to_5_star",
             "max_reviews": 20,
