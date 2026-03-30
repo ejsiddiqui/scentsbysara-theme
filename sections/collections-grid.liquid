@@ -24,7 +24,7 @@
             assign linked_collection = block.settings.collection
             assign card_image = block.settings.image_override | default: linked_collection.featured_image
             assign card_title = block.settings.heading_override | default: linked_collection.title | default: block.settings.heading_override
-            assign card_text = linked_collection.description | strip_html | default: block.settings.body_text
+            assign card_text = block.settings.body_text | default: linked_collection.description | strip_html
             assign card_link = linked_collection.url | default: block.settings.link_override
             if card_link == blank
               assign card_link = routes.all_products_collection_url
@@ -65,7 +65,7 @@
               {%- endif -%}
 
               {%- if block.settings.cta_text != blank and card_link != blank -%}
-                <a href="{{ card_link }}" class="btn-solid collections-grid__button">
+                <a href="{{ card_link }}" class="btn-outline collections-grid__button">
                   {{ block.settings.cta_text | escape }}
                 </a>
               {%- endif -%}
