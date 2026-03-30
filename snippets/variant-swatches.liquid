@@ -38,11 +38,11 @@
         assign swatch_color = 'var(--color-accent)'
 
         if value_downcase contains 'ivory' or value_downcase contains 'cream' or value_downcase contains 'white'
-          assign swatch_color = 'var(--color-background)'
+          assign swatch_color = 'var(--swatch-ivory)'
         elsif value_downcase contains 'caramel' or value_downcase contains 'tan' or value_downcase contains 'beige'
-          assign swatch_color = 'var(--color-secondary-bg)'
+          assign swatch_color = 'var(--swatch-caramel)'
         elsif value_downcase contains 'mocha' or value_downcase contains 'brown' or value_downcase contains 'chocolate'
-          assign swatch_color = 'var(--color-foreground)'
+          assign swatch_color = 'var(--swatch-mocha)'
         endif
 
         assign swatch_variant = blank
