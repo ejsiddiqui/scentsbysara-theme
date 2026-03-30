@@ -26,6 +26,7 @@ class FacetFilters extends Component {
       const toggle = event.target.closest('[data-facets-toggle]');
       const close = event.target.closest('[data-facets-close]');
       const clear = event.target.closest('[data-clear-filters]');
+      const apply = event.target.closest('.collection-filters__apply');
       const paginationLink = event.target.closest('[data-pagination-link]');
 
       if (toggle) {
@@ -43,6 +44,13 @@ class FacetFilters extends Component {
       if (clear) {
         event.preventDefault();
         this.renderSection(clear.href);
+        return;
+      }
+
+      if (apply) {
+        event.preventDefault();
+        this.closePanel();
+        this.renderSection(this.buildCollectionUrl());
         return;
       }
 
@@ -80,14 +88,32 @@ class FacetFilters extends Component {
 
   buildCollectionUrl() {
     const url = new URL(this.dataset.collectionUrl || window.location.pathname, window.location.origin);
-    const formData = new FormData(this.form);
 
     url.search = '';
 
-    for (const [key, value] of formData.entries()) {
-      if (value !== '') {
-        url.searchParams.append(key, value);
+    // Collect form inputs (sort_by)
+    if (this.form) {
+      const formData = new FormData(this.form);
+      for (const [key, value] of formData.entries()) {
+        if (value !== '') {
+          url.searchParams.append(key, value);
+        }
       }
+    }
+
+    // Collect filter panel inputs (checkboxes outside the main form)
+    if (this.panel) {
+      this.panel.querySelectorAll('input[type="checkbox"]:checked').forEach((input) => {
+        if (input.name && input.value) {
+          url.searchParams.append(input.name, input.value);
+        }
+      });
+
+      this.panel.querySelectorAll('input[type="number"]').forEach((input) => {
+        if (input.name && input.value !== '') {
+          url.searchParams.append(input.name, input.value);
+        }
+      });
     }
 
     return url.toString();
