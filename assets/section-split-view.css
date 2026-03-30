@@ -49,6 +49,7 @@
 
 .split-view .split-view__heading {
   max-width: 12ch;
+  font-size: var(--text-h2);
   margin-bottom: var(--space-lg);
   text-transform: uppercase;
   line-height: 1.1;
@@ -123,5 +124,6 @@
 
   .split-view .split-view__heading {
     max-width: none;
+    font-size: var(--text-h3);
   }
 }
