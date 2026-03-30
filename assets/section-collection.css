@@ -12,6 +12,10 @@
   text-align: left;
 }
 
+.collection-hero .shop-hero h1{
+  margin-bottom: var(--space-md);
+}
+
 .shop-page-shell {
   padding-top: var(--gutter);
   padding-bottom: var(--gutter);
@@ -21,7 +25,7 @@
   max-width: none;
   color: var(--color-foreground);
   line-height: 1.6;
-  font-size: var(--text-body-large);
+  font-size: var(--text-body);
   font-weight: 300;
 }
 

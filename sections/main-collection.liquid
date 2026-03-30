@@ -16,9 +16,9 @@
     data-collection-url="{{ collection.url }}"
   >
     {%- if collection.image or section.settings.hero_image != blank -%}
-          {%- liquid
-            assign hero_img = section.settings.hero_image | default: collection.image
-          -%}
+      {%- liquid
+        assign hero_img = section.settings.hero_image | default: collection.image
+      -%}
       <div class="collection-fullbleed-hero">
         {% render 'image',
           image: hero_img,
@@ -42,7 +42,7 @@
       <div class="container shop-page-shell">
         {%- unless collection.image or section.settings.hero_image != blank -%}
           <header class="collection-hero shop-hero">
-            <h1 class="font-serif text-h1">{{ collection_heading }}</h1>
+            <h1 class="font-serif text-h3">{{ collection_heading }}</h1>
 
             {%- if collection.description != blank -%}
               <div class="collection-hero__description text-body rte">
@@ -67,7 +67,15 @@
                 aria-controls="CollectionFiltersPanel-{{ section.id }}"
               >
                 <span class="filter-btn-label filter-btn-label-desktop">FILTER</span>
-                <svg class="filter-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                <svg
+                  class="filter-icon"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                  focusable="false"
+                >
                   <line x1="4" y1="21" x2="4" y2="14" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"></line>
                   <line x1="4" y1="10" x2="4" y2="3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"></line>
                   <line x1="12" y1="21" x2="12" y2="12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"></line>
@@ -87,7 +95,12 @@
                 <label for="CollectionSort-{{ section.id }}" class="sort-label">SORT BY:</label>
                 <select id="CollectionSort-{{ section.id }}" name="sort_by" class="sort-select" data-sort-select>
                   {%- for option in collection.sort_options -%}
-                    <option value="{{ option.value }}"{% if option.value == current_sort %} selected{% endif %}>
+                    <option
+                      value="{{ option.value }}"
+                      {% if option.value == current_sort %}
+                        selected
+                      {% endif %}
+                    >
                       {{ option.name }}
                     </option>
                   {%- endfor -%}
@@ -109,7 +122,12 @@
             hidden
           >
             <div class="collection-filters__scrim" data-facets-close></div>
-            <div class="collection-filters__dialog" role="dialog" aria-modal="true" aria-labelledby="CollectionFiltersHeading-{{ section.id }}">
+            <div
+              class="collection-filters__dialog"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="CollectionFiltersHeading-{{ section.id }}"
+            >
               <div class="collection-filters__header">
                 <h2 id="CollectionFiltersHeading-{{ section.id }}" class="font-serif text-h4">FILTERS</h2>
                 <button type="button" class="icon-btn" data-facets-close aria-label="Close filters">
@@ -136,8 +154,12 @@
                                     type="checkbox"
                                     name="{{ value.param_name }}"
                                     value="{{ value.value }}"
-                                    {% if value.active %}checked{% endif %}
-                                    {% if value.count == 0 and value.active == false %}disabled{% endif %}
+                                    {% if value.active %}
+                                      checked
+                                    {% endif %}
+                                    {% if value.count == 0 and value.active == false %}
+                                      disabled
+                                    {% endif %}
                                   >
                                   <span>{{ value.label }} ({{ value.count }})</span>
                                 </label>
@@ -177,9 +199,7 @@
                 <a href="{{ collection.url }}" class="btn-outline collection-filters__clear" data-clear-filters>
                   CLEAR ALL
                 </a>
-                <button type="submit" class="btn-solid collection-filters__apply">
-                  APPLY FILTERS
-                </button>
+                <button type="submit" class="btn-solid collection-filters__apply">APPLY FILTERS</button>
               </div>
             </div>
           </div>
@@ -201,9 +221,7 @@
                 show_quick_add: false
               %}
             {%- else -%}
-              <div class="collection-grid__empty" role="status">
-                No products match your current filters.
-              </div>
+              <div class="collection-grid__empty" role="status">No products match your current filters.</div>
             {%- endfor -%}
           </div>
         </div>
@@ -234,7 +252,7 @@
   .collection-fullbleed-hero__overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 60%, transparent 100%);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.15) 60%, transparent 100%);
   }
 
   .collection-fullbleed-hero__content {
@@ -247,7 +265,7 @@
   }
 
   .collection-fullbleed-hero__title {
-    color: #F9F6F2;
+    color: #f9f6f2;
     font-size: clamp(2rem, 4vw + 1rem, var(--font-size-h1));
     letter-spacing: 0.12em;
     line-height: 1;
