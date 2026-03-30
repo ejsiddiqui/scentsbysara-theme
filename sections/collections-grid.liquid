@@ -61,7 +61,7 @@
             <div class="collection-content collections-grid__content">
               <h3 class="collections-grid__title">{{ card_title | escape }}</h3>
               {%- if card_text != blank -%}
-                <p class="collections-grid__text">{{ card_text | strip_html | truncatewords: 28 }}</p>
+                <p class="collections-grid__text">{{ card_text | strip_html | truncatewords: 50 }}</p>
               {%- endif -%}
 
               {%- if block.settings.cta_text != blank and card_link != blank -%}
