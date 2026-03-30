@@ -106,12 +106,16 @@
 .home-hero .hero-heading {
   max-width: none;
   margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-lg);
   color: var(--color-foreground);
   line-height: 1;
+  font-size: var(--text-h3);
   font-size: var(--text-h3);
 }
 
 .home-hero .hero-subtext {
+  max-width: 400px;
+  margin-bottom: var(--space-lg);
   max-width: 400px;
   margin-bottom: var(--space-lg);
   color: var(--color-foreground);
