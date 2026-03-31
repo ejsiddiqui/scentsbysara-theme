@@ -23,10 +23,11 @@
 .split-view .split-view__image,
 .split-view .split-view__placeholder {
   width: 100%;
-  height: 100%;
+  height: 50vw;
   aspect-ratio: 4 / 5;
   min-height: 0;
   object-fit: cover;
+  object-position: bottom;
 }
 
 .split-view .split-view__placeholder {
@@ -49,8 +50,8 @@
 
 .split-view .split-view__heading {
   max-width: 12ch;
-  font-size: var(--text-h2);
-  margin-bottom: var(--space-lg);
+  font-size: var(--text-h3);
+  margin-bottom: var(--space-xl);
   text-transform: uppercase;
   line-height: 1.1;
 }
@@ -60,10 +61,12 @@
 }
 
 .split-view .split-view__body p {
-  font-size: var(--text-body-large);
+  font-size: var(--text-body);
   line-height: 1.6;
   font-weight: 300;
   margin-bottom: var(--space-md);
+  max-width: 490px;
+  margin: 0 auto;
 }
 
 .split-view .split-view__body p:last-child {

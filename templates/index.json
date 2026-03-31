@@ -163,8 +163,21 @@
         "button_style": "btn-solid",
         "text_alignment": "center",
         "button_alignment": "center",
-        "heading_max_width": "550px",
+        "heading_max_width": "500px",
         "collection_filter": ""
+      }
+    },
+    "full_width_image_L4gr8f": {
+      "type": "full-width-image",
+      "custom_css": [
+        ".full-width-image__wrap {margin: 0 var(--gutter);}"
+      ],
+      "name": "Full width image",
+      "settings": {
+        "color_scheme": "",
+        "image": "shopify://shop_images/home-image-2.png",
+        "alt_text": "",
+        "margin": 0
       }
     },
     "page_hero_aCnJqP": {
@@ -229,6 +242,7 @@
     "split_view_nGBMwq",
     "collections",
     "our_story",
+    "full_width_image_L4gr8f",
     "page_hero_aCnJqP",
     "testimonials"
   ]
