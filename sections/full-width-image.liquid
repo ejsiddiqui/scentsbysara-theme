@@ -1,15 +1,16 @@
 {%- liquid
-  assign margin_px = section.settings.margin | default: 0
+  assign margin_px = section.settings.margin
+  assign custom_class = section.settings.custom_class | strip
 -%}
 
 <section
   id="FullWidthImage-{{ section.id }}"
-  class="full-width-image section-block color-{{ section.settings.color_scheme }}"
+  class="full-width-image section-block color-{{ section.settings.color_scheme }}{% if custom_class != '' %} {{ custom_class }}{% endif %}"
 >
   {%- if section.settings.image != blank -%}
     <div
       class="full-width-image__wrap"
-      style="margin-inline: {{ margin_px }}px;"
+      {% if margin_px != blank %}style="margin-inline: {{ margin_px }}px;"{% endif %}
     >
       {% render 'image',
         image: section.settings.image,
@@ -20,7 +21,7 @@
       %}
     </div>
   {%- else -%}
-    <div class="full-width-image__placeholder" style="margin-inline: {{ margin_px }}px;">
+    <div class="full-width-image__placeholder"{% if margin_px != blank %} style="margin-inline: {{ margin_px }}px;"{% endif %}>
       <span>Select an image in the theme editor</span>
     </div>
   {%- endif -%}
@@ -75,14 +76,16 @@
       "label": "Image alt text"
     },
     {
-      "type": "range",
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom CSS class",
+      "info": "Add a class name to target this image with custom CSS."
+    },
+    {
+      "type": "number",
       "id": "margin",
       "label": "Side margin (px)",
-      "info": "Horizontal margin applied to each side of the image.",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "default": 0
+      "info": "Horizontal margin applied to each side of the image. Leave blank for none."
     }
   ],
   "presets": [

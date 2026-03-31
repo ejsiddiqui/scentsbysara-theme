@@ -170,7 +170,7 @@
     "full_width_image_L4gr8f": {
       "type": "full-width-image",
       "custom_css": [
-        ".full-width-image__wrap{margin: 0 60px;}"
+        ".full-width-image__wrap {margin: 0 var(--gutter);}"
       ],
       "name": "Full width image",
       "settings": {
