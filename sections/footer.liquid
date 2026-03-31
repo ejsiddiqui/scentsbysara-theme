@@ -55,17 +55,69 @@
         {%- endform -%}
 
         <div class="footer-section__socials" aria-label="{{ 'general.social_media_links' | t }}">
-          <a href="{{ instagram_url }}" class="footer-section__social" aria-label="{{ 'social.instagram' | t }}" target="_blank" rel="noopener noreferrer">
-            <img src="{{ 'footer-icon-instagram.svg' | asset_url }}" alt="" aria-hidden="true" loading="lazy" width="39" height="39">
+          <a
+            href="{{ instagram_url }}"
+            class="footer-section__social"
+            aria-label="{{ 'social.instagram' | t }}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="{{ 'footer-icon-instagram.svg' | asset_url }}"
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+              width="39"
+              height="39"
+            >
           </a>
-          <a href="{{ facebook_url }}" class="footer-section__social" aria-label="{{ 'social.facebook' | t }}" target="_blank" rel="noopener noreferrer">
-            <img src="{{ 'footer-icon-facebook.svg' | asset_url }}" alt="" aria-hidden="true" loading="lazy" width="39" height="39">
+          <a
+            href="{{ facebook_url }}"
+            class="footer-section__social"
+            aria-label="{{ 'social.facebook' | t }}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="{{ 'footer-icon-facebook.svg' | asset_url }}"
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+              width="39"
+              height="39"
+            >
           </a>
-          <a href="{{ tiktok_url }}" class="footer-section__social" aria-label="{{ 'social.tiktok' | t }}" target="_blank" rel="noopener noreferrer">
-            <img src="{{ 'footer-icon-tiktok.svg' | asset_url }}" alt="" aria-hidden="true" loading="lazy" width="39" height="39">
+          <a
+            href="{{ tiktok_url }}"
+            class="footer-section__social"
+            aria-label="{{ 'social.tiktok' | t }}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="{{ 'footer-icon-tiktok.svg' | asset_url }}"
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+              width="39"
+              height="39"
+            >
           </a>
-          <a href="{{ pinterest_url }}" class="footer-section__social" aria-label="{{ 'social.pinterest' | t }}" target="_blank" rel="noopener noreferrer">
-            <img src="{{ 'footer-icon-pinterest.svg' | asset_url }}" alt="" aria-hidden="true" loading="lazy" width="39" height="39">
+          <a
+            href="{{ pinterest_url }}"
+            class="footer-section__social"
+            aria-label="{{ 'social.pinterest' | t }}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="{{ 'footer-icon-pinterest.svg' | asset_url }}"
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+              width="39"
+              height="39"
+            >
           </a>
         </div>
       </div>
@@ -173,7 +225,11 @@
 
     <div class="footer-section__bottom">
       <div class="footer-section__brand">
-        <a href="{{ routes.root_url }}" class="footer-section__brand-link footer-section__brand-link--desktop" aria-label="{{ footer_brand_name }}">
+        <a
+          href="{{ routes.root_url }}"
+          class="footer-section__brand-link footer-section__brand-link--desktop"
+          aria-label="{{ footer_brand_name }}"
+        >
           <img
             src="{{ 'footer-logo.svg' | asset_url }}"
             alt="{{ footer_brand_name }}"
@@ -184,7 +240,11 @@
           >
         </a>
 
-        <a href="{{ routes.root_url }}" class="footer-section__brand-link footer-section__brand-link--mobile" aria-label="{{ footer_brand_name }}">
+        <a
+          href="{{ routes.root_url }}"
+          class="footer-section__brand-link footer-section__brand-link--mobile"
+          aria-label="{{ footer_brand_name }}"
+        >
           <img
             src="{{ 'footer-logo-symbol.svg' | asset_url }}"
             alt="{{ footer_brand_name }}"
@@ -196,7 +256,8 @@
         </a>
 
         <p class="footer-section__copyright">
-          &copy; {{ 'now' | date: '%Y' }} {{ footer_brand_name }}. {{ 'footer.rights_reserved' | t }}
+          &copy; {{ 'now' | date: '%Y' }}
+          {{ footer_brand_name }}. {{ 'footer.rights_reserved' | t }}
         </p>
       </div>
 
@@ -228,7 +289,9 @@
       }
 
       syncOpen(mq.matches);
-      mq.addEventListener('change', function (e) { syncOpen(e.matches); });
+      mq.addEventListener('change', function (e) {
+        syncOpen(e.matches);
+      });
     })();
   </script>
 </footer>
@@ -246,17 +309,25 @@
     gap: 80px;
     align-items: start;
   }
+  .footer-section__newsletter h2 {
+    padding-bottom: var(--space-md);
+    font-size: var(--text-heading-extra);
+  }
 
   .footer-section__newsletter-fields {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: var(--space-lg);
+    width: 100%;
     align-items: flex-start;
+  }
+
+  .footer-section__newsletter-fields label {
+    display: none;
   }
 
   .footer-section__input {
     width: 100%;
-    max-width: 350px;
     min-height: 48px;
     padding: 0 20px;
     border: 1px solid var(--color-taupe);
@@ -273,7 +344,7 @@
   }
 
   .footer-section__button {
-    width: 154px;
+    width: 182px;
     padding-inline: 24px;
   }
 
@@ -281,7 +352,7 @@
     display: flex;
     gap: 28px;
     flex-wrap: wrap;
-    margin-top: 56px;
+    margin-top: var(--space-xl);
   }
 
   .footer-section__social {
@@ -294,8 +365,8 @@
   }
 
   .footer-section__social img {
-    width: 24px;
-    height: 24px;
+    width: 38px;
+    height: 38px;
     display: block;
   }
 
@@ -309,10 +380,10 @@
     justify-content: space-between;
     gap: var(--space-md);
     width: 100%;
-    padding: 0 0 12px;
+    padding: 0 0 var(--space-md);
     border-bottom: 1px solid var(--color-foreground);
     font-family: var(--font-serif);
-    font-size: var(--text-body-large);
+    font-size: var(--text-h4);
     font-weight: 400;
     letter-spacing: 0.05em;
     color: var(--color-foreground);
@@ -348,7 +419,7 @@
 
   .footer-section__menu-item a,
   .footer-section__menu-item span {
-    font-size: var(--text-body);
+    font-size: var(--text-body-large);
     font-weight: 300;
     color: var(--color-foreground);
   }
