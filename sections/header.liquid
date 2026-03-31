@@ -437,6 +437,7 @@
     line-height: 1.25;
     letter-spacing: 0.1em;
     text-transform: uppercase;
+    color: var(--color-slate);
   }
 
   .sub-nav-label {
@@ -448,6 +449,7 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     font-weight: 500;
+    color: var(--color-slate);
   }
 
   .header-nav-link {
@@ -662,10 +664,8 @@
     gap: var(--space-md);
     min-height: 76px;
     border-bottom: 1px solid var(--border-light);
-    margin-left: calc(-1 * var(--gutter));
-    margin-right: calc(-1 * var(--gutter));
-    padding-left: var(--gutter);
-    padding-right: var(--gutter);
+    margin: 0;
+    padding: 0;
   }
 
   .mobile-menu-brand {
@@ -766,6 +766,7 @@
     display: flex;
     align-items: center;
     width: 100%;
+    color: var(--color-slate);
   }
 
   .mobile-menu-footer {
@@ -816,10 +817,17 @@
 
   .mobile-shop-group h3 {
     font-family: var(--font-sans);
-    font-size: var(--text-micro);
+    font-size: var(--text-body);
+    font-weight: 500;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--color-muted);
+    color: var(--color-mocha);
+  }
+
+  .mobile-shop-group a {
+    font-size: var(--text-small);
+    color: var(--color-mocha);
+    font-weight: 300;
   }
 
   .desktop-only-inline {

@@ -934,29 +934,13 @@ select:focus {
   opacity: 1;
 }
 
-@media (max-width: 1440px) {
-  :root {
-    --gutter: 48px;
-  }
-}
-
 @media (max-width: 1024px) {
-  :root {
-    --gutter: 32px;
-  }
-
   .grid-cols-4 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 768px) {
-  :root {
-    --gutter: 20px;
-    --header-height: 80px;
-    --text-xsmall: 11px;
-  }
-
   .grid-cols-4,
   .grid-cols-3 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1004,11 +988,6 @@ select:focus {
 }
 
 @media (max-width: 480px) {
-  :root {
-    --gutter: 14px;
-    --text-xsmall: 10px;
-  }
-
   .section-block {
     padding-block: calc(var(--space-section) * 0.75);
   }
@@ -1036,12 +1015,6 @@ select:focus {
 
   .variant-swatches {
     gap: 0.4rem;
-  }
-}
-
-@media (max-width: 402px) {
-  :root {
-    --gutter: 12px;
   }
 }
 

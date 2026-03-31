@@ -15,7 +15,12 @@
           <div class="announcement-bar__marquee" aria-label="Site announcements">
             <div class="announcement-bar__track">
               {%- for repeat in (1..2) -%}
-                <div class="announcement-bar__set"{% if repeat == 2 %} aria-hidden="true"{% endif %}>
+                <div
+                  class="announcement-bar__set"
+                  {% if repeat == 2 %}
+                    aria-hidden="true"
+                  {% endif %}
+                >
                   {%- for block in section.blocks -%}
                     <div class="announcement-bar__item" {{ block.shopify_attributes }}>
                       {%- if block.settings.link != blank -%}
@@ -98,7 +103,7 @@
     white-space: nowrap;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    font-size: var(--text-small);
+    font-size: var(--text-micro);
     font-weight: 500;
   }
 

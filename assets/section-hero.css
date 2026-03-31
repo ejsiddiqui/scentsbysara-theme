@@ -228,7 +228,7 @@
   }
 
   .home-hero .hero-heading {
-    max-width: 12ch;
+    max-width: 80vw;
     margin-bottom: var(--space-lg);
     font-size: var(--text-h3);
     color: var(--text-on-dark);
