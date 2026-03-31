@@ -86,7 +86,7 @@
     "split_view_nGBMwq": {
       "type": "split-view",
       "custom_css": [
-        ".home-our-philosphy{margin-left:0;}"
+        ".home-our-philosphy p{margin-left: 0;}"
       ],
       "name": "Split view",
       "settings": {
