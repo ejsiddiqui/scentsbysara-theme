@@ -167,6 +167,16 @@
         "collection_filter": ""
       }
     },
+    "full_width_image_ybLL44": {
+      "type": "full-width-image",
+      "name": "Full width image",
+      "settings": {
+        "color_scheme": "",
+        "image": "shopify://shop_images/home-image-2.png",
+        "alt_text": "",
+        "margin": 40
+      }
+    },
     "page_hero_aCnJqP": {
       "type": "page-hero",
       "custom_css": [
@@ -229,6 +239,7 @@
     "split_view_nGBMwq",
     "collections",
     "our_story",
+    "full_width_image_ybLL44",
     "page_hero_aCnJqP",
     "testimonials"
   ]
