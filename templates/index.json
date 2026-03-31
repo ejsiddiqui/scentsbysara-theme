@@ -62,7 +62,8 @@
         "interval": 5,
         "show_arrows": false,
         "accessibility_label": "Homepage hero slideshow",
-        "color_scheme": "scheme-1"
+        "color_scheme": "scheme-1",
+        "custom_class": ""
       }
     },
     "bestsellers": {
@@ -80,13 +81,14 @@
         "show_quick_add": false,
         "show_view_all": false,
         "view_all_label": "SHOP THE COLLECTION",
-        "color_scheme": "scheme-1"
+        "color_scheme": "scheme-1",
+        "custom_class": ""
       }
     },
     "split_view_nGBMwq": {
       "type": "split-view",
       "custom_css": [
-        ".home-our-philosphy p{margin-left: 0;}"
+        ".home-our-philosphy p {margin-left: 0;}"
       ],
       "name": "Split view",
       "settings": {
@@ -146,7 +148,8 @@
         "color_scheme": "scheme-1",
         "columns": 2,
         "eyebrow": "",
-        "heading": ""
+        "heading": "",
+        "custom_class": ""
       }
     },
     "our_story": {
@@ -224,7 +227,8 @@
         "heading": "CUSTOMER TESTIMONIALS",
         "aria_label": "Customer testimonials",
         "show_stars": true,
-        "star_count": 5
+        "star_count": 5,
+        "custom_class": ""
       }
     }
   },
