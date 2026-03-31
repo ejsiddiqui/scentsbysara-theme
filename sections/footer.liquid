@@ -230,6 +230,11 @@
           class="footer-section__brand-link footer-section__brand-link--desktop"
           aria-label="{{ footer_brand_name }}"
         >
+        <a
+          href="{{ routes.root_url }}"
+          class="footer-section__brand-link footer-section__brand-link--desktop"
+          aria-label="{{ footer_brand_name }}"
+        >
           <img
             src="{{ 'footer-logo.svg' | asset_url }}"
             alt="{{ footer_brand_name }}"
@@ -240,6 +245,11 @@
           >
         </a>
 
+        <a
+          href="{{ routes.root_url }}"
+          class="footer-section__brand-link footer-section__brand-link--mobile"
+          aria-label="{{ footer_brand_name }}"
+        >
         <a
           href="{{ routes.root_url }}"
           class="footer-section__brand-link footer-section__brand-link--mobile"
@@ -256,6 +266,8 @@
         </a>
 
         <p class="footer-section__copyright">
+          &copy; {{ 'now' | date: '%Y' }}
+          {{ footer_brand_name }}. {{ 'footer.rights_reserved' | t }}
           &copy; {{ 'now' | date: '%Y' }}
           {{ footer_brand_name }}. {{ 'footer.rights_reserved' | t }}
         </p>
@@ -292,6 +304,9 @@
       mq.addEventListener('change', function (e) {
         syncOpen(e.matches);
       });
+      mq.addEventListener('change', function (e) {
+        syncOpen(e.matches);
+      });
     })();
   </script>
 </footer>
@@ -313,13 +328,23 @@
     padding-bottom: var(--space-md);
     font-size: var(--text-heading-extra);
   }
+  .footer-section__newsletter h2 {
+    padding-bottom: var(--space-md);
+    font-size: var(--text-heading-extra);
+  }
 
   .footer-section__newsletter-fields {
     display: flex;
     flex-direction: column;
     gap: var(--space-lg);
     width: 100%;
+    gap: var(--space-lg);
+    width: 100%;
     align-items: flex-start;
+  }
+
+  .footer-section__newsletter-fields label {
+    display: none;
   }
 
   .footer-section__newsletter-fields label {
@@ -345,6 +370,7 @@
 
   .footer-section__button {
     width: 182px;
+    width: 182px;
     padding-inline: 24px;
   }
 
@@ -352,6 +378,7 @@
     display: flex;
     gap: 28px;
     flex-wrap: wrap;
+    margin-top: var(--space-xl);
     margin-top: var(--space-xl);
   }
 
@@ -365,6 +392,8 @@
   }
 
   .footer-section__social img {
+    width: 38px;
+    height: 38px;
     width: 38px;
     height: 38px;
     display: block;
@@ -381,8 +410,10 @@
     gap: var(--space-md);
     width: 100%;
     padding: 0 0 var(--space-md);
+    padding: 0 0 var(--space-md);
     border-bottom: 1px solid var(--color-foreground);
     font-family: var(--font-serif);
+    font-size: var(--text-h4);
     font-size: var(--text-h4);
     font-weight: 400;
     letter-spacing: 0.05em;
@@ -419,6 +450,7 @@
 
   .footer-section__menu-item a,
   .footer-section__menu-item span {
+    font-size: var(--text-body-large);
     font-size: var(--text-body-large);
     font-weight: 300;
     color: var(--color-foreground);
