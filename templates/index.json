@@ -170,7 +170,7 @@
     "full_width_image_L4gr8f": {
       "type": "full-width-image",
       "custom_css": [
-        ".home-testimonials-image .full-width-image__wrap {margin: 0 var(--gutter);}"
+        ".home-testimonials-image {margin: 0 var(--gutter);}"
       ],
       "name": "Full width image",
       "settings": {
