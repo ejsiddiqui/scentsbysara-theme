@@ -85,6 +85,9 @@
     },
     "split_view_nGBMwq": {
       "type": "split-view",
+      "custom_css": [
+        ".home-our-philosphy p{margin-left: 0;}"
+      ],
       "name": "Split view",
       "settings": {
         "color_scheme": "",
@@ -103,6 +106,7 @@
         "text_alignment": "left",
         "button_alignment": "left",
         "heading_max_width": "600",
+        "custom_class": "home-our-philosphy",
         "collection_filter": ""
       }
     },
@@ -164,6 +168,7 @@
         "text_alignment": "center",
         "button_alignment": "center",
         "heading_max_width": "500px",
+        "custom_class": "",
         "collection_filter": ""
       }
     },
