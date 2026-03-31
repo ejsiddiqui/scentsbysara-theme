@@ -501,7 +501,7 @@ main > .container {
   min-height: 44px;
   padding: 11px 60px;
   font-family: var(--font-sans);
-  font-size: var(--text-small);
+  font-size: var(--text-body-small);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   border: 1px solid transparent;
