@@ -37,7 +37,8 @@
               {%- endif -%}
 
               {%- if card_image != blank -%}
-                {% render 'image',
+                {%
+                  render 'image',
                   class: 'collections-grid__image',
                   image: card_image,
                   alt: block.settings.image_alt | default: card_title,
@@ -50,7 +51,13 @@
                     assign fallback_asset = 'sculpted-collection.png'
                   endif
                 -%}
-                <img class="collections-grid__image" src="{{ fallback_asset | asset_url }}" alt="{{ card_title | escape }}" width="1200" height="1320">
+                <img
+                  class="collections-grid__image"
+                  src="{{ fallback_asset | asset_url }}"
+                  alt="{{ card_title | escape }}"
+                  width="1200"
+                  height="1320"
+                >
               {%- endif -%}
 
               {%- if card_link != blank -%}
@@ -144,11 +151,11 @@
   }
 
   #CollectionsGrid-{{ section.id }} .collections-grid__text {
-    max-width: 34rem;
+    max-width: 626px;
     font-size: var(--text-body);
     line-height: 1.6;
     font-weight: 300;
-    color: var(--color-muted);
+    color: var(--color-mocha);
   }
 
   #CollectionsGrid-{{ section.id }} .collections-grid__button {
@@ -236,11 +243,13 @@
     {
       "type": "text",
       "id": "eyebrow",
-      "label": "Eyebrow"},
+      "label": "Eyebrow"
+    },
     {
       "type": "text",
       "id": "heading",
-      "label": "Heading"}
+      "label": "Heading"
+    }
   ],
   "blocks": [
     {
@@ -260,11 +269,13 @@
         {
           "type": "text",
           "id": "image_alt",
-          "label": "Image alt text"},
+          "label": "Image alt text"
+        },
         {
           "type": "text",
           "id": "heading_override",
-          "label": "Heading override"},
+          "label": "Heading override"
+        },
         {
           "type": "textarea",
           "id": "body_text",
