@@ -7,7 +7,7 @@
   endif
 -%}
 
-<section class="scents-section{% if is_product_template %} scents-section--product{% endif %}" aria-labelledby="scents-section-title-{{ section.id }}">
+<section class="scents-section{% if is_product_template %} scents-section--product{% endif %}{% if section.settings.custom_class != blank %} {{ section.settings.custom_class | escape }}{% endif %}" aria-labelledby="scents-section-title-{{ section.id }}">
   <style>
     #shopify-section-{{ section.id }} {
       --scents-section-bg: var(--color-background, #f9f6f2);
@@ -261,6 +261,12 @@
       "max": 4,
       "step": 1,
       "default": 2
+    },
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom CSS class",
+      "info": "Add a custom class to the section element for section-specific CSS overrides."
     }
   ],
   "blocks": [

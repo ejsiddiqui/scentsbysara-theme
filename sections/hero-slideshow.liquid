@@ -7,7 +7,7 @@
 <script src="{{ 'slideshow.js' | asset_url }}" type="module"></script>
 
 <slideshow-component
-  class="home-hero full-width color-{{ section.settings.color_scheme | default: 'scheme-1' }}"
+  class="home-hero full-width color-{{ section.settings.color_scheme | default: 'scheme-1' }}{% if section.settings.custom_class != blank %} {{ section.settings.custom_class | escape }}{% endif %}"
   data-autoplay="{{ autoplay }}"
   data-interval="{{ interval }}"
   aria-label="{{ section.settings.accessibility_label | default: 'Hero slideshow' | escape }}"
@@ -179,6 +179,12 @@
       "id": "color_scheme",
       "label": "Colour scheme",
       "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom CSS class",
+      "info": "Add a custom class to the section element for section-specific CSS overrides."
     }
   ],
   "blocks": [

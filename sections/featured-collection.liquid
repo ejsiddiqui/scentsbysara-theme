@@ -5,7 +5,7 @@
 
 <section
   id="FeaturedCollection-{{ section.id }}"
-  class="section-block featured-collection color-{{ section.settings.color_scheme }}"
+  class="section-block featured-collection color-{{ section.settings.color_scheme }}{% if section.settings.custom_class != blank %} {{ section.settings.custom_class | escape }}{% endif %}"
   data-featured-collection
 >
   <div class="container">
@@ -412,6 +412,12 @@
       "id": "color_scheme",
       "label": "Color scheme",
       "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom CSS class",
+      "info": "Add a custom class to the section element for section-specific CSS overrides."
     }
   ],
   "presets": [

@@ -1,4 +1,4 @@
-<section class="contact-section section-block color-{{ section.settings.color_scheme }}">
+<section class="contact-section section-block color-{{ section.settings.color_scheme }}{% if section.settings.custom_class != blank %} {{ section.settings.custom_class | escape }}{% endif %}">
   <div class="container contact-section__grid contact-grid grid-cols-2">
     <aside class="contact-section__info contact-info-panel">
       <span class="eyebrow">{{ section.settings.info_eyebrow | escape }}</span>
@@ -319,6 +319,12 @@
       "id": "description",
       "label": "Description",
       "default": "<p>Our team replies within one to two business days. For order issues, include your order number for faster help.</p>"
+    },
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom CSS class",
+      "info": "Add a custom class to the section element for section-specific CSS overrides."
     }
   ],
   "blocks": [

@@ -1,4 +1,4 @@
-<section class="story-form-section section-block color-{{ section.settings.color_scheme }}">
+<section class="story-form-section section-block color-{{ section.settings.color_scheme }}{% if section.settings.custom_class != blank %} {{ section.settings.custom_class | escape }}{% endif %}">
   <div class="container story-form-section__inner">
     <div class="story-form-section__intro text-center">
       {%- if section.settings.eyebrow != blank -%}
@@ -163,6 +163,12 @@
       "id": "disclaimer",
       "label": "Disclaimer",
       "default": "By submitting, you agree that Scents by Sara may publish your story, edited for brevity, across our digital channels."
+    },
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom CSS class",
+      "info": "Add a custom class to the section element for section-specific CSS overrides."
     }
   ],
   "presets": [

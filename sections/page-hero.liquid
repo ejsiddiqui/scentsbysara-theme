@@ -4,7 +4,7 @@
 {%- endif -%}
 
 <section
-  class="page-hero small-hero story-hero{% if has_image %} page-hero--has-image{% endif %} color-{{ section.settings.color_scheme }}"
+  class="page-hero small-hero story-hero{% if has_image %} page-hero--has-image{% endif %} color-{{ section.settings.color_scheme }}{% if section.settings.custom_class != blank %} {{ section.settings.custom_class | escape }}{% endif %}"
   {% if has_image %}
     style="--page-hero-bg: url('{{ section.settings.image | image_url: width: 2400 }}')"
   {% endif %}
@@ -162,6 +162,12 @@
       "type": "image_picker",
       "id": "image",
       "label": "Background image"
+    },
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom CSS class",
+      "info": "Add a custom class to the section element for section-specific CSS overrides."
     }
   ],
   "presets": [

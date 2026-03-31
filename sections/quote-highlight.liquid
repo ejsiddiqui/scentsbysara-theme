@@ -1,4 +1,4 @@
-<section class="quote-highlight section-block color-{{ section.settings.color_scheme }}">
+<section class="quote-highlight section-block color-{{ section.settings.color_scheme }}{% if section.settings.custom_class != blank %} {{ section.settings.custom_class | escape }}{% endif %}">
   <div class="container quote-highlight__inner quote-highlight__inner--{{ section.settings.text_alignment }}">
     <blockquote class="quote-highlight__quote font-serif">{{ section.settings.quote | escape }}</blockquote>
 
@@ -73,6 +73,12 @@
         }
       ],
       "default": "center"
+    },
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom CSS class",
+      "info": "Add a custom class to the section element for section-specific CSS overrides."
     }
   ],
   "presets": [

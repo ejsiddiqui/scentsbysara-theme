@@ -2,7 +2,7 @@
   assign stories = section.settings.stories
 -%}
 
-<section class="story-grid-section section-block color-{{ section.settings.color_scheme }}" id="StoryGrid-{{ section.id }}">
+<section class="story-grid-section section-block color-{{ section.settings.color_scheme }}{% if section.settings.custom_class != blank %} {{ section.settings.custom_class | escape }}{% endif %}" id="StoryGrid-{{ section.id }}">
   <div class="container">
     <div class="story-grid-section__header flex-between items-end">
       <div>
@@ -588,6 +588,12 @@
       "id": "stories",
       "label": "Stories",
       "metaobject_type": "customer_story"
+    },
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom CSS class",
+      "info": "Add a custom class to the section element for section-specific CSS overrides."
     }
   ],
   "presets": [

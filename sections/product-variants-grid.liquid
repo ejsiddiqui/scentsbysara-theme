@@ -6,7 +6,7 @@
 
 <section
   id="ProductVariantsGrid-{{ section.id }}"
-  class="section-block featured-collection color-{{ section.settings.color_scheme }}"
+  class="section-block featured-collection color-{{ section.settings.color_scheme }}{% if section.settings.custom_class != blank %} {{ section.settings.custom_class | escape }}{% endif %}"
 >
   <div class="container">
     <div class="section-header featured-collection__header">
@@ -161,6 +161,12 @@
       "id": "color_scheme",
       "label": "Colour scheme",
       "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom CSS class",
+      "info": "Add a custom class to the section element for section-specific CSS overrides."
     }
   ],
   "presets": [

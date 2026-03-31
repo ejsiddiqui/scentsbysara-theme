@@ -3,7 +3,7 @@
 -%}
 <section
   id="ReviewsPlaceholder-{{ section.id }}"
-  class="section-block reviews-placeholder"
+  class="section-block reviews-placeholder{% if section.settings.custom_class != blank %} {{ section.settings.custom_class | escape }}{% endif %}"
   role="region"
   aria-labelledby="ReviewsPlaceholderHeading-{{ section.id }}"
 >
@@ -52,6 +52,12 @@
       "id": "heading",
       "label": "Heading",
       "default": "WHAT OUR CUSTOMERS ARE SAYING"
+    },
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom CSS class",
+      "info": "Add a custom class to the section element for section-specific CSS overrides."
     }
   ],
   "blocks": [

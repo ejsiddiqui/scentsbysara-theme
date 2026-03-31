@@ -4,7 +4,7 @@
 
 <section
   id="CollectionsGrid-{{ section.id }}"
-  class="collections-grid section-block color-{{ section.settings.color_scheme }}"
+  class="collections-grid section-block color-{{ section.settings.color_scheme }}{% if section.settings.custom_class != blank %} {{ section.settings.custom_class | escape }}{% endif %}"
 >
   <div class="container">
     {%- if section_heading != blank -%}
@@ -250,6 +250,12 @@
       "type": "text",
       "id": "heading",
       "label": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom CSS class",
+      "info": "Add a custom class to the section element for section-specific CSS overrides."
     }
   ],
   "blocks": [

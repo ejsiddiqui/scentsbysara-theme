@@ -6,7 +6,7 @@
 
 <section
   id="ProductRecommendations-{{ section.id }}"
-  class="section-block best-sellers product-recommendations"
+  class="section-block best-sellers product-recommendations{% if section.settings.custom_class != blank %} {{ section.settings.custom_class | escape }}{% endif %}"
   data-product-recommendations
   data-url="{{ recommendations_url }}"
 >
@@ -264,6 +264,12 @@
           "label": "Compact / Carousel"
         }
       ]
+    },
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom CSS class",
+      "info": "Add a custom class to the section element for section-specific CSS overrides."
     }
   ],
   "presets": [

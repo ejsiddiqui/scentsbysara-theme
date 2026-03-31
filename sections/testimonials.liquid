@@ -5,7 +5,7 @@
 
 <section
   id="Testimonials-{{ section.id }}"
-  class="testimonials-section section-block bg-primary text-center color-{{ section.settings.color_scheme }}"
+  class="testimonials-section section-block bg-primary text-center color-{{ section.settings.color_scheme }}{% if section.settings.custom_class != blank %} {{ section.settings.custom_class | escape }}{% endif %}"
 >
   {{ 'section-testimonials.css' | asset_url | stylesheet_tag }}
 
@@ -131,6 +131,12 @@
       "max": 5,
       "step": 1,
       "default": 5
+    },
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom CSS class",
+      "info": "Add a custom class to the section element for section-specific CSS overrides."
     }
   ],
   "blocks": [

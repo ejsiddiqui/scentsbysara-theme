@@ -18,7 +18,7 @@
 
 <section
   id="Commitment-{{ section.id }}"
-  class="commitment-section section-block color-{{ section.settings.color_scheme }}{% if is_product_template %} commitment-section--product{% endif %}{% if section.settings.full_width %} commitment-section--full-width{% endif %}"
+  class="commitment-section section-block color-{{ section.settings.color_scheme }}{% if is_product_template %} commitment-section--product{% endif %}{% if section.settings.full_width %} commitment-section--full-width{% endif %}{% if section.settings.custom_class != blank %} {{ section.settings.custom_class | escape }}{% endif %}"
 >
   <div class="container">
     {%- if is_product_template -%}
@@ -396,6 +396,12 @@
       "type": "url",
       "id": "button_link",
       "label": "Button link"
+    },
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom CSS class",
+      "info": "Add a custom class to the section element for section-specific CSS overrides."
     }
   ],
   "blocks": [
