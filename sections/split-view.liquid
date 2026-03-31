@@ -34,7 +34,7 @@
 
 <section
   id="SplitView-{{ section.id }}"
-  class="split-view section-block color-{{ section.settings.color_scheme }}{% if section.settings.full_width %} split-view--full-width{% endif %}"
+  class="split-view section-block color-{{ section.settings.color_scheme }}{% if section.settings.full_width %} split-view--full-width{% endif %}{% if section.settings.custom_class != blank %} {{ section.settings.custom_class | escape }}{% endif %}"
 >
   {{ 'section-split-view.css' | asset_url | stylesheet_tag }}
 
@@ -240,6 +240,12 @@
       "id": "heading_max_width",
       "label": "Heading max-width",
       "info": "Override heading max-width. e.g. 500px, 20ch, none. Leave blank for default (12ch)."
+    },
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom CSS class",
+      "info": "Add a custom class to the section element for section-specific CSS overrides."
     },
     {
       "type": "text",
