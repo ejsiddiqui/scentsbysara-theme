@@ -178,14 +178,14 @@
     "full_width_image_L4gr8f": {
       "type": "full-width-image",
       "custom_css": [
-        ".full-width-image__wrap {padding-bottom: 0; max-width: 1920px; margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter);}"
+        ".testimonial-image-full {padding-bottom: 0; max-width: 1920px; margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter);}"
       ],
       "name": "Full width image",
       "settings": {
         "color_scheme": "",
         "image": "shopify://shop_images/home-image-2.png",
         "alt_text": "",
-        "custom_class": "full-width-image__wrap",
+        "custom_class": "testimonial-image-full",
         "margin": 0
       }
     },
