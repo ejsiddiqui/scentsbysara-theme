@@ -170,28 +170,15 @@
     "full_width_image_L4gr8f": {
       "type": "full-width-image",
       "custom_css": [
-        ".full-width-image__wrap {margin: 0 var(--gutter);}"
+        ".home-testimonial-image {margin: 0 var(--gutter); padding-bottom:0;}"
       ],
       "name": "Full width image",
       "settings": {
         "color_scheme": "",
         "image": "shopify://shop_images/home-image-2.png",
         "alt_text": "",
+        "custom_class": "home-testimonial-image",
         "margin": 0
-      }
-    },
-    "page_hero_aCnJqP": {
-      "type": "page-hero",
-      "custom_css": [
-        ".page-hero__overlay {background: none;}",
-        ".page-hero--has-image {margin: 0 var(--gutter);}"
-      ],
-      "name": "Page hero",
-      "settings": {
-        "color_scheme": "",
-        "heading": "",
-        "subheading": "",
-        "image": "shopify://shop_images/home-image-2.png"
       }
     },
     "testimonials": {
@@ -243,7 +230,6 @@
     "collections",
     "our_story",
     "full_width_image_L4gr8f",
-    "page_hero_aCnJqP",
     "testimonials"
   ]
 }
