@@ -60,6 +60,9 @@ class HeaderComponent extends Component {
   }
 
   updateStickyState() {
+    // Desktop (>=769px): pure CSS sticky, no class toggling needed
+    if (window.innerWidth >= 769) return;
+
     const SCROLL_THRESHOLD = 8;
     const scrollY = window.scrollY;
     const delta = scrollY - this.lastScrollY;

@@ -14,13 +14,9 @@
       "settings": {
         "products_per_page": 16,
         "columns_desktop": 4,
-        "card_layout": "shop",
-        "show_options": true,
         "enable_filtering": true,
         "enable_sorting": true,
-        "color_scheme": "scheme-1",
-        "hero_title": "SHOP ALL",
-        "hero_description": "Discover the full Scents By Sara collection. Thoughtfully designed to reflect real bodies, each combines sculptural form with meaning detail and intentional craftsmanship."
+        "color_scheme": "scheme-1"
       }
     },
     "sustainable": {
@@ -31,17 +27,13 @@
         "eyebrow": "OUR SUSTAINABLE PRACTICE",
         "heading": "CRAFTED WITH CONSIDERATION.",
         "body": "<p>Every material used by Scents by Sara is chosen for performance, longevity, and environmental consideration. Plant-based wax, IFRA-certified fragrances, and FSC-certified recyclable packaging — because what goes into the candle matters as much as what comes out.</p>",
-        "asset_image": "our-commitment-left.png",
-        "image_alt": "Sustainable materials",
         "image_position": "right",
         "content_background": "secondary",
+        "asset_image": "our-commitment-left.png",
+        "image_alt": "Sustainable materials",
         "cta_text": "READ MORE",
         "cta_link": "/pages/our-sustainability",
         "button_style": "btn-outline",
-        "text_alignment": "left",
-        "button_alignment": "left",
-        "heading_max_width": "",
-        "custom_class": "",
         "collection_filter": "scar-collection"
       }
     },
@@ -54,17 +46,12 @@
         "heading": "SCAR COLLECTION",
         "body": "<p>The Scar Collection celebrates the body as a holder of memory, healing, and confidence. Gold leaf is applied by hand to mark scars — not as decoration but as recognition.</p>",
         "image": "shopify://shop_images/scar-collection-half-left.png",
-        "asset_image": "",
         "image_alt": "SCAR Collection",
         "image_position": "left",
         "content_background": "secondary",
         "cta_text": "DISCOVER SCAR COLLECTION",
         "cta_link": "/collections/scar-collection",
         "button_style": "btn-solid",
-        "text_alignment": "left",
-        "button_alignment": "left",
-        "heading_max_width": "",
-        "custom_class": "",
         "collection_filter": "sculpted-collection"
       }
     }
