@@ -23,6 +23,10 @@
     assign show_quick_add = settings.card_show_quick_add
   endif
 
+  if show_options == blank and show_options != false
+    assign show_options = settings.card_show_options
+  endif
+
   if show_secondary_image and secondary_image != blank and secondary_image != primary_image
     assign has_secondary_image = true
   endif
@@ -120,22 +124,24 @@
 
     {%- if card_layout == 'shop' -%}
       <div class="product-options product-card__options">
-        {%- for option in card_product.options_with_values -%}
-          {%- assign opt_down = option.name | downcase -%}
-          {%- unless opt_down contains 'colour' or opt_down contains 'color' -%}
-            <select
-              class="product-card__option-select"
-              data-product-card-option="{{ option.name | downcase }}"
-            >
-              {%- for value in option.values -%}
-                <option
-                  value="{{ value | escape }}"
-                  {%- if current_variant.options[forloop.parentloop.index0] == value %} selected{%- endif -%}
-                >{{ option.name | upcase }}: {{ value | upcase }}</option>
-              {%- endfor -%}
-            </select>
-          {%- endunless -%}
-        {%- endfor -%}
+        {%- if show_options -%}
+          {%- for option in card_product.options_with_values -%}
+            {%- assign opt_down = option.name | downcase -%}
+            {%- unless opt_down contains 'colour' or opt_down contains 'color' or opt_down contains 'scent' -%}
+              <select
+                class="product-card__option-select"
+                data-product-card-option="{{ option.name | downcase }}"
+              >
+                {%- for value in option.values -%}
+                  <option
+                    value="{{ value | escape }}"
+                    {%- if current_variant.options[forloop.parentloop.index0] == value %} selected{%- endif -%}
+                  >{{ option.name | upcase }}: {{ value | upcase }}</option>
+                {%- endfor -%}
+              </select>
+            {%- endunless -%}
+          {%- endfor -%}
+        {%- endif -%}
         {%- if show_swatches -%}
           {% render 'variant-swatches', product: card_product, variant: current_variant %}
         {%- endif -%}

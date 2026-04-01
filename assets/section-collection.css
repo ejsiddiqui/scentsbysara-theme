@@ -343,9 +343,12 @@
 }
 
 .collection-page .product-card--shop .product-card__option-select {
-  display: none;
+  flex: 0 0 auto;
 }
 
+.collection-page .product-card--shop .product-card__option-select ~ .variant-swatches {
+  margin-left: auto;
+}
 
 .collection-page .product-card--shop .variant-swatches {
   flex: 0 0 auto;

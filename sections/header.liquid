@@ -847,6 +847,23 @@
     display: inline-flex;
   }
 
+  /* ── Desktop sticky: pin header at top, announcement bar scrolls away ── */
+  @media screen and (min-width: 769px) {
+    .header-shell {
+      top: 0;
+    }
+
+    /* Neutralise JS-driven classes so header never hides or changes appearance */
+    .header-shell.is-sticky {
+      position: sticky;
+      transform: none;
+    }
+
+    .header-shell.is-hidden {
+      transform: none;
+    }
+  }
+
   @media screen and (max-width: 989px) {
     .desktop-only-inline,
     .desktop-only-block {

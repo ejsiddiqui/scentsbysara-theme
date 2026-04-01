@@ -192,6 +192,10 @@
         },
         "card_show_quick_add": {
           "label": "Show quick add"
+        },
+        "card_show_options": {
+          "label": "Show option dropdowns (e.g. Shape)",
+          "info": "Displays non-colour product options as dropdown selectors on the card. Only visible when card layout is set to Shop."
         }
       }
     },

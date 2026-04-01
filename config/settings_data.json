@@ -35,6 +35,7 @@
     "card_show_secondary_image": true,
     "card_show_swatches": true,
     "card_show_quick_add": true,
+    "card_show_options": true,
     "swatch_shape": "circle",
     "swatch_size": 30,
     "social_instagram": "https://www.instagram.com/scentsbysara",
