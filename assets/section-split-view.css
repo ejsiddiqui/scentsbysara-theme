@@ -120,7 +120,7 @@
   }
 }
 
-@media screen and (max-width: 749px) {
+@media screen and (max-width: 768px) {
   .split-view .split-view__content {
     padding-inline: 1.25rem;
     padding-block: 1.5rem;
@@ -130,4 +130,10 @@
     max-width: none;
     font-size: var(--text-h3);
   }
+
+  .split-view .split-view__image,
+  .split-view .split-view__placeholder {
+    height: 100vw;
+}
+
 }
