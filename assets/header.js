@@ -5,6 +5,7 @@ class HeaderComponent extends Component {
     this.stickyMode = this.dataset.stickyMode || 'none';
     this.lastScrollY = window.scrollY;
     this.ticking = false;
+    this.siteHeader = this.querySelector('.site-header');
 
     this.handleClick = (event) => {
       if (event.target.closest('[data-open-mobile-menu]')) {
@@ -59,16 +60,21 @@ class HeaderComponent extends Component {
   }
 
   updateStickyState() {
+    const SCROLL_THRESHOLD = 8;
     const scrollY = window.scrollY;
+    const delta = scrollY - this.lastScrollY;
 
-    if (this.stickyMode === 'always') {
-      this.classList.toggle('is-sticky', scrollY > 0);
-    } else if (this.stickyMode === 'scroll-up') {
-      if (scrollY < this.lastScrollY || scrollY < 50) {
-        this.classList.add('is-sticky');
-      } else {
-        this.classList.remove('is-sticky');
-      }
+    if (scrollY <= 0) {
+      this.classList.remove('is-sticky', 'is-hidden');
+      if (this.siteHeader) this.siteHeader.classList.remove('header-scrolled');
+    } else if (delta > SCROLL_THRESHOLD) {
+      this.classList.add('is-hidden');
+      this.classList.remove('is-sticky');
+      if (this.siteHeader) this.siteHeader.classList.remove('header-scrolled');
+    } else if (delta < -SCROLL_THRESHOLD) {
+      this.classList.remove('is-hidden');
+      this.classList.add('is-sticky');
+      if (this.siteHeader) this.siteHeader.classList.add('header-scrolled');
     }
 
     this.lastScrollY = scrollY;
