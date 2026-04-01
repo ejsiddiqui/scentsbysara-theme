@@ -337,7 +337,7 @@
 .collection-page .product-card--shop .product-card__options {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   gap: 1rem;
   margin: 0;
 }
