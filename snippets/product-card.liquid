@@ -127,7 +127,7 @@
         {%- if show_options -%}
           {%- for option in card_product.options_with_values -%}
             {%- assign opt_down = option.name | downcase -%}
-            {%- unless opt_down contains 'colour' or opt_down contains 'color' -%}
+            {%- unless opt_down contains 'colour' or opt_down contains 'color' or opt_down contains 'scent' -%}
               <select
                 class="product-card__option-select"
                 data-product-card-option="{{ option.name | downcase }}"

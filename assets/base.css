@@ -887,7 +887,7 @@ select:focus {
 
 .product-card__option-select {
   appearance: none;
-  width: auto;
+  width: fit-content;
   border: 1px solid var(--color-border);
   background: transparent;
   padding: var(--space-xs) calc(var(--space-md) + var(--space-sm)) var(--space-xs) var(--space-sm);
