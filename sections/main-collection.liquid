@@ -218,7 +218,8 @@
                 card_layout: section.settings.card_layout,
                 show_secondary_image: true,
                 show_swatches: true,
-                show_quick_add: false
+                show_quick_add: false,
+                show_options: section.settings.show_options
               %}
             {%- else -%}
               <div class="collection-grid__empty" role="status">No products match your current filters.</div>
@@ -319,6 +320,13 @@
           "label": "Compact / Carousel"
         }
       ]
+    },
+    {
+      "type": "checkbox",
+      "id": "show_options",
+      "label": "Show option dropdowns (e.g. Shape)",
+      "info": "Displays non-colour product options as dropdown selectors on the card",
+      "default": true
     },
     {
       "type": "checkbox",

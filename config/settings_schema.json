@@ -378,6 +378,13 @@
         "id": "card_show_quick_add",
         "label": "t:settings_schema.product_cards.settings.card_show_quick_add.label",
         "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_options",
+        "label": "t:settings_schema.product_cards.settings.card_show_options.label",
+        "info": "t:settings_schema.product_cards.settings.card_show_options.info",
+        "default": true
       }
     ]
   },

@@ -56,6 +56,7 @@
               show_secondary_image: section.settings.show_secondary_image,
               show_swatches: section.settings.show_swatches,
               show_quick_add: section.settings.show_quick_add,
+              show_options: section.settings.show_options,
               subtitle: product.metafields.custom.short_description | default: product.type
             %}
           {%- endfor -%}
@@ -273,9 +274,8 @@
     margin: 16px 0 0;
   }
 
-  /* ── Hide body-shape option selects (swatches only) ─── */
   .product-card--shop .product-card__option-select {
-    display: none;
+    flex: 0 0 auto;
   }
 
   /* ── Mobile (≤480px) ─────────────────────────────────── */
@@ -390,6 +390,13 @@
       "id": "show_quick_add",
       "label": "Show quick add",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_options",
+      "label": "Show option dropdowns (e.g. Shape)",
+      "info": "Displays non-colour product options as dropdown selectors on the card. Only visible when card layout is Shop.",
+      "default": false
     },
     {
       "type": "checkbox",

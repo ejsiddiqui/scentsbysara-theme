@@ -343,7 +343,7 @@
 }
 
 .collection-page .product-card--shop .product-card__option-select {
-  display: none;
+  flex: 0 0 auto;
 }
 
 
