@@ -79,6 +79,7 @@
         "show_secondary_image": true,
         "show_swatches": false,
         "show_quick_add": false,
+        "show_options": false,
         "show_view_all": false,
         "view_all_label": "SHOP THE COLLECTION",
         "color_scheme": "scheme-1",
@@ -154,6 +155,9 @@
     },
     "our_story": {
       "type": "split-view",
+      "custom_css": [
+        ".home-our-story p{margin: 0 auto;}"
+      ],
       "settings": {
         "color_scheme": "scheme-1",
         "full_width": true,
@@ -171,7 +175,7 @@
         "text_alignment": "center",
         "button_alignment": "center",
         "heading_max_width": "500px",
-        "custom_class": "",
+        "custom_class": "home-our-story",
         "collection_filter": ""
       }
     },
