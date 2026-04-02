@@ -65,9 +65,9 @@
   font-size: var(--text-body);
   line-height: 1.6;
   font-weight: 300;
+  margin: 0;
   margin-bottom: var(--space-md);
   max-width: 490px;
-  margin: 0 auto;
 }
 
 .split-view .split-view__body p:last-child {
