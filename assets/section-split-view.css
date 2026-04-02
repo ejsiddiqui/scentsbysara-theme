@@ -61,10 +61,6 @@
   margin-bottom: var(--space-lg);
 }
 
-.split-view .split-view__body strong{
-  font-weight: 500;
-}
-
 .split-view .split-view__body p {
   font-size: var(--text-body);
   line-height: 1.6;
