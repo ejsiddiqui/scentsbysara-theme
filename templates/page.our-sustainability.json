@@ -9,6 +9,17 @@
  */
 {
   "sections": {
+    "page_hero_wn4NFF": {
+      "type": "page-hero",
+      "name": "Page hero",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "heading": "OUR SUSTAINABLE PRACTICE",
+        "subheading": "The philosophy behind Scents By Sara — where scent, sculptural form, and lived experience come together to invite embodied recognition.",
+        "image": "shopify://shop_images/sustainability-hero.png",
+        "custom_class": ""
+      }
+    },
     "hero": {
       "type": "split-view",
       "settings": {
@@ -25,6 +36,9 @@
         "cta_link": "shopify://collections/all",
         "button_style": "btn-solid",
         "text_alignment": "left",
+        "button_alignment": "left",
+        "heading_max_width": "",
+        "custom_class": "",
         "collection_filter": ""
       }
     },
@@ -34,7 +48,8 @@
         "quote": "The story begins before the candle is lit.",
         "attribution": "",
         "color_scheme": "scheme-1",
-        "text_alignment": "center"
+        "text_alignment": "center",
+        "custom_class": ""
       }
     },
     "materials": {
@@ -53,6 +68,9 @@
         "cta_link": "",
         "button_style": "btn-outline",
         "text_alignment": "left",
+        "button_alignment": "left",
+        "heading_max_width": "",
+        "custom_class": "",
         "collection_filter": ""
       }
     },
@@ -72,6 +90,9 @@
         "cta_link": "",
         "button_style": "btn-outline",
         "text_alignment": "left",
+        "button_alignment": "left",
+        "heading_max_width": "",
+        "custom_class": "",
         "collection_filter": ""
       }
     },
@@ -80,7 +101,8 @@
       "settings": {
         "heading": "OUR SIGNATURE SCENTS",
         "intro": "",
-        "columns_desktop": 3
+        "columns_desktop": 3,
+        "custom_class": ""
       }
     },
     "packaging": {
@@ -99,11 +121,15 @@
         "cta_link": "shopify://collections/all",
         "button_style": "btn-outline",
         "text_alignment": "left",
+        "button_alignment": "left",
+        "heading_max_width": "",
+        "custom_class": "",
         "collection_filter": ""
       }
     }
   },
   "order": [
+    "page_hero_wn4NFF",
     "hero",
     "quote",
     "materials",
