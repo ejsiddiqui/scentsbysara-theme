@@ -14,8 +14,8 @@
     <link rel="stylesheet" href="https://use.typekit.net/gnx4xvq.css">
 
     {%- comment -%} Suisse Int'l — preload primary weights {%- endcomment -%}
-    <link rel="preload" href="{{ 'SuisseIntl-Light.woff2' | asset_url }}" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="{{ 'SuisseIntl-Regular.woff2' | asset_url }}" as="font" type="font/woff2" crossorigin>
+    {{ 'SuisseIntl-Light.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+    {{ 'SuisseIntl-Regular.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
 
     {% render 'design-tokens' %}
     {% render 'color-schemes' %}
