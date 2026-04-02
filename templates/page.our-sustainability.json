@@ -11,20 +11,28 @@
   "sections": {
     "hero": {
       "type": "split-view",
+      "custom_css": [
+        ".sustainability-our-approach h2 {margin-bottom: var(--space-lg);}",
+        ".sustainability-our-approach p {max-width: 543px;}"
+      ],
       "settings": {
         "color_scheme": "scheme-1",
         "full_width": true,
-        "eyebrow": "OUR SUSTAINABILITY",
-        "heading": "CRAFTED WITH CONSIDERATION.",
-        "body": "<p>At Scents by Sara, sustainability is not a feature — it is a foundation. Every material, process, and decision is made with environmental responsibility and long-term impact in mind.</p>",
+        "eyebrow": "",
+        "heading": "OUR APPROACH",
+        "body": "<p><strong>At Scents By Sara, sustainability is an ongoing responsibility woven into how each piece is made. </strong></p><p>From materials to production and packaging, every decision is approached with environmental responsibility. Ingredients and materials are selected to meet our standards for quality, safety, and performance. </p><p><strong>Here, luxury is not defined by excess or volume, but by consideration</strong> — for the materials we work with, the people involved in bringing each piece to life, and the environments in which our pieces exist.</p><p>We approach sustainability as a continuous practice at every stage of creation — from how each piece is made to how much we produce and what remains once the ritual has ended. </p><p><strong>Today, our efforts focus on three key areas: ingredients, production, and packaging. <br/></strong><br/></p>",
+        "image": "shopify://shop_images/our-approach-1.png",
         "asset_image": "",
         "image_alt": "Founder of Scents by Sara",
         "image_position": "left",
         "content_background": "secondary",
-        "cta_text": "SHOP NOW",
+        "cta_text": "",
         "cta_link": "shopify://collections/all",
         "button_style": "btn-solid",
         "text_alignment": "left",
+        "button_alignment": "left",
+        "heading_max_width": "350px",
+        "custom_class": "sustainability-our-approach",
         "collection_filter": ""
       }
     },
@@ -34,7 +42,8 @@
         "quote": "The story begins before the candle is lit.",
         "attribution": "",
         "color_scheme": "scheme-1",
-        "text_alignment": "center"
+        "text_alignment": "center",
+        "custom_class": ""
       }
     },
     "materials": {
@@ -53,6 +62,9 @@
         "cta_link": "",
         "button_style": "btn-outline",
         "text_alignment": "left",
+        "button_alignment": "left",
+        "heading_max_width": "",
+        "custom_class": "",
         "collection_filter": ""
       }
     },
@@ -72,6 +84,9 @@
         "cta_link": "",
         "button_style": "btn-outline",
         "text_alignment": "left",
+        "button_alignment": "left",
+        "heading_max_width": "",
+        "custom_class": "",
         "collection_filter": ""
       }
     },
@@ -80,7 +95,8 @@
       "settings": {
         "heading": "OUR SIGNATURE SCENTS",
         "intro": "",
-        "columns_desktop": 3
+        "columns_desktop": 3,
+        "custom_class": ""
       }
     },
     "packaging": {
@@ -99,6 +115,9 @@
         "cta_link": "shopify://collections/all",
         "button_style": "btn-outline",
         "text_alignment": "left",
+        "button_alignment": "left",
+        "heading_max_width": "",
+        "custom_class": "",
         "collection_filter": ""
       }
     }
