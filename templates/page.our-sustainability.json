@@ -11,6 +11,9 @@
   "sections": {
     "hero": {
       "type": "split-view",
+      "custom_css": [
+        ".sustainability-our-approach h2 {margin-bottom: var(--spadce-lg);}"
+      ],
       "settings": {
         "color_scheme": "scheme-1",
         "full_width": true,
@@ -28,7 +31,7 @@
         "text_alignment": "left",
         "button_alignment": "left",
         "heading_max_width": "350px",
-        "custom_class": "",
+        "custom_class": "sustainability-our-approach",
         "collection_filter": ""
       }
     },
