@@ -70,7 +70,7 @@
   line-height: 1.6;
   font-weight: 300;
   margin: 0;
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-lg);
   max-width: 490px;
 }
 
