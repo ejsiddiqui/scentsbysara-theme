@@ -3,7 +3,7 @@
     "imports": {
       "@theme/component": "{{ 'component.js' | asset_url }}",
       "@theme/dialog": "{{ 'dialog.js' | asset_url }}",
-      "@theme/slideshow": "{{ 'slideshow.js' | asset_url }}",
+      "@theme/splide": "{{ 'splide.min.js' | asset_url }}",
       "@theme/product-card": "{{ 'product-card.js' | asset_url }}",
       "@theme/cart-drawer": "{{ 'cart-drawer.js' | asset_url }}",
       "@theme/cart": "{{ 'cart.js' | asset_url }}",
@@ -16,7 +16,6 @@
 <script type="module">
   import "@theme/component";
   import "@theme/dialog";
-  import "@theme/slideshow";
   import "@theme/product-card";
   import "@theme/cart-drawer";
   import "@theme/cart";
@@ -27,4 +26,5 @@
   import "{{ 'mobile-menu.js' | asset_url }}";
   import "{{ 'predictive-search.js' | asset_url }}";
   import "{{ 'accordion.js' | asset_url }}";
+  import "{{ 'splide-init.js' | asset_url }}";
 </script>

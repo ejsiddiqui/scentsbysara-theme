@@ -1,151 +1,185 @@
 {%- liquid
   assign autoplay = section.settings.autoplay
   assign interval = section.settings.interval | default: 5
+  assign transition_type = section.settings.transition_type | default: 'fade'
+  assign transition_speed = section.settings.transition_speed | default: 600
+  assign drag_enabled = section.settings.drag | default: true
+  assign rewind = section.settings.rewind | default: false
+  assign slide_count = section.blocks.size
 -%}
 
 {{ 'section-hero.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'slideshow.js' | asset_url }}" type="module"></script>
 
-<slideshow-component
-  class="home-hero full-width color-{{ section.settings.color_scheme | default: 'scheme-1' }}{% if section.settings.custom_class != blank %} {{ section.settings.custom_class | escape }}{% endif %}"
-  data-autoplay="{{ autoplay }}"
-  data-interval="{{ interval }}"
-  aria-label="{{ section.settings.accessibility_label | default: 'Hero slideshow' | escape }}"
->
-  {%- if section.blocks.size > 0 -%}
-    <div class="hero-slider">
-      {%- for block in section.blocks -%}
-        {%- liquid
-          assign slide_loading = 'lazy'
-          assign slide_fetchpriority = nil
-          if forloop.first
-            assign slide_loading = 'eager'
-            assign slide_fetchpriority = 'high'
-          endif
+{%- capture splide_options -%}
+{
+  "type": {{ transition_type | json }},
+  {% if transition_type == 'fade' %}"rewind": true,{% elsif rewind %}"rewind": true,{% endif %}
+  "autoplay": {{ autoplay | json }},
+  "interval": {{ interval | times: 1000 }},
+  "pauseOnHover": true,
+  "pauseOnFocus": true,
+  "speed": {{ transition_speed }},
+  "drag": {{ drag_enabled | json }},
+  "arrows": {{ section.settings.show_arrows | json }},
+  "pagination": {% if slide_count > 1 %}true{% else %}false{% endif %},
+  "classes": {
+    "pagination": "splide__pagination hero-dots",
+    "page": "splide__pagination__page hero-dot"
+  }
+}
+{%- endcapture -%}
 
-          assign hero_image = block.settings.image_desktop
-          assign fallback_desktop_asset = ''
-          assign fallback_mobile_asset = ''
+{%- if section.blocks.size > 0 -%}
+  <section
+    class="splide home-hero full-width color-{{ section.settings.color_scheme | default: 'scheme-1' }}{% if section.settings.custom_class != blank %} {{ section.settings.custom_class | escape }}{% endif %}"
+    data-splide='{{ splide_options }}'
+    aria-label="{{ section.settings.accessibility_label | default: 'Hero slideshow' | escape }}"
+  >
+    <div class="splide__track">
+      <ul class="splide__list">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign slide_loading = 'lazy'
+            assign slide_fetchpriority = nil
+            if forloop.first
+              assign slide_loading = 'eager'
+              assign slide_fetchpriority = 'high'
+            endif
 
-          case forloop.index
-            when 1
-              assign fallback_desktop_asset = 'desktop-hero-1.png'
-              assign fallback_mobile_asset = 'mobile-hero-1.png'
-            when 2
-              assign fallback_desktop_asset = 'desktop-hero-2.png'
-              assign fallback_mobile_asset = 'mobile-hero-2.png'
-            when 3
-              assign fallback_desktop_asset = 'desktop-hero-3.png'
-              assign fallback_mobile_asset = 'mobile-hero-3.png'
-          endcase
+            assign hero_image = block.settings.image_desktop
+            assign fallback_desktop_asset = ''
+            assign fallback_mobile_asset = ''
 
-          if hero_image == blank
-            assign hero_image = block.settings.image_mobile
-          endif
-        -%}
+            case forloop.index
+              when 1
+                assign fallback_desktop_asset = 'desktop-hero-1.png'
+                assign fallback_mobile_asset = 'mobile-hero-1.png'
+              when 2
+                assign fallback_desktop_asset = 'desktop-hero-2.png'
+                assign fallback_mobile_asset = 'mobile-hero-2.png'
+              when 3
+                assign fallback_desktop_asset = 'desktop-hero-3.png'
+                assign fallback_mobile_asset = 'mobile-hero-3.png'
+            endcase
 
-        <div
-          id="{{ section.id }}-slide-{{ forloop.index0 }}"
-          class="hero-slide{% if forloop.first %} is-active{% endif %}"
-          data-slide
-          role="group"
-          aria-roledescription="slide"
-          aria-label="{{ forloop.index }} of {{ section.blocks.size }}"
-          aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}"
-          tabindex="{% if forloop.first %}0{% else %}-1{% endif %}"
-          {{ block.shopify_attributes }}
-        >
-          <div class="hero-image">
-            {%- if hero_image != blank -%}
-              {% render
-                'image',
-                image: hero_image,
-                mobile_image: block.settings.image_mobile,
-                alt: block.settings.heading,
-                sizes: '100vw',
-                loading: slide_loading,
-                fetchpriority: slide_fetchpriority
-              %}
-            {%- elsif fallback_desktop_asset != blank -%}
-              <picture>
-                {%- if fallback_mobile_asset != blank -%}
-                  <source media="(max-width: 749px)" srcset="{{ fallback_mobile_asset | asset_url }}">
-                {%- endif -%}
-                <img
-                  src="{{ fallback_desktop_asset | asset_url }}"
-                  alt="{{ block.settings.heading | escape }}"
-                  loading="{{ slide_loading }}"
-                  width="1600"
-                  height="1800"
-                  {% if slide_fetchpriority != blank %}fetchpriority="{{ slide_fetchpriority }}"{% endif %}
-                >
-              </picture>
-            {%- else -%}
-              <div class="hero-placeholder" aria-hidden="true"></div>
-            {%- endif -%}
-          </div>
+            if hero_image == blank
+              assign hero_image = block.settings.image_mobile
+            endif
+          -%}
 
-          <div class="hero-content container" style="text-align: {{ block.settings.text_alignment }};">
-            <div>
-              {%- if block.settings.kicker != blank -%}
-                <span class="eyebrow">{{ block.settings.kicker }}</span>
-              {%- endif -%}
-              {%- if block.settings.heading != blank -%}
-                <h1 class="font-serif text-hero hero-heading">{{ block.settings.heading }}</h1>
+          <li
+            class="splide__slide hero-slide"
+            {{ block.shopify_attributes }}
+          >
+            <div class="hero-image">
+              {%- if hero_image != blank -%}
+                {% render
+                  'image',
+                  image: hero_image,
+                  mobile_image: block.settings.image_mobile,
+                  alt: block.settings.heading,
+                  sizes: '100vw',
+                  loading: slide_loading,
+                  fetchpriority: slide_fetchpriority
+                %}
+              {%- elsif fallback_desktop_asset != blank -%}
+                <picture>
+                  {%- if fallback_mobile_asset != blank -%}
+                    <source media="(max-width: 749px)" srcset="{{ fallback_mobile_asset | asset_url }}">
+                  {%- endif -%}
+                  <img
+                    src="{{ fallback_desktop_asset | asset_url }}"
+                    alt="{{ block.settings.heading | escape }}"
+                    loading="{{ slide_loading }}"
+                    width="1600"
+                    height="1800"
+                    {% if slide_fetchpriority != blank %}fetchpriority="{{ slide_fetchpriority }}"{% endif %}
+                  >
+                </picture>
+              {%- else -%}
+                <div class="hero-placeholder" aria-hidden="true"></div>
               {%- endif -%}
             </div>
 
-            {%- if block.settings.subheading != blank -%}
-              <p class="hero-subtext text-body">{{ block.settings.subheading }}</p>
-            {%- endif -%}
-
-            {%- if block.settings.cta_text != blank -%}
-              <div class="hero-actions">
-                <a
-                  {% if block.settings.cta_link != blank %}
-                    href="{{ block.settings.cta_link }}"
-                  {% else %}
-                    href="{{ routes.all_products_collection_url }}"
-                  {% endif %}
-                  class="btn-solid"
-                >
-                  {{ block.settings.cta_text }}
-                </a>
+            <div class="hero-content container" style="text-align: {{ block.settings.text_alignment }};">
+              <div>
+                {%- if block.settings.kicker != blank -%}
+                  <span class="eyebrow">{{ block.settings.kicker }}</span>
+                {%- endif -%}
+                {%- if block.settings.heading != blank -%}
+                  <h1 class="font-serif text-hero hero-heading">{{ block.settings.heading }}</h1>
+                {%- endif -%}
               </div>
-            {%- endif -%}
-          </div>
-        </div>
-      {%- endfor -%}
-    </div>
 
-    {% render
-      'slideshow-controls',
-      total: section.blocks.size,
-      id: section.id,
-      label: section.settings.accessibility_label,
-      show_arrows: section.settings.show_arrows
-    %}
-  {%- else -%}
-    <div class="hero-slider">
-      <div class="hero-slide is-active">
-        <div class="hero-placeholder">
-          <div class="hero-placeholder-content">
-            <span class="eyebrow">Hero slideshow</span>
-            <h1 class="font-serif text-hero hero-heading">Add slides in the theme editor</h1>
-            <p class="hero-subtext text-body">
-              Create one or more slides to match the homepage mockup and configure the content from the customizer.
-            </p>
-          </div>
+              {%- if block.settings.subheading != blank -%}
+                <p class="hero-subtext text-body">{{ block.settings.subheading }}</p>
+              {%- endif -%}
+
+              {%- if block.settings.cta_text != blank -%}
+                <div class="hero-actions">
+                  <a
+                    {% if block.settings.cta_link != blank %}
+                      href="{{ block.settings.cta_link }}"
+                    {% else %}
+                      href="{{ routes.all_products_collection_url }}"
+                    {% endif %}
+                    class="btn-solid"
+                  >
+                    {{ block.settings.cta_text }}
+                  </a>
+                </div>
+              {%- endif -%}
+            </div>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </section>
+{%- else -%}
+  <section class="home-hero full-width">
+    <div class="hero-slide is-active">
+      <div class="hero-placeholder">
+        <div class="hero-placeholder-content">
+          <span class="eyebrow">Hero slideshow</span>
+          <h1 class="font-serif text-hero hero-heading">Add slides in the theme editor</h1>
+          <p class="hero-subtext text-body">
+            Create one or more slides to match the homepage mockup and configure the content from the customizer.
+          </p>
         </div>
       </div>
     </div>
-  {%- endif -%}
-</slideshow-component>
+  </section>
+{%- endif -%}
 
 {% schema %}
 {
   "name": "Hero slideshow",
   "settings": [
+    {
+      "type": "header",
+      "content": "Slideshow behaviour"
+    },
+    {
+      "type": "select",
+      "id": "transition_type",
+      "label": "Transition type",
+      "default": "fade",
+      "options": [
+        { "value": "fade", "label": "Fade" },
+        { "value": "slide", "label": "Slide" },
+        { "value": "loop", "label": "Loop (infinite)" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "transition_speed",
+      "label": "Transition speed",
+      "min": 300,
+      "max": 1200,
+      "step": 100,
+      "unit": "ms",
+      "default": 600
+    },
     {
       "type": "checkbox",
       "id": "autoplay",
@@ -164,8 +198,21 @@
     },
     {
       "type": "checkbox",
+      "id": "drag",
+      "label": "Enable swipe / drag",
+      "default": true
+    },
+    {
+      "type": "checkbox",
       "id": "show_arrows",
       "label": "Show arrows",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "rewind",
+      "label": "Rewind to first slide",
+      "info": "Only applies when transition type is Slide (non-loop).",
       "default": false
     },
     {
@@ -237,18 +284,9 @@
           "label": "Text alignment",
           "default": "left",
           "options": [
-            {
-              "value": "left",
-              "label": "Left"
-            },
-            {
-              "value": "center",
-              "label": "Center"
-            },
-            {
-              "value": "right",
-              "label": "Right"
-            }
+            { "value": "left", "label": "Left" },
+            { "value": "center", "label": "Center" },
+            { "value": "right", "label": "Right" }
           ]
         }
       ]
@@ -258,15 +296,9 @@
     {
       "name": "Hero slideshow",
       "blocks": [
-        {
-          "type": "slide"
-        },
-        {
-          "type": "slide"
-        },
-        {
-          "type": "slide"
-        }
+        { "type": "slide" },
+        { "type": "slide" },
+        { "type": "slide" }
       ]
     }
   ]

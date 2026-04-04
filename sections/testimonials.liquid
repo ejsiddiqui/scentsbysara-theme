@@ -1,7 +1,30 @@
 {%- liquid
   assign section_heading = section.settings.heading | default: 'CUSTOMER TESTIMONIALS'
   assign star_count = section.settings.star_count | default: 5
+  assign transition_type = section.settings.transition_type | default: 'fade'
+  assign autoplay = section.settings.autoplay | default: false
+  assign interval = section.settings.interval | default: 6
+  assign drag_enabled = section.settings.drag | default: true
 -%}
+
+{%- capture splide_options -%}
+{
+  "type": {{ transition_type | json }},
+  "rewind": true,
+  "autoplay": {{ autoplay | json }},
+  "interval": {{ interval | times: 1000 }},
+  "pauseOnHover": true,
+  "pauseOnFocus": true,
+  "speed": 500,
+  "drag": {{ drag_enabled | json }},
+  "arrows": false,
+  "pagination": true,
+  "classes": {
+    "pagination": "splide__pagination testimonials-dots",
+    "page": "splide__pagination__page testimonials-dot"
+  }
+}
+{%- endcapture -%}
 
 <section
   id="Testimonials-{{ section.id }}"
@@ -28,52 +51,29 @@
       {%- endif -%}
     </header>
 
-    <slideshow-component
-      class="testimonials-section__slider testimonials-slider"
-      data-autoplay="false"
-      data-interval="6"
-      aria-roledescription="carousel"
+    <div
+      class="splide testimonials-section__slider"
+      data-splide='{{ splide_options }}'
       aria-label="{{ section.settings.aria_label | default: section_heading | escape }}"
     >
-      <div class="testimonials-section__slides">
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'testimonial' -%}
-            <article
-              id="Testimonial-{{ section.id }}-{{ forloop.index0 }}"
-              class="testimonial-slide{% if forloop.first %} is-active{% endif %}"
-              data-slide
-              role="tabpanel"
-              aria-labelledby="TestimonialTab-{{ section.id }}-{{ forloop.index0 }}"
-              aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}"
-              tabindex="{% if forloop.first %}0{% else %}-1{% endif %}"
-              {{ block.shopify_attributes }}
-            >
-              <div class="testimonial-content">
-                <p class="testimonial-text">{{ block.settings.quote | escape | newline_to_br }}</p>
-                <p class="testimonial-author">{{ block.settings.author | escape }}</p>
-              </div>
-            </article>
-          {%- endif -%}
-        {%- endfor -%}
+      <div class="splide__track">
+        <ul class="splide__list">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'testimonial' -%}
+              <li
+                class="splide__slide testimonial-slide"
+                {{ block.shopify_attributes }}
+              >
+                <article class="testimonial-content">
+                  <p class="testimonial-text">{{ block.settings.quote | escape | newline_to_br }}</p>
+                  <p class="testimonial-author">{{ block.settings.author | escape }}</p>
+                </article>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
       </div>
-
-      <div class="slider-dots testimonials-section__dots" role="tablist" aria-label="Testimonial navigation">
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'testimonial' -%}
-            <button
-              type="button"
-              class="dot slideshow-dot{% if forloop.first %} is-active{% endif %}"
-              id="TestimonialTab-{{ section.id }}-{{ forloop.index0 }}"
-              role="tab"
-              data-slide-index="{{ forloop.index0 }}"
-              aria-controls="Testimonial-{{ section.id }}-{{ forloop.index0 }}"
-              aria-label="Show testimonial {{ forloop.index }}"
-              aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
-            ></button>
-          {%- endif -%}
-        {%- endfor -%}
-      </div>
-    </slideshow-component>
+    </div>
   </div>
 </section>
 
@@ -116,6 +116,47 @@
       "id": "aria_label",
       "label": "Carousel accessibility label",
       "default": "Customer testimonials"
+    },
+    {
+      "type": "header",
+      "content": "Slider behaviour"
+    },
+    {
+      "type": "select",
+      "id": "transition_type",
+      "label": "Transition type",
+      "default": "fade",
+      "options": [
+        { "value": "fade", "label": "Fade" },
+        { "value": "slide", "label": "Slide" },
+        { "value": "loop", "label": "Loop (infinite)" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "interval",
+      "label": "Autoplay interval",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 6
+    },
+    {
+      "type": "checkbox",
+      "id": "drag",
+      "label": "Enable swipe / drag",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Content"
     },
     {
       "type": "checkbox",

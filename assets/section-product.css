@@ -88,35 +88,6 @@
   background: var(--color-secondary-bg);
 }
 
-.product-gallery__track,
-.product-gallery-track {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.product-gallery__slide,
-.product-gallery-slide {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  transform: scale(1.005);
-}
-
-.product-gallery__slide.is-active {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.product-gallery__slide[hidden] {
-  display: block;
-  pointer-events: none;
-}
-
 .product-gallery__slide .product-gallery__image,
 .product-gallery__slide .product-gallery__image img,
 .product-gallery__slide picture {
@@ -179,34 +150,47 @@
   gap: 8px;
 }
 
-/* Thumbnail slider (> 3 images) */
-.product-gallery__thumbnails--slider {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 8px;
-}
-
-.product-gallery__thumb-viewport {
-  flex: 1;
+/* ── Splide product gallery overrides ───────── */
+.product-gallery__viewport.splide .splide__track {
+  width: 100%;
+  height: 100%;
   overflow: hidden;
-  width: 96px;
-  min-width: 0;
 }
 
-.product-gallery__thumb-track {
+.product-gallery__viewport.splide .splide__list {
+  height: 100%;
+}
+
+.product-gallery__viewport.splide .splide__slide {
   display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  gap: 8px;
-  transition: transform 0.3s ease;
-  will-change: transform;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Each thumb in slider: sized to 96px wide */
-.product-gallery__thumbnails--slider .product-gallery__thumb {
-  flex: 0 0 96px;
-  min-width: 0;
+.product-gallery__thumbnails.splide {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.product-gallery__thumbnails.splide .splide__track {
+  height: 100%;
+}
+
+.product-gallery__thumbnails .splide__slide {
+  border: 1px solid transparent;
+  background: var(--color-secondary-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.25s ease;
+}
+
+.product-gallery__thumbnails .splide__slide.is-active,
+.product-gallery__thumbnails .splide__slide:hover,
+.product-gallery__thumbnails .splide__slide:focus-visible {
+  border-color: var(--color-foreground);
 }
 
 .product-gallery__thumb-arrow {
