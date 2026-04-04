@@ -1,4 +1,5 @@
 import { Component } from '@theme/component';
+import { destroyAll, mountAll } from '@theme/splide-init';
 
 class VariantPicker extends Component {
   onConnect() {
@@ -208,8 +209,11 @@ class VariantPicker extends Component {
 
       if (nextGallery) {
         const currentGallery = this.section?.querySelector('.product-gallery');
-        currentGallery?.replaceWith(nextGallery);
-        this.section?.productGalleryController?.refresh();
+        if (currentGallery) {
+          destroyAll(currentGallery);
+          currentGallery.replaceWith(nextGallery);
+          mountAll(nextGallery);
+        }
       }
 
       if (nextAddToCart && this.addToCartButton) {

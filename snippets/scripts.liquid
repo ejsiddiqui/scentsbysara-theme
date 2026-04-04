@@ -9,7 +9,8 @@
       "@theme/cart": "{{ 'cart.js' | asset_url }}",
       "@theme/facets": "{{ 'facets.js' | asset_url }}",
       "@theme/variant-picker": "{{ 'variant-picker.js' | asset_url }}",
-      "@theme/quantity-selector": "{{ 'quantity-selector.js' | asset_url }}"
+      "@theme/quantity-selector": "{{ 'quantity-selector.js' | asset_url }}",
+      "@theme/splide-init": "{{ 'splide-init.js' | asset_url }}"
     }
   }
 </script>
@@ -26,5 +27,5 @@
   import "{{ 'mobile-menu.js' | asset_url }}";
   import "{{ 'predictive-search.js' | asset_url }}";
   import "{{ 'accordion.js' | asset_url }}";
-  import "{{ 'splide-init.js' | asset_url }}";
+  import "@theme/splide-init";
 </script>
