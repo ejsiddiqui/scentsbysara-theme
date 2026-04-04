@@ -1,5 +1,5 @@
 import { Component } from '@theme/component';
-import { destroyAll, mountAll } from '@theme/splide-init';
+import { destroyAll, mountAll, goToMedia } from '@theme/splide-init';
 
 class VariantPicker extends Component {
   onConnect() {
@@ -213,6 +213,9 @@ class VariantPicker extends Component {
           destroyAll(currentGallery);
           currentGallery.replaceWith(nextGallery);
           mountAll(nextGallery);
+          if (variant.featured_media_id) {
+            goToMedia(this.section, { mediaId: variant.featured_media_id });
+          }
         }
       }
 
