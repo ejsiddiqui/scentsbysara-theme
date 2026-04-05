@@ -542,6 +542,7 @@
 .accordion-body__inner {
   overflow: visible;
   padding-bottom: 0;
+  font-weight: 300;
 }
 
 .accordion-body p {
