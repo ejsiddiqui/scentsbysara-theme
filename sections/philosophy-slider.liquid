@@ -57,7 +57,7 @@
           <h2 class="font-serif philosophy-slider__heading">{{ intro_block.settings.heading | escape }}</h2>
         {%- endif -%}
         {%- if intro_block.settings.description != blank -%}
-          <p class="philosophy-slider__description">{{ intro_block.settings.description | escape }}</p>
+          <div class="philosophy-slider__description">{{ intro_block.settings.description }}</div>
         {%- endif -%}
       </div>
     </div>
@@ -99,7 +99,7 @@
                     <h2 class="font-serif philosophy-slider__heading">{{ block.settings.heading | escape }}</h2>
                   {%- endif -%}
                   {%- if block.settings.description != blank -%}
-                    <p class="philosophy-slider__description">{{ block.settings.description | escape }}</p>
+                    <div class="philosophy-slider__description">{{ block.settings.description }}</div>
                   {%- endif -%}
                 </div>
               </div>
@@ -127,7 +127,7 @@
                   <h3 class="philosophy-slider__card-title">{{ block.settings.title | escape }}</h3>
                 {%- endif -%}
                 {%- if block.settings.description != blank -%}
-                  <p class="philosophy-slider__card-description">{{ block.settings.description | escape }}</p>
+                  <div class="philosophy-slider__card-description">{{ block.settings.description }}</div>
                 {%- endif -%}
               </div>
             </li>
@@ -200,13 +200,14 @@
   }
 
   #Philosophy-{{ section.id }} .philosophy-slider__heading {
-    font-size: var(--text-h2);
+    font-size: var(--text-h3);
     line-height: 1.1;
-    color: var(--color-muted);
+    color: var(--color-mocha);
     text-transform: uppercase;
     position: relative;
     padding-bottom: var(--space-lg);
     margin-bottom: var(--space-lg);
+    max-width: 400px;
   }
 
   #Philosophy-{{ section.id }} .philosophy-slider__heading:after {
@@ -361,10 +362,10 @@
           "default": "INTENTIONAL DESIGN IN SCENT & FORM."
         },
         {
-          "type": "textarea",
+          "type": "richtext",
           "id": "description",
           "label": "Description",
-          "default": "Every material used by Scents by Sara is chosen for performance, longevity, and environmental consideration."
+          "default": "<p>Every material used by Scents by Sara is chosen for performance, longevity, and environmental consideration.</p>"
         }
       ]
     },
@@ -390,10 +391,10 @@
           "default": "Card Title"
         },
         {
-          "type": "textarea",
+          "type": "richtext",
           "id": "description",
           "label": "Description",
-          "default": "Card Description"
+          "default": "<p>Card Description</p>"
         }
       ]
     }
@@ -407,7 +408,7 @@
           "settings": {
             "eyebrow": "OUR PHILOSOPHY",
             "heading": "INTENTIONAL DESIGN IN SCENT & FORM.",
-            "description": "Every material used by Scents by Sara is chosen for performance, longevity, and environmental consideration."
+            "description": "<p>Every material used by Scents by Sara is chosen for performance, longevity, and environmental consideration.</p>"
           }
         },
         {
