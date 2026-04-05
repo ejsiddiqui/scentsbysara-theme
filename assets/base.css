@@ -608,7 +608,7 @@ main > .container {
   justify-content: center;
   width: 44px;
   height: 44px;
-  color: var(--color-foreground);
+  color: #000;
   appearance: none;
   -webkit-appearance: none;
 }
@@ -989,9 +989,6 @@ select:focus {
 }
 
 @media (max-width: 480px) {
-  .section-block {
-    padding-block: calc(var(--space-section) * 0.4);
-  }
 
   .grid-cols-4,
   .grid-cols-3,

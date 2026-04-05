@@ -52,7 +52,12 @@
               "arrows": false,
               "drag": {{ section.settings.gallery_drag | default: true | json }},
               "speed": 400,
-              "classes": {}
+              "classes": {},
+              "breakpoints": {
+                "480": {
+                  "arrows": true
+                }
+              }
             }
             {%- endcapture -%}
 
