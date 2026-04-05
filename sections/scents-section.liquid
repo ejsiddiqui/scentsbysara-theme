@@ -166,6 +166,41 @@
         align-items: stretch;
       }
     }
+
+    @media (max-width: 480px) {
+      .product-page-section {
+        padding: 0;
+      }
+
+      #shopify-section-{{ section.id }} .scents-section--product .scents-section__inner {
+      padding-top: 0;
+    }
+
+       #shopify-section-{{ section.id }} {
+        padding: 0;
+      }
+
+      #shopify-section-{{ section.id }} .scents-section__heading {
+        font-size: var(--text-body-large);
+        letter-spacing: 0.1em;
+      }
+
+      #shopify-section-{{ section.id }} .scents-section--product .scents-section__grid {
+      display: grid;
+      grid-template-columns: none;
+      gap: 0;
+      margin-top: var(--space-md);
+     }
+
+     #shopify-section-{{ section.id }} .scents-section--product .scents-section__card,
+     #shopify-section-{{ section.id }} .scents-section--product .scents-section__media {
+        min-height: 0;
+      }
+
+      #shopify-section-{{ section.id }} .scents-section--product .scents-section__card:first-child {
+        order: 2;
+      }
+    }
   </style>
 
   <div class="scents-section__inner">

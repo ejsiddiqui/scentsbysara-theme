@@ -256,6 +256,7 @@
 .product-mobile-header .price__current {
   font-size: var(--text-h5);
   line-height: 1;
+  color: var(--color-slate);
 }
 .product-details .price-strikethrough.price__compare {
   color: var(--color-muted);
@@ -730,13 +731,18 @@
     border: 0;
     border-radius: 0;
     background: transparent;
-    color: var(--color-slate);
+    color: var(--color-muted);
     font-size: 18px;
     line-height: 1;
     cursor: pointer;
     opacity: 0.7;
     transition: opacity 0.2s ease;
   }
+
+  .product-gallery__viewport .splide__arrow.splide__arrow--prev {
+    rotate: 180deg;
+  }
+
 
   .product-gallery__viewport .splide__arrow:hover {
     opacity: 1;
@@ -753,6 +759,9 @@
   .variant-option {
     margin-bottom: var(--space-md);
   }
+  
+  .selector-group.selector-group--quantity {
+    margin-bottom: var(--space-lg);}
 
   .selector-label {
     font-size: 11px;
@@ -768,18 +777,25 @@
   .add-to-cart {
     font-size: 11px;
     letter-spacing: 0.1em;
-    min-height: 42px;
+    min-height: 36px;
+    padding: 8px;
   }
 
   .quantity-selector,
   .qty-selector {
-    min-height: 42px;
+    min-height: 36px;
   }
 
   /* Accordions — tighter padding */
   .accordion-header {
-    padding: var(--space-md) var(--space-md);
-    font-size: 12px;
+    padding: var(--space-md) var(--space-lg);
+    font-size: var(--text-small);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+  }
+
+  .is-default-open .accordion-header {
+    padding-bottom: var(--space-lg);
   }
 
   .accordion-body {
@@ -788,17 +804,20 @@
 
   .accordion:not([data-accordion-enhanced="true"])[open] .accordion-body,
   .accordion[data-accordion-enhanced="true"][data-accordion-expanded="true"] .accordion-body {
-    padding: 0 var(--space-md) var(--space-lg);
+    padding: var(--space-lg);
+    padding-top: 0;
   }
 
   .accordion.static-block .accordion-body,
   .accordion.static-block[open] .accordion-body,
   .accordion[data-accordion-enhanced="true"].static-block .accordion-body {
-    padding: 0 var(--space-md) var(--space-lg);
+    padding: var(--space-lg);
+    padding-top: 0;
   }
 
+  .accordion-body__inner,
   .accordion-body p {
-    font-size: 13px;
+    font-size: var(--text-small);
     line-height: 1.6;
   }
 
@@ -810,7 +829,7 @@
   /* Pills — ensure they fit on small screens */
   .pill,
   .pill-btn {
-    min-height: 40px;
+    min-height: 36px;
     padding: var(--space-sm) var(--space-xs);
     font-size: 11px;
   }
