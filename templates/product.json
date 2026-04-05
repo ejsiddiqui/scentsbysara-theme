@@ -121,7 +121,8 @@
     "split_view_wVCFki": {
       "type": "split-view",
       "custom_css": [
-        ".product-our-sustainable-practice {padding-block: 0;}"
+        ".product-our-sustainable-practice {padding-block: 0;}",
+        "@media and screen (max-width: 480px) {.product-our-sustainable-practice .split-view__content.bg-secondary {padding: var(--space-2xl); }}"
       ],
       "name": "OUR-SUSTAINABLE-PRACTICE",
       "settings": {
