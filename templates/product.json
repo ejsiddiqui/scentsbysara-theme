@@ -93,7 +93,8 @@
     "split_view_zjXTBk": {
       "type": "split-view",
       "custom_css": [
-        ".product-gifts-ofr-ecognition {padding-block: 0;}"
+        ".product-gifts-of-recognition {padding-block: 0;}",
+        "@media (max-width: 480px) {.split-view__content.bg-secondary {padding: var(--space-2xl); }}"
       ],
       "name": "gifts-of-recognition",
       "settings": {
@@ -113,7 +114,7 @@
         "text_alignment": "left",
         "button_alignment": "left",
         "heading_max_width": "350px",
-        "custom_class": "product-gifts-ofr-ecognition",
+        "custom_class": "product-gifts-of-recognition",
         "collection_filter": ""
       }
     },
