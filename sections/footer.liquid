@@ -258,8 +258,6 @@
         <p class="footer-section__copyright">
           &copy; {{ 'now' | date: '%Y' }}
           {{ footer_brand_name }}. {{ 'footer.rights_reserved' | t }}
-          &copy; {{ 'now' | date: '%Y' }}
-          {{ footer_brand_name }}. {{ 'footer.rights_reserved' | t }}
         </p>
       </div>
 
@@ -624,7 +622,7 @@
     .footer-section__menu-title {
       padding: 18px 0;
       border-bottom: 0;
-      font-family: var(--font-sans);
+      font-family: var(--font-serif);
       font-size: var(--text-small);
       letter-spacing: 0.06em;
       text-transform: uppercase;
@@ -696,12 +694,32 @@
     }
 
     .footer-section__copyright {
-      max-width: 220px;
+      max-width: 350px;
       padding-bottom: 10px;
       font-size: 9px;
       line-height: 1.4;
       text-align: right;
       opacity: 0.55;
+    }
+  }
+
+  @media screen and (max-width: 480px){
+    .footer-section__newsletter h2 {
+      font-size: var(--text-h4);
+      padding-bottom: 0;
+    }
+
+    .footer-section__divider {
+      display: none;
+    }
+
+    .footer-section__brand {
+      margin-top: var(--space-md);
+    }
+
+    .footer-section__copyright {
+      max-width: 300px;
+      letter-spacing: 18%;
     }
   }
 {% endstylesheet %}

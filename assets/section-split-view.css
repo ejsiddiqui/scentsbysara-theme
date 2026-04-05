@@ -137,3 +137,11 @@
 }
 
 }
+
+@media screen and (max-width: 480px) {
+  .split-view .split-view__heading {
+    font-size: var(--text-body-large);
+    margin-bottom: var(--space-lg);
+  }
+  
+}
