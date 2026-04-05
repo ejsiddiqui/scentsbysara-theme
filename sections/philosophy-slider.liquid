@@ -1,0 +1,417 @@
+{%- liquid
+  assign intro_block = nil
+  assign card_blocks = ''
+
+  for block in section.blocks
+    if block.type == 'intro'
+      assign intro_block = block
+    endif
+  endfor
+-%}
+
+{%- capture slider_options -%}
+{
+  "type": "slide",
+  "autoWidth": true,
+  "perPage": 1,
+  "gap": "1.5rem",
+  "arrows": false,
+  "pagination": false,
+  "drag": true,
+  "padding": { "right": "15%" },
+  "breakpoints": {
+    "749": {
+      "padding": { "right": "20%" },
+      "gap": "1rem"
+    }
+  }
+}
+{%- endcapture -%}
+
+<section
+  id="Philosophy-{{ section.id }}"
+  class="philosophy-slider section-block color-{{ section.settings.color_scheme }}{% if section.settings.full_width %} section--full-width{% endif %}{% if section.settings.custom_class != blank %} {{ section.settings.custom_class | escape }}{% endif %}"
+>
+  {%- comment -%} Mobile intro — rendered outside the slider {%- endcomment -%}
+  {%- if intro_block -%}
+    <div class="philosophy-slider__mobile-intro">
+      <div class="philosophy-slider__mobile-intro-image">
+        {%- if intro_block.settings.image != blank -%}
+          {% render 'image',
+            class: 'philosophy-slider__intro-img',
+            image: intro_block.settings.image,
+            alt: intro_block.settings.image_alt | default: intro_block.settings.eyebrow,
+            widths: '375,750,1100',
+            sizes: '100vw',
+            loading: 'lazy'
+          %}
+        {%- endif -%}
+      </div>
+      <div class="philosophy-slider__mobile-intro-content">
+        {%- if intro_block.settings.eyebrow != blank -%}
+          <span class="eyebrow">{{ intro_block.settings.eyebrow | escape }}</span>
+        {%- endif -%}
+        {%- if intro_block.settings.heading != blank -%}
+          <h2 class="font-serif philosophy-slider__heading">{{ intro_block.settings.heading | escape }}</h2>
+        {%- endif -%}
+        {%- if intro_block.settings.description != blank -%}
+          <p class="philosophy-slider__description">{{ intro_block.settings.description | escape }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} Splide slider — intro slide hidden on mobile {%- endcomment -%}
+  <div
+    class="splide philosophy-slider__carousel"
+    data-splide='{{ slider_options }}'
+    aria-label="{{ section.settings.heading | default: 'Our Philosophy' | escape }}"
+  >
+    <div class="splide__track">
+      <ul class="splide__list">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'intro' -%}
+            <li class="splide__slide philosophy-slider__slide philosophy-slider__slide--intro" {{ block.shopify_attributes }}>
+              <div class="philosophy-slider__intro-grid">
+                <div class="philosophy-slider__intro-media">
+                  {%- if block.settings.image != blank -%}
+                    {% render 'image',
+                      class: 'philosophy-slider__intro-img',
+                      image: block.settings.image,
+                      alt: block.settings.image_alt | default: block.settings.eyebrow,
+                      widths: '600,900,1200',
+                      sizes: '(min-width: 990px) 28vw, 50vw',
+                      loading: 'lazy'
+                    %}
+                  {%- endif -%}
+                </div>
+                <div class="philosophy-slider__intro-content">
+                  {%- if block.settings.eyebrow != blank -%}
+                    <span class="eyebrow">{{ block.settings.eyebrow | escape }}</span>
+                  {%- endif -%}
+                  {%- if block.settings.heading != blank -%}
+                    <h2 class="font-serif philosophy-slider__heading">{{ block.settings.heading | escape }}</h2>
+                  {%- endif -%}
+                  {%- if block.settings.description != blank -%}
+                    <p class="philosophy-slider__description">{{ block.settings.description | escape }}</p>
+                  {%- endif -%}
+                </div>
+              </div>
+            </li>
+          {%- elsif block.type == 'card' -%}
+            <li class="splide__slide philosophy-slider__slide philosophy-slider__slide--card" {{ block.shopify_attributes }}>
+              <div class="philosophy-slider__card">
+                {%- if block.settings.image != blank -%}
+                  <div class="philosophy-slider__card-media">
+                    {% render 'image',
+                      class: 'philosophy-slider__card-img',
+                      image: block.settings.image,
+                      alt: block.settings.image_alt | default: block.settings.title,
+                      widths: '300,450,600',
+                      sizes: '(min-width: 990px) 20vw, 60vw',
+                      loading: 'lazy'
+                    %}
+                  </div>
+                {%- endif -%}
+                {%- if block.settings.title != blank -%}
+                  <h3 class="philosophy-slider__card-title">{{ block.settings.title | escape }}</h3>
+                {%- endif -%}
+                {%- if block.settings.description != blank -%}
+                  <p class="philosophy-slider__card-description">{{ block.settings.description | escape }}</p>
+                {%- endif -%}
+              </div>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
+</section>
+
+{% style %}
+  /* ── Section ─────────────────────────────────────── */
+  #Philosophy-{{ section.id }} {
+    overflow: clip;
+    background-color: var(--color-stone);
+  }
+
+  #Philosophy-{{ section.id }}.section--full-width {
+    padding-inline: 0;
+  }
+
+  /* ── Mobile intro (visible <=749px only) ─────────── */
+  #Philosophy-{{ section.id }} .philosophy-slider__mobile-intro {
+    display: none;
+  }
+
+  /* ── Slider ──────────────────────────────────────── */
+  #Philosophy-{{ section.id }} .philosophy-slider__carousel {
+    overflow: visible;
+  }
+
+  #Philosophy-{{ section.id }} .philosophy-slider__carousel .splide__track {
+    overflow: visible;
+  }
+
+  /* ── Intro slide ─────────────────────────────────── */
+  #Philosophy-{{ section.id }} .philosophy-slider__slide--intro {
+    width: clamp(600px, 55vw, 900px);
+  }
+
+  #Philosophy-{{ section.id }} .philosophy-slider__intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    height: 100%;
+  }
+
+  #Philosophy-{{ section.id }} .philosophy-slider__intro-media {
+    min-width: 0;
+  }
+
+  #Philosophy-{{ section.id }} .philosophy-slider__intro-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #Philosophy-{{ section.id }} .philosophy-slider__intro-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--space-xl) var(--inner-gutter);
+  }
+
+  #Philosophy-{{ section.id }} .philosophy-slider__intro-content .eyebrow {
+    color: var(--color-taupe);
+  }
+
+  #Philosophy-{{ section.id }} .philosophy-slider__heading {
+    font-size: var(--text-h2);
+    line-height: 1.1;
+    color: var(--color-muted);
+    text-transform: uppercase;
+    position: relative;
+    padding-bottom: var(--space-lg);
+    margin-bottom: var(--space-lg);
+  }
+
+  #Philosophy-{{ section.id }} .philosophy-slider__heading:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 190px;
+    height: 1px;
+    background-color: var(--color-taupe);
+  }
+
+  #Philosophy-{{ section.id }} .philosophy-slider__description {
+    font-size: var(--text-body-large);
+    color: var(--color-slate);
+    font-weight: 300;
+    line-height: 1.6;
+    max-width: 36rem;
+  }
+
+  /* ── Card slides ─────────────────────────────────── */
+  #Philosophy-{{ section.id }} .philosophy-slider__slide--card {
+    width: clamp(250px, 20vw, 340px);
+  }
+
+  #Philosophy-{{ section.id }} .philosophy-slider__card {
+    height: 100%;
+  }
+
+  #Philosophy-{{ section.id }} .philosophy-slider__card-media {
+    overflow: hidden;
+  }
+
+  #Philosophy-{{ section.id }} .philosophy-slider__card-img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    display: block;
+  }
+
+  #Philosophy-{{ section.id }} .philosophy-slider__card-title {
+    margin-top: 1rem;
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    font-weight: 500;
+    text-transform: uppercase;
+    color: var(--color-slate);
+    letter-spacing: 0.05em;
+  }
+
+  #Philosophy-{{ section.id }} .philosophy-slider__card-description {
+    margin-top: 0.375rem;
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    font-weight: 300;
+    color: var(--color-mocha);
+    line-height: 1.5;
+  }
+
+  /* ── Mobile ──────────────────────────────────────── */
+  @media screen and (max-width: 749px) {
+    /* Show static intro, hide intro slide */
+    #Philosophy-{{ section.id }} .philosophy-slider__mobile-intro {
+      display: block;
+    }
+
+    #Philosophy-{{ section.id }} .philosophy-slider__slide--intro {
+      display: none;
+    }
+
+    #Philosophy-{{ section.id }} .philosophy-slider__mobile-intro-image .philosophy-slider__intro-img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display: block;
+    }
+
+    #Philosophy-{{ section.id }} .philosophy-slider__mobile-intro-content {
+      padding: var(--space-lg) var(--gutter);
+    }
+
+    #Philosophy-{{ section.id }} .philosophy-slider__heading {
+      font-size: var(--text-h4);
+    }
+
+    #Philosophy-{{ section.id }} .philosophy-slider__slide--card {
+      width: 60vw;
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Philosophy Slider",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom CSS class"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "intro",
+      "name": "Intro",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image alt text",
+          "default": "Our philosophy"
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow",
+          "default": "OUR PHILOSOPHY"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "INTENTIONAL DESIGN IN SCENT & FORM."
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Every material used by Scents by Sara is chosen for performance, longevity, and environmental consideration."
+        }
+      ]
+    },
+    {
+      "type": "card",
+      "name": "Card",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image alt text"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Card Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Card Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Philosophy Slider",
+      "blocks": [
+        {
+          "type": "intro",
+          "settings": {
+            "eyebrow": "OUR PHILOSOPHY",
+            "heading": "INTENTIONAL DESIGN IN SCENT & FORM.",
+            "description": "Every material used by Scents by Sara is chosen for performance, longevity, and environmental consideration."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "Embodied Craftsmanship"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "Built on Living Stories"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "Meaningful Gifting"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "Sustainable Craftsmanship"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
