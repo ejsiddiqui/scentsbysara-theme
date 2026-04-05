@@ -1023,3 +1023,11 @@ select:focus {
 .featured-collection .product-card__options {
   display: none;
 }
+
+/* ── Mobile carousel peek ─────────────────────────────── */
+/* Shows a sliver of the next card so users know they can swipe */
+@media (max-width: 749px) {
+  .featured-collection__carousel > .splide__track {
+    padding-right: 15% !important;
+  }
+}
