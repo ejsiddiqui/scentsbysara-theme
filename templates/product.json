@@ -97,7 +97,7 @@
       ],
       "name": "gifts-of-recognition",
       "settings": {
-        "color_scheme": "",
+        "color_scheme": "scheme-1",
         "full_width": true,
         "eyebrow": "",
         "heading": "GIFTS OF RECOGNITION.",
@@ -134,12 +134,12 @@
         "image_alt": "OUR SUSTAINABLE PRACTICE",
         "image_position": "right",
         "content_background": "secondary",
-        "cta_text": "",
-        "cta_link": "",
+        "cta_text": "Our Approach",
+        "cta_link": "shopify://pages/our-sustainability",
         "button_style": "btn-solid",
         "text_alignment": "left",
         "button_alignment": "left",
-        "heading_max_width": "350px",
+        "heading_max_width": "450px",
         "custom_class": "product-our-sustainable-practice",
         "collection_filter": ""
       }
