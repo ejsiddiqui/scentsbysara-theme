@@ -76,7 +76,7 @@
 
             <div
               class="splide product-gallery__viewport"
-              data-splide="{{ gallery_options }}"
+              data-splide='{{ gallery_options | strip_newlines | strip }}'
               data-splide-sync=".product-gallery__thumbnails"
               aria-label="{{ product.title | escape }} media gallery"
             >
@@ -144,7 +144,7 @@
         {%- if media_count > 1 -%}
           <div
             class="splide product-gallery__thumbnails"
-            data-splide="{{ thumb_options }}"
+            data-splide='{{ thumb_options | strip_newlines | strip }}'
             data-splide-is-sync
             aria-label="Product image thumbnails"
           >
@@ -158,7 +158,7 @@
                         image: media.preview_image,
                         alt: media.alt | default: product.title,
                         sizes: '282px',
-                        widths: '282',
+                        widths: '282,420,564,720',
                         loading: 'lazy',
                         class: 'product-gallery__thumb-image'
                       %}

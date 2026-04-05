@@ -377,8 +377,6 @@
   grid-template-columns: 82px minmax(0, 1fr);
   gap: var(--space-sm);
   align-items: stretch;
-  margin-top: 20px;
-  margin-bottom: 34px;
 }
 
 .quantity-selector,
