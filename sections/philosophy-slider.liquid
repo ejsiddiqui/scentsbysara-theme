@@ -18,6 +18,7 @@
   "arrows": false,
   "pagination": false,
   "drag": true,
+  "trimSpace": false,
   "padding": { "right": "15%" },
   "breakpoints": {
     "749": {
@@ -167,7 +168,7 @@
 
   /* ── Intro slide ─────────────────────────────────── */
   #Philosophy-{{ section.id }} .philosophy-slider__slide--intro {
-    width: clamp(600px, 55vw, 900px);
+    width: clamp(600px, 90vw, 1790px);
   }
 
   #Philosophy-{{ section.id }} .philosophy-slider__intro-grid {
@@ -228,7 +229,10 @@
 
   /* ── Card slides ─────────────────────────────────── */
   #Philosophy-{{ section.id }} .philosophy-slider__slide--card {
-    width: clamp(250px, 20vw, 340px);
+    width: clamp(390px, 20vw, 600px);
+    padding-top: var(--space-xl);
+    padding-right: var(--space-section);
+    padding-bottom: var(--space-xl);
   }
 
   #Philosophy-{{ section.id }} .philosophy-slider__card {
@@ -241,13 +245,14 @@
 
   #Philosophy-{{ section.id }} .philosophy-slider__card-img {
     width: 100%;
-    aspect-ratio: 3 / 4;
+    aspect-ratio: 1;
     object-fit: cover;
     display: block;
+    max-width: 600px;
   }
 
   #Philosophy-{{ section.id }} .philosophy-slider__card-title {
-    margin-top: 1rem;
+    margin-top: var(--space-section);
     font-family: var(--font-sans);
     font-size: var(--text-body);
     font-weight: 500;
@@ -257,7 +262,7 @@
   }
 
   #Philosophy-{{ section.id }} .philosophy-slider__card-description {
-    margin-top: 0.375rem;
+    margin-top: var(--space-md);
     font-family: var(--font-sans);
     font-size: var(--text-body);
     font-weight: 300;
@@ -266,6 +271,12 @@
   }
 
   /* ── Mobile ──────────────────────────────────────── */
+  @media screen and (max-width: 768px) {
+  #Philosophy-{{ section.id }} .philosophy-slider__intro-content {
+    padding: var(--space-lg) var(--space-lg);
+  }
+}
+
   @media screen and (max-width: 749px) {
     /* Show static intro, hide intro slide */
     #Philosophy-{{ section.id }} .philosophy-slider__mobile-intro {
@@ -278,7 +289,7 @@
 
     #Philosophy-{{ section.id }} .philosophy-slider__mobile-intro-image .philosophy-slider__intro-img {
       width: 100%;
-      aspect-ratio: 4 / 3;
+      aspect-ratio: 16 / 15;
       object-fit: cover;
       display: block;
     }
@@ -292,7 +303,8 @@
     }
 
     #Philosophy-{{ section.id }} .philosophy-slider__slide--card {
-      width: 60vw;
+      width: 85vw;
+      padding: var(--space-lg) 0 var(--space-lg) var(--space-md);
     }
   }
 {% endstyle %}
