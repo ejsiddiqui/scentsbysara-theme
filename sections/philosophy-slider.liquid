@@ -1,5 +1,5 @@
 {%- liquid
-  assign intro_block = nil
+  assign intro_block = null
   assign card_blocks = ''
 
   for block in section.blocks
@@ -37,7 +37,8 @@
     <div class="philosophy-slider__mobile-intro">
       <div class="philosophy-slider__mobile-intro-image">
         {%- if intro_block.settings.image != blank -%}
-          {% render 'image',
+          {%
+            render 'image',
             class: 'philosophy-slider__intro-img',
             image: intro_block.settings.image,
             alt: intro_block.settings.image_alt | default: intro_block.settings.eyebrow,
@@ -64,18 +65,22 @@
   {%- comment -%} Splide slider — intro slide hidden on mobile {%- endcomment -%}
   <div
     class="splide philosophy-slider__carousel"
-    data-splide='{{ slider_options }}'
+    data-splide="{{ slider_options }}"
     aria-label="{{ section.settings.heading | default: 'Our Philosophy' | escape }}"
   >
     <div class="splide__track">
       <ul class="splide__list">
         {%- for block in section.blocks -%}
           {%- if block.type == 'intro' -%}
-            <li class="splide__slide philosophy-slider__slide philosophy-slider__slide--intro" {{ block.shopify_attributes }}>
+            <li
+              class="splide__slide philosophy-slider__slide philosophy-slider__slide--intro"
+              {{ block.shopify_attributes }}
+            >
               <div class="philosophy-slider__intro-grid">
                 <div class="philosophy-slider__intro-media">
                   {%- if block.settings.image != blank -%}
-                    {% render 'image',
+                    {%
+                      render 'image',
                       class: 'philosophy-slider__intro-img',
                       image: block.settings.image,
                       alt: block.settings.image_alt | default: block.settings.eyebrow,
@@ -99,11 +104,15 @@
               </div>
             </li>
           {%- elsif block.type == 'card' -%}
-            <li class="splide__slide philosophy-slider__slide philosophy-slider__slide--card" {{ block.shopify_attributes }}>
+            <li
+              class="splide__slide philosophy-slider__slide philosophy-slider__slide--card"
+              {{ block.shopify_attributes }}
+            >
               <div class="philosophy-slider__card">
                 {%- if block.settings.image != blank -%}
                   <div class="philosophy-slider__card-media">
-                    {% render 'image',
+                    {%
+                      render 'image',
                       class: 'philosophy-slider__card-img',
                       image: block.settings.image,
                       alt: block.settings.image_alt | default: block.settings.title,
@@ -137,6 +146,9 @@
 
   #Philosophy-{{ section.id }}.section--full-width {
     padding-inline: 0;
+    padding: 0;
+    max-width: 1920px;
+    margin: 0 auto;
   }
 
   /* ── Mobile intro (visible <=749px only) ─────────── */
