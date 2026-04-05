@@ -122,7 +122,7 @@
       "type": "split-view",
       "custom_css": [
         ".product-our-sustainable-practice {padding-block: 0;}",
-        "@media screen and (max-width: 480px) {.product-our-sustainable-practice .split-view__content.bg-secondary {padding: var(--space-2xl); }}"
+        "@media screen and (max-width: 480px) {.product-our-sustainable-practice .split-view__content.bg-secondary {padding: var(--space-2xl); } .product-our-sustainable-practic .btn-solid {width: 220px; }}"
       ],
       "name": "OUR-SUSTAINABLE-PRACTICE",
       "settings": {
