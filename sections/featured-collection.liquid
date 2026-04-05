@@ -3,6 +3,31 @@
   assign products_to_show = section.settings.products_to_show | default: 4
 -%}
 
+{%- capture fc_splide_options -%}
+{
+  "type": {{ section.settings.carousel_type | default: 'slide' | json }},
+  "perPage": {{ section.settings.columns_desktop | default: 4 }},
+  "perMove": 1,
+  "gap": "1rem",
+  "autoplay": {{ section.settings.carousel_autoplay | default: false | json }},
+  "interval": {{ section.settings.carousel_interval | default: 5 | times: 1000 }},
+  "pauseOnHover": true,
+  "drag": {{ section.settings.carousel_drag | default: true | json }},
+  "arrows": false,
+  "pagination": false,
+  "breakpoints": {
+    "1024": {
+      "perPage": 3
+    },
+    "749": {
+      "perPage": {{ section.settings.mobile_per_page | default: '1' | plus: 0 }},
+      "arrows": false,
+      "pagination": true
+    }
+  }
+}
+{%- endcapture -%}
+
 <section
   id="FeaturedCollection-{{ section.id }}"
   class="section-block featured-collection color-{{ section.settings.color_scheme }}{% if section.settings.custom_class != blank %} {{ section.settings.custom_class | escape }}{% endif %}"
@@ -19,11 +44,11 @@
       {%- endif -%}
 
       {%- if section.settings.show_navigation -%}
-        <div class="section-nav featured-collection__nav" aria-label="Collection navigation">
+        <div class="section-nav featured-collection__nav" data-splide-controls-for=".featured-collection__carousel" aria-label="Collection navigation">
           <button
             type="button"
             class="section-nav-link featured-collection__nav-button"
-            data-carousel-prev
+            data-splide-control="prev"
             aria-label="Previous products"
           >
             {% render 'icon', name: 'chevron-left', size: 18 %}
@@ -32,7 +57,7 @@
           <button
             type="button"
             class="section-nav-link featured-collection__nav-button"
-            data-carousel-next
+            data-splide-control="next"
             aria-label="Next products"
           >
             NEXT
@@ -43,23 +68,28 @@
     </div>
 
     {%- if featured_collection != blank and featured_collection.products_count > 0 -%}
-      <div class="featured-collection__viewport">
-        <div
-          class="featured-collection__track"
-          style="--fc-columns: {{ section.settings.columns_desktop | default: 4 }}"
-        >
-          {%- for product in featured_collection.products limit: products_to_show -%}
-            {%
-              render 'product-card',
-              product: product,
-              card_layout: section.settings.card_layout,
-              show_secondary_image: section.settings.show_secondary_image,
-              show_swatches: section.settings.show_swatches,
-              show_quick_add: section.settings.show_quick_add,
-              show_options: section.settings.show_options,
-              subtitle: product.metafields.custom.short_description | default: product.type
-            %}
-          {%- endfor -%}
+      <div
+        class="splide featured-collection__carousel"
+        data-splide='{{ fc_splide_options }}'
+        aria-label="{% if featured_collection.title != blank %}Featured products: {{ featured_collection.title | escape }}{% elsif section.settings.heading != blank %}{{ section.settings.heading | escape }}{% else %}Featured products{% endif %}"
+      >
+        <div class="splide__track">
+          <ul class="splide__list">
+            {%- for product in featured_collection.products limit: products_to_show -%}
+              <li class="splide__slide">
+                {%
+                  render 'product-card',
+                  product: product,
+                  card_layout: section.settings.card_layout,
+                  show_secondary_image: section.settings.show_secondary_image,
+                  show_swatches: section.settings.show_swatches,
+                  show_quick_add: section.settings.show_quick_add,
+                  show_options: section.settings.show_options,
+                  subtitle: product.metafields.custom.short_description | default: product.type
+                %}
+              </li>
+            {%- endfor -%}
+          </ul>
         </div>
       </div>
 
@@ -69,49 +99,54 @@
         </div>
       {%- endif -%}
     {%- else -%}
-      <div class="featured-collection__viewport">
-        <div
-          class="featured-collection__track"
-          style="--fc-columns: {{ section.settings.columns_desktop | default: 4 }}"
-        >
-          {%- for placeholder_index in (1..4) -%}
-            {%- liquid
-              assign placeholder_asset = 'she-is-grace-thumb.png'
-              case placeholder_index
-                when 2
-                  assign placeholder_asset = 'she-is-beauty-thumb.png'
-                when 3
-                  assign placeholder_asset = 'she-is-power-thumb.png'
-                when 4
-                  assign placeholder_asset = 'she-is-strength-thumb.png'
-              endcase
-            -%}
-            <article class="product-card product-card--stacked">
-              <div class="product-card-media product-card__media-shell">
-                <a class="product-image-wrap product-card__media" href="{{ routes.all_products_collection_url }}">
-                  <img
-                    class="product-card__image product-card__image--primary"
-                    src="{{ placeholder_asset | asset_url }}"
-                    alt="Scents by Sara candle"
-                    width="900"
-                    height="1125"
-                  >
-                </a>
-              </div>
-              <div class="product-info-stacked product-card__body">
-                <div class="product-card__copy">
-                  <span class="product-name product-card__title">
-                    <a href="{{ routes.all_products_collection_url }}">Scents by Sara</a>
-                  </span>
-                  <span class="product-desc product-card__subtitle">Select a collection in the editor</span>
-                </div>
-                <div class="product-price price" data-price>
-                  <span class="price-current price__current">£20.26</span>
-                </div>
-              </div>
-              <a href="{{ routes.all_products_collection_url }}" class="product-btn product-card__button">SHOP NOW</a>
-            </article>
-          {%- endfor -%}
+      <div
+        class="splide featured-collection__carousel"
+        data-splide='{{ fc_splide_options }}'
+        aria-label="Featured products"
+      >
+        <div class="splide__track">
+          <ul class="splide__list">
+            {%- for placeholder_index in (1..4) -%}
+              {%- liquid
+                assign placeholder_asset = 'she-is-grace-thumb.png'
+                case placeholder_index
+                  when 2
+                    assign placeholder_asset = 'she-is-beauty-thumb.png'
+                  when 3
+                    assign placeholder_asset = 'she-is-power-thumb.png'
+                  when 4
+                    assign placeholder_asset = 'she-is-strength-thumb.png'
+                endcase
+              -%}
+              <li class="splide__slide">
+                <article class="product-card product-card--stacked">
+                  <div class="product-card-media product-card__media-shell">
+                    <a class="product-image-wrap product-card__media" href="{{ routes.all_products_collection_url }}">
+                      <img
+                        class="product-card__image product-card__image--primary"
+                        src="{{ placeholder_asset | asset_url }}"
+                        alt="Scents by Sara candle"
+                        width="900"
+                        height="1125"
+                      >
+                    </a>
+                  </div>
+                  <div class="product-info-stacked product-card__body">
+                    <div class="product-card__copy">
+                      <span class="product-name product-card__title">
+                        <a href="{{ routes.all_products_collection_url }}">Scents by Sara</a>
+                      </span>
+                      <span class="product-desc product-card__subtitle">Select a collection in the editor</span>
+                    </div>
+                    <div class="product-price price" data-price>
+                      <span class="price-current price__current">£20.26</span>
+                    </div>
+                  </div>
+                  <a href="{{ routes.all_products_collection_url }}" class="product-btn product-card__button">SHOP NOW</a>
+                </article>
+              </li>
+            {%- endfor -%}
+          </ul>
         </div>
       </div>
     {%- endif -%}
@@ -151,19 +186,12 @@
     height: 1rem;
   }
 
-  .featured-collection__viewport {
-    overflow: hidden;
+  .featured-collection__carousel {
+    position: relative;
   }
 
-  .featured-collection__track {
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: minmax(
-      0,
-      calc((100% - (clamp(var(--space-md), 2vw, var(--space-xl)) * (var(--fc-columns, 4) - 1))) / var(--fc-columns, 4))
-    );
-    gap: var(--space-md);
-    transition: transform 0.35s ease;
+  .featured-collection__carousel .splide__slide {
+    /* Cards fill the slide width naturally */
   }
 
   .featured-collection__footer {
@@ -183,28 +211,6 @@
     .featured-collection__header {
       align-items: flex-start;
       flex-direction: column;
-    }
-  }
-
-  @media (max-width: 749px) {
-    .featured-collection__viewport {
-      overflow-x: auto;
-      scroll-snap-type: x proximity;
-      scrollbar-width: none;
-    }
-
-    .featured-collection__viewport::-webkit-scrollbar {
-      display: none;
-    }
-
-    .featured-collection__track {
-      grid-auto-flow: column;
-      grid-auto-columns: minmax(78vw, 78vw);
-      width: max-content;
-    }
-
-    .featured-collection__track .product-card {
-      scroll-snap-align: start;
     }
   }
 
@@ -286,28 +292,6 @@
     }
   }
 {% endstylesheet %}
-
-<script type="module">
-  const featuredCollection = document.getElementById('FeaturedCollection-{{ section.id }}');
-
-  if (featuredCollection) {
-    const viewport = featuredCollection.querySelector('.featured-collection__viewport');
-    const prevButton = featuredCollection.querySelector('[data-carousel-prev]');
-    const nextButton = featuredCollection.querySelector('[data-carousel-next]');
-
-    if (viewport && prevButton && nextButton) {
-      const scrollByPage = (direction) => {
-        viewport.scrollBy({
-          left: direction * Math.max(viewport.clientWidth * 0.9, 280),
-          behavior: 'smooth',
-        });
-      };
-
-      prevButton.addEventListener('click', () => scrollByPage(-1));
-      nextButton.addEventListener('click', () => scrollByPage(1));
-    }
-  }
-</script>
 
 {% schema %}
 {
@@ -421,6 +405,52 @@
       "id": "custom_class",
       "label": "Custom CSS class",
       "info": "Add a custom class to the section element for section-specific CSS overrides."
+    },
+    {
+      "type": "header",
+      "content": "Carousel behaviour"
+    },
+    {
+      "type": "select",
+      "id": "carousel_type",
+      "label": "Carousel type",
+      "default": "slide",
+      "options": [
+        { "value": "slide", "label": "Slide" },
+        { "value": "loop", "label": "Loop (infinite)" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "carousel_autoplay",
+      "label": "Autoplay",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "carousel_interval",
+      "label": "Autoplay interval",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 5
+    },
+    {
+      "type": "checkbox",
+      "id": "carousel_drag",
+      "label": "Enable swipe / drag",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "mobile_per_page",
+      "label": "Cards visible on mobile",
+      "default": "1",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ]
     }
   ],
   "presets": [

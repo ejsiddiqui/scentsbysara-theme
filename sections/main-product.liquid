@@ -36,76 +36,99 @@
     </div>
 
     <div class="product-main product-page-grid">
-      <div class="product-gallery" data-product-gallery data-product-gallery-count="{{ media_count }}">
+      <div class="product-gallery" data-product-gallery data-product-gallery-count="{{ media_count }}" data-initial-media="{{ active_media_id }}">
         <div class="main-image-wrap product-gallery__stage">
           {%- if has_gallery_media -%}
-            <div class="product-gallery__viewport product-gallery-viewport" aria-label="{{ product.title | escape }} media gallery">
-              <ul class="product-gallery__track product-gallery-track" role="list">
-                {%- for media in product.media -%}
-                  {%- if media.preview_image != blank -%}
-                    {%- liquid
-                      assign is_active = false
 
-                      if active_media_id == blank and forloop.first
-                        assign is_active = true
-                      elsif media.id == active_media_id
-                        assign is_active = true
-                      endif
-                    -%}
-                    <li
-                      id="ProductGallerySlide-{{ section.id }}-{{ forloop.index0 }}"
-                      class="product-gallery__slide product-gallery-slide{% if is_active %} is-active{% endif %}"
-                      data-product-gallery-slide
-                      data-slide-index="{{ forloop.index0 }}"
-                      data-media-id="{{ media.id }}"
-                      role="tabpanel"
-                      aria-labelledby="ProductGalleryThumb-{{ section.id }}-{{ forloop.index0 }}"
-                      {% unless is_active %}hidden{% endunless %}
-                    >
-                      {%- if is_active -%}
+            {%- capture gallery_options -%}
+            {
+              "type": {{ section.settings.gallery_transition | default: 'fade' | json }},
+              "rewind": true,
+              "pagination": false,
+              "arrows": {% if media_count > 1 %}true{% else %}false{% endif %},
+              "drag": {{ section.settings.gallery_drag | default: true | json }},
+              "speed": 400,
+              "classes": {
+                "arrow": "splide__arrow product-gallery-arrow",
+                "prev": "splide__arrow--prev product-gallery__arrow--prev",
+                "next": "splide__arrow--next product-gallery__arrow--next"
+              }
+            }
+            {%- endcapture -%}
+
+            {%- capture thumb_options -%}
+            {
+              "fixedWidth": 96,
+              "fixedHeight": 96,
+              "gap": 8,
+              "direction": "ttb",
+              "height": "100%",
+              "rewind": true,
+              "pagination": false,
+              "arrows": {% if media_count > 3 %}true{% else %}false{% endif %},
+              "isNavigation": true,
+              "classes": {
+                "arrow": "splide__arrow product-gallery__thumb-arrow",
+                "prev": "splide__arrow--prev product-gallery__thumb-arrow--prev",
+                "next": "splide__arrow--next product-gallery__thumb-arrow--next"
+              },
+              "breakpoints": {
+                "749": {
+                  "direction": "ltr",
+                  "height": "",
+                  "fixedWidth": 72,
+                  "fixedHeight": 72
+                }
+              }
+            }
+            {%- endcapture -%}
+
+            <div
+              class="splide product-gallery__viewport"
+              data-splide='{{ gallery_options }}'
+              data-splide-sync=".product-gallery__thumbnails"
+              aria-label="{{ product.title | escape }} media gallery"
+            >
+              <div class="splide__track">
+                <ul class="splide__list">
+                  {%- for media in product.media -%}
+                    {%- if media.preview_image != blank -%}
+                      {%- liquid
+                        assign is_first = false
+                        if active_media_id == blank and forloop.first
+                          assign is_first = true
+                        elsif media.id == active_media_id
+                          assign is_first = true
+                        endif
+
+                        if is_first
+                          assign slide_loading = 'eager'
+                          assign slide_fetchpriority = 'high'
+                        else
+                          assign slide_loading = 'lazy'
+                          assign slide_fetchpriority = nil
+                        endif
+                      -%}
+                      <li
+                        class="splide__slide product-gallery-slide"
+                        data-product-gallery-slide
+                        data-media-id="{{ media.id }}"
+                      >
                         {% render 'image',
                           image: media.preview_image,
                           alt: media.alt | default: product.title,
                           sizes: '(min-width: 1200px) 52vw, 100vw',
                           widths: '375,540,720,960,1200,1500',
-                          loading: 'eager',
-                          fetchpriority: 'high',
+                          loading: slide_loading,
+                          fetchpriority: slide_fetchpriority,
                           class: 'product-gallery__image'
                         %}
-                      {%- else -%}
-                        {% render 'image',
-                          image: media.preview_image,
-                          alt: media.alt | default: product.title,
-                          sizes: '(min-width: 1200px) 52vw, 100vw',
-                          widths: '375,540,720,960,1200,1500',
-                          loading: 'lazy',
-                          class: 'product-gallery__image'
-                        %}
-                      {%- endif -%}
-                    </li>
-                  {%- endif -%}
-                {%- endfor -%}
-              </ul>
+                      </li>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </ul>
+              </div>
             </div>
-
-            {%- if media_count > 1 -%}
-              <button
-                class="product-gallery__arrow product-gallery-arrow product-gallery__arrow--prev"
-                type="button"
-                data-product-gallery-prev
-                aria-label="Show previous product image"
-              >
-                {% render 'icon', name: 'chevron-left', size: 18 %}
-              </button>
-              <button
-                class="product-gallery__arrow product-gallery-arrow product-gallery__arrow--next"
-                type="button"
-                data-product-gallery-next
-                aria-label="Show next product image"
-              >
-                {% render 'icon', name: 'chevron-right', size: 18 %}
-              </button>
-            {%- endif -%}
 
             <button
               class="product-gallery__wishlist wishlist-btn icon-btn"
@@ -124,49 +147,16 @@
 
         {%- if media_count > 1 -%}
           <div
-            class="thumbnails product-gallery__thumbnails{% if media_count > 3 %} product-gallery__thumbnails--slider{% endif %}"
-            role="tablist"
+            class="splide product-gallery__thumbnails"
+            data-splide='{{ thumb_options }}'
+            data-splide-is-sync
             aria-label="Product image thumbnails"
-            {% if media_count > 3 %}data-thumb-slider{% endif %}
           >
-            {%- if media_count > 3 -%}
-              <button
-                class="product-gallery__thumb-arrow product-gallery__thumb-arrow--prev"
-                type="button"
-                data-thumb-prev
-                aria-label="Show previous thumbnails"
-                disabled
-              >
-                {% render 'icon', name: 'chevron-left', size: 16 %}
-              </button>
-            {%- endif -%}
-
-            <div class="product-gallery__thumb-viewport">
-              <div class="product-gallery__thumb-track" data-thumb-track>
+            <div class="splide__track">
+              <ul class="splide__list">
                 {%- for media in product.media -%}
                   {%- if media.preview_image != blank -%}
-                    {%- liquid
-                      assign is_active = false
-
-                      if active_media_id == blank and forloop.first
-                        assign is_active = true
-                      elsif media.id == active_media_id
-                        assign is_active = true
-                      endif
-                    -%}
-                    <button
-                      class="thumb-wrap product-gallery__thumb{% if is_active %} is-active active{% endif %}"
-                      id="ProductGalleryThumb-{{ section.id }}-{{ forloop.index0 }}"
-                      type="button"
-                      role="tab"
-                      data-product-gallery-thumb
-                      data-slide-index="{{ forloop.index0 }}"
-                      data-media-id="{{ media.id }}"
-                      data-product-gallery-thumb-id="ProductGallerySlide-{{ section.id }}-{{ forloop.index0 }}"
-                      aria-label="Show image {{ forloop.index }} for {{ product.title | escape }}"
-                      aria-controls="ProductGallerySlide-{{ section.id }}-{{ forloop.index0 }}"
-                      aria-selected="{% if is_active %}true{% else %}false{% endif %}"
-                    >
+                    <li class="splide__slide product-gallery__thumb" data-media-id="{{ media.id }}">
                       {% render 'image',
                         image: media.preview_image,
                         alt: media.alt | default: product.title,
@@ -175,22 +165,11 @@
                         loading: 'lazy',
                         class: 'product-gallery__thumb-image'
                       %}
-                    </button>
+                    </li>
                   {%- endif -%}
                 {%- endfor -%}
-              </div>
+              </ul>
             </div>
-
-            {%- if media_count > 3 -%}
-              <button
-                class="product-gallery__thumb-arrow product-gallery__thumb-arrow--next"
-                type="button"
-                data-thumb-next
-                aria-label="Show next thumbnails"
-              >
-                {% render 'icon', name: 'chevron-right', size: 16 %}
-              </button>
-            {%- endif -%}
           </div>
         {%- endif -%}
       </div>
@@ -279,204 +258,6 @@
     </div>
   </div>
 </section>
-
-<script type="module">
-  const root = document.getElementById('ProductSection-{{ section.id }}');
-
-  if (root && !root.productGalleryController) {
-    root.productGalleryController = (() => {
-      let activeIndex = 0;
-      let pointerStartX = 0;
-      let pointerStartY = 0;
-      let pointerTracking = false;
-
-      const getGalleryParts = () => {
-        const gallery = root.querySelector('[data-product-gallery]');
-        return {
-          gallery,
-          slides: gallery ? Array.from(gallery.querySelectorAll('[data-product-gallery-slide]')) : [],
-          thumbs: gallery ? Array.from(gallery.querySelectorAll('[data-product-gallery-thumb]')) : [],
-        };
-      };
-
-      const syncActiveIndex = () => {
-        const { slides } = getGalleryParts();
-        const visibleIndex = slides.findIndex((slide) => !slide.hidden);
-
-        activeIndex = visibleIndex >= 0 ? visibleIndex : 0;
-        return slides;
-      };
-
-      const updateActiveSlide = (nextIndex) => {
-        const { slides, thumbs } = getGalleryParts();
-
-        if (slides.length === 0) {
-          return;
-        }
-
-        const boundedIndex = (nextIndex + slides.length) % slides.length;
-
-        slides.forEach((slide, index) => {
-          const isActive = index === boundedIndex;
-          slide.hidden = !isActive;
-          slide.classList.toggle('is-active', isActive);
-        });
-
-        thumbs.forEach((thumb, index) => {
-          const isActive = index === boundedIndex;
-          thumb.classList.toggle('is-active', isActive);
-          thumb.setAttribute('aria-selected', isActive ? 'true' : 'false');
-        });
-
-        activeIndex = boundedIndex;
-      };
-
-      const activateByMediaId = (mediaId) => {
-        const { slides } = getGalleryParts();
-        const nextIndex = slides.findIndex((slide) => slide.dataset.mediaId === String(mediaId));
-
-        if (nextIndex >= 0) {
-          updateActiveSlide(nextIndex);
-        }
-      };
-
-      root.addEventListener('click', (event) => {
-        if (event.target.closest('[data-product-gallery-prev]')) {
-          updateActiveSlide(activeIndex - 1);
-          return;
-        }
-
-        if (event.target.closest('[data-product-gallery-next]')) {
-          updateActiveSlide(activeIndex + 1);
-          return;
-        }
-
-        const thumb = event.target.closest('[data-product-gallery-thumb]');
-        if (thumb) {
-          const nextIndex = Number(thumb.dataset.slideIndex || 0);
-          updateActiveSlide(nextIndex);
-        }
-      });
-
-      root.addEventListener('pointerdown', (event) => {
-        if (!event.target.closest('[data-product-gallery]')) {
-          return;
-        }
-
-        if (event.pointerType && event.pointerType !== 'touch') {
-          return;
-        }
-
-        pointerTracking = true;
-        pointerStartX = event.clientX;
-        pointerStartY = event.clientY;
-      });
-
-      root.addEventListener('pointerup', (event) => {
-        if (!event.target.closest('[data-product-gallery]')) {
-          return;
-        }
-
-        if (!pointerTracking) {
-          return;
-        }
-
-        pointerTracking = false;
-        const deltaX = event.clientX - pointerStartX;
-        const deltaY = event.clientY - pointerStartY;
-
-        if (Math.abs(deltaX) < 45 || Math.abs(deltaX) < Math.abs(deltaY)) {
-          return;
-        }
-
-        updateActiveSlide(deltaX < 0 ? activeIndex + 1 : activeIndex - 1);
-      });
-
-      root.addEventListener('pointercancel', () => {
-        pointerTracking = false;
-      });
-
-      root.addEventListener('theme:gallery:activate', (event) => {
-        const mediaId = event.detail?.mediaId;
-        const nextIndex = Number(event.detail?.index);
-
-        if (mediaId) {
-          activateByMediaId(mediaId);
-        } else if (Number.isFinite(nextIndex)) {
-          updateActiveSlide(nextIndex);
-        }
-      });
-
-      syncActiveIndex();
-
-      return {
-        refresh() {
-          syncActiveIndex();
-        },
-      };
-    })();
-  } else {
-    root?.productGalleryController?.refresh();
-  }
-
-  // Thumbnail slider (only when > 3 thumbnails)
-  (() => {
-    const slider = root?.querySelector('[data-thumb-slider]');
-    if (!slider) return;
-
-    const track = slider.querySelector('[data-thumb-track]');
-    const prevBtn = slider.querySelector('[data-thumb-prev]');
-    const nextBtn = slider.querySelector('[data-thumb-next]');
-    if (!track || !prevBtn || !nextBtn) return;
-
-    const VISIBLE = 3;
-    const thumbs = Array.from(track.querySelectorAll('[data-product-gallery-thumb]'));
-    const total = thumbs.length;
-    let offset = 0; // index of leftmost visible thumb
-
-    const updateSlider = () => {
-      // Use the first thumb's actual rendered width + gap for the step
-      const firstThumb = thumbs[0];
-      const gap = 12;
-      const step = firstThumb ? firstThumb.offsetWidth + gap : 0;
-      track.style.transform = `translateX(-${offset * step}px)`;
-
-      prevBtn.disabled = offset <= 0;
-      nextBtn.disabled = offset + VISIBLE >= total;
-    };
-
-    prevBtn.addEventListener('click', () => {
-      if (offset > 0) {
-        offset = Math.max(0, offset - 1);
-        updateSlider();
-      }
-    });
-
-    nextBtn.addEventListener('click', () => {
-      if (offset + VISIBLE < total) {
-        offset = Math.min(total - VISIBLE, offset + 1);
-        updateSlider();
-      }
-    });
-
-    // When a thumb is activated, scroll slider to keep it visible
-    root.addEventListener('click', (event) => {
-      const thumb = event.target.closest('[data-product-gallery-thumb]');
-      if (!thumb || !slider.contains(thumb)) return;
-      const idx = Number(thumb.dataset.slideIndex || 0);
-      if (idx < offset) {
-        offset = idx;
-        updateSlider();
-      } else if (idx >= offset + VISIBLE) {
-        offset = idx - VISIBLE + 1;
-        updateSlider();
-      }
-    });
-
-    updateSlider();
-  })();
-</script>
-
 {% schema %}
 {
   "name": "Main product",
@@ -498,6 +279,26 @@
       "id": "fallback_subtitle",
       "label": "Fallback subtitle",
       "default": "STRETCH MARK BODY CANDLE"
+    },
+    {
+      "type": "header",
+      "content": "Gallery"
+    },
+    {
+      "type": "select",
+      "id": "gallery_transition",
+      "label": "Gallery transition",
+      "default": "fade",
+      "options": [
+        { "value": "fade", "label": "Fade" },
+        { "value": "slide", "label": "Slide" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "gallery_drag",
+      "label": "Enable swipe / drag",
+      "default": true
     }
   ],
   "presets": [
