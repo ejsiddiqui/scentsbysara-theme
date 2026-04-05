@@ -47,7 +47,7 @@ class VariantPicker extends Component {
       const target = fieldset.querySelector('[data-selected-value]');
 
       if (checkedInput && target) {
-        target.textContent = checkedInput.value;
+        target.textContent = checkedInput.value.toUpperCase();
       }
     });
   }
