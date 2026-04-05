@@ -990,7 +990,7 @@ select:focus {
 
 @media (max-width: 480px) {
   .section-block {
-    padding-block: calc(var(--space-section) * 0.75);
+    padding-block: calc(var(--space-section) * 0.4);
   }
 
   .grid-cols-4,
