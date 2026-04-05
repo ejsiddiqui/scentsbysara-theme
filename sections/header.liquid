@@ -495,7 +495,7 @@
     grid-template-columns: minmax(0, 1fr) 22rem;
     gap: 3rem;
     padding: 2.5rem var(--gutter);
-    max-width: var(--page-width, 1440px);
+    max-width: var(--page-width, 1460px);
     margin: 0 auto;
   }
 
@@ -511,7 +511,7 @@
     margin-bottom: 1rem;
     color: var(--color-foreground);
     border-bottom: 1px solid var(--color-border);
-    font-size: var(--text-micro);
+    font-size: var(--text-body);
     letter-spacing: 0.12em;
     text-transform: uppercase;
   }
@@ -523,9 +523,10 @@
 
   .mega-menu-links a {
     display: inline-flex;
-    font-size: var(--text-small);
+    font-size: var(--text-body-small);
     color: var(--color-foreground);
     letter-spacing: 0.02em;
+    font-weight: 300;
   }
 
   .mega-menu-links a:hover {
@@ -846,6 +847,13 @@
   .desktop-only-inline {
     display: inline-flex;
   }
+
+  @media screen and  (max-width: 1600px) {
+    .has-mega-menu:hover .mega-menu {
+      width: 100vw;
+    }
+  }
+
 
   /* ── Desktop sticky: pin header at top, announcement bar scrolls away ── */
   @media screen and (min-width: 769px) {
