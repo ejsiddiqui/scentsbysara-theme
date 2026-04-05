@@ -11,6 +11,10 @@ import Splide from '@theme/splide';
 
 const instances = new Map();
 
+function parseOptions(el) {
+  return JSON.parse(el.dataset.splide || '{}');
+}
+
 /**
  * Mount a single Splide element.
  * If data-splide-sync="<selector>" is present, sync with that Splide instance.
@@ -18,15 +22,13 @@ const instances = new Map();
 function mountSplide(el) {
   if (instances.has(el)) return;
 
-  const options = JSON.parse(el.dataset.splide || '{}');
-  const splide = new Splide(el, options);
+  const splide = new Splide(el, parseOptions(el));
 
   const syncSelector = el.dataset.splideSync;
   if (syncSelector) {
     const syncEl = el.closest('section, [data-product-section]')?.querySelector(syncSelector);
     if (syncEl) {
-      const syncOptions = JSON.parse(syncEl.dataset.splide || '{}');
-      const syncSplide = new Splide(syncEl, syncOptions);
+      const syncSplide = new Splide(syncEl, parseOptions(syncEl));
       splide.sync(syncSplide);
       splide.mount();
       syncSplide.mount();
@@ -148,9 +150,12 @@ function goToMediaSlide(section, detail) {
 
   const mediaId = detail?.mediaId;
   if (mediaId) {
-    const slides = Array.from(splideEl.querySelectorAll('.splide__slide'));
-    const index = slides.findIndex(s => s.dataset.mediaId === String(mediaId));
-    if (index >= 0) instance.go(index);
+    const slide = splideEl.querySelector(`.splide__slide[data-media-id="${CSS.escape(mediaId)}"]`);
+    if (slide) {
+      const slides = splideEl.querySelectorAll('.splide__slide');
+      const index = Array.prototype.indexOf.call(slides, slide);
+      if (index >= 0) instance.go(index);
+    }
   } else if (Number.isFinite(detail?.index)) {
     instance.go(detail.index);
   }

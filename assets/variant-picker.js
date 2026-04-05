@@ -142,17 +142,9 @@ class VariantPicker extends Component {
       return;
     }
 
-    const slides = Array.from(this.section.querySelectorAll('[data-product-gallery-slide]'));
-    const thumbs = Array.from(this.section.querySelectorAll('[data-product-gallery-thumb]'));
-    const targetIndex = slides.findIndex((slide) => slide.dataset.mediaId === String(mediaId));
-
-    if (targetIndex < 0) {
-      return;
-    }
-
     this.section.dispatchEvent(new CustomEvent('theme:gallery:activate', {
       bubbles: true,
-      detail: { index: targetIndex, mediaId },
+      detail: { mediaId },
     }));
   }
 
