@@ -1,4 +1,4 @@
-<details class="accordion{% if open %} static-block is-default-open{% endif %}"{% if open %} open{% endif %} data-accordion{% if group != blank %} data-accordion-group="{{ group }}"{% endif %}>
+<details class="accordion{% if open %} static-block is-default-open{% endif %}"{% if open %} open{% endif %} data-accordion{% if group != blank %} data-accordion-group="{{ group }}"{% endif %}{% if persistent %} data-accordion-persistent="true"{% endif %}>
   <summary class="accordion-header">
     <span class="accordion-header__label">{{ title }}</span>
     {%- unless hide_indicator -%}

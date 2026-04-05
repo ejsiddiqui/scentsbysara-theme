@@ -8,7 +8,7 @@ function closeOthers(activeDetails) {
   }
 
   document.querySelectorAll(`${selector}[data-accordion-group="${groupName}"]`).forEach((details) => {
-    if (details !== activeDetails) {
+    if (details !== activeDetails && details.dataset.accordionPersistent !== 'true') {
       details.open = false;
     }
   });
