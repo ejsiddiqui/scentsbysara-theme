@@ -148,7 +148,7 @@
       "type": "featured-collection",
       "name": "Featured collection",
       "settings": {
-        "heading": "You May Also Like",
+        "heading": "YOU MAY ALSO LIKE",
         "subheading": "",
         "collection": "bestsellers",
         "products_to_show": 4,
