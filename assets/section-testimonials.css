@@ -1,14 +1,21 @@
 .testimonials-section {
   overflow: clip;
+  padding-block: var(--space-2xl);
 }
+
 
 .testimonials-section .testimonials-section__header {
   display: grid;
   justify-items: center;
-  gap: 1rem;
+  gap: calc( var(--space-md) * 1.5);
   text-align: center;
-  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+  margin-bottom: clamp(1.5rem, 3vw, 3.5rem);
 }
+
+.testimonials-section .testimonials-section__header h2{
+  color: var(--color-slate);
+}
+
 
 .testimonials-section .testimonials-section__stars {
   display: inline-flex;
@@ -35,29 +42,29 @@
 }
 
 .testimonials-section .testimonial-text {
-  max-width: 34rem;
+  max-width: 920px;
   margin-inline: auto;
-  font-size: var(--text-body-large);
+  font-size: var(--text-h5);
   line-height: 1.6;
   font-style: italic;
   font-weight: 300;
-  color: var(--color-taupe);
+  color: var(--color-mocha);
   opacity: 0.8;
 }
 
 .testimonials-section .testimonial-author {
   font-family: var(--font-sans);
-  font-size: var(--text-body-large);
+  font-size: var(--text-body);
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--color-taupe);
+  color: var(--color-slate);
   margin-top: var(--space-md);
 }
 
 .testimonials-section .splide__slide {
-  max-width: min(100%, 46rem);
-  margin-inline: auto;
+  display: flex;
+  justify-content: center;
 }
 
 .testimonials-dots {
