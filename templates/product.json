@@ -144,13 +144,30 @@
         "collection_filter": ""
       }
     },
-    "recommendations": {
-      "type": "product-recommendations",
+    "featured_collection_k7Rn6Q": {
+      "type": "featured-collection",
+      "name": "Featured collection",
       "settings": {
-        "heading": "YOU MAY ALSO LIKE",
+        "heading": "You May Also Like",
+        "subheading": "",
+        "collection": "bestsellers",
         "products_to_show": 4,
+        "columns_desktop": 4,
+        "show_navigation": false,
         "card_layout": "compact",
-        "custom_class": ""
+        "show_secondary_image": true,
+        "show_swatches": false,
+        "show_quick_add": false,
+        "show_options": false,
+        "show_view_all": false,
+        "view_all_label": "SHOP THE COLLECTION",
+        "color_scheme": "",
+        "custom_class": "",
+        "carousel_type": "slide",
+        "carousel_autoplay": false,
+        "carousel_interval": 5,
+        "carousel_drag": true,
+        "mobile_per_page": "1"
       }
     },
     "reviews": {
@@ -213,7 +230,7 @@
     "scents",
     "split_view_zjXTBk",
     "split_view_wVCFki",
-    "recommendations",
+    "featured_collection_k7Rn6Q",
     "reviews"
   ]
 }
