@@ -58,9 +58,13 @@
         "hero_slide_3"
       ],
       "settings": {
+        "transition_type": "fade",
+        "transition_speed": 600,
         "autoplay": true,
         "interval": 5,
+        "drag": true,
         "show_arrows": false,
+        "rewind": false,
         "accessibility_label": "Homepage hero slideshow",
         "color_scheme": "scheme-1",
         "custom_class": ""
@@ -79,37 +83,80 @@
         "show_secondary_image": true,
         "show_swatches": false,
         "show_quick_add": false,
+        "show_options": false,
         "show_view_all": false,
         "view_all_label": "SHOP THE COLLECTION",
         "color_scheme": "scheme-1",
-        "custom_class": ""
+        "custom_class": "",
+        "carousel_type": "slide",
+        "carousel_autoplay": false,
+        "carousel_interval": 5,
+        "carousel_drag": true,
+        "mobile_per_page": "1"
       }
     },
-    "split_view_nGBMwq": {
-      "type": "split-view",
-      "custom_css": [
-        ".home-our-philosphy p {margin-left: 0;}"
+    "philosophy_slider_fzWXXL": {
+      "type": "philosophy-slider",
+      "blocks": {
+        "intro_PHyagd": {
+          "type": "intro",
+          "settings": {
+            "image": "shopify://shop_images/our-philosphy.png",
+            "image_alt": "Our philosophy",
+            "eyebrow": "OUR PHILOSOPHY",
+            "heading": "INTENTIONAL DESIGN IN SCENT & FORM.",
+            "description": "Scents By Sara is rooted in self-recognition in a culture of external validation. \n\nFragrance is approached as emotional architecture, shaping the relationship between body, space, and emotion. \n\nEach piece is created as a ritual object, designed to be returned to — reinforcing recognition of self, space, and lived experience.\n\nHere, confidence is not performed.\nIt is embodied."
+          }
+        },
+        "card_d8Ddwq": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/embedied-confidence.png",
+            "image_alt": "",
+            "title": "Embodied Craftsmanship",
+            "description": "Confidence that is felt rather than performed, creating space to recognise ourselves, our experiences, and how we feel within them."
+          }
+        },
+        "card_jWycUn": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/rooted-in-real-storeis.png",
+            "image_alt": "",
+            "title": "Rooted in Real Stories",
+            "description": "Built with its community, not just for it, shaped by lived experience, resilience, and the individuality that defines each person."
+          }
+        },
+        "card_L6XALQ": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/meanigful-gifts.png",
+            "image_alt": "",
+            "title": "Meaningful Gifting",
+            "description": "Custom pieces gifted as recognition for self or others – chosen to honour who someone is and the moments that shape them."
+          }
+        },
+        "card_mE7UcX": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/sustainable-craftsmanship.png",
+            "image_alt": "",
+            "title": "Sustainable Craftsmanship",
+            "description": "Luxury defined through consideration — for materials, craft, and the environments in which our pieces exist."
+          }
+        }
+      },
+      "block_order": [
+        "intro_PHyagd",
+        "card_d8Ddwq",
+        "card_jWycUn",
+        "card_L6XALQ",
+        "card_mE7UcX"
       ],
-      "name": "Split view",
+      "name": "Philosophy Slider",
       "settings": {
         "color_scheme": "",
         "full_width": true,
-        "eyebrow": "OUR PHILOSOPHY",
-        "heading": "INTENTIONAL DESIGN IN SCENT & FORM.",
-        "body": "<p>Scents By Sara is rooted in self-recognition in a culture of external validation. <br/><br/>Fragrance is approached as emotional architecture, shaping the relationship between body, space, and emotion. <br/><br/>Each piece is created as a ritual object, designed to be returned to — reinforcing recognition of self, space, and lived experience.<br/><br/>Here, confidence is not performed.<br/>It is embodied.</p>",
-        "image": "shopify://shop_images/our-philosphy.png",
-        "asset_image": "",
-        "image_alt": "Founder of Scents by Sara",
-        "image_position": "left",
-        "content_background": "secondary",
-        "cta_text": "",
-        "cta_link": "",
-        "button_style": "btn-solid",
-        "text_alignment": "left",
-        "button_alignment": "left",
-        "heading_max_width": "600",
-        "custom_class": "home-our-philosphy",
-        "collection_filter": ""
+        "custom_class": ""
       }
     },
     "collections": {
@@ -226,6 +273,10 @@
         "color_scheme": "scheme-1",
         "heading": "CUSTOMER TESTIMONIALS",
         "aria_label": "Customer testimonials",
+        "transition_type": "fade",
+        "autoplay": false,
+        "interval": 6,
+        "drag": true,
         "show_stars": true,
         "star_count": 5,
         "custom_class": ""
@@ -235,7 +286,7 @@
   "order": [
     "hero",
     "bestsellers",
-    "split_view_nGBMwq",
+    "philosophy_slider_fzWXXL",
     "collections",
     "our_story",
     "full_width_image_L4gr8f",
